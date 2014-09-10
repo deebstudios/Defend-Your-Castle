@@ -137,6 +137,10 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="Menus\MenuScreen.cs" />
+    <Compile Include="Menus\OptionsScreen.cs" />
+    <Compile Include="Menus\TitleScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
