@@ -19,6 +19,20 @@ namespace Defend_Your_Castle
 
             // Create the game.
             _game = XamlGame<Game1>.Create(args, Window.Current.CoreWindow, this);
+
+            // Set the GamePage of Game1 to the current class
+            _game.GamePage = this;
         }
+
+        private void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Create a new Title Screen
+            TitleScreen screen = new TitleScreen(_game.GamePage, _game);
+
+            // Add the Title Screen to the MenuScreens Stack
+            _game.AddScreen(screen);
+        }
+
+
     }
 }
