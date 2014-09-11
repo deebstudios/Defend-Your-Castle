@@ -90,7 +90,7 @@ namespace Defend_Your_Castle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            LoadAssets.LoadContent(Content);
         }
 
         protected override void UnloadContent()
@@ -223,6 +223,8 @@ namespace Defend_Your_Castle
             {
                 case GameState.Screen: // Draw the current screen
                     //GetCurrentScreen().Draw(spriteBatch);
+                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
                     break;
                 case GameState.InGame: // Draw the in-game objects

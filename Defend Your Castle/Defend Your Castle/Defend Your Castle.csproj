@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Game1.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="LoadAssets.cs" />
     <Compile Include="Menus\MenuScreen.cs" />
     <Compile Include="Menus\OptionsScreen.cs" />
     <Compile Include="Menus\TitleScreen.cs" />
@@ -154,10 +155,16 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Content\A Character.png" />
+    <Content Include="Content\Alpha Sword.png" />
+    <Content Include="Content\Alpha Warhammer.png" />
+    <Content Include="Content\B Character.png" />
+    <Content Include="Content\C Character.png" />
+    <Content Include="Content\D Character.png" />
+    <Content Include="Content\E Character.png" />
+    <Content Include="Content\F Character.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
