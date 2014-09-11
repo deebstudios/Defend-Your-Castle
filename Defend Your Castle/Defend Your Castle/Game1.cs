@@ -81,6 +81,9 @@ namespace Defend_Your_Castle
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
 
+            // Load the volume settings
+            SoundManager.LoadVolumeSettings();
+
             // Handle the ClientSizeChanged event for the game window
             Window.ClientSizeChanged += Window_ClientSizeChanged;
         }
@@ -90,12 +93,18 @@ namespace Defend_Your_Castle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            LoadAssets.LoadContent(Content);
+            //TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
+            //TestSound = Content.Load<SoundEffect>("Sounds/test");
+
+            //SoundManager.PlaySong(TestSong);
         }
 
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+            // Unload all content here so that the game does not throw an exception when the "Quit" button is clicked
         }
 
         public GameState GameState
@@ -223,6 +232,8 @@ namespace Defend_Your_Castle
             {
                 case GameState.Screen: // Draw the current screen
                     //GetCurrentScreen().Draw(spriteBatch);
+                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
                     break;
                 case GameState.InGame: // Draw the in-game objects
