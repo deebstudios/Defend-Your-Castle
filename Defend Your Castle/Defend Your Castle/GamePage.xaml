@@ -7,12 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="SwapChainBackgroundPanel_Loaded">
 
+    <SwapChainBackgroundPanel.Resources>
+        <!-- Weapon Button Style -->
+        <Style x:Key="WeaponButtonStyle" BasedOn="{StaticResource RoundedButtonStyle}" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+        </Style>
+    </SwapChainBackgroundPanel.Resources>
+
     <Canvas Name="CurrentScreen" x:FieldModifier="public">
-
-    </Canvas>
-
-    <Canvas Name="HUD" x:FieldModifier="public" Visibility="Collapsed">
         
+    </Canvas>
+    
+    <Canvas Name="HUD" x:FieldModifier="public" Visibility="Collapsed">
+
     </Canvas>
 
 </SwapChainBackgroundPanel>
