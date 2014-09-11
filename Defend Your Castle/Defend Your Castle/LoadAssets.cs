@@ -17,6 +17,9 @@ namespace Defend_Your_Castle
         public static Texture2D Sword;
         public static Texture2D Warhammer;
 
+        //Debug graphics
+        public static Texture2D ScalableBox;
+
         public static void LoadContent(ContentManager Content)
         {
             LoadGraphics(Content);
@@ -26,6 +29,9 @@ namespace Defend_Your_Castle
         {
             Sword = Content.Load<Texture2D>("Alpha Sword");
             Warhammer = Content.Load<Texture2D>("Alpha Warhammer");
+
+            //Debug graphics
+            ScalableBox = Content.Load<Texture2D>("ScalableBox");
         }
 
         private static void LoadSounds(ContentManager Content)

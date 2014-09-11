@@ -20,7 +20,7 @@ namespace Defend_Your_Castle
         public GamePage GamePage;
 
         //Time the game is active
-        private static float activeTime;
+        public static float activeTime;
 
         // Stack of MenuScreen objects
         private Stack<MenuScreen> MenuScreens;
@@ -65,11 +65,6 @@ namespace Defend_Your_Castle
             ScreenHalf = (ScreenSize / 2);
         }
 
-        public static float ActiveTime
-        {
-            get { return activeTime; }
-        }
-
         protected override void OnDeactivated(object sender, System.EventArgs args)
         {
             // Code pausing here
@@ -98,11 +93,15 @@ namespace Defend_Your_Castle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+<<<<<<< HEAD
             LoadAssets.LoadContent(Content);
+=======
             //TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
             //TestSound = Content.Load<SoundEffect>("Sounds/test");
 
             //SoundManager.PlaySong(TestSong);
+            // TODO: use this.Content to load your game content here
+>>>>>>> origin/SoundSystem
         }
 
         protected override void UnloadContent()

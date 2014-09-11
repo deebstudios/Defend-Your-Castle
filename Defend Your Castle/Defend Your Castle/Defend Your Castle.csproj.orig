@@ -137,9 +137,7 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
-    <Compile Include="Hurtbox.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="LevelObject.cs" />
     <Compile Include="LoadAssets.cs" />
     <Compile Include="Menus\MenuScreen.cs" />
     <Compile Include="Menus\OptionsScreen.cs" />
@@ -152,7 +150,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
-    <Content Include="Content\ScalableBox.png" />
     <Content Include="Content\Sounds\test.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -163,17 +160,20 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+<<<<<<< HEAD
     <Content Include="Content\A Character.png" />
     <Content Include="Content\Alpha Sword.png" />
     <Content Include="Content\Alpha Warhammer.png" />
-    <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.wma">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\B Character.png" />
     <Content Include="Content\C Character.png" />
     <Content Include="Content\D Character.png" />
     <Content Include="Content\E Character.png" />
     <Content Include="Content\F Character.png" />
+=======
+    <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.wma">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+>>>>>>> origin/SoundSystem
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
