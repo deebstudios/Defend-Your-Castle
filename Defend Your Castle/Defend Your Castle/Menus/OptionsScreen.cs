@@ -25,9 +25,11 @@ namespace Defend_Your_Castle
 
             TextBlock Back = CreateLabel("Back", new Vector2(50, 150));
 
+            System.Diagnostics.Debug.WriteLine(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["HighPriority"]);
+
             // Set the SelectedIndex of MusicVolumes and SoundVolumes to the current volume
-            //MusicVolumes.SelectedIndex = (int)(SoundManager.MusicVolume * 10);
-            //SoundVolumes.SelectedIndex = (int)(SoundManager.SoundVolume * 10);
+            MusicVolumes.SelectedIndex = (int)Math.Round((SoundManager.MusicVolume * 10));
+            SoundVolumes.SelectedIndex = (int)Math.Round((SoundManager.SoundVolume * 10));
 
             MusicVolumes.SelectionChanged += MusicVolumes_SelectionChanged;
             SoundVolumes.SelectionChanged += SoundVolumes_SelectionChanged;
@@ -47,24 +49,31 @@ namespace Defend_Your_Castle
 
         protected void MusicVolumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Get the ComboBox that had its value changed
             ComboBox box = (ComboBox)sender;
 
+            // Get the volume based on the ComboBox's SelectedIndex
             float thevol = ((float)box.SelectedIndex / 10);
 
-            //SoundManager.SetMusicVolume(thevol);
+            // Set the music volume
+            SoundManager.SetMusicVolume(thevol);
         }
 
         protected void SoundVolumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Get the ComboBox that had its value changed
             ComboBox box = (ComboBox)sender;
 
+            // Get the volume based on the ComboBox's SelectedIndex
             float thevol = ((float)box.SelectedIndex / 10);
 
-            //SoundManager.SetSoundVolume(thevol);
+            // Set the sound volume
+            SoundManager.SetSoundVolume(thevol);
         }
 
         protected override void AddDropdownItems(ComboBox Dropdown)
         {
+            // Add volume choices of 0 to 10
             for (int i = 0; i <= 10; i++)
             {
                 Dropdown.Items.Add(i);

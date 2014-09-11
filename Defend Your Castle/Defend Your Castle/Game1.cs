@@ -81,6 +81,9 @@ namespace Defend_Your_Castle
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
 
+            // Load the volume settings
+            SoundManager.LoadVolumeSettings();
+
             // Handle the ClientSizeChanged event for the game window
             Window.ClientSizeChanged += Window_ClientSizeChanged;
         }
@@ -91,11 +94,17 @@ namespace Defend_Your_Castle
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             LoadAssets.LoadContent(Content);
+            //TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
+            //TestSound = Content.Load<SoundEffect>("Sounds/test");
+
+            //SoundManager.PlaySong(TestSong);
         }
 
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+            // Unload all content here so that the game does not throw an exception when the "Quit" button is clicked
         }
 
         public GameState GameState
