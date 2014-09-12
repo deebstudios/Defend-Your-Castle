@@ -19,6 +19,8 @@ namespace Defend_Your_Castle
 
         //Debug graphics
         public static Texture2D ScalableBox;
+        public static Song TestSong;
+        public static SoundEffect TestSound;
 
         public static void LoadContent(ContentManager Content)
         {
@@ -32,6 +34,8 @@ namespace Defend_Your_Castle
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>("ScalableBox");
+            TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
+            TestSound = Content.Load<SoundEffect>("Sounds/test");
         }
 
         private static void LoadSounds(ContentManager Content)
@@ -43,5 +47,7 @@ namespace Defend_Your_Castle
         {
 
         }
+
+
     }
 }

@@ -99,10 +99,8 @@ namespace Defend_Your_Castle
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             LoadAssets.LoadContent(Content);
-            //TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
-            //TestSound = Content.Load<SoundEffect>("Sounds/test");
 
-            //SoundManager.PlaySong(TestSong);
+            SoundManager.PlaySong(LoadAssets.TestSong);
         }
 
         protected override void UnloadContent()
@@ -202,6 +200,18 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void StartGame()
+        {
+            // Remove the Title Screen
+            RemoveScreen();
+
+            // Set the player to in-game
+            ChangeGameState(GameState.InGame);
+
+            // Force the HUD Canvas to render itself and its child elements
+            GamePage.HUD.UpdateLayout();
+        }
+
         protected override void Update(GameTime gameTime)
         {
             //Update active time
@@ -237,12 +247,12 @@ namespace Defend_Your_Castle
             {
                 case GameState.Screen: // Draw the current screen
                     //GetCurrentScreen().Draw(spriteBatch);
-                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
                     break;
                 case GameState.InGame: // Draw the in-game objects
                     //Level.Draw(spriteBatch);
+                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
                     break;
                 case GameState.Paused: // Draw the in-game objects and as dark color overlay
