@@ -17,6 +17,9 @@ namespace Defend_Your_Castle
         public static Texture2D Sword;
         public static Texture2D Warhammer;
 
+        public static Song TestSong;
+        public static SoundEffect TestSound;
+
         public static void LoadContent(ContentManager Content)
         {
             LoadGraphics(Content);
@@ -26,6 +29,9 @@ namespace Defend_Your_Castle
         {
             Sword = Content.Load<Texture2D>("Alpha Sword");
             Warhammer = Content.Load<Texture2D>("Alpha Warhammer");
+
+            TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
+            TestSound = Content.Load<SoundEffect>("Sounds/test");
         }
 
         private static void LoadSounds(ContentManager Content)
@@ -37,5 +43,7 @@ namespace Defend_Your_Castle
         {
 
         }
+
+
     }
 }
