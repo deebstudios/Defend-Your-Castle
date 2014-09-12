@@ -38,7 +38,7 @@ namespace Defend_Your_Castle
             {
                 case 0: // Start Game
                     // Start the game
-                    //Game.StartGame();
+                    Game.StartGame();
                     break;
                 case 1: // Options
                     Game.AddScreen(new OptionsScreen(GamePage, Game));

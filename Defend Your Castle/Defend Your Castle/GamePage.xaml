@@ -22,5 +22,4 @@
     <Canvas Name="HUD" x:FieldModifier="public" Visibility="Collapsed">
 
     </Canvas>
-
 </SwapChainBackgroundPanel>
