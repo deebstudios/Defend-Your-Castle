@@ -60,10 +60,15 @@ namespace Defend_Your_Castle
         {
             if (song != null)
             {
-                MediaPlayer.Stop();
+                StopSong();
                 MediaPlayer.Play(song);
                 MediaPlayer.IsRepeating = loop;
             }
+        }
+
+        public static void StopSong()
+        {
+            MediaPlayer.Stop();
         }
 
         public static void SaveVolumeSettings()
