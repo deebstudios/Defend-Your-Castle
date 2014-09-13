@@ -19,14 +19,11 @@ namespace Defend_Your_Castle
         // Stores how much the player's castle's max health will increase for each level
         private int HealthIncrease;
 
-        // Stores the player's castle's max health for each castle level
-        private int[] HealthLevels;
-
         // The level of the player's castle
         private int CastleLevel;
 
         // The max level of the player's castle
-        private int MaxCastleLevel;
+        private const int MaxCastleLevel = 3;
 
         // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
         public bool CanUpgradeCastle
@@ -35,27 +32,15 @@ namespace Defend_Your_Castle
         }
 
         public Player(Animation animation)
-        {
+        {   
             // Set the player's default castle level
             CastleLevel = 1;
-
-            // Set the max castle level
-            MaxCastleLevel = 3;
 
             // Set the health increase per level
             HealthIncrease = 1500;
 
-            // Initialize the HealthLevels array
-            HealthLevels = new int[MaxCastleLevel];
-
-            // Set the values of each health level
-            for (int i = 0; i < MaxCastleLevel; i++)
-            {
-                HealthLevels[i] = (i * HealthIncrease);
-            }
-
             // Set the player's health and maximum health
-            Health = MaxHealth = HealthLevels[(CastleLevel - 1)];
+            Health = MaxHealth = HealthIncrease;
 
             // Set the animation of the player
             Animation = animation;
@@ -79,12 +64,10 @@ namespace Defend_Your_Castle
                 // Increment the player's castle level by 1
                 CastleLevel += 1;
                 
-                // Upgrade the player's max HP
-                MaxHealth = HealthLevels[(CastleLevel - 1)];
-
-                // Heal the player by the health increase amount
+                // Upgrade the player's max HP and HP
                 Health += HealthIncrease;
-                
+                MaxHealth += HealthIncrease;
+
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
                 // wasted memory though
@@ -96,6 +79,18 @@ namespace Defend_Your_Castle
 
                 //}
             }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+
+
+            base.Draw(spriteBatch);
         }
 
 

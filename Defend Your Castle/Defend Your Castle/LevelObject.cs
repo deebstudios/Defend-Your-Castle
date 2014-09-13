@@ -158,6 +158,12 @@ namespace Defend_Your_Castle
         public void Die()
         {
             Dead = true;
+
+            // Kill all of the object's children
+            for (int i = 0; i < Children.Count; i++)
+            {
+                Children[i].Die();
+            }
         }
 
         //Move the object a specified amount
