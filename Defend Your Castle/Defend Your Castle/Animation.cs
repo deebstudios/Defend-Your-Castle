@@ -106,6 +106,13 @@ namespace Defend_Your_Castle
             get { return AnimationEnd; }
         }
 
+        //Restarts the animation
+        public void Restart()
+        {
+            CurFrame = 0;
+            CurrentAnimFrame.ResetFrame();
+        }
+
         //Move onto the next frame
         private void NextFrame()
         {

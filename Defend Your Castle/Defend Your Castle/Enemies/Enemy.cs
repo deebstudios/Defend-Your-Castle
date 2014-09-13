@@ -17,55 +17,64 @@ namespace Defend_Your_Castle
         protected int Range;
 
         // The point on the level at which the enemy will stop moving
-        protected Vector2 StopPoint;
+        //protected Vector2 StopPoint;
 
-        // Movement durations
-        private float MoveDuration;
-        private float PrevMoveDuration;
+        //Current action the enemy is performing
+        protected Action CurAction;
 
-        public Enemy(Animation animation, float moveDuration = 20)
+        public Enemy(Animation animation)
         {
             // Set the enemy's properties
-            MoveSpeed = new Vector2(5, 0);
+            MoveSpeed = new Vector2(2, 0);
             Range = 1;
             //StopPoint = (CastleX - Range);
 
             // Set the animation of the enemy
             Animation = animation;
 
-            // Set the previous move timer to 0
-            PrevMoveDuration = 0;
-
             Position = new Vector2(0, 100);
 
-            // Set the move duration
-            MoveDuration = moveDuration;
+            //By default, enemies start out moving right
+            CurAction = new MoveForward(this, Animation, Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X);
+        }
+
+        //Gets the movespeed of the enemy
+        public Vector2 GetMoveSpeed
+        {
+            get { return MoveSpeed; }
+        }
+
+        protected virtual void ChooseNextAction()
+        {
+            if (CurAction.GetType == Action.ActionType.Moving)
+            {
+                //Attack now
+
+            }
         }
 
         public override void Update()
         {
-            // Check if the enemy can move
-            if (Game1.ActiveTime >= PrevMoveDuration)
+            if (CurAction.IsComplete == false)
             {
-                // Move the enemy
-                Move(MoveSpeed);
-
-                // Update the animation
-                Animation.Update();
-
-                // Reset the previous move timer
-                PrevMoveDuration = (Game1.ActiveTime + MoveDuration);
+                CurAction.Update();
+                if (CurAction.IsComplete == true) ChooseNextAction();
             }
+            // Move the enemy
+            //Move(MoveSpeed);
+
+            // Update the animation
+            //Animation.Update();
+
 
             base.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
+            CurAction.Draw(spriteBatch, LoadAssets.testanim);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }
-
     }
 }
