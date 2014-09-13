@@ -26,6 +26,6 @@ namespace Defend_Your_Castle
 
             base.Draw(spriteBatch);
         }
-    }
 #endif
+    }
 }

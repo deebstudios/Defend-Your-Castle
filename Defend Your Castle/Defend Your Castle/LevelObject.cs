@@ -32,6 +32,9 @@ namespace Defend_Your_Castle
         //Hurtbox of the object
         protected Hurtbox hurtbox;
 
+        //The animation of the object
+        protected Animation Animation;
+
         //The parent of the level object
         protected LevelObject Parent;
 
