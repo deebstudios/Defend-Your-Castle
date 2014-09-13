@@ -59,6 +59,18 @@ namespace Defend_Your_Castle
             get { return Dead; }
         }
 
+        //Get the position of the object
+        public Vector2 GetPosition
+        {
+            get { return Position; }
+        }
+
+        //Get the direction the object is facing
+        public Direction GetDirection
+        {
+            get { return DirectionFacing; }
+        }
+
         //Sets the hurtbox of the object
         public void SetHurtbox(int width, int height)
         {
