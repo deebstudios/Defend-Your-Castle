@@ -37,6 +37,10 @@ namespace Defend_Your_Castle
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
+        //Temporary
+        private Animation TestAnim;
+        private Direction testdirection;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -101,6 +105,8 @@ namespace Defend_Your_Castle
             LoadAssets.LoadContent(Content);
 
             SoundManager.PlaySong(LoadAssets.TestSong);
+            TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
+            testdirection = Direction.Right;
         }
 
         protected override void UnloadContent()
@@ -227,6 +233,10 @@ namespace Defend_Your_Castle
                 case GameState.InGame: // Update the in-game objects
                     //Level.Update(this);
 
+                    //Temporary
+                    TestAnim.Update();
+                    if (Keyboard.GetState().IsKeyDown(Keys.D)) testdirection = testdirection == Direction.Left ? Direction.Right : Direction.Left;
+
                     break;
                 case GameState.Paused: // Don't update any in-game objects
                     //Level.Update(this);
@@ -254,6 +264,7 @@ namespace Defend_Your_Castle
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
+                    TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
                 case GameState.Paused: // Draw the in-game objects and as dark color overlay
                     //Level.Draw(spriteBatch);
