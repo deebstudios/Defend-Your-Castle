@@ -130,9 +130,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -151,8 +153,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Content\Graphics\cursor.png" />
+    <Content Include="Content\Graphics\TestAnim.png" />
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
-    <Content Include="Content\ScalableBox.png" />
+    <Content Include="Content\Graphics\ScalableBox.png" />
     <Content Include="Content\Sounds\test.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -164,8 +168,8 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Content\A Character.png" />
-    <Content Include="Content\Alpha Sword.png" />
-    <Content Include="Content\Alpha Warhammer.png" />
+    <Content Include="Content\Graphics\Alpha Sword.png" />
+    <Content Include="Content\Graphics\Alpha Warhammer.png" />
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.wma">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

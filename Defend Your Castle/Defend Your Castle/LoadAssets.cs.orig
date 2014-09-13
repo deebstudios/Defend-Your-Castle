@@ -14,46 +14,44 @@ namespace Defend_Your_Castle
     //A class for loading all of our assets
     public static class LoadAssets
     {
-        private const string GraphicsDir = "Graphics/";
-        private const string SoundDir = "Sounds/";
-        private const string MusicDir = "Music/";
-
         public static Texture2D Sword;
         public static Texture2D Warhammer;
 
-
+<<<<<<< HEAD
         //Debug graphics
         public static Texture2D ScalableBox;
-        public static Texture2D testanim;
-
+=======
         public static Song TestSong;
         public static SoundEffect TestSound;
+>>>>>>> origin/IngameModeSetup
 
         public static void LoadContent(ContentManager Content)
         {
             LoadGraphics(Content);
-            LoadSounds(Content);
-            LoadMusic(Content);
         }
 
         private static void LoadGraphics(ContentManager Content)
         {
-            Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
-            Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
+            Sword = Content.Load<Texture2D>("Alpha Sword");
+            Warhammer = Content.Load<Texture2D>("Alpha Warhammer");
 
+<<<<<<< HEAD
             //Debug graphics
-            ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");
-            testanim = Content.Load<Texture2D>(GraphicsDir + "TestAnim");
+            ScalableBox = Content.Load<Texture2D>("ScalableBox");
+=======
+            TestSong = Content.Load<Song>("Music\\Mario Party - Peaceful Mushroom Village");
+            TestSound = Content.Load<SoundEffect>("Sounds/test");
+>>>>>>> origin/IngameModeSetup
         }
 
         private static void LoadSounds(ContentManager Content)
         {
-            TestSound = Content.Load<SoundEffect>(SoundDir + "test");
+
         }
 
         private static void LoadMusic(ContentManager Content)
         {
-            TestSong = Content.Load<Song>(MusicDir + "Mario Party - Peaceful Mushroom Village");
+
         }
 
 

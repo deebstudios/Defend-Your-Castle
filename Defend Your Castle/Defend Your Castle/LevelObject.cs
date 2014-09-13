@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Defend_Your_Castle
 {
+    public enum Direction
+    {
+        Right, Left
+    };
+
     //A base class for objects that exist in each level; this includes the Player Castle and Enemies
     //Hitboxes, hurtboxes, and the like are added as children, but references to them are kept
     public abstract class LevelObject
@@ -21,8 +26,14 @@ namespace Defend_Your_Castle
         //The position of the object
         protected Vector2 Position;
 
+        //The direction the object is facing; defaults to Right
+        protected Direction DirectionFacing;
+
         //Hurtbox of the object
         protected Hurtbox hurtbox;
+
+        //The animation of the object
+        protected Animation Animation;
 
         //The parent of the level object
         protected LevelObject Parent;
@@ -33,6 +44,7 @@ namespace Defend_Your_Castle
         public LevelObject()
         {
             Position = Vector2.Zero;
+            DirectionFacing = Direction.Right;
 
             Children = new List<LevelObject>();
         }

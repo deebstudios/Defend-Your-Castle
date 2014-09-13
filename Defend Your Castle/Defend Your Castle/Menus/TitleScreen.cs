@@ -44,8 +44,7 @@ namespace Defend_Your_Castle
                     Game.AddScreen(new OptionsScreen(GamePage, Game));
                     break;
                 case 2: // Quit
-                    Game.Exit();
-                    Application.Current.Exit();
+                    Game1.ShouldExit = true;
                     break;
             }
         }

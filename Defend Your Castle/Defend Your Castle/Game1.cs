@@ -34,8 +34,18 @@ namespace Defend_Your_Castle
         // Half the screen size of the game
         public static readonly Vector2 ScreenHalf;
 
+        // Indicates whether or not the game should exit
+        public static bool ShouldExit;
+
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
+
+        //Temporary
+        private Animation TestAnim;
+        private Direction testdirection;
+
+        //Temporary
+        private Enemy TestEnemy;
 
         public Game1()
         {
@@ -63,6 +73,9 @@ namespace Defend_Your_Castle
 
             // Get half the screen size
             ScreenHalf = (ScreenSize / 2);
+
+            // State that the game should not be exited
+            ShouldExit = false;
         }
 
         public static float ActiveTime
@@ -101,13 +114,34 @@ namespace Defend_Your_Castle
             LoadAssets.LoadContent(Content);
 
             SoundManager.PlaySong(LoadAssets.TestSong);
+            
+            TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
+            testdirection = Direction.Right;
+
+            TestEnemy = new Enemy(TestAnim);
         }
 
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            
+            // Stop all songs
+            SoundManager.StopSong();
 
-            // Unload all content here so that the game does not throw an exception when the "Quit" button is clicked
+            // Unload all content so that the game does not throw an exception when the "Quit" button is clicked
+            Content.Unload();
+        }
+
+        private void ExitGame()
+        {
+            // Unload all content
+            UnloadContent();
+
+            // Exit the game
+            Exit();
+
+            // Exit the application
+            Application.Current.Exit();
         }
 
         public GameState GameState
@@ -227,10 +261,25 @@ namespace Defend_Your_Castle
                 case GameState.InGame: // Update the in-game objects
                     //Level.Update(this);
 
+                    //Temporary
+                    TestEnemy.Update();
+                    //TestAnim.Update();
+                    if (Keyboard.GetState().IsKeyDown(Keys.D)) testdirection = testdirection == Direction.Left ? Direction.Right : Direction.Left;
+
                     break;
                 case GameState.Paused: // Don't update any in-game objects
                     //Level.Update(this);
                     break;
+            }
+
+            // Check if the game should be exited
+            if (ShouldExit == true)
+            {
+                // Exit the game
+                ExitGame();
+               
+                // Exit the method
+                return;
             }
 
             base.Update(gameTime);
@@ -254,6 +303,8 @@ namespace Defend_Your_Castle
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
+                    TestEnemy.Draw(spriteBatch);
+                    //TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
                 case GameState.Paused: // Draw the in-game objects and as dark color overlay
                     //Level.Draw(spriteBatch);
