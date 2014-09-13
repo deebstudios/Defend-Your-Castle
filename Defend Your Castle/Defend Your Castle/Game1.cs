@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 namespace Defend_Your_Castle
 {
     // Global enum to represent the game state
-    public enum GameState : byte { Screen, InGame, Paused }
+    public enum GameState : byte { Screen, InGame, Paused, Shop }
 
     public class Game1 : Game
     {
@@ -167,13 +167,22 @@ namespace Defend_Your_Castle
         private void ShowCanvas_Screen()
         {
             GamePage.CurrentScreen.Visibility = Visibility.Visible;
-            GamePage.HUD.Visibility = Visibility.Collapsed;
+            GamePage.GameHUD.Visibility = Visibility.Collapsed;
+            GamePage.Shop.Visibility = Visibility.Collapsed;
         }
 
         private void ShowCanvas_InGame()
         {
-            GamePage.HUD.Visibility = Visibility.Visible;
+            GamePage.GameHUD.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
+            GamePage.Shop.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowCanvas_Shop()
+        {
+            GamePage.Shop.Visibility = Visibility.Visible;
+            GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
+            GamePage.GameHUD.Visibility = Visibility.Collapsed;
         }
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
@@ -243,7 +252,7 @@ namespace Defend_Your_Castle
             ChangeGameState(GameState.InGame);
 
             // Force the HUD Canvas to render itself and its child elements
-            GamePage.HUD.UpdateLayout();
+            GamePage.GameHUD.UpdateLayout();
         }
 
         protected override void Update(GameTime gameTime)
@@ -269,6 +278,9 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.Paused: // Don't update any in-game objects
                     //Level.Update(this);
+                    break;
+                case GameState.Shop:
+                    
                     break;
             }
 
@@ -310,6 +322,9 @@ namespace Defend_Your_Castle
                     //Level.Draw(spriteBatch);
 
                     // Draw color overlay
+
+                    break;
+                case GameState.Shop:
 
                     break;
             }

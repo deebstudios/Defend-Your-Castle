@@ -19,7 +19,11 @@
         
     </Canvas>
     
-    <Canvas Name="HUD" x:FieldModifier="public" Visibility="Collapsed">
+    <Canvas Name="GameHUD" x:FieldModifier="public" Visibility="Collapsed">
+
+    </Canvas>
+
+    <Canvas Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
 
     </Canvas>
 </SwapChainBackgroundPanel>

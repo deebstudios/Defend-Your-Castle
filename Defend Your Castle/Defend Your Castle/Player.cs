@@ -16,14 +16,14 @@ namespace Defend_Your_Castle
         // The max amount of health of the player
         private int MaxHealth;
 
-        // Stores how much the player's castle's max health will increase for each level
-        private int HealthIncrease;
-
         // The level of the player's castle
         private int CastleLevel;
 
         // The max level of the player's castle
         private const int MaxCastleLevel = 3;
+
+        // The amount of gold the player has
+        public int Gold;
 
         // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
         public bool CanUpgradeCastle
@@ -36,11 +36,11 @@ namespace Defend_Your_Castle
             // Set the player's default castle level
             CastleLevel = 1;
 
-            // Set the health increase per level
-            HealthIncrease = 1500;
+            // Set the player's base health and maximum health
+            Health = MaxHealth = 1500;
 
-            // Set the player's health and maximum health
-            Health = MaxHealth = HealthIncrease;
+            // Start the player out with some gold
+            Gold = 100;
 
             // Set the animation of the player
             Animation = animation;
@@ -56,7 +56,7 @@ namespace Defend_Your_Castle
             if (Health > MaxHealth) Health = MaxHealth;
         }
 
-        public void UpgradeCastle()
+        public void UpgradeCastle(int healthIncrease)
         {
             // Make sure the player can upgrade his castle
             if (CanUpgradeCastle)
@@ -64,9 +64,9 @@ namespace Defend_Your_Castle
                 // Increment the player's castle level by 1
                 CastleLevel += 1;
                 
-                // Upgrade the player's max HP and HP
-                Health += HealthIncrease;
-                MaxHealth += HealthIncrease;
+                // Increase the player's max HP and HP
+                Health += healthIncrease;
+                MaxHealth += healthIncrease;
 
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
