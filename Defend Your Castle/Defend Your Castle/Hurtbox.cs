@@ -11,18 +11,24 @@ namespace Defend_Your_Castle
     //A hurtbox for LevelObjects
     public sealed class Hurtbox : LevelObject
     {
-        //The box for collision
-        private Rectangle Box;
+        //The width and height for collision
+        private Vector2 WidthHeight;
 
         public Hurtbox(Vector2 position, int width, int height)
         {
-            Box = new Rectangle((int)position.X, (int)position.Y, width, height);
+            Position = position;
+            WidthHeight = new Vector2(width, height);
+        }
+
+        public Rectangle GetRect
+        {
+            get { return new Rectangle((int)Position.X, (int)Position.Y, (int)WidthHeight.X, (int)WidthHeight.Y); }
         }
 
 #if DEBUG
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(Box.X, Box.Y), null, Color.Blue, 0f, Vector2.Zero, new Vector2(Box.Width, Box.Height), SpriteEffects.None, .999f);
+            spriteBatch.Draw(LoadAssets.ScalableBox, Position, null, Color.Blue, 0f, Vector2.Zero, WidthHeight, SpriteEffects.None, .999f);
 
             base.Draw(spriteBatch);
         }

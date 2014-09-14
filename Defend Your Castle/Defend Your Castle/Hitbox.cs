@@ -11,14 +11,17 @@ namespace Defend_Your_Castle
     public sealed class Hitbox : LevelObject
     {
         //The hurtboxes this hitbox hit
-        public List<Hurtbox> Hurtboxes;
+        //public List<Hurtbox> Hurtboxes;
 
         //The box for collision
-        private Rectangle Box;
+        private Vector2 WidthHeight;
 
         public Hitbox(Vector2 position, int width, int height)
         {
-            Box = new Rectangle((int)position.X, (int)position.Y, width, height);
+            Position = position;
+            WidthHeight = new Vector2(width, height);
+
+            //Hurtboxes = new List<Hurtbox>();
         }
 
         //public void Reset()
@@ -26,10 +29,15 @@ namespace Defend_Your_Castle
         //    Hurtboxes.Clear();
         //}
 
-        //protected bool CanHit(Hurtbox hurtbox)
-        //{
-        //    return (Hurtboxes.Contains(hurtbox) == false);
-        //}
+        public Rectangle GetRect
+        {
+            get { return new Rectangle((int)Position.X, (int)Position.Y, (int)WidthHeight.X, (int)WidthHeight.Y); }
+        }
+
+        private bool CanHit(Hurtbox hurtbox)
+        {
+            return (GetRect.Intersects(hurtbox.GetRect));
+        }
         //
         //protected void AddHurtbox(Hurtbox hurtbox)
         //{
@@ -39,7 +47,7 @@ namespace Defend_Your_Castle
 #if DEBUG
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(Box.X, Box.Y), null, Color.Blue, 0f, Vector2.Zero, new Vector2(Box.Width, Box.Height), SpriteEffects.None, .999f);
+            spriteBatch.Draw(LoadAssets.ScalableBox, Position, null, Color.Red, 0f, Vector2.Zero, WidthHeight, SpriteEffects.None, .999f);
 
             base.Draw(spriteBatch);
         }
