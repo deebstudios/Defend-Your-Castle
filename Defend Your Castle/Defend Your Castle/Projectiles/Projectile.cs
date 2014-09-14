@@ -36,11 +36,11 @@ namespace Defend_Your_Castle
             SetHurtbox(width, height);
         }
 
-        public override void Update()
+        public override void Update(Level level)
         {
             Move(Velocity);
 
-            base.Update();
+            base.Update(level);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

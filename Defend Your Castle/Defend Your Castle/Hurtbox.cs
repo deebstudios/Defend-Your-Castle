@@ -25,6 +25,11 @@ namespace Defend_Your_Castle
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)WidthHeight.X, (int)WidthHeight.Y); }
         }
 
+        public bool CanBeHit(Rectangle rect)
+        {
+            return (rect.Intersects(GetRect));
+        }
+
 #if DEBUG
         public override void Draw(SpriteBatch spriteBatch)
         {

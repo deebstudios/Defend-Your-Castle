@@ -49,7 +49,7 @@ namespace Defend_Your_Castle
             get { return ((Game1.ActiveTime - PrevAttackTimer) >= Weapon.AttackSpeed); }
         }
 
-        public Player(Animation animation)
+        public Player()
         {   
             // Set the player's default castle level
             CastleLevel = 1;
@@ -64,7 +64,9 @@ namespace Defend_Your_Castle
             Weapon = new Sword();
 
             // Set the animation of the player
-            Animation = animation;
+            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
+
+            Position = new Vector2(Game1.ScreenSize.X - (Animation.CurrentAnimFrame.FrameSize.X / 2), Animation.CurrentAnimFrame.FrameSize.Y);
 
             // Initialize the mouse state
             mouseState = new MouseState();
@@ -105,7 +107,7 @@ namespace Defend_Your_Castle
             }
         }
 
-        public void Attack(GestureSample? gesture)
+        public void Attack(Level level, GestureSample? gesture)
         {
             // Check to make sure the player can attack
             if (CanAttack)
@@ -113,18 +115,14 @@ namespace Defend_Your_Castle
                 // Play the weapon's attack sound
                 SoundManager.PlaySound(Weapon.Sound);
 
-                if (Input.IsTapInRect(Game1.TestEnemy.GetHurtbox.GetRect, gesture))
-                {
-                    // Perform the attack
-                    Game1.TestEnemy.Die();
-                }
+                level.EnemyHit(Input.GestureRect(gesture));
 
                 // Update the attack timer
                 PrevAttackTimer = Game1.ActiveTime;
             }
         }
 
-        public void Attack(MouseState mouseState)
+        public void Attack(Level level)
         {
             // Check to make sure the player can attack
             if (CanAttack)
@@ -132,40 +130,36 @@ namespace Defend_Your_Castle
                 // Play the weapon's attack sound
                 SoundManager.PlaySound(Weapon.Sound);
 
-                if (Input.IsMouseInRect(Game1.TestEnemy.GetHurtbox.GetRect, mouseState))
-                {
-                    // Perform the attack
-                    Game1.TestEnemy.Die();
-                }
+                level.EnemyHit(Input.MouseRect(mouseState));
 
                 // Update the attack timer
                 PrevAttackTimer = Game1.ActiveTime;
             }
         }
 
-        public override void Update()
+        public override void Update(Level level)
         {
             // Get the last touch gesture (if any)
             GestureSample? gesture = Input.GetTouchGesture();
 
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
-                Attack(mouseState);
+                Attack(level);
             }
             else if (Input.IsScreenTapped(gesture))
             {
-                Attack(gesture);
+                Attack(level, gesture);
             }
 
             // Get the mouse state
             mouseState = Mouse.GetState();
 
-            base.Update();
+            base.Update(level);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
+            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Left, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

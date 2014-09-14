@@ -42,13 +42,8 @@ namespace Defend_Your_Castle
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
-        //Temporary
-        private Animation TestAnim;
-        private Direction testdirection;
-        private Player player;
-
-        //Temporary
-        public static Enemy TestEnemy;
+        //The level
+        private Level level;
 
         public Game1()
         {
@@ -121,11 +116,9 @@ namespace Defend_Your_Castle
 
             SoundManager.PlaySong(LoadAssets.TestSong);
             
-            TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
-            testdirection = Direction.Right;
-            player = new Player(TestAnim);
-
-            TestEnemy = new Enemy(TestAnim);
+            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
+            level = new Level(new Player());
+            level.AddEnemy(new Enemy(TestAnim));
         }
 
         protected override void UnloadContent()
@@ -297,13 +290,8 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.InGame: // Update the in-game objects
-                    //Level.Update(this);
-                    player.Update();
-                    //Temporary
-                    TestEnemy.Update();
-                    //TestAnim.Update();
-                    if (Keyboard.GetState().IsKeyDown(Keys.D)) testdirection = testdirection == Direction.Left ? Direction.Right : Direction.Left;
-
+                    level.Update();
+                    
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
                         ChangeGameState(GameState.Paused);
@@ -311,8 +299,6 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.Paused: // Don't update any in-game objects
-                    //Level.Update(this);
-
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
                         ChangeGameState(GameState.InGame);
@@ -356,20 +342,16 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.InGame: // Draw the in-game objects
-                    //Level.Draw(spriteBatch);
+                    level.Draw(spriteBatch);
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
-                    if (TestEnemy.IsDead == false) TestEnemy.Draw(spriteBatch);
-                    //TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
                 case GameState.Paused: // Draw the in-game objects and a dark color overlay
-                    //Level.Draw(spriteBatch);
+                    level.Draw(spriteBatch);
 
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-
-                    TestEnemy.Draw(spriteBatch);
                     
                     // Draw color overlay
                     spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(0, 0), null, new Color(Color.Black, 35), 0f, new Vector2(0, 0), new Vector2(ScreenSize.X, ScreenSize.Y), SpriteEffects.None, 1f);

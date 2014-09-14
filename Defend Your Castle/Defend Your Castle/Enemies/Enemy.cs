@@ -55,7 +55,7 @@ namespace Defend_Your_Castle
             }
         }
 
-        public override void Update()
+        public override void Update(Level level)
         {
             if (CurAction.IsComplete == false)
             {
@@ -69,7 +69,7 @@ namespace Defend_Your_Castle
             //Animation.Update();
 
 
-            base.Update();
+            base.Update(level);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

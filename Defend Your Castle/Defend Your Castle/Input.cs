@@ -56,6 +56,15 @@ namespace Defend_Your_Castle
             return MouseRect.Intersects(Rect);
         }
 
+        public static Rectangle MouseRect(MouseState MouseState)
+        {
+            // Create a rectangle for the mouse on the screen
+            // The GetX and GetY methods are needed here since the mouse's coordinates are read by XAML
+            Rectangle MouseRect = new Rectangle(GetX(MouseState.X), GetY(MouseState.Y), 1, 1);
+
+            return MouseRect;
+        }
+
         public static GestureSample? GetTouchGesture()
         {
             // Check if a gesture is NOT available, and return null if so
@@ -89,6 +98,15 @@ namespace Defend_Your_Castle
             return TapRect.Intersects(Rect);
         }
 
+        public static Rectangle GestureRect(GestureSample? gesture)
+        {
+            // Convert the specified gesture to a non-nullable type GestureSample to access its properties
+            GestureSample fullGesture = (GestureSample)gesture;
 
+            // Create a rectangle for the tap on the screen
+            Rectangle TapRect = new Rectangle((int)fullGesture.Position.X, (int)fullGesture.Position.Y, 1, 1);
+
+            return TapRect;
+        }
     }
 }

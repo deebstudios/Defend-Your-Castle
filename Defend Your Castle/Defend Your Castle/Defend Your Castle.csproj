@@ -144,6 +144,7 @@
     <Compile Include="Hitbox.cs" />
     <Compile Include="Hurtbox.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="LevelObject.cs" />
     <Compile Include="LoadAssets.cs" />
     <Compile Include="Menus\MenuScreen.cs" />
