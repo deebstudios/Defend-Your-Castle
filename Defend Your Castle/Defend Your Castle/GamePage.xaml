@@ -23,6 +23,23 @@
 
     </Canvas>
 
+    <Border Name="PauseMenu" x:FieldModifier="public" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"
+            Padding="10" Background="LightBlue" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="Menu Option 1" IsTabStop="False"></Button>
+            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="1"></Button>
+            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="2"></Button>
+            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="3"></Button>
+        </Grid>
+    </Border>
+
     <Canvas Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
 
     </Canvas>

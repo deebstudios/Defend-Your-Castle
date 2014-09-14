@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Defend_Your_Castle
 {
@@ -15,7 +17,7 @@ namespace Defend_Your_Castle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         // Reference to GamePage.xaml
         public GamePage GamePage;
 
@@ -69,7 +71,7 @@ namespace Defend_Your_Castle
             activeTime = 0f;
 
             // Get the screen size
-            ScreenSize = new Vector2(640, 384);
+            ScreenSize = new Vector2(640, 480);
 
             // Get half the screen size
             ScreenHalf = (ScreenSize / 2);
@@ -178,6 +180,11 @@ namespace Defend_Your_Castle
             GamePage.Shop.Visibility = Visibility.Collapsed;
         }
 
+        private void ChangePauseMenuState(Visibility visibility)
+        {
+            GamePage.PauseMenu.Visibility = visibility;
+        }
+
         private void ShowCanvas_Shop()
         {
             GamePage.Shop.Visibility = Visibility.Visible;
@@ -237,7 +244,16 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.InGame:
+                    ChangePauseMenuState(Visibility.Collapsed);
                     ShowCanvas_InGame();
+
+                    break;
+                case GameState.Paused:
+                    ChangePauseMenuState(Visibility.Visible);
+
+                    break;
+                case GameState.Shop:
+                    ShowCanvas_Shop();
 
                     break;
             }
@@ -255,10 +271,18 @@ namespace Defend_Your_Castle
             GamePage.GameHUD.UpdateLayout();
         }
 
+        public void PauseGame()
+        {
+            // Set the game to paused
+            ChangeGameState(GameState.Paused);
+
+
+        }
+
         protected override void Update(GameTime gameTime)
         {
-            //Update active time
-            activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //Update active time if the game is not paused
+            if (GameState != GameState.Paused) activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // Check which game state the player is in
             switch (GameState)
@@ -275,9 +299,20 @@ namespace Defend_Your_Castle
                     //TestAnim.Update();
                     if (Keyboard.GetState().IsKeyDown(Keys.D)) testdirection = testdirection == Direction.Left ? Direction.Right : Direction.Left;
 
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        ChangeGameState(GameState.Paused);
+                    }
+
                     break;
                 case GameState.Paused: // Don't update any in-game objects
                     //Level.Update(this);
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        ChangeGameState(GameState.InGame);
+                    }
+
                     break;
                 case GameState.Shop:
                     
@@ -301,7 +336,9 @@ namespace Defend_Your_Castle
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null);
+            Matrix scaleMatrix = Matrix.CreateScale(new Vector3(graphics.PreferredBackBufferWidth / ScreenSize.X, graphics.PreferredBackBufferHeight / ScreenSize.Y, 1f));
+
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, scaleMatrix);
 
             // Check which game state the player is in
             switch (GameState)
@@ -318,10 +355,16 @@ namespace Defend_Your_Castle
                     TestEnemy.Draw(spriteBatch);
                     //TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
-                case GameState.Paused: // Draw the in-game objects and as dark color overlay
+                case GameState.Paused: // Draw the in-game objects and a dark color overlay
                     //Level.Draw(spriteBatch);
 
+                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+
+                    TestEnemy.Draw(spriteBatch);
+                    
                     // Draw color overlay
+                    spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(0, 0), null, new Color(Color.Black, 35), 0f, new Vector2(0, 0), new Vector2(ScreenSize.X, ScreenSize.Y), SpriteEffects.None, 1f);
 
                     break;
                 case GameState.Shop:
