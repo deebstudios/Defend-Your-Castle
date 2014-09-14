@@ -88,6 +88,11 @@ namespace Defend_Your_Castle
             AddChild(hurtbox);
         }
 
+        public Hurtbox GetHurtbox
+        {
+            get { return hurtbox; }
+        }
+
         //Sets the parent of this object
         public void SetParent(LevelObject parent)
         {

@@ -45,9 +45,10 @@ namespace Defend_Your_Castle
         //Temporary
         private Animation TestAnim;
         private Direction testdirection;
+        private Player player;
 
         //Temporary
-        private Enemy TestEnemy;
+        public static Enemy TestEnemy;
 
         public Game1()
         {
@@ -61,6 +62,9 @@ namespace Defend_Your_Castle
 
             // Show the mouse on the game screen
             IsMouseVisible = true;
+            
+            // Store the global touch state
+            Input.TouchState = TouchPanel.GetState(Window);
 
             // Enable the tap gesture
             TouchPanel.EnabledGestures = GestureType.Tap;
@@ -100,7 +104,7 @@ namespace Defend_Your_Castle
 
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
-
+            
             // Load the volume settings
             SoundManager.LoadVolumeSettings();
 
@@ -119,6 +123,7 @@ namespace Defend_Your_Castle
             
             TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
             testdirection = Direction.Right;
+            player = new Player(TestAnim);
 
             TestEnemy = new Enemy(TestAnim);
         }
@@ -293,7 +298,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.InGame: // Update the in-game objects
                     //Level.Update(this);
-
+                    player.Update();
                     //Temporary
                     TestEnemy.Update();
                     //TestAnim.Update();
@@ -329,6 +334,9 @@ namespace Defend_Your_Castle
                 return;
             }
 
+            // Update the global touch state
+            Input.TouchState = TouchPanel.GetState(Window);
+
             base.Update(gameTime);
         }
 
@@ -352,7 +360,7 @@ namespace Defend_Your_Castle
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
-                    TestEnemy.Draw(spriteBatch);
+                    if (TestEnemy.IsDead == false) TestEnemy.Draw(spriteBatch);
                     //TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
                 case GameState.Paused: // Draw the in-game objects and a dark color overlay

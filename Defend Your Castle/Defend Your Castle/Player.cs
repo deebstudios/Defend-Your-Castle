@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Defend_Your_Castle
 {
@@ -26,10 +27,26 @@ namespace Defend_Your_Castle
         // The amount of gold the player has
         public int Gold;
 
+        // The player's currently-selected weapon
+        public Weapon Weapon;
+
+        // Stores the last time the player attacked
+        public float PrevAttackTimer;
+
+        // Stores the mouse state
+        private MouseState mouseState;
+        
         // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
         public bool CanUpgradeCastle
         {
             get { return (CastleLevel != MaxCastleLevel); }
+        }
+
+        // Determines if the player can attack
+        // This is not included in the Weapon class because the player would be able to reset the attack timer by switching weapons
+        public bool CanAttack
+        {
+            get { return ((Game1.ActiveTime - PrevAttackTimer) >= Weapon.AttackSpeed); }
         }
 
         public Player(Animation animation)
@@ -43,8 +60,14 @@ namespace Defend_Your_Castle
             // Start the player out with some gold
             Gold = 100;
 
+            // Select the Sword weapon by default
+            Weapon = new Sword();
+
             // Set the animation of the player
             Animation = animation;
+
+            // Initialize the mouse state
+            mouseState = new MouseState();
         }
         
         // Heals the player
@@ -68,7 +91,7 @@ namespace Defend_Your_Castle
                 // Increase the player's max HP and HP
                 Health += healthIncrease;
                 MaxHealth += healthIncrease;
-
+                
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
                 // wasted memory though
@@ -82,8 +105,61 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void Attack(GestureSample? gesture)
+        {
+            // Check to make sure the player can attack
+            if (CanAttack)
+            {
+                // Play the weapon's attack sound
+                SoundManager.PlaySound(Weapon.Sound);
+
+                if (Input.IsTapInRect(Game1.TestEnemy.GetHurtbox.GetRect, gesture))
+                {
+                    // Perform the attack
+                    Game1.TestEnemy.Die();
+                }
+
+                // Update the attack timer
+                PrevAttackTimer = Game1.ActiveTime;
+            }
+        }
+
+        public void Attack(MouseState mouseState)
+        {
+            // Check to make sure the player can attack
+            if (CanAttack)
+            {
+                // Play the weapon's attack sound
+                SoundManager.PlaySound(Weapon.Sound);
+
+                if (Input.IsMouseInRect(Game1.TestEnemy.GetHurtbox.GetRect, mouseState))
+                {
+                    // Perform the attack
+                    Game1.TestEnemy.Die();
+                }
+
+                // Update the attack timer
+                PrevAttackTimer = Game1.ActiveTime;
+            }
+        }
+
         public override void Update()
         {
+            // Get the last touch gesture (if any)
+            GestureSample? gesture = Input.GetTouchGesture();
+
+            if (Input.IsLeftMouseButtonDown(mouseState))
+            {
+                Attack(mouseState);
+            }
+            else if (Input.IsScreenTapped(gesture))
+            {
+                Attack(gesture);
+            }
+
+            // Get the mouse state
+            mouseState = Mouse.GetState();
+
             base.Update();
         }
 

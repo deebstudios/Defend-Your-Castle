@@ -156,6 +156,8 @@
     <Compile Include="ShopItems\CastleUpgrade.cs" />
     <Compile Include="ShopItems\ShopItem.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="Weapons\Sword.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
