@@ -28,7 +28,7 @@ namespace Defend_Your_Castle
         {
             // Create a new Title Screen
             TitleScreen screen = new TitleScreen(_game.GamePage, _game);
-
+            
             // Add the Title Screen to the MenuScreens Stack
             _game.AddScreen(screen);
         }
