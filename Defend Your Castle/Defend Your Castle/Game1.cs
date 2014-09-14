@@ -69,7 +69,7 @@ namespace Defend_Your_Castle
             activeTime = 0f;
 
             // Get the screen size
-            ScreenSize = new Vector2(640, 384);
+            ScreenSize = new Vector2(640, 480);
 
             // Get half the screen size
             ScreenHalf = (ScreenSize / 2);
@@ -301,7 +301,9 @@ namespace Defend_Your_Castle
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null);
+            Matrix scaleMatrix = Matrix.CreateScale(new Vector3(graphics.PreferredBackBufferWidth / ScreenSize.X, graphics.PreferredBackBufferHeight / ScreenSize.Y, 1f));
+
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, scaleMatrix);
 
             // Check which game state the player is in
             switch (GameState)

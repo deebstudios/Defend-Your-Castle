@@ -47,7 +47,7 @@ namespace Defend_Your_Castle
             get { return Anim; }
         }
 
-        public ActionType GetType
+        public ActionType GetActionType
         {
             get { return Type; }
         }

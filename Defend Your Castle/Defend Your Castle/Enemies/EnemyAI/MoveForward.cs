@@ -12,9 +12,9 @@ namespace Defend_Your_Castle
     public sealed class MoveForward : Action
     {
         //The X to stop
-        public float XStop;
+        public int XStop;
 
-        public MoveForward(Enemy enem, Animation anim, float xstop) : base(enem, anim, ActionType.Moving)
+        public MoveForward(Enemy enem, Animation anim, int xstop) : base(enem, anim, ActionType.Moving)
         {
             XStop = xstop;
         }

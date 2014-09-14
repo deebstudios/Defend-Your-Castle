@@ -20,7 +20,7 @@ namespace Defend_Your_Castle
 
         public static Texture2D Sword;
         public static Texture2D Warhammer;
-
+        public static Texture2D PlayerCastle;
 
         //Debug graphics
         public static Texture2D ScalableBox;
@@ -40,6 +40,7 @@ namespace Defend_Your_Castle
         {
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
+            PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "Castle");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");

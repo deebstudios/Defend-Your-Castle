@@ -29,6 +29,9 @@ namespace Defend_Your_Castle
         //The direction the object is facing; defaults to Right
         protected Direction DirectionFacing;
 
+        //A potential hitbox the object can have
+        protected Hitbox hitbox;
+
         //Hurtbox of the object
         protected Hurtbox hurtbox;
 
@@ -69,6 +72,13 @@ namespace Defend_Your_Castle
         public Direction GetDirection
         {
             get { return DirectionFacing; }
+        }
+
+        //Sets the hitbox of the object
+        public void SetHitbox(int width, int height)
+        {
+            hitbox = new Hitbox(Position, width, height);
+            AddChild(hitbox);
         }
 
         //Sets the hurtbox of the object
