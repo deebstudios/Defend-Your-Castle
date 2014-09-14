@@ -35,7 +35,7 @@ namespace Defend_Your_Castle
             Position = new Vector2(0, 100);
 
             //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X);
+            CurAction = new MoveForward(this, Animation, (int)(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X));
         }
 
         //Gets the movespeed of the enemy
@@ -46,7 +46,7 @@ namespace Defend_Your_Castle
 
         protected virtual void ChooseNextAction()
         {
-            if (CurAction.GetType == Action.ActionType.Moving)
+            if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Attack now
 
