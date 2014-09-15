@@ -24,6 +24,16 @@ namespace Defend_Your_Castle
             //Hurtboxes = new List<Hurtbox>();
         }
 
+        public int Width
+        {
+            get { return (int)WidthHeight.X; }
+        }
+
+        public int Height
+        {
+            get { return (int)WidthHeight.Y; }
+        }
+
         //public void Reset()
         //{
         //    Hurtboxes.Clear();

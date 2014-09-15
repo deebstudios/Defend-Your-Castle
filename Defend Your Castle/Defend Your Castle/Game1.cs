@@ -116,7 +116,7 @@ namespace Defend_Your_Castle
 
             SoundManager.PlaySong(LoadAssets.TestSong);
             
-            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
+            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
             level = new Level(new Player());
             level.AddEnemy(new Enemy(TestAnim, level));
         }

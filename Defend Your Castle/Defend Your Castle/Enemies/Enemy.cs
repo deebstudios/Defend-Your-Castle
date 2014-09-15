@@ -33,11 +33,11 @@ namespace Defend_Your_Castle
             Animation = animation;
 
             Position = new Vector2(0, 100);
-            
-            //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, (level.GetPlayer.GetStartX - (int)Animation.CurrentAnimFrame.FrameSize.X - Range));
 
             SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y);
+
+            //By default, enemies start out moving right
+            CurAction = new MoveForward(this, Animation, ((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
         }
 
         //Gets the movespeed of the enemy

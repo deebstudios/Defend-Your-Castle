@@ -52,7 +52,7 @@ namespace Defend_Your_Castle
         // Gets the left side of the player's position
         public int GetStartX
         {
-            get { return ((int)(Position.X - (Animation.CurrentAnimFrame.FrameSize.X / 2))); }
+            get { return (int)Position.X; }
         }
 
         public Player()
@@ -72,7 +72,7 @@ namespace Defend_Your_Castle
             // Set the animation of the player
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
 
-            Position = new Vector2(Game1.ScreenSize.X - (Animation.CurrentAnimFrame.FrameSize.X / 2), Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
 
             // Initialize the mouse state
             mouseState = new MouseState();
@@ -165,7 +165,7 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Left, Color.White, 0f, 1f);
+            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Right, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

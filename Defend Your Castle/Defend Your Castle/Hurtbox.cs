@@ -20,6 +20,16 @@ namespace Defend_Your_Castle
             WidthHeight = new Vector2(width, height);
         }
 
+        public int Width
+        {
+            get { return (int)WidthHeight.X; }
+        }
+
+        public int Height
+        {
+            get { return (int)WidthHeight.Y; }
+        }
+
         public Rectangle GetRect
         {
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)WidthHeight.X, (int)WidthHeight.Y); }
