@@ -22,7 +22,7 @@ namespace Defend_Your_Castle
         //Current action the enemy is performing
         protected Action CurAction;
 
-        public Enemy(Animation animation)
+        public Enemy(Animation animation, Level level)
         {
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
@@ -33,9 +33,9 @@ namespace Defend_Your_Castle
             Animation = animation;
 
             Position = new Vector2(0, 100);
-
+            
             //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, (int)(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X));
+            CurAction = new MoveForward(this, Animation, (level.GetPlayer.GetStartX - (int)Animation.CurrentAnimFrame.FrameSize.X - Range));
 
             SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y);
         }

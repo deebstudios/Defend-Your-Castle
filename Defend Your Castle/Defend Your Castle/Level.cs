@@ -66,6 +66,7 @@ namespace Defend_Your_Castle
                 if (Enemies[i].CanGetHit(rect) == true)
                 {
                     Enemies[i].Die();
+                    break;
                 }
             }
         }

@@ -118,7 +118,7 @@ namespace Defend_Your_Castle
             
             Animation TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
             level = new Level(new Player());
-            level.AddEnemy(new Enemy(TestAnim));
+            level.AddEnemy(new Enemy(TestAnim, level));
         }
 
         protected override void UnloadContent()

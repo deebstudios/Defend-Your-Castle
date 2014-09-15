@@ -49,6 +49,12 @@ namespace Defend_Your_Castle
             get { return ((Game1.ActiveTime - PrevAttackTimer) >= Weapon.AttackSpeed); }
         }
 
+        // Gets the left side of the player's position
+        public int GetStartX
+        {
+            get { return ((int)(Position.X - (Animation.CurrentAnimFrame.FrameSize.X / 2))); }
+        }
+
         public Player()
         {   
             // Set the player's default castle level
