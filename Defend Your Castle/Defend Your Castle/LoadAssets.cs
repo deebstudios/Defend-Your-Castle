@@ -22,6 +22,13 @@ namespace Defend_Your_Castle
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
 
+        //Shop graphics
+        public static Texture2D ShopIcon;
+        public static Texture2D FortifyWalls;
+        public static Texture2D Invincibility;
+        public static Texture2D RepairWalls;
+        public static Texture2D RepairWallsx10;
+
         //Debug graphics
         public static Texture2D ScalableBox;
         public static Texture2D testanim;
@@ -36,11 +43,23 @@ namespace Defend_Your_Castle
             LoadMusic(Content);
         }
 
+        private static Texture2D LoadGraphic(ContentManager Content, string filename)
+        {
+            return Content.Load<Texture2D>(GraphicsDir + filename);
+        }
+
         private static void LoadGraphics(ContentManager Content)
         {
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "Castle");
+
+            //Shop graphics
+            ShopIcon = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/ShopIcon");
+            FortifyWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/FortifyWallsIcon");
+            Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
+            RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
+            RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");
