@@ -19,8 +19,8 @@
         
         <!-- Weapon Button Style -->
         <Style x:Key="WeaponButtonStyle" BasedOn="{StaticResource RoundedButtonStyle}" TargetType="Button">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
@@ -28,9 +28,44 @@
         
     </Canvas>
     
-    <Canvas Name="GameHUD" x:FieldModifier="public" Visibility="Collapsed">
+    <Grid Name="GameHUD" x:FieldModifier="public" Margin="20" Visibility="Collapsed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Name="HUD_TopRow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                <Button Name="HUD_WeaponSword" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" />
+                <Button Name="HUD_WeaponMace" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" Margin="30,0,30,0" />
+                <Button Name="HUD_WeaponWarhammer" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" />
+            </StackPanel>
 
-    </Canvas>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Name="HUD_OuterHPBar" VerticalAlignment="Top" CornerRadius="1" Height="50" Background="Black" BorderBrush="Black" BorderThickness="1">
+                    <Border Name="HUD_InnerHPBar" CornerRadius="1" Background="Red" BorderBrush="Transparent" BorderThickness="0" />
+                </Border>
+
+                <TextBlock Text="Gold: 500" FontSize="24" Foreground="Black" Grid.Row="1" Margin="0,5,0,0"/>
+            </Grid>
+        </Grid>
+    </Grid>
 
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
         <Grid>
