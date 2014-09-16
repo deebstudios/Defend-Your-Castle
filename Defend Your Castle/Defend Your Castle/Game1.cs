@@ -42,12 +42,8 @@ namespace Defend_Your_Castle
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
-        //Temporary
-        private Animation TestAnim;
-        private Direction testdirection;
-
-        //Temporary
-        private Enemy TestEnemy;
+        //The level
+        private Level level;
 
         public Game1()
         {
@@ -61,6 +57,9 @@ namespace Defend_Your_Castle
 
             // Show the mouse on the game screen
             IsMouseVisible = true;
+            
+            // Store the global touch state
+            Input.TouchState = TouchPanel.GetState(Window);
 
             // Enable the tap gesture
             TouchPanel.EnabledGestures = GestureType.Tap;
@@ -100,7 +99,7 @@ namespace Defend_Your_Castle
 
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
-
+            
             // Load the volume settings
             SoundManager.LoadVolumeSettings();
 
@@ -117,10 +116,9 @@ namespace Defend_Your_Castle
 
             SoundManager.PlaySong(LoadAssets.TestSong);
             
-            TestAnim = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(17, 0, 17, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(34, 0, 17, 16), 300, new Vector2(1, 0)));
-            testdirection = Direction.Right;
-
-            TestEnemy = new Enemy(TestAnim);
+            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            level = new Level(new Player());
+            level.AddEnemy(new Enemy(TestAnim, level));
         }
 
         protected override void UnloadContent()
@@ -173,7 +171,7 @@ namespace Defend_Your_Castle
             GamePage.Shop.Visibility = Visibility.Collapsed;
         }
 
-        private void ShowCanvas_InGame()
+        private void ShowGrid_InGame()
         {
             GamePage.GameHUD.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
@@ -245,7 +243,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.InGame:
                     ChangePauseMenuState(Visibility.Collapsed);
-                    ShowCanvas_InGame();
+                    ShowGrid_InGame();
 
                     break;
                 case GameState.Paused:
@@ -292,13 +290,8 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.InGame: // Update the in-game objects
-                    //Level.Update(this);
-
-                    //Temporary
-                    TestEnemy.Update();
-                    //TestAnim.Update();
-                    if (Keyboard.GetState().IsKeyDown(Keys.D)) testdirection = testdirection == Direction.Left ? Direction.Right : Direction.Left;
-
+                    level.Update();
+                    
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
                         ChangeGameState(GameState.Paused);
@@ -306,8 +299,6 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.Paused: // Don't update any in-game objects
-                    //Level.Update(this);
-
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
                         ChangeGameState(GameState.InGame);
@@ -329,6 +320,9 @@ namespace Defend_Your_Castle
                 return;
             }
 
+            // Update the global touch state
+            Input.TouchState = TouchPanel.GetState(Window);
+
             base.Update(gameTime);
         }
 
@@ -348,20 +342,16 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.InGame: // Draw the in-game objects
-                    //Level.Draw(spriteBatch);
+                    level.Draw(spriteBatch);
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
-                    TestEnemy.Draw(spriteBatch);
-                    //TestAnim.Draw(spriteBatch, LoadAssets.testanim, new Vector2(300, 100), testdirection, Color.White, 0f, 1f);
                     break;
                 case GameState.Paused: // Draw the in-game objects and a dark color overlay
-                    //Level.Draw(spriteBatch);
+                    level.Draw(spriteBatch);
 
                     spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
                     spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-
-                    TestEnemy.Draw(spriteBatch);
                     
                     // Draw color overlay
                     spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(0, 0), null, new Color(Color.Black, 35), 0f, new Vector2(0, 0), new Vector2(ScreenSize.X, ScreenSize.Y), SpriteEffects.None, 1f);

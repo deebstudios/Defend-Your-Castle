@@ -144,6 +144,7 @@
     <Compile Include="Hitbox.cs" />
     <Compile Include="Hurtbox.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="LevelObject.cs" />
     <Compile Include="LoadAssets.cs" />
     <Compile Include="Menus\MenuScreen.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="ShopItems\CastleUpgrade.cs" />
     <Compile Include="ShopItems\ShopItem.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="Weapons\Sword.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -163,6 +166,12 @@
     </AppxManifest>
     <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\cursor.png" />
+    <Content Include="Content\Graphics\ShopIcons\FortifyWallsIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon2.png" />
+    <Content Include="Content\Graphics\ShopIcons\RepairWallsIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\RepairWallsx10Icon.png" />
+    <Content Include="Content\Graphics\ShopIcons\ShopIcon.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
     <Content Include="Content\Graphics\ScalableBox.png" />

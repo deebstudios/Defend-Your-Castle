@@ -59,14 +59,10 @@ namespace Defend_Your_Castle
         public static Vector2 DefaultOrigin(Vector2 TextureDimensions, Direction directionfacing)
         {
             //For X dimensions that don't divide by 2 evenly, we need to get the ceiling when the direction faced is Left and use the floor when the direction faced is Right
-            float X = TextureDimensions.X / 2f;
-            //if (X != (int)X)
-            //{
-            //    if (directionfacing == Direction.Left) X = (int)Math.Ceiling(X);
-            //    else X = (int)Math.Floor(X);
-            //}
+            int X = 0;
+            if (directionfacing == Direction.Left) X = (int)(TextureDimensions.X / 2f);
 
-            return (new Vector2((int)X, (int)TextureDimensions.Y));
+            return (new Vector2(X, 0));
         }
 
         //Indexer for accessing frames
@@ -235,10 +231,7 @@ namespace Defend_Your_Castle
         public void Draw(SpriteBatch spriteBatch, Texture2D SpriteSheet, Vector2 Position, Direction directionfacing, Color statuscolor, float rotation, float depth)
         {
             Vector2 truepos = TrueDrawPos(Position, directionfacing);
-            Debug.WriteLine(truepos);
-
             Vector2 origin = GetOrigin(directionfacing);
-            //Debug.WriteLine(origin);
 
             spriteBatch.Draw(SpriteSheet, truepos, DrawSection, statuscolor, rotation, origin, 1f, GetFlip(directionfacing), depth);
         }

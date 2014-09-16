@@ -88,6 +88,11 @@ namespace Defend_Your_Castle
             AddChild(hurtbox);
         }
 
+        public Hurtbox GetHurtbox
+        {
+            get { return hurtbox; }
+        }
+
         //Sets the parent of this object
         public void SetParent(LevelObject parent)
         {
@@ -176,6 +181,12 @@ namespace Defend_Your_Castle
             Active = active;
         }
 
+        //Checks if the object can get hit
+        public bool CanGetHit(Rectangle rect)
+        {
+            return (hurtbox == null || (hurtbox.CanBeHit(rect) == true));
+        }
+
         //Kill the object and mark it as dead
         public void Die()
         {
@@ -200,18 +211,29 @@ namespace Defend_Your_Castle
             }
         }
 
-        public virtual void Update()
+        public virtual void Update(Level level)
         {
             //Update children
             for (int i = 0; i < Children.Count; i++)
-                Children[i].Update();
+            {
+                if (Children[i].IsDead == false)
+                    Children[i].Update(level);
+                else
+                {
+                    Children.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //Draw children
             for (int i = 0; i < Children.Count; i++)
-                Children[i].Draw(spriteBatch);
+            {
+                if (Children[i].IsDead == false)
+                    Children[i].Draw(spriteBatch);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Defend_Your_Castle
 {
@@ -26,13 +27,35 @@ namespace Defend_Your_Castle
         // The amount of gold the player has
         public int Gold;
 
+        // The player's currently-selected weapon
+        public Weapon Weapon;
+
+        // Stores the last time the player attacked
+        public float PrevAttackTimer;
+
+        // Stores the mouse state
+        private MouseState mouseState;
+        
         // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
         public bool CanUpgradeCastle
         {
             get { return (CastleLevel != MaxCastleLevel); }
         }
 
-        public Player(Animation animation)
+        // Determines if the player can attack
+        // This is not included in the Weapon class because the player would be able to reset the attack timer by switching weapons
+        public bool CanAttack
+        {
+            get { return ((Game1.ActiveTime - PrevAttackTimer) >= Weapon.AttackSpeed); }
+        }
+
+        // Gets the left side of the player's position
+        public int GetStartX
+        {
+            get { return (int)Position.X; }
+        }
+
+        public Player()
         {   
             // Set the player's default castle level
             CastleLevel = 1;
@@ -43,8 +66,16 @@ namespace Defend_Your_Castle
             // Start the player out with some gold
             Gold = 100;
 
+            // Select the Sword weapon by default
+            Weapon = new Sword();
+
             // Set the animation of the player
-            Animation = animation;
+            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
+
+            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
+
+            // Initialize the mouse state
+            mouseState = new MouseState();
         }
         
         // Heals the player
@@ -68,7 +99,7 @@ namespace Defend_Your_Castle
                 // Increase the player's max HP and HP
                 Health += healthIncrease;
                 MaxHealth += healthIncrease;
-
+                
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
                 // wasted memory though
@@ -82,14 +113,59 @@ namespace Defend_Your_Castle
             }
         }
 
-        public override void Update()
+        public void Attack(Level level, GestureSample? gesture)
         {
-            base.Update();
+            // Check to make sure the player can attack
+            if (CanAttack)
+            {
+                // Play the weapon's attack sound
+                SoundManager.PlaySound(Weapon.Sound);
+
+                level.EnemyHit(Input.GestureRect(gesture));
+
+                // Update the attack timer
+                PrevAttackTimer = Game1.ActiveTime;
+            }
+        }
+
+        public void Attack(Level level)
+        {
+            // Check to make sure the player can attack
+            if (CanAttack)
+            {
+                // Play the weapon's attack sound
+                SoundManager.PlaySound(Weapon.Sound);
+
+                level.EnemyHit(Input.MouseRect(mouseState));
+
+                // Update the attack timer
+                PrevAttackTimer = Game1.ActiveTime;
+            }
+        }
+
+        public override void Update(Level level)
+        {
+            // Get the last touch gesture (if any)
+            GestureSample? gesture = Input.GetTouchGesture();
+
+            if (Input.IsLeftMouseButtonDown(mouseState))
+            {
+                Attack(level);
+            }
+            else if (Input.IsScreenTapped(gesture))
+            {
+                Attack(level, gesture);
+            }
+
+            // Get the mouse state
+            mouseState = Mouse.GetState();
+
+            base.Update(level);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
+            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Right, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

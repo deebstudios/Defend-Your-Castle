@@ -12,6 +12,9 @@ namespace Defend_Your_Castle
     // Class that handles key input
     public static class Input
     {
+        // Stores the global touch state for the game window
+        public static TouchPanelState TouchState;
+
         public static bool IsKeyDown(KeyboardState KeyboardState, Keys Key)
         {
             // Return true if the specified key is pressed and held; otherwise, return false
@@ -43,48 +46,67 @@ namespace Defend_Your_Castle
             return ((int)((float)Y * Game1.ResolutionScaleFactor.Y));
         }
 
-        public static bool IsMouseInRect(Rectangle Rect)
+        public static bool IsMouseInRect(Rectangle Rect, MouseState MouseState)
         {
-            // Get the current MouseState
-            MouseState mouseState = Mouse.GetState();
-
             // Create a rectangle for the mouse on the screen
-            Rectangle MouseRect = new Rectangle(GetX(mouseState.X), GetY(mouseState.Y), 1, 1);
+            // The GetX and GetY methods are needed here since the mouse's coordinates are read by XAML
+            Rectangle MouseRect = new Rectangle(GetX(MouseState.X), GetY(MouseState.Y), 1, 1);
 
             // Return true if the mouse is within the Rectangle's bounds; otherwise, return false
             return MouseRect.Intersects(Rect);
         }
 
-        public static bool IsScreenTapped(TouchPanelState touchState)
+        public static Rectangle MouseRect(MouseState MouseState)
         {
-            // Check if a gesture is NOT available, and return false if so
-            if (touchState.IsGestureAvailable == false) return false;
+            // Create a rectangle for the mouse on the screen
+            // The GetX and GetY methods are needed here since the mouse's coordinates are read by XAML
+            Rectangle MouseRect = new Rectangle(GetX(MouseState.X), GetY(MouseState.Y), 1, 1);
 
-            return (touchState.ReadGesture().GestureType == GestureType.Tap);
+            return MouseRect;
         }
 
-        public static bool IsTapInRect(Rectangle Rect)
+        public static GestureSample? GetTouchGesture()
         {
-            // Check if a gesture is NOT available, and return false if so
-            if (TouchPanel.IsGestureAvailable == false) return false;
-
-            // Get the gesture
-            GestureSample gesture = TouchPanel.ReadGesture();
-
-            // Check if the gesture was a tap
-            if (gesture.GestureType == GestureType.Tap)
-            {
-                // Create a rectangle for the tap on the screen
-                Rectangle TapRect = new Rectangle(GetX((int)gesture.Position.X), GetY((int)gesture.Position.Y), 1, 1);
-
-                // Return true if the tap is within the Rectangle's bounds; otherwise, return false
-                return Rect.Intersects(TapRect);
-            }
-
-            // A tap gesture was not found, so return false
-            return false;
+            // Check if a gesture is NOT available, and return null if so
+            if (TouchState.IsGestureAvailable == false) return null;
+            
+            // Return the last gesture
+            return (TouchState.ReadGesture());
         }
 
+        public static bool IsScreenTapped(GestureSample? gesture)
+        {
+            // Check if the specified gesture is invalid, and return false if so
+            if (gesture == null) return false;
 
+            // Convert the specified gesture to a non-nullable type GestureSample to access its properties
+            GestureSample fullGesture = (GestureSample)gesture;
+
+            // Return whether or not the gesture was a tap
+            return (fullGesture.GestureType == GestureType.Tap);
+        }
+
+        public static bool IsTapInRect(Rectangle Rect, GestureSample? gesture)
+        {
+            // Convert the specified gesture to a non-nullable type GestureSample to access its properties
+            GestureSample fullGesture = (GestureSample)gesture;
+
+            // Create a rectangle for the tap on the screen
+            Rectangle TapRect = new Rectangle((int)fullGesture.Position.X, (int)fullGesture.Position.Y, 1, 1);
+
+            // Return true if the tap is within the Rectangle's bounds; otherwise, return false
+            return TapRect.Intersects(Rect);
+        }
+
+        public static Rectangle GestureRect(GestureSample? gesture)
+        {
+            // Convert the specified gesture to a non-nullable type GestureSample to access its properties
+            GestureSample fullGesture = (GestureSample)gesture;
+
+            // Create a rectangle for the tap on the screen
+            Rectangle TapRect = new Rectangle((int)fullGesture.Position.X, (int)fullGesture.Position.Y, 1, 1);
+
+            return TapRect;
+        }
     }
 }
