@@ -43,7 +43,7 @@ namespace Defend_Your_Castle
         public static Vector2 ResolutionScaleFactor;
 
         //The level
-        private Level level;
+        public Level level;
 
         public Game1()
         {
@@ -116,10 +116,6 @@ namespace Defend_Your_Castle
             LoadAssets.LoadContent(Content);
 
             SoundManager.PlaySong(LoadAssets.TestSong);
-            
-            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
-            level = new Level(new Player());
-            level.AddEnemy(new Enemy(TestAnim, level));
         }
 
         protected override void UnloadContent()
@@ -265,6 +261,10 @@ namespace Defend_Your_Castle
         {
             // Remove the Title Screen
             RemoveScreen();
+
+            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            level = new Level(new Player(GamePage));
+            level.AddEnemy(new Enemy(TestAnim, level));
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);

@@ -34,6 +34,15 @@ namespace Defend_Your_Castle
             _game.AddScreen(screen);
         }
 
+        private void ChangeWeaponButton(object sender, RoutedEventArgs e)
+        {
+            // Get the weapon button that was clicked
+            Button WeaponButton = (Button)sender;
+
+            // Switch the player's weapon
+            _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
+        }
+
 
     }
 }

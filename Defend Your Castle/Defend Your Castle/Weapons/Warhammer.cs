@@ -15,6 +15,9 @@ namespace Defend_Your_Castle
 
             //Set the sound of the warhammer
             Sound = LoadAssets.TestSound;
+
+            // TEMPORARY
+            MakeAvailable();
         }
     }
 }

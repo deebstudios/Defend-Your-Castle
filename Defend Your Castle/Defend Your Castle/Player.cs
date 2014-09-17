@@ -17,6 +17,9 @@ namespace Defend_Your_Castle
             Sword, Warhammer
         }
 
+        // Reference to GamePage.xaml
+        private GamePage gamePage;
+
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
         private const int HUDYBounds = 75;
 
@@ -44,8 +47,11 @@ namespace Defend_Your_Castle
         // Stores the mouse state
         private MouseState mouseState;
 
-        public Player()
-        {   
+        public Player(GamePage gamepage)
+        {
+            // Get the reference to GamePage.xaml
+            gamePage = gamepage;
+
             // Set the player's default castle level
             CastleLevel = 1;
 
@@ -108,6 +114,9 @@ namespace Defend_Your_Castle
         public void ReceiveGold(int goldamount)
         {
             Gold += goldamount;
+            
+            // Update the UI
+            gamePage.HUD_GoldAmount.Text = Gold.ToString();
         }
 
         // Heals the player
@@ -194,11 +203,6 @@ namespace Defend_Your_Castle
             {
                 Attack(level, gesture);
             }
-
-            //TEMPORARY
-            //Switch weapons with right-click
-            if (Input.IsRightMouseButtonDown(mouseState) == true)
-                CurWeapon = (CurWeapon + 1) % Weapons.Length;
 
             // Get the mouse state
             mouseState = Mouse.GetState();
