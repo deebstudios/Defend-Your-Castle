@@ -188,14 +188,14 @@ namespace Defend_Your_Castle
         }
 
         //Kill the object and mark it as dead
-        public void Die()
+        public virtual void Die(Level level)
         {
             Dead = true;
 
             // Kill all of the object's children
             for (int i = 0; i < Children.Count; i++)
             {
-                Children[i].Die();
+                Children[i].Die(level);
             }
         }
 
