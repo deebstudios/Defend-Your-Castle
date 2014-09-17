@@ -57,7 +57,7 @@ namespace Defend_Your_Castle
             get { return Complete; }
         }
 
-        public virtual void Update()
+        public virtual void Update(Level level)
         {
             Anim.Update();
         }

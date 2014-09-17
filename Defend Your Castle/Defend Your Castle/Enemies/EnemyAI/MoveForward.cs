@@ -19,9 +19,9 @@ namespace Defend_Your_Castle
             XStop = xstop;
         }
 
-        public override void Update()
+        public override void Update(Level level)
         {
-            base.Update();
+            base.Update(level);
 
             enemy.Move(enemy.GetMoveSpeed);
 

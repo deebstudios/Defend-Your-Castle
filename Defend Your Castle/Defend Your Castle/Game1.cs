@@ -327,6 +327,11 @@ namespace Defend_Your_Castle
             // Update the global touch state
             Input.TouchState = TouchPanel.GetState(Window);
 
+#if DEBUG
+            //Debug commands
+            Debug.Update();
+#endif
+
             base.Update(gameTime);
         }
 

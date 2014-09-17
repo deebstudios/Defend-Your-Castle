@@ -134,8 +134,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Debug.cs" />
     <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Enemies\EnemyAI\Action.cs" />
+    <Compile Include="Enemies\EnemyAI\MeleeAttack.cs" />
     <Compile Include="Enemies\EnemyAI\MoveForward.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>

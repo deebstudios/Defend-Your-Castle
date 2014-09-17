@@ -60,12 +60,14 @@ namespace Defend_Your_Castle
             base.Die(level);
         }
 
-        protected virtual void ChooseNextAction()
+        protected virtual void ChooseNextAction(Level level)
         {
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Attack now
+                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 300, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 300));
 
+                CurAction = new MeleeAttack(this, AttackAnim, 50, 600, 300);
             }
         }
 
@@ -73,8 +75,8 @@ namespace Defend_Your_Castle
         {
             if (CurAction.IsComplete == false)
             {
-                CurAction.Update();
-                if (CurAction.IsComplete == true) ChooseNextAction();
+                CurAction.Update(level);
+                if (CurAction.IsComplete == true) ChooseNextAction(level);
             }
             // Move the enemy
             //Move(MoveSpeed);

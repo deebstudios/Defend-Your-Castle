@@ -129,6 +129,24 @@ namespace Defend_Your_Castle
             if (Health > MaxHealth) Health = MaxHealth;
         }
 
+        //Makes the player lose health when being attacked
+        public void TakeDamage(int damage, Level level)
+        {
+            //Subtract an amount of damage
+            Health -= damage;
+
+            SoundManager.PlaySound(LoadAssets.TestSound);
+
+            //Don't show negative health
+            if (Health < 0)
+            {
+                Health = 0;
+
+                //The death sequence would be in the overloaded Die() method
+                Die(level);
+            }
+        }
+
         public void UpgradeCastle(int healthIncrease)
         {
             // Make sure the player can upgrade his castle
