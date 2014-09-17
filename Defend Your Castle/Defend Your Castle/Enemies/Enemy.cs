@@ -16,8 +16,8 @@ namespace Defend_Your_Castle
         // Range of the Enemy. Use 1 for melee enemies
         protected int Range;
 
-        // The point on the level at which the enemy will stop moving
-        //protected Vector2 StopPoint;
+        // The amount of gold the enemy gives when killed
+        protected int Gold;
 
         //Current action the enemy is performing
         protected Action CurAction;
@@ -32,6 +32,8 @@ namespace Defend_Your_Castle
             // Set the animation of the enemy
             Animation = animation;
 
+            Gold = 100;
+
             Position = new Vector2(0, 100);
 
             SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y);
@@ -44,6 +46,18 @@ namespace Defend_Your_Castle
         public Vector2 GetMoveSpeed
         {
             get { return MoveSpeed; }
+        }
+
+        //Gets the amount of gold the enemy grants upon being killed
+        public int GetGold
+        {
+            get { return Gold; }
+        }
+
+        public override void Die(Level level)
+        {
+            level.GetPlayer.ReceiveGold(Gold);
+            base.Die(level);
         }
 
         protected virtual void ChooseNextAction()

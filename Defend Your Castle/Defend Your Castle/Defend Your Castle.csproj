@@ -158,6 +158,7 @@
     <Compile Include="ShopItems\ShopItem.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="Weapons\Sword.cs" />
+    <Compile Include="Weapons\Warhammer.cs" />
     <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
