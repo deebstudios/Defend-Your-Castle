@@ -50,6 +50,7 @@ namespace Defend_Your_Castle
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = (int)ScreenSize.X;
             graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
+
             Content.RootDirectory = "Content";
 
             // Get the resolution scale factor
@@ -158,6 +159,9 @@ namespace Defend_Your_Castle
                 }
                 else
                 {
+                    // Remove the KeyDown event from the game window in case it was added before
+                    Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
+
                     // Handle the KeyDown event for the game window
                     Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
                 }
