@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Defend_Your_Castle
 {
-    public class CastleUpgrade : ShopItem
+    public sealed class CastleUpgrade : ShopItem
     {
         // The amount of health to upgrade the castle
         private int HealthIncrease;
@@ -15,17 +15,20 @@ namespace Defend_Your_Castle
         {
             // Set the properties of the item
             Name = "Fortify Castle";
-            Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Health.";
-
-            // Get the image of the item
-            //Image = LoadAssets.ImagePathHere
 
             // Set the health increase
             HealthIncrease = 1500;
+
+            Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Max Health.";
+
+            // Get the image of the item
+            //Image = LoadAssets.ImagePathHere
         }
 
         public override void UseItem()
         {
+            base.UseItem();
+
             // Use the castle upgrade to upgrade the player's castle
             ShopPlayer.UpgradeCastle(HealthIncrease);
         }
