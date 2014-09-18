@@ -69,7 +69,11 @@ namespace Defend_Your_Castle
             // Set the animation of the player
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
 
+            // Set the position of the player
             Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
+
+            // Update the UI with the new gold amount
+            UpdateGoldAmount();
 
             // Initialize the mouse state
             mouseState = new MouseState();
@@ -114,9 +118,21 @@ namespace Defend_Your_Castle
         public void ReceiveGold(int goldamount)
         {
             Gold += goldamount;
-            
-            // Update the UI
+
+            // Update the UI with the new gold amount
+            UpdateGoldAmount();
+        }
+
+        private void UpdateGoldAmount()
+        {
+            // Set the Gold Amount TextBlock's Text to the amount of gold the player has
             gamePage.HUD_GoldAmount.Text = Gold.ToString();
+        }
+
+        private void UpdateHealth()
+        {
+            // Set the Width of the inner HP bar to reflect the player's remaining HP
+            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.InnerHPBarWidth);
         }
 
         // Heals the player
@@ -127,6 +143,9 @@ namespace Defend_Your_Castle
 
             // Make sure the player doesn't heal over his max health
             if (Health > MaxHealth) Health = MaxHealth;
+
+            // Update the UI with the player's health
+            UpdateHealth();
         }
 
         //Makes the player lose health when being attacked
@@ -145,6 +164,9 @@ namespace Defend_Your_Castle
                 //The death sequence would be in the overloaded Die() method
                 Die(level);
             }
+
+            // Update the UI with the player's health
+            UpdateHealth();
         }
 
         public void UpgradeCastle(int healthIncrease)

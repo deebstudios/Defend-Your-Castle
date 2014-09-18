@@ -183,7 +183,7 @@ namespace Defend_Your_Castle
             GamePage.PauseMenu.Visibility = visibility;
         }
 
-        private void ShowCanvas_Shop()
+        private void ShowGrid_Shop()
         {
             GamePage.Shop.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
@@ -251,7 +251,7 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.Shop:
-                    ShowCanvas_Shop();
+                    ShowGrid_Shop();
 
                     break;
             }
