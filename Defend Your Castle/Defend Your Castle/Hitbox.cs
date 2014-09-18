@@ -57,9 +57,12 @@ namespace Defend_Your_Castle
 #if DEBUG
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(LoadAssets.ScalableBox, Position, null, Color.Red, 0f, Vector2.Zero, WidthHeight, SpriteEffects.None, .999f);
+            if (Debug.HitboxShow == true)
+            {
+                spriteBatch.Draw(LoadAssets.ScalableBox, Position, null, Color.Red, 0f, Vector2.Zero, WidthHeight, SpriteEffects.None, .999f);
 
-            base.Draw(spriteBatch);
+                base.Draw(spriteBatch);
+            }
         }
 #endif
     }

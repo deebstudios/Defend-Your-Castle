@@ -43,13 +43,14 @@ namespace Defend_Your_Castle
         public static Vector2 ResolutionScaleFactor;
 
         //The level
-        private Level level;
+        public Level level;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = (int)ScreenSize.X;
             graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
+
             Content.RootDirectory = "Content";
 
             // Get the resolution scale factor
@@ -115,10 +116,6 @@ namespace Defend_Your_Castle
             LoadAssets.LoadContent(Content);
 
             SoundManager.PlaySong(LoadAssets.TestSong);
-            
-            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
-            level = new Level(new Player());
-            level.AddEnemy(new Enemy(TestAnim, level));
         }
 
         protected override void UnloadContent()
@@ -158,6 +155,9 @@ namespace Defend_Your_Castle
                 }
                 else
                 {
+                    // Remove the KeyDown event from the game window in case it was added before
+                    Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
+
                     // Handle the KeyDown event for the game window
                     Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
                 }
@@ -183,7 +183,7 @@ namespace Defend_Your_Castle
             GamePage.PauseMenu.Visibility = visibility;
         }
 
-        private void ShowCanvas_Shop()
+        private void ShowGrid_Shop()
         {
             GamePage.Shop.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
@@ -251,7 +251,7 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.Shop:
-                    ShowCanvas_Shop();
+                    ShowGrid_Shop();
 
                     break;
             }
@@ -261,6 +261,10 @@ namespace Defend_Your_Castle
         {
             // Remove the Title Screen
             RemoveScreen();
+
+            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            level = new Level(new Player(GamePage));
+            level.AddEnemy(new Enemy(TestAnim, level));
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
@@ -322,6 +326,11 @@ namespace Defend_Your_Castle
 
             // Update the global touch state
             Input.TouchState = TouchPanel.GetState(Window);
+
+#if DEBUG
+            //Debug commands
+            Debug.Update();
+#endif
 
             base.Update(gameTime);
         }

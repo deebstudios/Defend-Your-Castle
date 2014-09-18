@@ -12,6 +12,17 @@ namespace Defend_Your_Castle
 {
     public class Player : LevelObject
     {
+        public enum WeaponTypes
+        {
+            Sword, Warhammer
+        }
+
+        // Reference to GamePage.xaml
+        private GamePage gamePage;
+
+        //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
+        private const int HUDYBounds = 75;
+
         // The amount of health of the player
         private int Health;
 
@@ -27,36 +38,20 @@ namespace Defend_Your_Castle
         // The amount of gold the player has
         public int Gold;
 
-        // The player's currently-selected weapon
-        public Weapon Weapon;
+        //The player's weapons
+        public Weapon[] Weapons;
 
-        // Stores the last time the player attacked
-        public float PrevAttackTimer;
+        // The player's currently-selected weapon
+        public int CurWeapon;
 
         // Stores the mouse state
         private MouseState mouseState;
-        
-        // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
-        public bool CanUpgradeCastle
-        {
-            get { return (CastleLevel != MaxCastleLevel); }
-        }
 
-        // Determines if the player can attack
-        // This is not included in the Weapon class because the player would be able to reset the attack timer by switching weapons
-        public bool CanAttack
+        public Player(GamePage gamepage)
         {
-            get { return ((Game1.ActiveTime - PrevAttackTimer) >= Weapon.AttackSpeed); }
-        }
+            // Get the reference to GamePage.xaml
+            gamePage = gamepage;
 
-        // Gets the left side of the player's position
-        public int GetStartX
-        {
-            get { return (int)Position.X; }
-        }
-
-        public Player()
-        {   
             // Set the player's default castle level
             CastleLevel = 1;
 
@@ -67,17 +62,89 @@ namespace Defend_Your_Castle
             Gold = 100;
 
             // Select the Sword weapon by default
-            Weapon = new Sword();
+            Weapons = new Weapon[] { new Sword(), new Warhammer() };
+
+            CurWeapon = (int)WeaponTypes.Sword;
 
             // Set the animation of the player
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
 
+            // Set the position of the player
             Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
+
+            // Update the UI with the new gold amount
+            UpdateGoldAmount();
 
             // Initialize the mouse state
             mouseState = new MouseState();
         }
-        
+
+        public int GetHealth
+        {
+            get { return Health; }
+        }
+
+        public int GetMaxHealth
+        {
+            get { return MaxHealth; }
+        }
+
+        //The weapon the player has
+        public Weapon CurrentWeapon
+        {
+            get { return Weapons[CurWeapon]; }
+        }
+
+        // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
+        public bool CanUpgradeCastle
+        {
+            get { return (CastleLevel != MaxCastleLevel); }
+        }
+
+        // Determines if the player can attack
+        // This is not included in the Weapon class because the player would be able to reset the attack timer by switching weapons
+        public bool CanAttack
+        {
+            get { return CurrentWeapon.CanAttack; }
+        }
+
+        // Gets the left side of the player's position
+        public int GetStartX
+        {
+            get { return (int)Position.X; }
+        }
+
+        //Switch the Player's weapon
+        public void SwitchWeapon(int newweapon)
+        {
+            if (newweapon >= 0 && newweapon < Weapons.Length)
+            {
+                if (Weapons[newweapon].CanUse == true)
+                    CurWeapon = newweapon;
+            }
+        }
+
+        //Set goldamount to a negative value when subtracting gold
+        public void ReceiveGold(int goldamount)
+        {
+            Gold += goldamount;
+
+            // Update the UI with the new gold amount
+            UpdateGoldAmount();
+        }
+
+        private void UpdateGoldAmount()
+        {
+            // Set the Gold Amount TextBlock's Text to the amount of gold the player has
+            gamePage.HUD_GoldAmount.Text = Gold.ToString();
+        }
+
+        private void UpdateHealth()
+        {
+            // Set the Width of the inner HP bar to reflect the player's remaining HP
+            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.InnerHPBarWidth);
+        }
+
         // Heals the player
         public void Heal(int healAmount)
         {
@@ -86,6 +153,37 @@ namespace Defend_Your_Castle
 
             // Make sure the player doesn't heal over his max health
             if (Health > MaxHealth) Health = MaxHealth;
+
+            // Update the UI with the player's health
+            UpdateHealth();
+        }
+
+        //Makes the player lose health when being attacked
+        public void TakeDamage(int damage, Level level)
+        {
+            //Subtract an amount of damage
+            Health -= damage;
+
+            SoundManager.PlaySound(LoadAssets.TestSound);
+
+            //Don't show negative health
+            if (Health < 0)
+            {
+                Health = 0;
+
+                //The death sequence would be in the overloaded Die() method
+                Die(level);
+            }
+
+            // Update the UI with the player's health
+            UpdateHealth();
+        }
+
+        public void IncreaseMaxHealth(int healthIncrease)
+        {
+            //Increase the player's current and max HP by the designated amount
+            Health += healthIncrease;
+            MaxHealth += healthIncrease;
         }
 
         public void UpgradeCastle(int healthIncrease)
@@ -95,10 +193,8 @@ namespace Defend_Your_Castle
             {
                 // Increment the player's castle level by 1
                 CastleLevel += 1;
-                
-                // Increase the player's max HP and HP
-                Health += healthIncrease;
-                MaxHealth += healthIncrease;
+
+                IncreaseMaxHealth(healthIncrease);
                 
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
@@ -116,15 +212,18 @@ namespace Defend_Your_Castle
         public void Attack(Level level, GestureSample? gesture)
         {
             // Check to make sure the player can attack
-            if (CanAttack)
+            if (CanAttack == true)
             {
-                // Play the weapon's attack sound
-                SoundManager.PlaySound(Weapon.Sound);
+                //Make sure the attack is below the HUD boundary
+                Rectangle touchrect = Input.GestureRect(gesture);
 
-                level.EnemyHit(Input.GestureRect(gesture));
+                if (touchrect.Y > HUDYBounds)
+                {
+                    // Play the weapon's attack sound
+                    CurrentWeapon.Attack();
 
-                // Update the attack timer
-                PrevAttackTimer = Game1.ActiveTime;
+                    level.EnemyHit(touchrect);
+                }
             }
         }
 
@@ -133,13 +232,16 @@ namespace Defend_Your_Castle
             // Check to make sure the player can attack
             if (CanAttack)
             {
-                // Play the weapon's attack sound
-                SoundManager.PlaySound(Weapon.Sound);
+                //Make sure the attack is below the HUD boundary
+                Rectangle clickrect = Input.MouseRect(mouseState);
 
-                level.EnemyHit(Input.MouseRect(mouseState));
+                if (clickrect.Y > HUDYBounds)
+                {
+                    // Play the weapon's attack sound
+                    CurrentWeapon.Attack();
 
-                // Update the attack timer
-                PrevAttackTimer = Game1.ActiveTime;
+                    level.EnemyHit(clickrect);
+                }
             }
         }
 

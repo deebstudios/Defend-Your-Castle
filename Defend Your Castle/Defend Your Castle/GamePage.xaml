@@ -8,6 +8,63 @@
     mc:Ignorable="d" Loaded="SwapChainBackgroundPanel_Loaded">
 
     <SwapChainBackgroundPanel.Resources>
+        <!-- Weapon Styles -->
+        <Style x:Key="HUD_WeaponButtonStyle" BasedOn="{StaticResource RoundedButtonStyle}" TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        
+        <!-- Health Bar Styles -->
+        <Style x:Key="HUD_OuterHPBarStyle" TargetType="Border">
+            <Setter Property="Width" Value="442"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        
+        <Style x:Key="HUD_InnerHPBarStyle" TargetType="Border">
+            <Setter Property="Width" Value="440"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <!-- Gold Styles -->
+        <Style x:Key="HUD_GoldImageStyle" TargetType="Image">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Source" Value="Content/Graphics/ShopIcons/ShopIcon.png"/>
+        </Style>
+        
+        <Style x:Key="HUD_GoldAmountStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+        </Style>
+        
+        <!-- Pause Button Styles -->
+        <Style x:Key="HUD_PauseButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="IsTabStop" Value="False"/>
+        </Style>
+        
+        
+        <!-- Pause Menu Styles -->
         <Style x:Key="PauseMenuStyle" TargetType="Border">
             <Setter Property="Background" Value="LightBlue"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -17,10 +74,8 @@
             <Setter Property="Padding" Value="10"/>
         </Style>
         
-        <!-- Weapon Button Style -->
-        <Style x:Key="WeaponButtonStyle" BasedOn="{StaticResource RoundedButtonStyle}" TargetType="Button">
-            <Setter Property="Width" Value="80"/>
-            <Setter Property="Height" Value="80"/>
+        <Style x:Key="PauseMenu_ButtonStyle" TargetType="Button">
+            <Setter Property="IsTabStop" Value="False"/>
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
@@ -32,6 +87,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Grid Name="HUD_TopRow">
@@ -47,9 +103,9 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
-                <Button Name="HUD_WeaponSword" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" />
-                <Button Name="HUD_WeaponMace" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" Margin="30,0,30,0" />
-                <Button Name="HUD_WeaponWarhammer" Style="{StaticResource WeaponButtonStyle}" BorderBrush="Black" />
+                <Button Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" Click="ChangeWeaponButton" />
+                <Button Name="HUD_WeaponMace" Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0" />
+                <Button Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton" />
             </StackPanel>
 
             <Grid Grid.Column="2">
@@ -58,12 +114,20 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Border Name="HUD_OuterHPBar" VerticalAlignment="Top" CornerRadius="1" Height="50" Background="Black" BorderBrush="Black" BorderThickness="1">
-                    <Border Name="HUD_InnerHPBar" CornerRadius="1" Background="Red" BorderBrush="Transparent" BorderThickness="0" />
+                <Border Name="HUD_OuterHPBar" Style="{StaticResource HUD_OuterHPBarStyle}">
+                    <Border Name="HUD_InnerHPBar" Style="{StaticResource HUD_InnerHPBarStyle}" x:FieldModifier="public" />
                 </Border>
 
-                <TextBlock Text="Gold: 500" FontSize="24" Foreground="Black" Grid.Row="1" Margin="0,5,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
+                    <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="0" x:FieldModifier="public" />
+                </StackPanel>
             </Grid>
+        </Grid>
+        
+        <Grid Name="HUD_BottomRow" Grid.Row="2">
+            <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;"
+                    Click="PauseGame" />
         </Grid>
     </Grid>
 
@@ -76,14 +140,69 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Content="Menu Option 1" IsTabStop="False"></Button>
-            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="1"></Button>
-            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="2"></Button>
-            <Button Content="Menu Option 2" IsTabStop="False" Grid.Row="3"></Button>
+            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Content="Menu Option 1" />
+            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="1" Content="Menu Option 2" />
+            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="2" Content="Menu Option 2" />
+            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="3" Content="Menu Option 2" />
         </Grid>
     </Border>
 
-    <Canvas Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
+    <Grid Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Top Row -->
+        <Border BorderBrush="Black" BorderThickness="0,0,0,1">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="64" Foreground="Black" Text="- Shop -" />
+        </Border>
+        
+        <!-- Middle Row -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Left Side -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-    </Canvas>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Upgrades -->
+                <TextBlock Grid.RowSpan="3" Grid.ColumnSpan="3" Foreground="Black" FontSize="56" HorizontalAlignment="Center"
+                           Text="Upgrades"/>
+            </Grid>
+            
+            <!-- Right Side -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Prepair/Repair -->
+                <TextBlock Grid.RowSpan="3" Grid.ColumnSpan="3" Foreground="Black" FontSize="56" HorizontalAlignment="Center"
+                           Text="Prepare/Repair"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </SwapChainBackgroundPanel>

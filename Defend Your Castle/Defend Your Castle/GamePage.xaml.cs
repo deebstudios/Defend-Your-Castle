@@ -14,6 +14,8 @@ namespace Defend_Your_Castle
     {
         readonly Game1 _game;
 
+        public double InnerHPBarWidth;
+
         public GamePage(LaunchActivatedEventArgs args)
         {
             this.InitializeComponent();
@@ -32,6 +34,33 @@ namespace Defend_Your_Castle
             
             // Add the Title Screen to the MenuScreens Stack
             _game.AddScreen(screen);
+
+            // Get the InnerHPBarWidth
+            InnerHPBarWidth = HUD_InnerHPBar.Width;
+        }
+
+        private void ChangeWeaponButton(object sender, RoutedEventArgs e)
+        {
+            // Get the weapon button that was clicked
+            Button WeaponButton = (Button)sender;
+
+            // Switch the player's weapon
+            _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
+        }
+
+        private void PauseGame(object sender, RoutedEventArgs e)
+        {
+            // Check if the game is NOT paused
+            if (_game.GameState == GameState.InGame)
+            {
+                // Pause the game
+                _game.ChangeGameState(GameState.Paused);
+            }
+            else if (_game.GameState == GameState.Paused) // The game is paused
+            {
+                // Resume the game
+                _game.ChangeGameState(GameState.InGame);
+            }
         }
 
 

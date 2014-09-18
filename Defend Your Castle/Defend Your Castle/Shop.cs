@@ -26,15 +26,10 @@ namespace Defend_Your_Castle
 
         }
 
-        public bool CanBuyItem(ShopItem item)
-        {
-            return (ShopPlayer.Gold >= item.Price);
-        }
-
         public void BuyItem(ShopItem item)
         {
             // Check if the player can buy the item
-            if (CanBuyItem(item))
+            if (item.CanBuy(ShopPlayer) == true)
             {
                 // Play the "purchase" sound
 
