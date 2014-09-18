@@ -75,6 +75,16 @@ namespace Defend_Your_Castle
             mouseState = new MouseState();
         }
 
+        public int GetHealth
+        {
+            get { return Health; }
+        }
+
+        public int GetMaxHealth
+        {
+            get { return MaxHealth; }
+        }
+
         //The weapon the player has
         public Weapon CurrentWeapon
         {
@@ -147,6 +157,13 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void IncreaseMaxHealth(int healthIncrease)
+        {
+            //Increase the player's current and max HP by the designated amount
+            Health += healthIncrease;
+            MaxHealth += healthIncrease;
+        }
+
         public void UpgradeCastle(int healthIncrease)
         {
             // Make sure the player can upgrade his castle
@@ -154,10 +171,8 @@ namespace Defend_Your_Castle
             {
                 // Increment the player's castle level by 1
                 CastleLevel += 1;
-                
-                // Increase the player's max HP and HP
-                Health += healthIncrease;
-                MaxHealth += healthIncrease;
+
+                IncreaseMaxHealth(healthIncrease);
                 
                 // Change the castle animation
                 // Instead of a switch, may be able to store an array of castle animations. This is probably
