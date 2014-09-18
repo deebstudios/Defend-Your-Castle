@@ -265,6 +265,7 @@ namespace Defend_Your_Castle
             Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
             level = new Level(new Player(GamePage));
             level.AddEnemy(new Enemy(TestAnim, level));
+            level.AddEnemy(new SpearEnemy(level));
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);

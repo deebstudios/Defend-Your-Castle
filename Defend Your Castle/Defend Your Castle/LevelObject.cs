@@ -17,6 +17,12 @@ namespace Defend_Your_Castle
     //Hitboxes, hurtboxes, and the like are added as children, but references to them are kept
     public abstract class LevelObject
     {
+        //Gravitational constant for flying objects affected by gravity
+        public const float Gravity = .1f;
+
+        //Tells if the object is influenced by gravity or not (used mostly for projectiles)
+        protected bool UsesGravity;
+
         //Whether the object is active or not
         protected bool Active;
 
@@ -26,6 +32,9 @@ namespace Defend_Your_Castle
         //The position of the object
         protected Vector2 Position;
 
+        //The rotation of the object
+        protected float Rotation;
+
         //The direction the object is facing; defaults to Right
         protected Direction DirectionFacing;
 
@@ -34,6 +43,9 @@ namespace Defend_Your_Castle
 
         //Hurtbox of the object
         protected Hurtbox hurtbox;
+
+        //Spritesheet of the object
+        protected Texture2D ObjectSheet;
 
         //The animation of the object
         protected Animation Animation;
@@ -47,7 +59,11 @@ namespace Defend_Your_Castle
         public LevelObject()
         {
             Position = Vector2.Zero;
+            Rotation = 0f;
             DirectionFacing = Direction.Right;
+            UsesGravity = false;
+
+            ObjectSheet = null;
 
             Children = new List<LevelObject>();
         }
@@ -112,6 +128,16 @@ namespace Defend_Your_Castle
 
             child.Parent = this;
             Children.Add(child);
+        }
+
+        //Completely removes a child from the level
+        public void RemoveChildComplete(LevelObject child)
+        {
+            if (HasChild(child) == true)
+            {
+                child.Parent = null;
+                Children.Remove(child);
+            }
         }
 
         //Remove a child from this object

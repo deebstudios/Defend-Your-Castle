@@ -22,12 +22,18 @@ namespace Defend_Your_Castle
         //Current action the enemy is performing
         protected Action CurAction;
 
+        public Enemy()
+        {
+
+        }
+
         public Enemy(Animation animation, Level level)
         {
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
             Range = 1;
-            //StopPoint = (CastleX - Range);
+
+            ObjectSheet = LoadAssets.testanim;
 
             // Set the animation of the enemy
             Animation = animation;
@@ -90,7 +96,7 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            CurAction.Draw(spriteBatch, LoadAssets.testanim);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
+            CurAction.Draw(spriteBatch, ObjectSheet);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

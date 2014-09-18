@@ -139,6 +139,8 @@
     <Compile Include="Enemies\EnemyAI\Action.cs" />
     <Compile Include="Enemies\EnemyAI\MeleeAttack.cs" />
     <Compile Include="Enemies\EnemyAI\MoveForward.cs" />
+    <Compile Include="Enemies\EnemyAI\ThrowSpear.cs" />
+    <Compile Include="Enemies\SpearEnemy.cs" />
     <Compile Include="Fade.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
@@ -155,6 +157,7 @@
     <Compile Include="Menus\TitleScreen.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
+    <Compile Include="Projectiles\Spear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
@@ -172,6 +175,7 @@
     </AppxManifest>
     <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\cursor.png" />
+    <Content Include="Content\Graphics\Enemy Spear.png" />
     <Content Include="Content\Graphics\ShopIcons\FortifyWallsIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon2.png" />
