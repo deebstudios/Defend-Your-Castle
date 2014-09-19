@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
             HealthIncrease = 1000;
 
             Description = "Upgrade your castle walls. +" + HealthIncrease + " Max Health.";
+            
+            // Get the path to the image of the item
+            ImagePath = "Content/Graphics/ShopIcons/FortifyWallsIcon.png";
         }
 
         public override void UseItem()
