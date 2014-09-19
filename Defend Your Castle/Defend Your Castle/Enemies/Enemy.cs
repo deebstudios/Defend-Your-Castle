@@ -10,6 +10,9 @@ namespace Defend_Your_Castle
 {
     public class Enemy : LevelObject
     {
+        //The weapon type that hurts the enemy; anything equal to or above it can hurt it
+        protected int WeaponHurt;
+
         // Movement speed
         protected Vector2 MoveSpeed;
 
@@ -24,10 +27,10 @@ namespace Defend_Your_Castle
 
         public Enemy()
         {
-
+            WeaponHurt = (int)Player.WeaponTypes.Sword;
         }
 
-        public Enemy(Animation animation, Level level)
+        public Enemy(Animation animation, Level level) : this()
         {
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
@@ -58,6 +61,11 @@ namespace Defend_Your_Castle
         public int GetGold
         {
             get { return Gold; }
+        }
+
+        public int GetWeaponWeakness
+        {
+            get { return WeaponHurt; }
         }
 
         public override void Die(Level level)

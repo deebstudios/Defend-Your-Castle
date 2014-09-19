@@ -208,7 +208,7 @@ namespace Defend_Your_Castle
         }
 
         //Checks if the object can get hit
-        public bool CanGetHit(Rectangle rect)
+        public virtual bool CanGetHit(Rectangle rect)
         {
             return (hurtbox == null || (hurtbox.CanBeHit(rect) == true));
         }
