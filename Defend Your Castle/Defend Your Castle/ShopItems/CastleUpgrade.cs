@@ -21,8 +21,8 @@ namespace Defend_Your_Castle
 
             Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Max Health.";
 
-            // Get the image of the item
-            //Image = LoadAssets.ImagePathHere
+            // Get the path to the image of the item
+            ImagePath = "Content/Graphics/ShopIcons/FortifyWallsIcon.png";
         }
 
         public override void UseItem()

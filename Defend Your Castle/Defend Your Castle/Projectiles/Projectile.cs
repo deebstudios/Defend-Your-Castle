@@ -9,11 +9,19 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Defend_Your_Castle
 {
     //A projectile
+    //NOTE: This, along with Enemy, need to be way more flexible than they currently are. At the moment I'm just testing if they work or not
     public class Projectile : LevelObject
     {
-        //Velocity and direction of the projectile
+        //Tells if the projectile has been launched or not
+        protected bool Launched;
+
+        //The damage the projectile does
+        protected int Damage;
+
+        //Velocity of the projectile
         protected Vector2 Velocity;
-        protected Texture2D SpriteSheet;
+        protected Vector2 CurVelocity;
+
         protected AnimFrame Sprite;
 
         private Projectile()
@@ -21,33 +29,70 @@ namespace Defend_Your_Castle
             Velocity = Vector2.Zero;
         }
 
-        public Projectile(Vector2 position, Vector2 velocity, Texture2D spritesheet, AnimFrame sprite)
+        public Projectile(Vector2 velocity, Texture2D spritesheet, AnimFrame sprite)
         {
-            Position = position;
             Velocity = velocity;
             if (Velocity.X < 0) DirectionFacing = Direction.Left;
 
-            SpriteSheet = spritesheet;
+            Damage = 1;
+
+            ObjectSheet = spritesheet;
             Sprite = sprite;
+        }
+
+        //Defines rules for setting the rotation of a projectile
+        protected virtual void CheckRotation()
+        {
+
+        }
+
+        //Launches the projectile
+        public void Launch(Vector2 position)
+        {
+            Position = position;
+            CurVelocity = Velocity;
+            CheckRotation();
 
             int width = (int)Sprite.FrameSize.X;
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);
             SetHurtbox(width, height);
+
+            Launched = true;
         }
 
         public override void Update(Level level)
         {
-            Move(Velocity);
+            if (Launched == true)
+            {
+                Move(CurVelocity);
+                if (UsesGravity == true)
+                {
+                    CurVelocity.Y += LevelObject.Gravity;
+                    
+                    //Rotate the projectile
+                    CheckRotation();
+                }
 
-            base.Update(level);
+                base.Update(level);
+
+                //If the projectile hitbox touches the player, make the player take damage and remove the projectile from the level
+                if (hitbox.GetRect.Right >= level.GetPlayer.GetPosition.X)
+                {
+                    level.GetPlayer.TakeDamage(Damage, level);
+                    Die(level);
+                }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.Draw(spriteBatch, SpriteSheet, Position, DirectionFacing, Color.White, 0f, .999f);
+            if (Launched == true)
+            {
+                Sprite.Draw(spriteBatch, ObjectSheet, Position, DirectionFacing, Color.White, Rotation, .999f);
 
-            base.Draw(spriteBatch);
+                base.Draw(spriteBatch);
+            }
         }
     }
 }

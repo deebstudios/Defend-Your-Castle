@@ -109,7 +109,7 @@ namespace Defend_Your_Castle
             // Get the X and Y position at which the Cursor should be displayed in the canvas
             float x = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.LeftProperty));
             float y = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.TopProperty));
-            
+
             // Get the new cursor position. Subtract the CursorOffset by the generated position
             CursorPos = (new Vector2(x, y) - CursorOffset);
             

@@ -45,11 +45,14 @@ namespace Defend_Your_Castle
         //The level
         public Level level;
 
+        // The shop
+        public Shop shop;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = (int)ScreenSize.X;
-            graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
+            //graphics.PreferredBackBufferWidth = (int)ScreenSize.X;
+            //graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
 
             Content.RootDirectory = "Content";
 
@@ -265,12 +268,16 @@ namespace Defend_Your_Castle
             Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
             level = new Level(new Player(GamePage));
             level.AddEnemy(new Enemy(TestAnim, level));
+            level.AddEnemy(new SpearEnemy(level));
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
 
             // Force the HUD Canvas to render itself and its child elements
             GamePage.GameHUD.UpdateLayout();
+
+            // Initialize the Shop
+            shop = new Shop(GamePage, level.GetPlayer);
         }
 
         public void PauseGame()
@@ -279,6 +286,12 @@ namespace Defend_Your_Castle
             ChangeGameState(GameState.Paused);
 
 
+        }
+
+        public void ShowShop()
+        {
+            // Bring the player to the Shop
+            ChangeGameState(GameState.Shop);
         }
 
         protected override void Update(GameTime gameTime)
@@ -338,7 +351,7 @@ namespace Defend_Your_Castle
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             Matrix scaleMatrix = Matrix.CreateScale(new Vector3(graphics.PreferredBackBufferWidth / ScreenSize.X, graphics.PreferredBackBufferHeight / ScreenSize.Y, 1f));
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, scaleMatrix);

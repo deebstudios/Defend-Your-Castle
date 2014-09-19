@@ -28,8 +28,12 @@ namespace Defend_Your_Castle
         // The stock of the item in the shop
         protected int Stock;
 
-        // The image used to represent the item
-        protected AnimFrame Image;
+        // The path to the image used to represent the item
+        public String ImagePath
+        {
+            get;
+            set;
+        }
         
         //The level and max level of the shop item (how many times it can be upgraded)
         protected int MaxLevel;

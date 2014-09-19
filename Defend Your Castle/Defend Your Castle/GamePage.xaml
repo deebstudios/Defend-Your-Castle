@@ -5,7 +5,7 @@
     xmlns:local="using:Defend_Your_Castle"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="SwapChainBackgroundPanel_Loaded">
+    mc:Ignorable="d" Loaded="SwapChainBackgroundPanel_Loaded" UseLayoutRounding="True">
 
     <SwapChainBackgroundPanel.Resources>
         <!-- Weapon Styles -->
@@ -77,6 +77,59 @@
         <Style x:Key="PauseMenu_ButtonStyle" TargetType="Button">
             <Setter Property="IsTabStop" Value="False"/>
         </Style>
+        
+        <!-- Shop Styles -->
+        <Style x:Key="Shop_ShopTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="64"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style x:Key="Shop_ShopSubtitleStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="56"/>
+        </Style>
+        
+        <Style x:Key="Shop_ShopSectionStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+        
+        <Style x:Key="Shop_ShopItemsListButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="IsTabStop" Value="False"/>
+        </Style>
+        
+        <Style x:Key="Shop_ShopItemsListImageStyle" TargetType="Image">
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Height" Value="48"/>
+        </Style>
+        
+        <Style x:Key="Shop_ShopItemsListStyle" TargetType="GridView">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="SelectionMode" Value="None"/>
+            <Setter Property="CanDragItems" Value="False"/>
+            <Setter Property="CanReorderItems" Value="False"/>
+            <Setter Property="IsSwipeEnabled" Value="False"/>
+            <Setter Property="IsItemClickEnabled" Value="False"/>
+            <Setter Property="IsHoldingEnabled" Value="False"/>
+            <Setter Property="IsRightTapEnabled" Value="False"/>
+            <Setter Property="IsDoubleTapEnabled" Value="False"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Button Style="{StaticResource Shop_ShopItemsListButtonStyle}" Click="ShopItem_Click">
+                            <Image Style="{StaticResource Shop_ShopItemsListImageStyle}" Source="{Binding Path=ImagePath}" />
+                        </Button>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </SwapChainBackgroundPanel.Resources>
 
     <Canvas Name="CurrentScreen" x:FieldModifier="public">
@@ -126,8 +179,7 @@
         </Grid>
         
         <Grid Name="HUD_BottomRow" Grid.Row="2">
-            <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;"
-                    Click="PauseGame" />
+            <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" Click="PauseGame" />
         </Grid>
     </Grid>
 
@@ -140,7 +192,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Content="Menu Option 1" />
+            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Content="Shop" Click="PauseMenuOption1_Click" />
             <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="1" Content="Menu Option 2" />
             <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="2" Content="Menu Option 2" />
             <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="3" Content="Menu Option 2" />
@@ -155,54 +207,66 @@
         </Grid.RowDefinitions>
         
         <!-- Top Row -->
-        <Border BorderBrush="Black" BorderThickness="0,0,0,1">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="64" Foreground="Black" Text="- Shop -" />
+        <Border Style="{StaticResource Shop_ShopSectionStyle}">
+            <TextBlock Name="Shop_ShopText" Style="{StaticResource Shop_ShopTitleStyle}" Text="- Shop -" />
         </Border>
         
         <!-- Middle Row -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <!-- Left Side -->
+        <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="1">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <!-- Upgrades -->
-                <TextBlock Grid.RowSpan="3" Grid.ColumnSpan="3" Foreground="Black" FontSize="56" HorizontalAlignment="Center"
-                           Text="Upgrades"/>
+
+                <!-- Left Side -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Upgrades -->
+                    <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Upgrades"/>
+
+                    <!-- Upgrades Items -->
+                    <GridView Name="Shop_UpgradesList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public" />
+                </Grid>
+
+                <!-- Right Side -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Prepair/Repair -->
+                    <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Prepare/Repair"/>
+
+                    <!-- Prepare/Repair Items -->
+                    <GridView Name="Shop_PrepareRepairList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public" />
+                </Grid>
             </Grid>
+        </Border>
+
+        <!-- Bottom Row -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Items -->
+            <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
             
-            <!-- Right Side -->
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Prepair/Repair -->
-                <TextBlock Grid.RowSpan="3" Grid.ColumnSpan="3" Foreground="Black" FontSize="56" HorizontalAlignment="Center"
-                           Text="Prepare/Repair"/>
-            </Grid>
+            <!-- Bottom Row -->
+            <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
         </Grid>
     </Grid>
 </SwapChainBackgroundPanel>

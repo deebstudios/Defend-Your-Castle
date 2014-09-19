@@ -10,6 +10,9 @@ namespace Defend_Your_Castle
 {
     public class Enemy : LevelObject
     {
+        //The weapon type that hurts the enemy; anything equal to or above it can hurt it
+        protected int WeaponHurt;
+
         // Movement speed
         protected Vector2 MoveSpeed;
 
@@ -22,12 +25,18 @@ namespace Defend_Your_Castle
         //Current action the enemy is performing
         protected Action CurAction;
 
-        public Enemy(Animation animation, Level level)
+        public Enemy()
+        {
+            WeaponHurt = (int)Player.WeaponTypes.Sword;
+        }
+
+        public Enemy(Animation animation, Level level) : this()
         {
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
             Range = 1;
-            //StopPoint = (CastleX - Range);
+
+            ObjectSheet = LoadAssets.testanim;
 
             // Set the animation of the enemy
             Animation = animation;
@@ -52,6 +61,11 @@ namespace Defend_Your_Castle
         public int GetGold
         {
             get { return Gold; }
+        }
+
+        public int GetWeaponWeakness
+        {
+            get { return WeaponHurt; }
         }
 
         public override void Die(Level level)
@@ -90,7 +104,7 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            CurAction.Draw(spriteBatch, LoadAssets.testanim);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
+            CurAction.Draw(spriteBatch, ObjectSheet);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

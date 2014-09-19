@@ -22,6 +22,9 @@ namespace Defend_Your_Castle
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
 
+        //Enemy graphics
+        public static Texture2D EnemySpear;
+
         //Shop graphics
         public static Texture2D ShopIcon;
         public static Texture2D FortifyWalls;
@@ -53,6 +56,9 @@ namespace Defend_Your_Castle
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "Castle");
+
+            //Enemy graphics
+            EnemySpear = LoadGraphic(Content, "Enemy Spear");
 
             //Shop graphics
             ShopIcon = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/ShopIcon");
