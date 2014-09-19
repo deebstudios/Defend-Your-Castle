@@ -63,6 +63,24 @@ namespace Defend_Your_Castle
             }
         }
 
+        private void ShopItem_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the Button that was clicked
+            Button TheButton = (Button)sender;
+
+            // Get the ShopItem associated with the Button
+            ShopItem shopItem = (ShopItem)TheButton.DataContext;
+
+            // Use the item
+            shopItem.UseItem();
+        }
+
+        private void PauseMenuOption1_Click(object sender, RoutedEventArgs e)
+        {
+            _game.ShowShop();
+            PauseMenu.Visibility = Visibility.Collapsed;
+        }
+
 
     }
 }
