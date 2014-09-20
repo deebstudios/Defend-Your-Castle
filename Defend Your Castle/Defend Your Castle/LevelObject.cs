@@ -26,6 +26,9 @@ namespace Defend_Your_Castle
         //Whether the object is active or not
         protected bool Active;
 
+        //The weapon type that hurts the object; anything equal to or above it can hurt it
+        protected int WeaponWeakness;
+
         //Whether the object is dead or not and should be removed
         protected bool Dead;
 
@@ -64,6 +67,7 @@ namespace Defend_Your_Castle
             UsesGravity = false;
 
             ObjectSheet = null;
+            WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
             Children = new List<LevelObject>();
         }
@@ -82,6 +86,11 @@ namespace Defend_Your_Castle
         public Vector2 GetPosition
         {
             get { return Position; }
+        }
+
+        public int GetWeaponWeakness
+        {
+            get { return WeaponWeakness; }
         }
 
         //Get the direction the object is facing
@@ -130,13 +139,14 @@ namespace Defend_Your_Castle
             Children.Add(child);
         }
 
-        //Completely removes a child from the level
-        public void RemoveChildComplete(LevelObject child)
+        //Completely removes a child from its parent and puts it in the level
+        public void RemoveChildComplete(LevelObject child, Level level)
         {
             if (HasChild(child) == true)
             {
                 child.Parent = null;
                 Children.Remove(child);
+                level.AddEnemy(child);
             }
         }
 

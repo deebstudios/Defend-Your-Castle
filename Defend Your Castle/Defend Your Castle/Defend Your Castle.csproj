@@ -140,6 +140,7 @@
     <Compile Include="Enemies\EnemyAI\MeleeAttack.cs" />
     <Compile Include="Enemies\EnemyAI\MoveForward.cs" />
     <Compile Include="Enemies\EnemyAI\ThrowSpear.cs" />
+    <Compile Include="Enemies\MeleeEnemy.cs" />
     <Compile Include="Enemies\SpearEnemy.cs" />
     <Compile Include="Fade.cs" />
     <Compile Include="GamePage.xaml.cs">

@@ -11,9 +11,11 @@ namespace Defend_Your_Castle
     //A spear for ranged enemies to throw
     public sealed class Spear : Projectile
     {
-        public Spear(Vector2 velocity) : base(velocity, LoadAssets.EnemySpear, new AnimFrame(new Rectangle(0, 0, LoadAssets.EnemySpear.Width, LoadAssets.EnemySpear.Height), 0f))
+        public Spear(Vector2 velocity) : base(velocity)
         {
-            UsesGravity = true;
+            ObjectSheet = LoadAssets.EnemySpear;
+            Sprite = new AnimFrame(new Rectangle(0, 0, LoadAssets.EnemySpear.Width, LoadAssets.EnemySpear.Height), 0f);
+
             Damage = 20;
         }
 

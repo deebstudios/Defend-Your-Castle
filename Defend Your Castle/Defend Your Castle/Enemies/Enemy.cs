@@ -8,11 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Defend_Your_Castle
 {
-    public class Enemy : LevelObject
+    public abstract class Enemy : LevelObject
     {
-        //The weapon type that hurts the enemy; anything equal to or above it can hurt it
-        protected int WeaponHurt;
-
         // Movement speed
         protected Vector2 MoveSpeed;
 
@@ -27,25 +24,22 @@ namespace Defend_Your_Castle
 
         public Enemy()
         {
-            WeaponHurt = (int)Player.WeaponTypes.Sword;
-        }
-
-        public Enemy(Animation animation, Level level) : this()
-        {
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
             Range = 1;
 
             ObjectSheet = LoadAssets.testanim;
 
-            // Set the animation of the enemy
-            Animation = animation;
-
             Gold = 100;
 
             Position = new Vector2(0, 100);
 
-            SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y);
+            WeaponWeakness = (int)Player.WeaponTypes.Sword;
+        }
+
+        protected void SetProperties(Level level)
+        {
+            SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X + 10, (int)Animation.CurrentAnimFrame.FrameSize.Y + 10);
 
             //By default, enemies start out moving right
             CurAction = new MoveForward(this, Animation, ((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
@@ -63,27 +57,13 @@ namespace Defend_Your_Castle
             get { return Gold; }
         }
 
-        public int GetWeaponWeakness
-        {
-            get { return WeaponHurt; }
-        }
-
         public override void Die(Level level)
         {
             level.GetPlayer.ReceiveGold(Gold);
             base.Die(level);
         }
 
-        protected virtual void ChooseNextAction(Level level)
-        {
-            if (CurAction.GetActionType == Action.ActionType.Moving)
-            {
-                //Attack now
-                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 300, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 300));
-
-                CurAction = new MeleeAttack(this, AttackAnim, 50, 600, 300);
-            }
-        }
+        protected abstract void ChooseNextAction(Level level);
 
         public override void Update(Level level)
         {
@@ -92,12 +72,6 @@ namespace Defend_Your_Castle
                 CurAction.Update(level);
                 if (CurAction.IsComplete == true) ChooseNextAction(level);
             }
-            // Move the enemy
-            //Move(MoveSpeed);
-
-            // Update the animation
-            //Animation.Update();
-
 
             base.Update(level);
         }
