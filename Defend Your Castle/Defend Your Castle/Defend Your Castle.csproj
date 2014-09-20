@@ -177,6 +177,8 @@
     <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\cursor.png" />
     <Content Include="Content\Graphics\Enemy Spear.png" />
+    <Content Include="Content\Graphics\Gold Coin Effect.png" />
+    <Content Include="Content\Graphics\Gold Coin.png" />
     <Content Include="Content\Graphics\ShopIcons\FortifyWallsIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon2.png" />

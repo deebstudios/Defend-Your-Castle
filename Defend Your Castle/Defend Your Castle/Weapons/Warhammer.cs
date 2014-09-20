@@ -11,7 +11,7 @@ namespace Defend_Your_Castle
         public Warhammer()
         {
             //Set the attack speed
-            AttackSpeed = 750;
+            AttackSpeed = 300;
 
             //Set the sound of the warhammer
             Sound = LoadAssets.TestSound;

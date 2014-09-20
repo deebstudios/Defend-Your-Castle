@@ -39,7 +39,7 @@ namespace Defend_Your_Castle
 
         protected void SetProperties(Level level)
         {
-            SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X + 10, (int)Animation.CurrentAnimFrame.FrameSize.Y + 10);
+            SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y, new Vector2(10));
 
             //By default, enemies start out moving right
             CurAction = new MoveForward(this, Animation, ((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
