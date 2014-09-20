@@ -160,7 +160,7 @@ namespace Defend_Your_Castle
             for (int i = 0; i < Enemies.Count; i++)
             {
                 //The "as" cast is temporary!
-                if (Enemies[i].CanGetHit(rect) == true && player.CurWeapon >= (Enemies[i] as Enemy).GetWeaponWeakness)
+                if (Enemies[i].CanGetHit(rect) == true && player.CurWeapon >= Enemies[i].GetWeaponWeakness)
                 {
                     Enemies[i].Die(this);
                     break;

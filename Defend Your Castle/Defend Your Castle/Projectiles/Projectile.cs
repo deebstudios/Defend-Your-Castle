@@ -9,8 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Defend_Your_Castle
 {
     //A projectile
-    //NOTE: This, along with Enemy, need to be way more flexible than they currently are. At the moment I'm just testing if they work or not
-    public class Projectile : LevelObject
+    public abstract class Projectile : LevelObject
     {
         //Tells if the projectile has been launched or not
         protected bool Launched;
@@ -24,20 +23,21 @@ namespace Defend_Your_Castle
 
         protected AnimFrame Sprite;
 
-        private Projectile()
+        public Projectile()
         {
             Velocity = Vector2.Zero;
-        }
-
-        public Projectile(Vector2 velocity, Texture2D spritesheet, AnimFrame sprite)
-        {
-            Velocity = velocity;
-            if (Velocity.X < 0) DirectionFacing = Direction.Left;
 
             Damage = 1;
 
-            ObjectSheet = spritesheet;
-            Sprite = sprite;
+            Launched = false;
+
+            UsesGravity = true;
+        }
+
+        public Projectile(Vector2 velocity) : this()
+        {
+            Velocity = velocity;
+            if (Velocity.X < 0) DirectionFacing = Direction.Left;
         }
 
         //Defines rules for setting the rotation of a projectile
