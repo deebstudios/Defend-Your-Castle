@@ -15,18 +15,13 @@ namespace Defend_Your_Castle
             MoveSpeed = new Vector2(1, 0);
             Range = 150;
 
-            WeaponHurt = (int)Player.WeaponTypes.Warhammer;
-
-            ObjectSheet = LoadAssets.testanim;
+            WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
 
             Animation = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
 
             Position = new Vector2(0, 140);
 
-            SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y);
-
-            //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, ((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
+            SetProperties(level);
         }
 
         protected override void ChooseNextAction(Level level)

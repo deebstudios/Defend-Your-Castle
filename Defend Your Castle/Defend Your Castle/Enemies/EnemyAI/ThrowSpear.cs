@@ -33,7 +33,7 @@ namespace Defend_Your_Castle
             {
                 Projectile spear = SpearThrown();
                 spear.Launch(enemy.GetPosition);
-                enemy.AddChild(spear);
+                level.AddEnemy(spear);
             }
         }
     }
