@@ -142,6 +142,7 @@
     <Compile Include="Enemies\EnemyAI\ThrowSpear.cs" />
     <Compile Include="Enemies\MeleeEnemy.cs" />
     <Compile Include="Enemies\SpearEnemy.cs" />
+    <Compile Include="EnemySpawning.cs" />
     <Compile Include="Fade.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
