@@ -144,6 +144,7 @@
     <Compile Include="Enemies\SpearEnemy.cs" />
     <Compile Include="EnemySpawning.cs" />
     <Compile Include="Fade.cs" />
+    <Compile Include="FadeOnce.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -190,6 +191,9 @@
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
     <Content Include="Content\Graphics\ScalableBox.png" />
     <Content Include="Content\Sounds\test.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\SOR2 Bitmap Font.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />

@@ -141,6 +141,7 @@ namespace Defend_Your_Castle
             Exit();
 
             // Exit the application
+            Application.Current.Resources.Clear();
             Application.Current.Exit();
         }
 

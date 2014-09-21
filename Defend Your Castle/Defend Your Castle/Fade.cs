@@ -9,29 +9,29 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Defend_Your_Castle
 {
     //A helper class for fading things in and out
-    public sealed class Fade
+    public class Fade
     {
         //An infinite fade
         public const int InfiniteFade = -1;
 
-        private Color FadeColor;
+        protected Color FadeColor;
 
         //The amount to fade and the min and max fade amounts
-        private int FadeAmount;
-        private int CurFade;
-        private int MinFadeAmount;
-        private int MaxFadeAmount;
+        protected int FadeAmount;
+        protected int CurFade;
+        protected int MinFadeAmount;
+        protected int MaxFadeAmount;
 
         //Start value for tracking loops
-        private int StartFade;
+        protected int StartFade;
 
         //The number of times the fade loops
-        private int Loops;
-        private int CurLoops;
+        protected int Loops;
+        protected int CurLoops;
 
         //Time between fades
-        private float FadeTime;
-        private float PrevFade;
+        protected float FadeTime;
+        protected float PrevFade;
 
         public Fade(Color startingcolor, int fadeamount, int minfade, int maxfade, int loops, float fadetime)
         {
@@ -66,11 +66,11 @@ namespace Defend_Your_Castle
         //Gets the fade color; this is the value you want when drawing something
         public Color GetFadeColor
         {
-            get { return new Color(FadeColor.R, FadeColor.G, FadeColor.B, CurFade); }
+            get { return (new Color((int)FadeColor.R, (int)FadeColor.G, (int)FadeColor.B) * (float)(CurFade / 255f)); }
         }
 
         //Tells if the fade is complete or not
-        public bool DoneFading
+        public virtual bool DoneFading
         {
             get { return (Loops != InfiniteFade && CurLoops >= Loops); }
         }
@@ -78,6 +78,9 @@ namespace Defend_Your_Castle
         public void FlipFade()
         {
             FadeAmount = -FadeAmount;
+
+            //If the fade amount is the amount we started with, we successfully looped once
+            if (FadeAmount == StartFade) CurLoops++;
         }
 
         private void RefreshFade()
@@ -87,7 +90,7 @@ namespace Defend_Your_Castle
 
         public void Update()
         {
-            //If we're not done fading, check if the fade time is up
+            //Check if the fade time is up
             if (DoneFading == false && Game1.ActiveTime >= PrevFade)
             {
                 CurFade += FadeAmount;
@@ -103,9 +106,6 @@ namespace Defend_Your_Castle
                     CurFade = MinFadeAmount;
                     FlipFade();
                 }
-
-                //If the fade amount is the amount we started with, we successfully looped once
-                if (FadeAmount == StartFade) CurLoops++;
 
                 RefreshFade();
             }
