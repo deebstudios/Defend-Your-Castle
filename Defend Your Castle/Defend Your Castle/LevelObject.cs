@@ -107,9 +107,9 @@ namespace Defend_Your_Castle
         }
 
         //Sets the hurtbox of the object
-        public void SetHurtbox(int width, int height)
+        public void SetHurtbox(int width, int height, Vector2 padamount)
         {
-            hurtbox = new Hurtbox(Position, width, height);
+            hurtbox = new Hurtbox(Position, width, height, padamount);
             AddChild(hurtbox);
         }
 

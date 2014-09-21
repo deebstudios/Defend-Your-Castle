@@ -14,10 +14,10 @@ namespace Defend_Your_Castle
         //The width and height for collision
         private Vector2 WidthHeight;
 
-        public Hurtbox(Vector2 position, int width, int height)
+        public Hurtbox(Vector2 position, int width, int height, Vector2 padamount)
         {
-            Position = position;
-            WidthHeight = new Vector2(width, height);
+            Position = position - (padamount / 2);
+            WidthHeight = new Vector2(width + (int)padamount.X, height + (int)padamount.Y);
         }
 
         public int Width

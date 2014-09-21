@@ -56,7 +56,7 @@ namespace Defend_Your_Castle
             int width = (int)Sprite.FrameSize.X;
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);
-            SetHurtbox(width, height);
+            SetHurtbox(width, height, Vector2.Zero);
 
             Launched = true;
         }
