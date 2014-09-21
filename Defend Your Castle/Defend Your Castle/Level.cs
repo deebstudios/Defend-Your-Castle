@@ -91,7 +91,7 @@ namespace Defend_Your_Castle
         {
             for (int i = 0; i < Enemies.Count; i++)
             {
-                //The "as" cast is temporary!
+                //Check for the object's weapon weakness
                 if (Enemies[i].CanGetHit(rect) == true && player.CurWeapon >= Enemies[i].GetWeaponWeakness)
                 {
                     Enemies[i].Die(this);
@@ -100,7 +100,6 @@ namespace Defend_Your_Castle
             }
         }
 
-                    return (new MeleeEnemy(this));
         public void Update()
         {
             UpdateEnemies();
