@@ -34,7 +34,7 @@ namespace Defend_Your_Castle
             get { return (Game1.ActiveTime >= NextSpawnTime); }
         }
 
-        private void CheckAddSpawnEnemy()
+        public void CheckAddSpawnEnemy()
         {
             switch (level.GetLevelNum)
             {
@@ -123,7 +123,7 @@ namespace Defend_Your_Castle
             }
 
             // Spawn a random enemy if, for some reason, no enemy can be found
-            return ((new Random()).Next(0, EnemySpawnChances.Count));
+            return (new Random().Next(0, EnemySpawnChances.Count));
         }
 
         private Enemy FindEnemyToSpawn(int RandNum)

@@ -199,6 +199,17 @@
         </Grid>
     </Border>
 
+    <Grid Name="LevelEnd" x:FieldModifier="public" Visibility="Collapsed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Name="LevelEnd_LevelCompleteText" x:FieldModifier="public" FontSize="48" Foreground="Black" TextAlignment="Center" />
+        <Button Name="LevelEnd_OK" Content="OK" Grid.Row="1" BorderBrush="Blue" Background="Black" HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Margin="0,0,40,40" FontSize="48" Click="ShowShop" />
+    </Grid>
+    
     <Grid Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -254,12 +265,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Items -->
+            <!-- Items Text -->
             <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
             
-            <!-- Bottom Row -->
+            <!-- Items -->
             <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -267,6 +279,10 @@
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
             </GridView>
+
+            <!-- Done Button -->
+            <Button Name="Shop_Done" Content="Done" Grid.Row="2" BorderBrush="Blue" Background="Black" HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Margin="0,0,20,20" FontSize="48" Click="StartNextLevel" />
         </Grid>
     </Grid>
 </SwapChainBackgroundPanel>
