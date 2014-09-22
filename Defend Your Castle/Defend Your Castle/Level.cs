@@ -11,15 +11,15 @@ namespace Defend_Your_Castle
     //The Level where gameplay takes place; it handles all the LevelObjects
     public sealed class Level
     {
+        // Stores the reference to Game1
+        private Game1 Game;
+
         // Stores the level number of the level
         private int LevelNum;
 
         //The player; the player's children are the things that are helpful to the player
         //The player and its children persist between levels
         private Player player;
-
-        // The duration of the level (in milliseconds)
-        private float LevelDuration;
 
         // The time at which the level will end
         private float LevelEndTime;
@@ -30,21 +30,59 @@ namespace Defend_Your_Castle
         // Instance of the EnemySpawning class - used to spawn enemies
         private EnemySpawning EnemySpawn;
 
-        public Level(Player play)
+        public Level(Player play, Game1 game)
         {
             player = play;
+            Game = game;
 
             Enemies = new List<LevelObject>();
-
-            // NOTE: This calculation will need to be changed
-            // Set the level duration
-            LevelDuration = (30000 + ((LevelNum - 1) * 1000));
 
             // Set the level number to 1 (for testing)
             LevelNum = 1;
 
             // Initialize the EnemySpawning class
             EnemySpawn = new EnemySpawning(this);
+
+            // Set the level end time
+            LevelEndTime = Game1.ActiveTime + LevelDuration;
+        }
+
+        // The duration of the level (in milliseconds)
+        private float LevelDuration
+        {
+            // NOTE: This calculation will need to be changed
+            get { return (30000 + ((LevelNum - 1) * 1000)); }
+        }
+
+        public void StartNextLevel()
+        {
+            // Increase the level number by 1
+            LevelNum += 1;
+
+            // Check if a new enemy can be added to the spawn list, and add the enemy if so
+            EnemySpawn.CheckAddSpawnEnemy();
+
+            // Set the level end time
+            LevelEndTime = Game1.ActiveTime + LevelDuration;
+
+            // Set the game state to InGame
+            Game.ChangeGameState(GameState.InGame);
+        }
+
+        public void CheckEndLevel()
+        {
+            // Check if the level should be ended
+            if (Game1.ActiveTime >= LevelEndTime)
+            {
+                // Clear the enemies list
+                Enemies.Clear();
+
+                // Set the level complete text
+                player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
+
+                // Set the game state to Shop
+                Game.ChangeGameState(GameState.Shop);
+            }
         }
 
         //Returns the player reference
@@ -102,6 +140,10 @@ namespace Defend_Your_Castle
 
         public void Update()
         {
+            // Check if the level can be ended
+            CheckEndLevel();
+
+            // Update the enemies
             UpdateEnemies();
 
             //Update the player

@@ -10,6 +10,12 @@ namespace Defend_Your_Castle
 {
     public abstract class Enemy : LevelObject
     {
+        //"Fake" death for the enemy, indicating that the gold animation must play now
+        protected bool FakeDead;
+
+        //The fade for the gold drop
+        protected FadeOnce GoldDrop;
+
         // Movement speed
         protected Vector2 MoveSpeed;
 
@@ -27,6 +33,9 @@ namespace Defend_Your_Castle
             // Set the enemy's properties
             MoveSpeed = new Vector2(2, 0);
             Range = 1;
+
+            FakeDead = false;
+            GoldDrop = null;
 
             ObjectSheet = LoadAssets.testanim;
 
@@ -57,20 +66,33 @@ namespace Defend_Your_Castle
             get { return Gold; }
         }
 
+        //Checks if the enemy can get hit
+        public override bool CanGetHit(Rectangle rect)
+        {
+            return (base.CanGetHit(rect) == true && FakeDead == false);
+        }
+
         public override void Die(Level level)
         {
             level.GetPlayer.ReceiveGold(Gold);
-            base.Die(level);
+            FakeDead = true;
+            GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
         }
 
         protected abstract void ChooseNextAction(Level level);
 
         public override void Update(Level level)
         {
-            if (CurAction.IsComplete == false)
+            if (FakeDead == false)
             {
                 CurAction.Update(level);
                 if (CurAction.IsComplete == true) ChooseNextAction(level);
+            }
+            //Update gold dropping animation
+            else
+            {
+                GoldDrop.Update();
+                if (GoldDrop.DoneFading == true) base.Die(level);
             }
 
             base.Update(level);
@@ -78,7 +100,13 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            CurAction.Draw(spriteBatch, ObjectSheet);//Animation.Draw(spriteBatch, LoadAssets.testanim, Position, DirectionFacing, Color.White, 0f, 1f);
+            if (FakeDead == false) CurAction.Draw(spriteBatch, ObjectSheet);
+            //Draw gold dropping animation
+            else
+            {
+                spriteBatch.DrawString(LoadAssets.bmpFont, "+" + Gold, new Vector2(Position.X - 20, Position.Y - 10), GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, .999f);
+                spriteBatch.Draw(LoadAssets.GoldCoinEffect, Position, null, GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            }
 
             base.Draw(spriteBatch);
         }
