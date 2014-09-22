@@ -23,6 +23,12 @@ namespace Defend_Your_Castle
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
         private const int HUDYBounds = 75;
 
+        //Invincibility lasts for 5 seconds
+        private const float InvincibilityLength = 5000f;
+        private bool InvincibilityAvailable;
+        private float PrevInvincibility;
+        private Fade InvincibilityFade;
+
         // The amount of health of the player
         private int Health;
 
@@ -54,6 +60,10 @@ namespace Defend_Your_Castle
 
             // Set the player's default castle level
             CastleLevel = 1;
+
+            InvincibilityAvailable = false;
+            PrevInvincibility = 0f;
+            InvincibilityFade = new Fade(Color.White, -10, 0, 255, Fade.InfiniteFade, 0f);
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
@@ -92,6 +102,11 @@ namespace Defend_Your_Castle
         public int GetMaxHealth
         {
             get { return MaxHealth; }
+        }
+
+        public bool IsInvincible
+        {
+            get { return (Game1.ActiveTime < PrevInvincibility); }
         }
 
         //The weapon the player has
@@ -160,22 +175,26 @@ namespace Defend_Your_Castle
         //Makes the player lose health when being attacked
         public void TakeDamage(int damage, Level level)
         {
-            //Subtract an amount of damage
-            Health -= damage;
-
-            SoundManager.PlaySound(LoadAssets.TestSound);
-
-            //Don't show negative health
-            if (Health < 0)
+            //Check if the player is invincible
+            if (IsInvincible == false)
             {
-                Health = 0;
+                //Subtract an amount of damage
+                Health -= damage;
 
-                //The death sequence would be in the overloaded Die() method
-                Die(level);
+                SoundManager.PlaySound(LoadAssets.TestSound);
+
+                //Don't show negative health
+                if (Health < 0)
+                {
+                    Health = 0;
+
+                    //The death sequence would be in the overloaded Die() method
+                    Die(level);
+                }
+
+                // Update the UI with the player's health
+                UpdateHealth();
             }
-
-            // Update the UI with the player's health
-            UpdateHealth();
         }
 
         public void IncreaseMaxHealth(int healthIncrease)
@@ -206,6 +225,15 @@ namespace Defend_Your_Castle
 
                 //}
             }
+        }
+
+        //Uses the player's invincibility power-up
+        public void UseInvincibility()
+        {
+            InvincibilityFade.RestartFade();
+            InvincibilityAvailable = false;
+
+            PrevInvincibility = (Game1.ActiveTime + InvincibilityLength);
         }
 
         public void Attack(Level level, GestureSample? gesture)
@@ -258,6 +286,13 @@ namespace Defend_Your_Castle
                 Attack(level, gesture);
             }
 
+            //If the player is invincible, update the color effect
+            if (IsInvincible == true) InvincibilityFade.Update();
+
+            //TEMPORARY, test granting invincibility
+            if (Input.IsRightMouseButtonDown(mouseState) == true)
+                UseInvincibility();
+
             // Get the mouse state
             mouseState = Mouse.GetState();
 
@@ -266,7 +301,10 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Right, Color.White, 0f, 1f);
+            Color drawcolor = Color.White;
+            if (IsInvincible == true) drawcolor.A = (byte)InvincibilityFade.GetCurFade;
+
+            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Right, drawcolor, 0f, 1f);
 
             base.Draw(spriteBatch);
         }

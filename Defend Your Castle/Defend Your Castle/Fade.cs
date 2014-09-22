@@ -63,6 +63,11 @@ namespace Defend_Your_Castle
             get { return (FadeAmount < 0); }
         }
 
+        public int GetCurFade
+        {
+            get { return CurFade; }
+        }
+
         //Gets the fade color; this is the value you want when drawing something
         public Color GetFadeColor
         {
@@ -81,6 +86,18 @@ namespace Defend_Your_Castle
 
             //If the fade amount is the amount we started with, we successfully looped once
             if (FadeAmount == StartFade) CurLoops++;
+        }
+
+        //Restarts the fade
+        public void RestartFade()
+        {
+            FadeAmount = StartFade;
+            if (FadeAmount < 0) CurFade = MaxFadeAmount;
+            else CurFade = MinFadeAmount;
+
+            CurLoops = 0;
+
+            RefreshFade();
         }
 
         private void RefreshFade()
