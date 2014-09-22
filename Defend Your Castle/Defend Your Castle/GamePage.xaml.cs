@@ -77,8 +77,23 @@ namespace Defend_Your_Castle
 
         private void PauseMenuOption1_Click(object sender, RoutedEventArgs e)
         {
-            _game.ShowShop();
+            _game.ChangeGameState(GameState.Shop);
             PauseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowShop(object sender, RoutedEventArgs e)
+        {
+            // Hide the level end screen
+            LevelEnd.Visibility = Visibility.Collapsed;
+            
+            // Show the shop
+            Shop.Visibility = Visibility.Visible;
+        }
+
+        private void StartNextLevel(object sender, RoutedEventArgs e)
+        {
+            // Start the next level
+            _game.level.StartNextLevel();
         }
 
 

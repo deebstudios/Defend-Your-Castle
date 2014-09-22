@@ -79,6 +79,11 @@ namespace Defend_Your_Castle
             mouseState = new MouseState();
         }
 
+        public GamePage GetGamePage
+        {
+            get { return gamePage; }
+        }
+
         public int GetHealth
         {
             get { return Health; }
@@ -106,12 +111,6 @@ namespace Defend_Your_Castle
         public bool CanAttack
         {
             get { return CurrentWeapon.CanAttack; }
-        }
-
-        // Gets the left side of the player's position
-        public int GetStartX
-        {
-            get { return (int)Position.X; }
         }
 
         //Switch the Player's weapon

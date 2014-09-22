@@ -189,7 +189,7 @@ namespace Defend_Your_Castle
 
         private void ShowGrid_Shop()
         {
-            GamePage.Shop.Visibility = Visibility.Visible;
+            GamePage.LevelEnd.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
             GamePage.GameHUD.Visibility = Visibility.Collapsed;
         }
@@ -267,7 +267,7 @@ namespace Defend_Your_Castle
             RemoveScreen();
 
             Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
-            level = new Level(new Player(GamePage));
+            level = new Level(new Player(GamePage), this);
             level.AddEnemy(new MeleeEnemy(level));
             level.AddEnemy(new SpearEnemy(level));
 
@@ -287,12 +287,6 @@ namespace Defend_Your_Castle
             ChangeGameState(GameState.Paused);
 
 
-        }
-
-        public void ShowShop()
-        {
-            // Bring the player to the Shop
-            ChangeGameState(GameState.Shop);
         }
 
         protected override void Update(GameTime gameTime)
