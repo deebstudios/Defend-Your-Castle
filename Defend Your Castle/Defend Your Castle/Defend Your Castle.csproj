@@ -135,6 +135,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Debug.cs" />
+    <Compile Include="Enemies\ArmoredEnemy.cs" />
     <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Enemies\EnemyAI\Action.cs" />
     <Compile Include="Enemies\EnemyAI\MeleeAttack.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Menus\OptionsScreen.cs" />
     <Compile Include="Menus\TitleScreen.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerHelpers\Archer.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Projectiles\Spear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -176,6 +178,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\cursor.png" />
     <Content Include="Content\Graphics\Enemy Spear.png" />

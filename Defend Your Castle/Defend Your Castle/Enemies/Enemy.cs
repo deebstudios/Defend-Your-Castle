@@ -34,6 +34,8 @@ namespace Defend_Your_Castle
             MoveSpeed = new Vector2(2, 0);
             Range = 1;
 
+            objectType = ObjectType.Enemy;
+
             FakeDead = false;
             GoldDrop = null;
 
@@ -64,6 +66,11 @@ namespace Defend_Your_Castle
         public int GetGold
         {
             get { return Gold; }
+        }
+
+        public override bool IsDying
+        {
+            get { return FakeDead; }
         }
 
         //Checks if the enemy can get hit

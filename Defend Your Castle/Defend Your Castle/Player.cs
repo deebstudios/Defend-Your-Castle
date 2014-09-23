@@ -61,6 +61,8 @@ namespace Defend_Your_Castle
             // Set the player's default castle level
             CastleLevel = 1;
 
+            ObjectSheet = LoadAssets.PlayerCastle;
+
             InvincibilityAvailable = false;
             PrevInvincibility = 0f;
             InvincibilityFade = new Fade(Color.White, -10, 0, 255, Fade.InfiniteFade, 0f);
@@ -302,9 +304,9 @@ namespace Defend_Your_Castle
         public override void Draw(SpriteBatch spriteBatch)
         {
             Color drawcolor = Color.White;
-            if (IsInvincible == true) drawcolor.A = (byte)InvincibilityFade.GetCurFade;
+            if (IsInvincible == true) drawcolor = InvincibilityFade.GetFadeColor;
 
-            Animation.Draw(spriteBatch, LoadAssets.PlayerCastle, Position, Direction.Right, drawcolor, 0f, 1f);
+            Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, drawcolor, 0f, 1f);
 
             base.Draw(spriteBatch);
         }
