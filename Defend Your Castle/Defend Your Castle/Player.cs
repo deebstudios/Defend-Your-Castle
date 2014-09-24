@@ -106,6 +106,11 @@ namespace Defend_Your_Castle
             get { return MaxHealth; }
         }
 
+        public int GetCastleLevel
+        {
+            get { return CastleLevel; }
+        }
+
         public bool IsInvincible
         {
             get { return (Game1.ActiveTime < PrevInvincibility); }
@@ -254,6 +259,15 @@ namespace Defend_Your_Castle
                     level.EnemyHit(touchrect);
                 }
             }
+        }
+
+        public void LoadPlayerData(PlayerData playerData)
+        {
+            // Set the player's properties to the stored data properties
+            Health = playerData.Health;
+            MaxHealth = playerData.MaxHealth;
+            CastleLevel = playerData.CastleLevel;
+            Gold = playerData.Gold;
         }
 
         public void Attack(Level level)

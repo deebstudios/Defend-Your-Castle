@@ -134,6 +134,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Enemies\ArmoredEnemy.cs" />
     <Compile Include="Enemies\Enemy.cs" />
