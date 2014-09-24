@@ -214,6 +214,12 @@ namespace Defend_Your_Castle
             return child;
         }
 
+        //Get all the children this object has
+        public List<LevelObject> GetChildren
+        {
+            get { return Children; }
+        }
+
         //Check if an object is a child of this object
         public bool HasChild(LevelObject child)
         {

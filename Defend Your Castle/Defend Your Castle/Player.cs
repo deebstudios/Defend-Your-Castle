@@ -79,7 +79,7 @@ namespace Defend_Your_Castle
             CurWeapon = (int)WeaponTypes.Sword;
 
             // Set the animation of the player
-            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, LoadAssets.PlayerCastle.Width, LoadAssets.PlayerCastle.Height), 0f));
+            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, ObjectSheet.Width, ObjectSheet.Height), 0f));
 
             // Set the position of the player
             Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
@@ -109,6 +109,11 @@ namespace Defend_Your_Castle
         public int GetCastleLevel
         {
             get { return CastleLevel; }
+        }
+
+        public bool HasInvincibility
+        {
+            get { return InvincibilityAvailable; }
         }
 
         public bool IsInvincible
@@ -268,6 +273,14 @@ namespace Defend_Your_Castle
             MaxHealth = playerData.MaxHealth;
             CastleLevel = playerData.CastleLevel;
             Gold = playerData.Gold;
+
+            InvincibilityAvailable = playerData.Invincibility;
+
+            //Use the helper data to add the helpers to the player
+            for (int i = 0; i < playerData.Helpers.Count; i++)
+            {
+                AddChild(playerData.Helpers[i].CreateHelper());
+            }
         }
 
         public void Attack(Level level)

@@ -37,7 +37,7 @@ namespace Defend_Your_Castle
             ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer) };
 
             // Prepare/Repair
-            ShopPrepareRepairs = new List<ShopItem>() { new FortifyWalls(shopPlayer), new RepairWalls(shopPlayer) };
+            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer) };
 
             // Items
             ShopItems = new List<ShopItem>();

@@ -51,11 +51,31 @@ namespace Defend_Your_Castle
             deferral.Complete();
         }
 
+        //Gets all the player helpers and returns them in HelperData form
+        public static List<HelperData> GetPlayerHelpers(Player player)
+        {
+            List<HelperData> Helpers = new List<HelperData>();
+
+            //For now check the type of the player's children
+            for (int i = 0; i < player.GetChildren.Count; i++)
+            {
+                PlayerHelper helper = player.GetChildren[i] as PlayerHelper;
+                //Conver the helper to a HelperData so we can store its values
+                if (helper != null)
+                {
+                    Helpers.Add(helper.ConvertHelperToData());
+                }
+            }
+
+            return Helpers;
+        }
+
         public static async void SavePlayer(Player player)
         {
             // Create a new PlayerData object from the player
-            PlayerData playerData = new PlayerData(player.GetHealth, player.GetMaxHealth, player.GetCastleLevel, player.Gold);
-            
+            PlayerData playerData = new PlayerData(player.GetHealth, player.GetMaxHealth, player.GetCastleLevel, player.Gold, player.HasInvincibility, GetPlayerHelpers(player));
+            //playerData.SetHelpers(GetPlayerHelpers(player));
+
             // Create a new file for the player's save data, overwriting any existing file
             StorageFile file = await AppVersionData.LocalFolder.CreateFileAsync("player.sav", CreationCollisionOption.ReplaceExisting);
 
@@ -144,18 +164,90 @@ namespace Defend_Your_Castle
     [DataContract(Namespace="")]
     public class PlayerData
     {
+        [DataMember]
         public int Health;
+        [DataMember]
         public int MaxHealth;
+        [DataMember]
         public int CastleLevel;
+        [DataMember]
         public int Gold;
+        [DataMember]
+        public bool Invincibility;
 
-        public PlayerData(int health, int maxHealth, int castleLevel, int gold)
+        [DataMember]
+        public List<HelperData> Helpers;
+
+        public PlayerData(int health, int maxHealth, int castleLevel, int gold, bool invincibility, List<HelperData> helpers)
         {
             Health = health;
             MaxHealth = maxHealth;
             CastleLevel = castleLevel;
             Gold = gold;
+
+            Invincibility = invincibility;
+            Helpers = helpers;
+        }
+
+        //I'm not sure if you prefer a separate method like this or to just have it all in the constructor
+        //public void SetHelpers(List<HelperData> helpers)
+        //{
+        //    Helpers = helpers;
+        //}
+    }
+
+    //Data for the player's helpers
+    [DataContract(Namespace="")]
+    [KnownType("GetKnownTypes")]
+    public abstract class HelperData
+    {
+        [DataMember]
+        public int Level;
+
+        public HelperData()
+        {
+
+        }
+
+        //Creates the appropriate player helper when loading in the HelperData
+        public abstract PlayerHelper CreateHelper();
+
+        //The helper types
+        private static Type[] GetKnownTypes()
+        {
+            return new Type[] { typeof(ArcherData) };
         }
     }
 
+    [DataContract(Namespace="")]
+    public class ArcherData : HelperData
+    {
+        public ArcherData(int currentlevel)
+        {
+            Level = currentlevel;
+        }
+
+        public override PlayerHelper CreateHelper()
+        {
+            Archer playerarcher = new Archer();
+            
+            //Level up the archer until its at the appropriate level; we will definitely have a SetLevel method later to avoid the unnecessary loop
+            for (int i = 0; i < Level; i++)
+                playerarcher.IncreaseLevel();
+
+            return playerarcher;
+        }
+    }
+
+    //Class for storing shop data; we need to set the prices of items to their correct values based on how much they were leveled up
+    [DataContract(Namespace="")]
+    public class ShopData
+    {
+        public int CastleLevel;
+
+        public ShopData()
+        {
+
+        }
+    }
 }

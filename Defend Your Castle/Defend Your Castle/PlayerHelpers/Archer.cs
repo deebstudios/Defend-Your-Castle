@@ -11,8 +11,13 @@ namespace Defend_Your_Castle
     //A close-range archer that helps the player by attacking enemies that approach the castle. It reacts on a timer
     //It does not attack Projectiles nor ranged enemies (they're too far) and can only hurt enemies that the Sword can
     //The Archer is a child of the Player
-    public sealed class Archer : LevelObject
+    public sealed class Archer : PlayerHelper
     {
+        //The amount the Archer's stats increase by each level
+        private const int ChanceIncrease = 1;
+        private const int RangeIncrease = 50;
+        private const float SpeedIncrease = 200f;
+
         //The enemy the archer is attacking
         private LevelObject Victim;
 
@@ -25,11 +30,13 @@ namespace Defend_Your_Castle
         private float AttackTime;
         private float PrevAttack;
 
-        public Archer(Level level)
+        public Archer(/*Level level*/)
         {
             Victim = null;
 
             ObjectSheet = LoadAssets.PlayerArcher;
+
+            MaxLevel = 4;
 
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 9, 16), 0f));
             AttackingAnim = new Animation(new AnimFrame(new Rectangle(9, 0, 7, 16), 500f), new AnimFrame(new Rectangle(16, 0, 7, 16), 300f));
@@ -41,7 +48,7 @@ namespace Defend_Your_Castle
             PrevAttack = 0f;
 
             //TEMPORARY
-            Position = new Vector2(level.GetPlayer.GetPosition.X - 20, 140);
+            Position = new Vector2(/*level.GetPlayer.GetPosition.X - 20*/Game1.ScreenSize.X - LoadAssets.PlayerCastle.Width - 20, 140);
         }
 
         public bool IsAttacking
@@ -87,6 +94,19 @@ namespace Defend_Your_Castle
         private void StopShooting()
         {
             Victim = null;
+        }
+
+        //Make the archer attack faster, further, and more successfully
+        public override void IncreaseStats()
+        {
+            AttackChance -= ChanceIncrease;
+            AttackRange += RangeIncrease;
+            AttackTime -= SpeedIncrease;
+        }
+
+        public override HelperData ConvertHelperToData()
+        {
+            return new ArcherData(HelperLevel);
         }
 
         public override void Update(Level level)

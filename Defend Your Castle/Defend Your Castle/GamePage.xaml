@@ -272,7 +272,7 @@
             <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
             
             <!-- Items -->
-            <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="pubic">
+            <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal" />
