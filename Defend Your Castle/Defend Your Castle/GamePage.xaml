@@ -280,7 +280,10 @@
                 </GridView.ItemsPanel>
             </GridView>
 
-            <!-- Done Button -->
+            <!-- Save + Done Buttons -->
+            <Button Name="Shop_Save" Content="Save" Grid.Row="2" BorderBrush="Blue" Background="Black" HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom" Margin="20,0,0,20" FontSize="48" Click="SaveGame" />
+            
             <Button Name="Shop_Done" Content="Done" Grid.Row="2" BorderBrush="Blue" Background="Black" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" Margin="0,0,20,20" FontSize="48" Click="StartNextLevel" />
         </Grid>

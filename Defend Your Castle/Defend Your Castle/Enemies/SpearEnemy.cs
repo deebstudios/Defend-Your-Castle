@@ -15,8 +15,6 @@ namespace Defend_Your_Castle
             MoveSpeed = new Vector2(1, 0);
             Range = 150;
 
-            WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
-
             Animation = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
 
             Position = new Vector2(0, 140);

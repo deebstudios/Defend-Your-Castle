@@ -53,6 +53,8 @@ namespace Defend_Your_Castle
             CurVelocity = Velocity;
             CheckRotation();
 
+            objectType = ObjectType.Projectile;
+
             int width = (int)Sprite.FrameSize.X;
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);

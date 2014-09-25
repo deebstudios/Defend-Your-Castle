@@ -96,6 +96,12 @@ namespace Defend_Your_Castle
             _game.level.StartNextLevel();
         }
 
+        private void SaveGame(object sender, RoutedEventArgs e)
+        {
+            // Save the player
+            Data.SavePlayer(_game.level.GetPlayer);
+        }
+
 
     }
 }

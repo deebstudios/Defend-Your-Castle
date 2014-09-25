@@ -8,6 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Defend_Your_Castle
 {
+    //The type of object the level object is; we only need a few types for comparison
+    public enum ObjectType
+    {
+        None, Enemy, Projectile
+    }
+
     public enum Direction
     {
         Right, Left
@@ -38,6 +44,9 @@ namespace Defend_Your_Castle
         //The rotation of the object
         protected float Rotation;
 
+        //The object type of the LevelObject
+        protected ObjectType objectType;
+
         //The direction the object is facing; defaults to Right
         protected Direction DirectionFacing;
 
@@ -63,6 +72,7 @@ namespace Defend_Your_Castle
         {
             Position = Vector2.Zero;
             Rotation = 0f;
+            objectType = ObjectType.None;
             DirectionFacing = Direction.Right;
             UsesGravity = false;
 
@@ -75,6 +85,12 @@ namespace Defend_Your_Castle
         public bool IsActive
         {
             get { return Active; }
+        }
+
+        //Used for certain things (Ex. Enemy gold effect showing but the enemy isn't dead)
+        public virtual bool IsDying
+        {
+            get { return false; }
         }
 
         public bool IsDead
@@ -91,6 +107,11 @@ namespace Defend_Your_Castle
         public int GetWeaponWeakness
         {
             get { return WeaponWeakness; }
+        }
+
+        public ObjectType GetObjectType
+        {
+            get { return objectType; }
         }
 
         //Get the direction the object is facing
@@ -191,6 +212,12 @@ namespace Defend_Your_Castle
                 child = Children[index];
             
             return child;
+        }
+
+        //Get all the children this object has
+        public List<LevelObject> GetChildren
+        {
+            get { return Children; }
         }
 
         //Check if an object is a child of this object

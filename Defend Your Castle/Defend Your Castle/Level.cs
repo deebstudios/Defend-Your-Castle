@@ -47,6 +47,11 @@ namespace Defend_Your_Castle
             LevelEndTime = Game1.ActiveTime + LevelDuration;
         }
 
+        public List<LevelObject> GetEnemies
+        {
+            get { return Enemies; }
+        }
+
         // The duration of the level (in milliseconds)
         private float LevelDuration
         {

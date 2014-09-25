@@ -107,6 +107,7 @@ namespace Defend_Your_Castle
         {
             CurFrame = 0;
             CurrentAnimFrame.ResetFrame();
+            AnimationEnd = false;
         }
 
         //Move onto the next frame
