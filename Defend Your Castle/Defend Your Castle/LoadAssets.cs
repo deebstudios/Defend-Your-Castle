@@ -63,7 +63,7 @@ namespace Defend_Your_Castle
         {
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
-            PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "Castle");
+            PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
             PlayerArcher = LoadGraphic(Content, "ArcherSheet");
 
             //Enemy graphics
