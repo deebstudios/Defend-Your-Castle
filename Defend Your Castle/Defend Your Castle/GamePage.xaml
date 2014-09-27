@@ -78,7 +78,29 @@
             <Setter Property="IsTabStop" Value="False"/>
         </Style>
         
+        
+        <!-- Level End Styles -->
+        <Style x:Key="LevelEnd_ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,40,40"/>
+        </Style>
+        
+        
         <!-- Shop Styles -->
+        <Style x:Key="Shop_BackgroundImageStyle" TargetType="Image">
+            <Setter Property="Grid.RowSpan" Value="3"/>
+            <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="50"/>
+            <Setter Property="Opacity" Value="0.50"/>
+        </Style>
+        
         <Style x:Key="Shop_ShopTitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="64"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -206,16 +228,18 @@
         </Grid.RowDefinitions>
         
         <TextBlock Name="LevelEnd_LevelCompleteText" x:FieldModifier="public" FontSize="48" Foreground="Black" TextAlignment="Center" />
-        <Button Name="LevelEnd_OK" Content="OK" Grid.Row="1" BorderBrush="Blue" Background="Black" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" Margin="0,0,40,40" FontSize="48" Click="ShowShop" />
+        <Button Name="LevelEnd_OK" Style="{StaticResource LevelEnd_ButtonStyle}" Content="OK" Click="ShowShop" />
     </Grid>
-    
-    <Grid Name="Shop" x:FieldModifier="public" Visibility="Collapsed">
+
+    <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!-- Shop Background -->
+        <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
         
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">

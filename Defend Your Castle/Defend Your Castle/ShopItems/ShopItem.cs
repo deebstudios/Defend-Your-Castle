@@ -49,7 +49,7 @@ namespace Defend_Your_Castle
             // Get the current player shopping
             ShopPlayer = shopPlayer;
 
-            MaxLevel = InfinitePurchases;
+            MaxLevel = 1;
             CurLevel = 0;
         }
 
