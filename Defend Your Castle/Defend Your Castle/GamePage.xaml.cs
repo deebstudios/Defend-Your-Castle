@@ -94,6 +94,12 @@ namespace Defend_Your_Castle
         {
             // Start the next level
             _game.level.StartNextLevel();
+
+            // Set the level start message's text to the level number
+            LevelStart_Message.Text = "Level " + _game.level.GetLevelNum;
+
+            // Show the level animation
+            LevelStart_Anim.Begin();
         }
 
         private void SaveGame(object sender, RoutedEventArgs e)

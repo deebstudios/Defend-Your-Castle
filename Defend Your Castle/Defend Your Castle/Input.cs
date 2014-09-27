@@ -104,9 +104,13 @@ namespace Defend_Your_Castle
             GestureSample fullGesture = (GestureSample)gesture;
 
             // Create a rectangle for the tap on the screen
-            Rectangle TapRect = new Rectangle((int)fullGesture.Position.X, (int)fullGesture.Position.Y, 1, 1);
+            // The GetX and GetY methods are needed here since the touch coordinates are based on the screen resolution
+            Rectangle TapRect = new Rectangle(GetX((int)fullGesture.Position.X), GetY((int)fullGesture.Position.Y), 1, 1);
 
+            // Return the rectangle that represents the tapped region
             return TapRect;
         }
+
+
     }
 }

@@ -15,8 +15,6 @@
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Custom Styles -->
-
             <!-- Game Font -->
             <FontFamily x:Key="GameFont">Consolas</FontFamily>
 
@@ -25,6 +23,9 @@
 
             <!-- Game Font Color -->
             <SolidColorBrush x:Key="GameFontColor">Black</SolidColorBrush>
+            
+            <!-- Game Button Background Color -->
+            <SolidColorBrush x:Key="GameButtonBackgroundColor">Orange</SolidColorBrush>
 
             <!-- TextBlock -->
             <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -38,6 +39,16 @@
                 <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
                 <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
                 <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
+            </Style>
+            
+            <!-- Button -->
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
+                <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
+                <Setter Property="Background" Value="{StaticResource GameButtonBackgroundColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="IsTabStop" Value="False"/>
             </Style>
 
             <!-- TextBox -->
@@ -390,8 +401,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <!-- End Custom Styles -->
 
         </ResourceDictionary>
     </Application.Resources>
