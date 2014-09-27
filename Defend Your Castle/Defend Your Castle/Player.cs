@@ -82,7 +82,7 @@ namespace Defend_Your_Castle
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, ObjectSheet.Width, ObjectSheet.Height), 0f));
 
             // Set the position of the player
-            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 0);
+            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 70);
 
             // Update the UI with the new gold amount
             UpdateGoldAmount();
@@ -159,7 +159,7 @@ namespace Defend_Your_Castle
             UpdateGoldAmount();
         }
 
-        private void UpdateGoldAmount()
+        public void UpdateGoldAmount()
         {
             // Set the Gold Amount TextBlock's Text to the amount of gold the player has
             gamePage.HUD_GoldAmount.Text = Gold.ToString();

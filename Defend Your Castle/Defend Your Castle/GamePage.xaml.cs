@@ -71,8 +71,8 @@ namespace Defend_Your_Castle
             // Get the ShopItem associated with the Button
             ShopItem shopItem = (ShopItem)TheButton.DataContext;
 
-            // Use the item
-            shopItem.UseItem();
+            // Buy the item if possible
+            _game.shop.BuyItem(shopItem);
         }
 
         private void PauseMenuOption1_Click(object sender, RoutedEventArgs e)

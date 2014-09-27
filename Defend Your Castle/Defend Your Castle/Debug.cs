@@ -26,6 +26,12 @@ namespace Defend_Your_Castle
             DebugKeyboard = new KeyboardState();
         }
 
+        //Displays the value of an object into the Output window
+        public static void OutputValue(object value)
+        {
+            System.Diagnostics.Debug.WriteLine(value);
+        }
+
         public static void Update()
         {
             //Key combinations
