@@ -104,7 +104,7 @@ namespace Defend_Your_Castle
         {
             // Try to get the player file from its stored location
             IStorageItem storageItem = await AppVersionData.LocalFolder.TryGetItemAsync("player.sav");
-
+            
             // Check if the file was found. If it wasn't, return a new player
             if (storageItem == null) return (new Player(page));
 

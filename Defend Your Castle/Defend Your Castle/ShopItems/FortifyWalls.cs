@@ -18,6 +18,8 @@ namespace Defend_Your_Castle
             //Set the health increase
             HealthIncrease = 1000;
 
+            
+
             Description = "Upgrade your castle walls. +" + HealthIncrease + " Max Health.";
             
             // Get the path to the image of the item

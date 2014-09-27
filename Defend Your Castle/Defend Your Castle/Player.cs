@@ -159,7 +159,7 @@ namespace Defend_Your_Castle
             UpdateGoldAmount();
         }
 
-        private void UpdateGoldAmount()
+        public void UpdateGoldAmount()
         {
             // Set the Gold Amount TextBlock's Text to the amount of gold the player has
             gamePage.HUD_GoldAmount.Text = Gold.ToString();
