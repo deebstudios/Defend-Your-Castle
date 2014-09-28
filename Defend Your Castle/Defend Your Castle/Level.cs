@@ -79,15 +79,24 @@ namespace Defend_Your_Castle
             // Check if the level should be ended
             if (Game1.ActiveTime >= LevelEndTime)
             {
-                // Clear the enemies list
-                Enemies.Clear();
-
-                // Set the level complete text
-                player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
-
-                // Set the game state to Shop
-                Game.ChangeGameState(GameState.Shop);
+                //End the level if so
+                EndLevel();
             }
+        }
+
+        public void EndLevel()
+        {
+            // Clear the enemies list
+            Enemies.Clear();
+
+            //Stop the Player's Invincibility if it is active
+            player.StopInvincibility();
+
+            // Set the level complete text
+            player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
+
+            // Set the game state to Shop
+            Game.ChangeGameState(GameState.Shop);
         }
 
         //Returns the player reference

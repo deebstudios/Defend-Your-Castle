@@ -213,14 +213,28 @@ namespace Defend_Your_Castle
         }
 
         //Gets the location to draw the frame, with all other factors taken into account
-        private Vector2 TrueDrawPos(Vector2 Position, Direction directionfacing)
+        private Vector2 TrueDrawPos(Vector2 Position, Direction directionfacing, float rotation)
         {
             Vector2 trueoffset = OffsetOrigin;
 
             //Due to the way SpriteEffects.FlipHorizontally works, we need to negate the X offset so it properly offsets the frame
             if (directionfacing == Direction.Left) trueoffset.X = -trueoffset.X;
 
-            return (Position + trueoffset);
+            //Offset rotation so it doesn't change where the object is drawn
+            //Currently, this works for only 90 degree rotations. Avoid setting the rotation to π * 2 degrees and instead set it to 0
+            Vector2 rotationoffset = Vector2.Zero;
+            if (rotation != 0f)
+            {
+                float pi90 = (float)MathHelper.PiOver2;
+                float pi180 = (float)Math.PI;
+                float pi270 = (float)Math.PI + MathHelper.PiOver2;
+
+                //Adjust the position based on how these rotation values affect how the sprite draws
+                if (rotation < pi270) rotationoffset.X = DrawSection.Width;
+                if (rotation > pi90) rotationoffset.Y = DrawSection.Height;
+            }
+
+            return (Position + trueoffset + rotationoffset);
         }
 
         //Resets the frame's duration
@@ -231,7 +245,7 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch, Texture2D SpriteSheet, Vector2 Position, Direction directionfacing, Color statuscolor, float rotation, float depth)
         {
-            Vector2 truepos = TrueDrawPos(Position, directionfacing);
+            Vector2 truepos = TrueDrawPos(Position, directionfacing, rotation);
             Vector2 origin = GetOrigin(directionfacing);
 
             spriteBatch.Draw(SpriteSheet, truepos, DrawSection, statuscolor, rotation, origin, 1f, GetFlip(directionfacing), depth);

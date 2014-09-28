@@ -21,6 +21,7 @@ namespace Defend_Your_Castle
         public static Texture2D Sword;
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
+        public static Texture2D PlayerCastleInvincible;
         public static Texture2D PlayerArcher;
 
         //Enemy graphics
@@ -64,6 +65,7 @@ namespace Defend_Your_Castle
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
+            PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
             PlayerArcher = LoadGraphic(Content, "ArcherSheet");
 
             //Enemy graphics

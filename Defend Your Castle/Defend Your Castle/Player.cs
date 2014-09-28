@@ -65,7 +65,7 @@ namespace Defend_Your_Castle
 
             InvincibilityAvailable = false;
             PrevInvincibility = 0f;
-            InvincibilityFade = new Fade(Color.White, -10, 0, 255, Fade.InfiniteFade, 0f);
+            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteFade, 0f);
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
@@ -248,6 +248,12 @@ namespace Defend_Your_Castle
             PrevInvincibility = (Game1.ActiveTime + InvincibilityLength);
         }
 
+        //Stops the player's invincibility
+        public void StopInvincibility()
+        {
+            PrevInvincibility = 0f;
+        }
+
         public void Attack(Level level, GestureSample? gesture)
         {
             // Check to make sure the player can attack
@@ -330,10 +336,15 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Color drawcolor = Color.White;
-            if (IsInvincible == true) drawcolor = InvincibilityFade.GetFadeColor;
+            float depth = GetDrawDepth;
 
-            Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, drawcolor, 0f, 1f);
+            //If the player is invincible, draw the invincible fort above on top of the normal one
+            if (IsInvincible == true)
+            {
+                spriteBatch.Draw(LoadAssets.PlayerCastleInvincible, Position, null, InvincibilityFade.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth + .0001f);
+            }
+
+            Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, depth);
 
             base.Draw(spriteBatch);
         }

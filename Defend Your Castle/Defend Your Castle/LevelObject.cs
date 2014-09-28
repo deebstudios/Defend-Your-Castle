@@ -134,6 +134,18 @@ namespace Defend_Your_Castle
             AddChild(hurtbox);
         }
 
+        //Get the proper depth to draw the object; objects lower in the Y position will be drawn above objects above them
+        public float GetDrawDepth
+        {
+            get 
+            {
+                float depth = (Position.Y / 10000f);
+                if (depth <= 0) depth = .001f;
+
+                return depth;
+            }
+        }
+
         public Hurtbox GetHurtbox
         {
             get { return hurtbox; }

@@ -146,7 +146,7 @@ namespace Defend_Your_Castle
         {
             Animation drawanim = IsAttacking == false ? Animation : AttackingAnim;
 
-            drawanim.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, 1f); 
+            drawanim.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, .998f); 
 
             base.Draw(spriteBatch);
         }
