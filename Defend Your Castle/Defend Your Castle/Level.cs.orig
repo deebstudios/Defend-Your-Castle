@@ -78,12 +78,25 @@ namespace Defend_Your_Castle
             player.UpdateGoldAmount();
         }
 
+        public void EndLevel()
+        {
+            // Clear the enemies list
+            Enemies.Clear();
+
+            // Set the level complete text
+            player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
+
+            // Set the game state to Shop
+            Game.ChangeGameState(GameState.Shop);
+        }
+
         public void CheckEndLevel()
         {
             // Check if the level should be ended
             if (Game1.ActiveTime >= LevelEndTime)
             {
-                // End the level
+<<<<<<< HEAD
+                //End the level if so
                 EndLevel();
             }
         }
@@ -101,6 +114,11 @@ namespace Defend_Your_Castle
 
             // Set the game state to Shop
             Game.ChangeGameState(GameState.Shop);
+=======
+                // End the level
+                EndLevel();
+            }
+>>>>>>> origin/GeneralUIImprovements2
         }
 
         //Returns the player reference
