@@ -61,7 +61,7 @@ namespace Defend_Your_Castle
 
             // Show the mouse on the game screen
             IsMouseVisible = true;
-            
+
             // Store the global touch state
             Input.TouchState = TouchPanel.GetState(Window);
 
@@ -187,6 +187,19 @@ namespace Defend_Your_Castle
             GamePage.PauseMenu.Visibility = visibility;
         }
 
+        private void ChangeLevelStartAnimState(bool ShouldPause)
+        {
+            // Check if the level animation is active
+            if (GamePage.LevelStart_Anim.GetCurrentState() == Windows.UI.Xaml.Media.Animation.ClockState.Active)
+            {
+                // It is, so check if the animation should be paused, and pause it if so
+                if (ShouldPause == true)
+                    GamePage.LevelStart_Anim.Pause();
+                else // The animation should not be paused, so resume it
+                    GamePage.LevelStart_Anim.Resume();
+            }
+        }
+
         private void ShowGrid_Shop()
         {
             GamePage.LevelEnd.Visibility = Visibility.Visible;
@@ -247,11 +260,13 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.InGame:
                     ChangePauseMenuState(Visibility.Collapsed);
+                    ChangeLevelStartAnimState(false);
                     ShowGrid_InGame();
 
                     break;
                 case GameState.Paused:
                     ChangePauseMenuState(Visibility.Visible);
+                    ChangeLevelStartAnimState(true);
 
                     break;
                 case GameState.Shop:

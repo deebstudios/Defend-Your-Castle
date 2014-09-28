@@ -33,6 +33,9 @@ namespace Defend_Your_Castle
 
             // Use the castle upgrade to upgrade the player's castle
             ShopPlayer.UpgradeCastle(HealthIncrease);
+
+            // Update the player's HP on the Shop
+            ShopPlayer.UpdateHealthInShop();
         }
 
 
