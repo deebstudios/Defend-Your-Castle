@@ -66,8 +66,8 @@ namespace Defend_Your_Castle
                 // Use the shop item
                 item.UseItem();
 
-                // Update the UI with the new gold amount
-                ShopPlayer.UpdateGoldAmount();
+                // Update the Shop UI with the new gold amount
+                ShopPlayer.UpdateGoldAmountInShop();
             }
             else // The player doesn't have enough gold for the item
             {

@@ -44,26 +44,35 @@
             <Setter Property="Source" Value="Content/Graphics/ShopIcons/ShopIcon.png"/>
         </Style>
         
-        <Style x:Key="HUD_GoldAmountStyle" TargetType="TextBlock">
+        <Style x:Key="HUD_GoldAmountStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="26"/>
-            <Setter Property="FontFamily" Value="Consolas"/>
-            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
         
         <!-- Pause Button Styles -->
-        <Style x:Key="HUD_PauseButtonStyle" TargetType="Button">
+        <Style x:Key="HUD_PauseButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
             <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Background" Value="Orange"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Padding" Value="8,4,8,4"/>
-            <Setter Property="IsTabStop" Value="False"/>
         </Style>
         
         
+        <!-- Level Start Styles -->
+        <Style x:Key="LevelStart_BorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="BorderThickness" Value="0,1,0,1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,10,0,10"/>
+        </Style>
+        
+        <Style x:Key="LevelStart_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="56"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+
         <!-- Pause Menu Styles -->
         <Style x:Key="PauseMenuStyle" TargetType="Border">
             <Setter Property="Background" Value="LightBlue"/>
@@ -74,26 +83,10 @@
             <Setter Property="Padding" Value="10"/>
         </Style>
         
-        <Style x:Key="PauseMenu_ButtonStyle" TargetType="Button">
-            <Setter Property="IsTabStop" Value="False"/>
-        </Style>
-        
         
         <!-- Level End Styles -->
-        <Style x:Key="LevelEnd_ButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="48"/>
-            <Setter Property="Grid.Row" Value="1"/>
-            <Setter Property="BorderBrush" Value="Blue"/>
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="0,0,40,40"/>
-        </Style>
-        
-        
-        <!-- Shop Styles -->
-        <Style x:Key="Shop_BackgroundImageStyle" TargetType="Image">
-            <Setter Property="Grid.RowSpan" Value="3"/>
+        <Style x:Key="LevelEnd_BackgroundImageStyle" TargetType="Image">
+            <Setter Property="Grid.RowSpan" Value="2"/>
             <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -101,9 +94,27 @@
             <Setter Property="Opacity" Value="0.50"/>
         </Style>
         
-        <Style x:Key="Shop_ShopTitleStyle" TargetType="TextBlock">
+        <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        
+        <Style x:Key="LevelEnd_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,40,40"/>
+        </Style>
+        
+        
+        <!-- Shop Styles -->
+        <Style x:Key="Shop_BackgroundImageStyle" BasedOn="{StaticResource LevelEnd_BackgroundImageStyle}" TargetType="Image">
+            <Setter Property="Grid.RowSpan" Value="4"/>
+        </Style>
+
+        <Style x:Key="Shop_ShopTitleStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="64"/>
-            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
@@ -116,13 +127,10 @@
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
         </Style>
-        
-        <Style x:Key="Shop_ShopItemsListButtonStyle" TargetType="Button">
+
+        <Style x:Key="Shop_ShopItemsListButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="100"/>
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="BorderBrush" Value="Blue"/>
-            <Setter Property="IsTabStop" Value="False"/>
         </Style>
         
         <Style x:Key="Shop_ShopItemsListImageStyle" TargetType="Image">
@@ -151,6 +159,35 @@
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        
+        <Style x:Key="Shop_OuterHPBarStyle" BasedOn="{StaticResource HUD_OuterHPBarStyle}" TargetType="Border">
+            <Setter Property="Width" Value="352"/>
+        </Style>
+
+        <Style x:Key="Shop_InnerHPBarStyle" BasedOn="{StaticResource HUD_InnerHPBarStyle}" TargetType="Border">
+            <Setter Property="Width" Value="350"/>
+        </Style>
+        
+        <Style x:Key="Shop_HPTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+
+        <Style x:Key="Shop_SaveGameStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="Grid.Row" Value="2"/>
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="20,0,0,20"/>
+        </Style>
+
+        <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
@@ -205,6 +242,24 @@
         </Grid>
     </Grid>
 
+    <!-- Level Start Border -->
+    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}" Visibility="Collapsed">
+        <!-- Level Start Text -->
+        <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
+        
+        <Border.Resources>
+            <!-- Level Start Animation -->
+            <Storyboard x:Name="LevelStart_Anim" x:FieldModifier="public">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                </ObjectAnimationUsingKeyFrames>
+
+                <DoubleAnimation Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0"
+                                 Duration="0:0:2"/>
+            </Storyboard>
+        </Border.Resources>
+    </Border>
+
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
         <Grid>
             <Grid.RowDefinitions>
@@ -214,10 +269,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Content="Shop" Click="PauseMenuOption1_Click" />
-            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="1" Content="Menu Option 2" />
-            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="2" Content="Menu Option 2" />
-            <Button Style="{StaticResource PauseMenu_ButtonStyle}" Grid.Row="3" Content="Menu Option 2" />
+            <Button Style="{StaticResource ButtonStyle}" Content="Shop" Click="PauseMenuOption1_Click" />
+            <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Content="Menu Option 2" />
+            <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Menu Option 2" />
+            <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Content="Menu Option 2" />
         </Grid>
     </Border>
 
@@ -226,13 +281,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <TextBlock Name="LevelEnd_LevelCompleteText" x:FieldModifier="public" FontSize="48" Foreground="Black" TextAlignment="Center" />
-        <Button Name="LevelEnd_OK" Style="{StaticResource LevelEnd_ButtonStyle}" Content="OK" Click="ShowShop" />
+
+        <!-- Level End Background -->
+        <Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />
+
+        <TextBlock Name="LevelEnd_LevelCompleteText" Style="{StaticResource LevelEnd_LevelCompleteTextStyle}" x:FieldModifier="public" />
+        <Button Name="LevelEnd_OK" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="ShowShop" />
     </Grid>
 
     <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -243,11 +302,40 @@
         
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
+            <!-- Shop Title -->
             <TextBlock Name="Shop_ShopText" Style="{StaticResource Shop_ShopTitleStyle}" Text="- Shop -" />
         </Border>
         
-        <!-- Middle Row -->
+        <!-- Row 2 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <!-- Player Outer HP Bar -->
+                <Border Name="Shop_OuterHPBar" Style="{StaticResource Shop_OuterHPBarStyle}">
+                    <Grid>
+                        <!-- Player Inner HP Bar -->
+                        <Border Name="Shop_InnerHPBar" Style="{StaticResource Shop_InnerHPBarStyle}" x:FieldModifier="public"/>
+
+                        <!-- Player HP Text -->
+                        <TextBlock Name="Shop_HPText" Style="{StaticResource Shop_HPTextStyle}" x:FieldModifier="public" />
+                    </Grid>
+                </Border>
+
+                <!-- Player Gold Amount -->
+                <Grid HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Name="Shop_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" VerticalAlignment="Bottom" />
+                    <TextBlock Name="Shop_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" x:FieldModifier="public"
+                                   Grid.Column="1" VerticalAlignment="Bottom" />
+                </Grid>
+            </StackPanel>
+        </Border>
+        
+        <!-- Row 3 -->
+        <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -285,7 +373,7 @@
         </Border>
 
         <!-- Bottom Row -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -305,11 +393,8 @@
             </GridView>
 
             <!-- Save + Done Buttons -->
-            <Button Name="Shop_Save" Content="Save" Grid.Row="2" BorderBrush="Blue" Background="Black" HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom" Margin="20,0,0,20" FontSize="48" Click="SaveGame" />
-            
-            <Button Name="Shop_Done" Content="Done" Grid.Row="2" BorderBrush="Blue" Background="Black" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" Margin="0,0,20,20" FontSize="48" Click="StartNextLevel" />
+            <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
+            <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
         </Grid>
     </Grid>
 </SwapChainBackgroundPanel>

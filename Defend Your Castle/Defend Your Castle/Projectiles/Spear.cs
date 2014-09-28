@@ -25,9 +25,9 @@ namespace Defend_Your_Castle
             //Facing up-right
             if (CurVelocity.Y < 0f) Rotation = 0f;
             //Facing straight right
-            else if (CurVelocity.Y == 0f) Rotation = ((float)Math.PI / 4f);
+            //else if (CurVelocity.Y == 0f) Rotation = ((float)Math.PI / 4f);
             //Facing down-right
-            else Rotation = ((float)Math.PI / 2f);
+            else Rotation = ((float)MathHelper.PiOver2);
         }
     }
 }

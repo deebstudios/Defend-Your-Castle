@@ -65,7 +65,7 @@ namespace Defend_Your_Castle
 
             InvincibilityAvailable = false;
             PrevInvincibility = 0f;
-            InvincibilityFade = new Fade(Color.White, -10, 0, 255, Fade.InfiniteFade, 0f);
+            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteFade, 0f);
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
@@ -165,10 +165,25 @@ namespace Defend_Your_Castle
             gamePage.HUD_GoldAmount.Text = Gold.ToString();
         }
 
-        private void UpdateHealth()
+        public void UpdateGoldAmountInShop()
+        {
+            // Set the Gold Amount TextBlock's Text to the amount of gold the player has
+            gamePage.Shop_GoldAmount.Text = Gold.ToString();
+        }
+
+        public void UpdateHealth()
         {
             // Set the Width of the inner HP bar to reflect the player's remaining HP
-            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.InnerHPBarWidth);
+            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.HUD_InnerHPBarWidth);
+        }
+
+        public void UpdateHealthInShop()
+        {
+            // Set the Width of the inner HP bar to reflect the player's remaining HP
+            gamePage.Shop_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.Shop_InnerHPBarWidth);
+            
+            // Update the player's HP value
+            gamePage.Shop_HPText.Text = Health + " / " + MaxHealth;
         }
 
         // Heals the player
@@ -246,6 +261,12 @@ namespace Defend_Your_Castle
             InvincibilityAvailable = false;
 
             PrevInvincibility = (Game1.ActiveTime + InvincibilityLength);
+        }
+
+        //Stops the player's invincibility
+        public void StopInvincibility()
+        {
+            PrevInvincibility = 0f;
         }
 
         public void Attack(Level level, GestureSample? gesture)
@@ -330,10 +351,15 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Color drawcolor = Color.White;
-            if (IsInvincible == true) drawcolor = InvincibilityFade.GetFadeColor;
+            float depth = GetDrawDepth;
 
-            Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, drawcolor, 0f, 1f);
+            //If the player is invincible, draw the invincible fort above on top of the normal one
+            if (IsInvincible == true)
+            {
+                spriteBatch.Draw(LoadAssets.PlayerCastleInvincible, Position, null, InvincibilityFade.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth + .0001f);
+            }
+
+            Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, depth);
 
             base.Draw(spriteBatch);
         }

@@ -64,7 +64,7 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
-            Anim.Draw(spriteBatch, spritesheet, enemy.GetPosition, enemy.GetDirection, Color.White, 0f, 1f);
+            Anim.Draw(spriteBatch, spritesheet, enemy.GetPosition, enemy.GetDirection, Color.White, 0f, enemy.GetDrawDepth);
         }
     }
 }

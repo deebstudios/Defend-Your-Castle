@@ -58,7 +58,7 @@ namespace Defend_Your_Castle
             int width = (int)Sprite.FrameSize.X;
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);
-            SetHurtbox(width, height, Vector2.Zero);
+            SetHurtbox(width, height, new Vector2(5, 5));
 
             Launched = true;
         }
@@ -91,7 +91,7 @@ namespace Defend_Your_Castle
         {
             if (Launched == true)
             {
-                Sprite.Draw(spriteBatch, ObjectSheet, Position, DirectionFacing, Color.White, Rotation, .999f);
+                Sprite.Draw(spriteBatch, ObjectSheet, Position, DirectionFacing, Color.White, Rotation, GetDrawDepth);
 
                 base.Draw(spriteBatch);
             }

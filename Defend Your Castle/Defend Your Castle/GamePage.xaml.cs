@@ -14,7 +14,8 @@ namespace Defend_Your_Castle
     {
         readonly Game1 _game;
 
-        public double InnerHPBarWidth;
+        public double HUD_InnerHPBarWidth;
+        public double Shop_InnerHPBarWidth;
 
         public GamePage(LaunchActivatedEventArgs args)
         {
@@ -35,8 +36,9 @@ namespace Defend_Your_Castle
             // Add the Title Screen to the MenuScreens Stack
             _game.AddScreen(screen);
 
-            // Get the InnerHPBarWidth
-            InnerHPBarWidth = HUD_InnerHPBar.Width;
+            // Store the width of the HP Bars in the HUD and the Shop
+            HUD_InnerHPBarWidth = HUD_InnerHPBar.Width;
+            Shop_InnerHPBarWidth = Shop_InnerHPBar.Width;
         }
 
         private void ChangeWeaponButton(object sender, RoutedEventArgs e)
@@ -86,6 +88,10 @@ namespace Defend_Your_Castle
             // Hide the level end screen
             LevelEnd.Visibility = Visibility.Collapsed;
             
+            // Update the player's Health and Gold in the Shop
+            _game.level.GetPlayer.UpdateHealthInShop();
+            _game.level.GetPlayer.UpdateGoldAmountInShop();
+            
             // Show the shop
             Shop.Visibility = Visibility.Visible;
         }
@@ -94,6 +100,12 @@ namespace Defend_Your_Castle
         {
             // Start the next level
             _game.level.StartNextLevel();
+
+            // Set the level start message's text to the level number
+            LevelStart_Message.Text = "Level " + _game.level.GetLevelNum;
+
+            // Show the level animation
+            LevelStart_Anim.Begin();
         }
 
         private void SaveGame(object sender, RoutedEventArgs e)
