@@ -72,16 +72,10 @@ namespace Defend_Your_Castle
 
             // Set the game state to InGame
             Game.ChangeGameState(GameState.InGame);
-        }
 
-        public void CheckEndLevel()
-        {
-            // Check if the level should be ended
-            if (Game1.ActiveTime >= LevelEndTime)
-            {
-                //End the level if so
-                EndLevel();
-            }
+            // Update the player's HP and Gold on the UI
+            player.UpdateHealth();
+            player.UpdateGoldAmount();
         }
 
         public void EndLevel()
@@ -97,6 +91,16 @@ namespace Defend_Your_Castle
 
             // Set the game state to Shop
             Game.ChangeGameState(GameState.Shop);
+        }
+
+        public void CheckEndLevel()
+        {
+            // Check if the level should be ended
+            if (Game1.ActiveTime >= LevelEndTime)
+            {
+                // End the level
+                EndLevel();
+                }
         }
 
         //Returns the player reference

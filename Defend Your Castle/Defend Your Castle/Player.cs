@@ -165,10 +165,25 @@ namespace Defend_Your_Castle
             gamePage.HUD_GoldAmount.Text = Gold.ToString();
         }
 
-        private void UpdateHealth()
+        public void UpdateGoldAmountInShop()
+        {
+            // Set the Gold Amount TextBlock's Text to the amount of gold the player has
+            gamePage.Shop_GoldAmount.Text = Gold.ToString();
+        }
+
+        public void UpdateHealth()
         {
             // Set the Width of the inner HP bar to reflect the player's remaining HP
-            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.InnerHPBarWidth);
+            gamePage.HUD_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.HUD_InnerHPBarWidth);
+        }
+
+        public void UpdateHealthInShop()
+        {
+            // Set the Width of the inner HP bar to reflect the player's remaining HP
+            gamePage.Shop_InnerHPBar.Width = (((double)Health / (double)MaxHealth) * gamePage.Shop_InnerHPBarWidth);
+            
+            // Update the player's HP value
+            gamePage.Shop_HPText.Text = Health + " / " + MaxHealth;
         }
 
         // Heals the player
