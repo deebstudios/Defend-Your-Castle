@@ -17,10 +17,10 @@ namespace Defend_Your_Castle
         protected Player ShopPlayer;
 
         // The name of the item
-        protected String Name;
+        protected String name;
 
         // A brief description of the item
-        protected String Description;
+        protected String description;
 
         // The price of the item
         protected int price;
@@ -33,6 +33,18 @@ namespace Defend_Your_Castle
         {
             get;
             set;
+        }
+
+        public String Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public String Description
+        {
+            get { return description; }
+            set { description = value; }
         }
         
         //The level and max level of the shop item (how many times it can be upgraded)

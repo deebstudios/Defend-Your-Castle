@@ -21,7 +21,7 @@ namespace Defend_Your_Castle
 
             price = 400;
 
-            Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Max Health.";
+            Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Max Health";
 
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/FortifyWallsIcon.png";
