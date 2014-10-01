@@ -30,6 +30,44 @@ namespace Defend_Your_Castle
         // Instance of the EnemySpawning class - used to spawn enemies
         private EnemySpawning EnemySpawn;
 
+        // Stores the amount of Gold the player has when the level starts
+        // Used to calculate the amount of Gold the player earned in the level
+        private int StartingGold;
+
+        // Stores the number of times the player has attacked by tapping/clicking. Used to calculate the player's accuracy rate
+        private int NumAttacks;
+
+        // Stores the number of enemies the player has killed by tapping/clicking. Also used to calculate the player's accuracy rate
+        private int NumPlayerKills;
+
+        // Stores the number of enemies the player's helpers have killed
+        public int NumHelperKills;
+
+        // Returns the number of total kills the player earned in the round
+        private int NumTotalKills
+        {
+            get { return (NumPlayerKills + NumHelperKills); }
+        }
+
+        // Returns the player's accuracy rate, rounded to the nearest whole number
+        private double PlayerAccuracyRate
+        {
+            get
+            {
+                // Return 0 if the player hasn't attacked
+                if (NumAttacks == 0) return 0;
+
+                // Divide the number of player kills by the number of attacks to get the accuracy rate
+                return Math.Round((((double)NumPlayerKills / (double)NumAttacks) * 100d), 2);
+            }
+        }
+
+        // Returns the amount of gold the player has earned in the level
+        private int GoldEarned
+        {
+            get { return (player.Gold - StartingGold); }
+        }
+
         public Level(Player play, Game1 game)
         {
             player = play;
@@ -39,6 +77,9 @@ namespace Defend_Your_Castle
 
             // Set the level number to 1 (for testing)
             LevelNum = 1;
+
+            // Set the starting gold to the player's gold amount
+            StartingGold = player.Gold;
 
             // Initialize the EnemySpawning class
             EnemySpawn = new EnemySpawning(this);
@@ -73,9 +114,22 @@ namespace Defend_Your_Castle
             // Set the game state to InGame
             Game.ChangeGameState(GameState.InGame);
 
+            // Reset the tracked information
+            ResetTrackedInfo();
+
             // Update the player's HP and Gold on the UI
             player.UpdateHealth();
             player.UpdateGoldAmount();
+        }
+        
+        // Resets the information that is tracked during the level
+        private void ResetTrackedInfo()
+        {
+            // Store the amount of gold the player has
+            StartingGold = player.Gold;
+
+            // Set the number of attacks and kills to 0
+            NumAttacks = NumPlayerKills = NumHelperKills = 0;
         }
 
         public void CheckEndLevel()
@@ -93,11 +147,18 @@ namespace Defend_Your_Castle
             // Clear the enemies list
             Enemies.Clear();
 
-            //Stop the Player's Invincibility if it is active
+            // Stop the Player's Invincibility if it is active
             player.StopInvincibility();
 
             // Set the level complete text
             player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
+
+            // Display the player's level stats
+            player.GetGamePage.LevelEnd_Kills.Text = "Kills: " + NumPlayerKills;
+            player.GetGamePage.LevelEnd_HelperKills.Text = "Helper Kills: " + NumHelperKills;
+            player.GetGamePage.LevelEnd_TotalKills.Text = "Total Kills: " + NumTotalKills;
+            player.GetGamePage.LevelEnd_AccuracyRate.Text = "Accuracy Rate: " + PlayerAccuracyRate + "%";
+            player.GetGamePage.LevelEnd_GoldEarned.Text = "Gold Earned: " + GoldEarned;
 
             // Set the game state to Shop
             Game.ChangeGameState(GameState.Shop);
@@ -145,12 +206,19 @@ namespace Defend_Your_Castle
         //Make the player hit an enemy if it attacked
         public void EnemyHit(Rectangle rect)
         {
+            // Increment the player's number of attacks by 1
+            NumAttacks += 1;
+
             for (int i = 0; i < Enemies.Count; i++)
             {
                 //Check for the object's weapon weakness
                 if (Enemies[i].CanGetHit(rect) == true && player.CurWeapon >= Enemies[i].GetWeaponWeakness)
                 {
                     Enemies[i].Die(this);
+
+                    // Increment the player's kill count by 1
+                    NumPlayerKills += 1;
+
                     break;
                 }
             }

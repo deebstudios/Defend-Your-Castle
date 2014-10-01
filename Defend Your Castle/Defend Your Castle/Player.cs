@@ -322,6 +322,12 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void AddHelperKill(Level level)
+        {
+            // Increment the number of helper kills in the level by 1
+            level.NumHelperKills += 1;
+        }
+
         public override void Update(Level level)
         {
             // Get the last touch gesture (if any)
