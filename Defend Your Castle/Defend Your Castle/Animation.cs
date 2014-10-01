@@ -27,8 +27,8 @@ namespace Defend_Your_Castle
         private float FullAnimDuration;
 
         //Tells if the animation reverses or not after finishing
-        //private bool ShouldReverse;
-        //private bool CurReverse;
+        private bool ShouldReverse;
+        private bool CurReverse;
 
         //Tells if the animation is finished or not
         private bool AnimationEnd;
@@ -39,7 +39,8 @@ namespace Defend_Your_Castle
             FullAnimDuration = 0;
 
             CurFrame = 0;
-            
+            CurReverse = false;
+
             AnimationEnd = false;
         }
 
@@ -53,6 +54,11 @@ namespace Defend_Your_Castle
             {
                 FullAnimDuration += Frames[i].GetDuration;
             }
+        }
+
+        public Animation(bool shouldreverse, params AnimFrame[] frames) : this(frames)
+        {
+            ShouldReverse = shouldreverse;
         }
 
         //The default origin for drawing a sprite, given a Vector2 value
@@ -116,19 +122,47 @@ namespace Defend_Your_Castle
             CurFrame++;
             if (CurFrame > MaxFrame)
             {
-                //if (ShouldReverse == false)
-                //{
+                if (ShouldReverse == false)
+                {
                     CurFrame = 0;
                     AnimationEnd = true;
                     //CurLoop++;
                     //if (CurLoop >= MaxLoops) AnimationEnd = true;
-                //}
-                //else
-                //{
-                //    CurFrame = MaxFrame - 1;
-                //    if (CurFrame < 0) CurFrame = 0;
-                //    CurReverse = true;
-                //}
+                }
+                else
+                {
+                    CurFrame = MaxFrame - 1;
+                    if (CurFrame < 0) CurFrame = 0;
+                    CurReverse = true;
+                }
+            }
+
+            CurrentAnimFrame.ResetFrame();
+        }
+
+        //Move onto the next frame while the animation is currently in reverse
+        private void NextFrameReverse()
+        {
+            CurFrame--;
+            if (CurFrame < 0)
+            {
+                //We shouldn't reverse, meaning this animation was reset starting in reverse and thus should play only once
+                if (ShouldReverse == false)
+                {
+                    CurFrame = 0;
+                    AnimationEnd = true;
+                    CurReverse = false;
+                }
+                //Otherwise, reverse it so it looks like a continuous loop, playing each frame only once (Ex. since it just played the first frame, move to the second)
+                else
+                {
+                    CurFrame = 1;
+                    if (CurFrame > MaxFrame) CurFrame = MaxFrame;
+                    //CurLoop++;
+                    //if (CurLoop >= MaxLoops) AnimationEnd = true;
+                    CurReverse = false;
+                    AnimationEnd = true;
+                }
             }
 
             CurrentAnimFrame.ResetFrame();
@@ -137,7 +171,10 @@ namespace Defend_Your_Castle
         public void Update()
         {
             if (CurrentAnimFrame.FrameComplete == true)
-                NextFrame();
+            {
+                if (CurReverse == false) NextFrame();
+                else NextFrameReverse();
+            }
         }
 
         //Pass in the spritesheet
