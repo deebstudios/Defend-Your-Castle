@@ -23,11 +23,8 @@ namespace Defend_Your_Castle
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
         private const int HUDYBounds = 75;
 
-        //Invincibility lasts for 5 seconds
-        private const float InvincibilityLength = 5000f;
-        private bool InvincibilityAvailable;
-        private float PrevInvincibility;
-        private Fade InvincibilityFade;
+        //Sees whether the player has an invincibility powerup or not
+        protected bool InvincibilityAvailable;
 
         // The amount of health of the player
         private int Health;
@@ -63,9 +60,9 @@ namespace Defend_Your_Castle
 
             ObjectSheet = LoadAssets.PlayerCastle;
 
+            InvincibilityLength = 5000f;
             InvincibilityAvailable = false;
-            PrevInvincibility = 0f;
-            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteFade, 0f);
+            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
@@ -114,11 +111,6 @@ namespace Defend_Your_Castle
         public bool HasInvincibility
         {
             get { return InvincibilityAvailable; }
-        }
-
-        public bool IsInvincible
-        {
-            get { return (Game1.ActiveTime < PrevInvincibility); }
         }
 
         //The weapon the player has
@@ -255,18 +247,10 @@ namespace Defend_Your_Castle
         }
 
         //Uses the player's invincibility power-up
-        public void UseInvincibility()
+        public override void UseInvincibility()
         {
-            InvincibilityFade.RestartFade();
+            base.UseInvincibility();
             InvincibilityAvailable = false;
-
-            PrevInvincibility = (Game1.ActiveTime + InvincibilityLength);
-        }
-
-        //Stops the player's invincibility
-        public void StopInvincibility()
-        {
-            PrevInvincibility = 0f;
         }
 
         public void Attack(Level level, GestureSample? gesture)

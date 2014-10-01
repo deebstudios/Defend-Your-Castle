@@ -11,8 +11,8 @@ namespace Defend_Your_Castle
     //A helper class for fading things in and out
     public class Fade
     {
-        //An infinite fade
-        public const int InfiniteFade = -1;
+        //A number designated an infinite number of loops for a fade
+        public const int InfiniteLoops = -1;
 
         protected Color FadeColor;
 
@@ -53,6 +53,12 @@ namespace Defend_Your_Castle
             RefreshFade();
         }
 
+        //An empty fade
+        public static Fade Empty
+        {
+            get { return new Fade(Color.White, 0, 0, 0, 0, 0f); }
+        }
+
         public bool FadingIn
         {
             get { return (FadeAmount > 0); }
@@ -68,6 +74,12 @@ namespace Defend_Your_Castle
             get { return CurFade; }
         }
 
+        //Gets the actual color the fade is fading
+        public Color GetColor
+        {
+            get { return FadeColor; }
+        }
+
         //Gets the fade color; this is the value you want when drawing something
         public Color GetFadeColor
         {
@@ -77,7 +89,7 @@ namespace Defend_Your_Castle
         //Tells if the fade is complete or not
         public virtual bool DoneFading
         {
-            get { return (Loops != InfiniteFade && CurLoops >= Loops); }
+            get { return (Loops != InfiniteLoops && CurLoops >= Loops); }
         }
 
         public void FlipFade()

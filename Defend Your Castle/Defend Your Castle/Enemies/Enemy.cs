@@ -41,6 +41,11 @@ namespace Defend_Your_Castle
 
             ObjectSheet = LoadAssets.testanim;
 
+            //FOR TESTING INVINCIBILITY
+            //InvincibilityLength = 5000f;
+            //InvincibilityFade = new Fade(Color.Yellow, 10, 0, 255, Fade.InfiniteLoops, 0f);
+            //UseInvincibility();
+
             Gold = 100;
 
             Position = new Vector2(0, 100);
@@ -92,6 +97,7 @@ namespace Defend_Your_Castle
         {
             if (FakeDead == false)
             {
+                if (IsInvincible == true) InvincibilityFade.Update();
                 CurAction.Update(level);
                 if (CurAction.IsComplete == true) ChooseNextAction(level);
             }

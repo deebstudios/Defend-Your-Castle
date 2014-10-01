@@ -64,7 +64,15 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
-            Anim.Draw(spriteBatch, spritesheet, enemy.GetPosition, enemy.GetDirection, Color.White, 0f, enemy.GetDrawDepth);
+            Color drawcolor = Color.White;
+            if (enemy.IsInvincible == true) 
+            {
+                Color invincolor = enemy.GetInvincibilityColor(false);
+                //drawcolor = new Color(invincolor.R, invincolor.G, enemy.GetInvincibilityFade, 255);
+                drawcolor = Color.Yellow;
+            }
+
+            Anim.Draw(spriteBatch, spritesheet, enemy.GetPosition, enemy.GetDirection, drawcolor, 0f, enemy.GetDrawDepth);
         }
     }
 }
