@@ -36,7 +36,7 @@ namespace Defend_Your_Castle
         private int CastleLevel;
 
         // The max level of the player's castle
-        private const int MaxCastleLevel = 3;
+        //private const int MaxCastleLevel = 3;
 
         // The amount of gold the player has
         public int Gold;
@@ -120,10 +120,10 @@ namespace Defend_Your_Castle
         }
 
         // Determines if the player can upgrade his castle. Should be used in the Shop to grey out the Upgrade icon
-        public bool CanUpgradeCastle
-        {
-            get { return (CastleLevel != MaxCastleLevel); }
-        }
+        //public bool CanUpgradeCastle
+        //{
+        //    get { return (CastleLevel != MaxCastleLevel); }
+        //}
 
         // Determines if the player can attack
         // This is not included in the Weapon class because the player would be able to reset the attack timer by switching weapons
@@ -225,25 +225,21 @@ namespace Defend_Your_Castle
 
         public void UpgradeCastle(int healthIncrease)
         {
-            // Make sure the player can upgrade his castle
-            if (CanUpgradeCastle)
-            {
-                // Increment the player's castle level by 1
-                CastleLevel += 1;
+            // Increment the player's castle level by 1
+            CastleLevel += 1;
 
-                IncreaseMaxHealth(healthIncrease);
-                
-                // Change the castle animation
-                // Instead of a switch, may be able to store an array of castle animations. This is probably
-                // wasted memory though
-                //switch (CastleLevel)
-                //{
-                //    case 1:
-                //    case 2:
-                //    case 3:
+            IncreaseMaxHealth(healthIncrease);
+            
+            // Change the castle animation
+            // Instead of a switch, may be able to store an array of castle animations. This is probably
+            // wasted memory though
+            //switch (CastleLevel)
+            //{
+            //    case 1:
+            //    case 2:
+            //    case 3:
 
-                //}
-            }
+            //}
         }
 
         //Uses the player's invincibility power-up

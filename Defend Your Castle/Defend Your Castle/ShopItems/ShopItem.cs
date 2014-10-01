@@ -61,13 +61,13 @@ namespace Defend_Your_Castle
             // Get the current player shopping
             ShopPlayer = shopPlayer;
 
-            MaxLevel = 1;
+            MaxLevel = InfinitePurchases;
             CurLevel = 0;
         }
 
         public virtual bool CanBuy(Player ShopPlayer)
         {
-            return (ShopPlayer.Gold >= price && CurLevel < MaxLevel);
+            return (ShopPlayer.Gold >= price && (MaxLevel == InfinitePurchases || CurLevel < MaxLevel));
         }
 
         // Performs the action of the shop item
