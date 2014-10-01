@@ -35,6 +35,11 @@ namespace Defend_Your_Castle
         //The weapon type that hurts the object; anything equal to or above it can hurt it
         protected int WeaponWeakness;
 
+        //Invincibility lasts for a designated amount of time that differs depending on the object that has it
+        protected float InvincibilityLength;
+        protected float PrevInvincibility;
+        protected Fade InvincibilityFade;
+
         //Whether the object is dead or not and should be removed
         protected bool Dead;
 
@@ -76,6 +81,11 @@ namespace Defend_Your_Castle
             DirectionFacing = Direction.Right;
             UsesGravity = false;
 
+            //Set invincibililty to last 1 second by default
+            InvincibilityLength = 1000f;
+            PrevInvincibility = 0f;
+            InvincibilityFade = Fade.Empty;
+
             ObjectSheet = null;
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
@@ -98,6 +108,12 @@ namespace Defend_Your_Castle
             get { return Dead; }
         }
 
+        //Checks if the object is invincible
+        public bool IsInvincible
+        {
+            get { return (Game1.ActiveTime < PrevInvincibility); }
+        }
+
         //Get the position of the object
         public Vector2 GetPosition
         {
@@ -118,6 +134,20 @@ namespace Defend_Your_Castle
         public Direction GetDirection
         {
             get { return DirectionFacing; }
+        }
+
+        //Gets the invincibility fade color or pure color
+        public Color GetInvincibilityColor(bool fadecolor)
+        {
+            if (fadecolor == true)
+                return InvincibilityFade.GetFadeColor;
+            else return InvincibilityFade.GetColor;
+        }
+
+        //Gets the invincibility's current fade
+        public int GetInvincibilityFade
+        {
+            get { return InvincibilityFade.GetCurFade; }
         }
 
         //Sets the hitbox of the object
@@ -259,7 +289,20 @@ namespace Defend_Your_Castle
         //Checks if the object can get hit
         public virtual bool CanGetHit(Rectangle rect)
         {
-            return (hurtbox == null || (hurtbox.CanBeHit(rect) == true));
+            return (hurtbox == null || (hurtbox.CanBeHit(rect) == true && IsInvincible == false));
+        }
+
+        //Uses invincibility
+        public virtual void UseInvincibility()
+        {
+            InvincibilityFade.RestartFade();
+            PrevInvincibility = (Game1.ActiveTime + InvincibilityLength);
+        }
+
+        //Ends an object's invincibility
+        public void EndInvincibility()
+        {
+            PrevInvincibility = 0;
         }
 
         //Kill the object and mark it as dead

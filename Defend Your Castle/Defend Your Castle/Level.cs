@@ -94,7 +94,7 @@ namespace Defend_Your_Castle
             Enemies.Clear();
 
             //Stop the Player's Invincibility if it is active
-            player.StopInvincibility();
+            player.EndInvincibility();
 
             // Set the level complete text
             player.GetGamePage.LevelEnd_LevelCompleteText.Text = "Level " + LevelNum + " Complete";
