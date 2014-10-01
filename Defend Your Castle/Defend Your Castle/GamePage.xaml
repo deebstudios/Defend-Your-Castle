@@ -86,22 +86,29 @@
         
         <!-- Level End Styles -->
         <Style x:Key="LevelEnd_BackgroundImageStyle" TargetType="Image">
-            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Grid.RowSpan" Value="3"/>
             <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="50"/>
-            <Setter Property="Opacity" Value="0.50"/>
+            <Setter Property="Opacity" Value="0.30"/>
         </Style>
         
         <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="FontSize" Value="56"/>
             <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+        
+        <Style x:Key="LevelEnd_StatsTextStyle" BasedOn="{StaticResource LevelEnd_LevelCompleteTextStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="44"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
         </Style>
         
         <Style x:Key="LevelEnd_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="FontSize" Value="48"/>
-            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.Row" Value="2"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
@@ -128,16 +135,29 @@
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
         </Style>
 
-        <Style x:Key="Shop_ShopItemsListButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Style x:Key="Shop_ShopItemsList_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="100"/>
         </Style>
         
-        <Style x:Key="Shop_ShopItemsListImageStyle" TargetType="Image">
+        <Style x:Key="Shop_ShopItemsList_ImageStyle" TargetType="Image">
             <Setter Property="Width" Value="48"/>
             <Setter Property="Height" Value="48"/>
         </Style>
         
+        <Style x:Key="Shop_ShopItemsList_NameStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
+            <Setter Property="MaxWidth" Value="400"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
         <Style x:Key="Shop_ShopItemsListStyle" TargetType="GridView">
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -150,12 +170,27 @@
             <Setter Property="IsHoldingEnabled" Value="False"/>
             <Setter Property="IsRightTapEnabled" Value="False"/>
             <Setter Property="IsDoubleTapEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource GridViewItemStyle}"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Button Style="{StaticResource Shop_ShopItemsListButtonStyle}" Click="ShopItem_Click">
-                            <Image Style="{StaticResource Shop_ShopItemsListImageStyle}" Source="{Binding Path=ImagePath}" />
-                        </Button>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <!-- Shop Item Image -->
+                            <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click" FontFamily="Global User Interface">
+                                <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
+                            </Button>
+                            
+                            <!-- Shop Item Name + Description -->
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}" />
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
+                            </StackPanel>
+                        </StackPanel>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -208,11 +243,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <Button Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" Click="ChangeWeaponButton" />
@@ -280,13 +310,35 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Level End Background -->
         <Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />
 
+        <!-- Level Complete Text -->
         <TextBlock Name="LevelEnd_LevelCompleteText" Style="{StaticResource LevelEnd_LevelCompleteTextStyle}" x:FieldModifier="public" />
-        <Button Name="LevelEnd_OK" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="ShowShop" />
+        
+        <!-- Level Statistics -->
+        <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Kills -->
+            <TextBlock Name="LevelEnd_Kills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+            
+            <!-- Helper Kills -->
+            <TextBlock Name="LevelEnd_HelperKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+            
+            <!-- Total Kills -->
+            <TextBlock Name="LevelEnd_TotalKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+            
+            <!-- Accuracy Rate -->
+            <TextBlock Name="LevelEnd_AccuracyRate" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+            
+            <!-- Gold Earned -->
+            <TextBlock Name="LevelEnd_GoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+        </StackPanel>
+        
+        <!-- Next Button -->
+        <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="ShowShop" />
     </Grid>
 
     <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">
@@ -329,7 +381,7 @@
 
                     <Image Name="Shop_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" VerticalAlignment="Bottom" />
                     <TextBlock Name="Shop_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" x:FieldModifier="public"
-                                   Grid.Column="1" VerticalAlignment="Bottom" />
+                               Grid.Column="1" VerticalAlignment="Bottom" />
                 </Grid>
             </StackPanel>
         </Border>

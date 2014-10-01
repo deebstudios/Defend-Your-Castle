@@ -19,15 +19,12 @@ namespace Defend_Your_Castle
 
             TextBlock StartGame = CreateLabel("Start Game", new Vector2(50, 50));
             TextBlock Options = CreateLabel("Options", new Vector2(50, 100));
-            TextBlock Quit = CreateLabel("Quit", new Vector2(50, 150));
-
+            
             AllControls.Add(StartGame);
             AllControls.Add(Options);
-            AllControls.Add(Quit);
 
             AddMenuOption(StartGame);
             AddMenuOption(Options);
-            AddMenuOption(Quit);
             
             SetCursorPosition();
         }
@@ -42,9 +39,6 @@ namespace Defend_Your_Castle
                     break;
                 case 1: // Options
                     Game.AddScreen(new OptionsScreen(GamePage, Game));
-                    break;
-                case 2: // Quit
-                    Game1.ShouldExit = true;
                     break;
             }
         }

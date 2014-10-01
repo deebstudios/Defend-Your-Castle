@@ -134,7 +134,13 @@ namespace Defend_Your_Castle
                     StopShooting();
                 else if (AttackingAnim.IsAnimationComplete == true)
                 {
+                    // Add a helper kill
+                    (Parent as Player).AddHelperKill(level);
+                    
+                    // Kill the designated enemy
                     Victim.Die(level);
+                    
+                    // Stop the helper from shopping
                     StopShooting();
                 }
             }
