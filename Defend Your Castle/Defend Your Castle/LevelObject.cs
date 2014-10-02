@@ -61,8 +61,9 @@ namespace Defend_Your_Castle
         //Hurtbox of the object
         protected Hurtbox hurtbox;
 
-        //Spritesheet of the object
+        //Spritesheet of the object; it can be accompanied by a sheet used when the object is invincible
         protected Texture2D ObjectSheet;
+        protected Texture2D InvincibleSheet;
 
         //The animation of the object
         protected Animation Animation;
@@ -87,6 +88,7 @@ namespace Defend_Your_Castle
             InvincibilityFade = Fade.Empty;
 
             ObjectSheet = null;
+            InvincibleSheet = null;
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
             Children = new List<LevelObject>();
@@ -148,6 +150,12 @@ namespace Defend_Your_Castle
         public int GetInvincibilityFade
         {
             get { return InvincibilityFade.GetCurFade; }
+        }
+
+        //Gets an object's invincible spritesheet
+        public Texture2D GetInvincibleSheet
+        {
+            get { return InvincibleSheet; }
         }
 
         //Sets the hitbox of the object

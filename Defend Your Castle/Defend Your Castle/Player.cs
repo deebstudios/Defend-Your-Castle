@@ -59,6 +59,7 @@ namespace Defend_Your_Castle
             CastleLevel = 1;
 
             ObjectSheet = LoadAssets.PlayerCastle;
+            InvincibleSheet = LoadAssets.PlayerCastleInvincible;
 
             InvincibilityLength = 5000f;
             InvincibilityAvailable = false;
@@ -342,7 +343,8 @@ namespace Defend_Your_Castle
             //If the player is invincible, draw the invincible fort above on top of the normal one
             if (IsInvincible == true)
             {
-                spriteBatch.Draw(LoadAssets.PlayerCastleInvincible, Position, null, InvincibilityFade.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth + .0001f);
+                Animation.Draw(spriteBatch, InvincibleSheet, Position, Direction.Right, InvincibilityFade.GetFadeColor, 0f, depth + .0001f);
+                //spriteBatch.Draw(InvincibleSheet, Position, null, InvincibilityFade.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth + .0001f);
             }
 
             Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, depth);
