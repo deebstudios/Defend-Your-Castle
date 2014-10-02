@@ -28,6 +28,7 @@ namespace Defend_Your_Castle
         public static Texture2D GoldCoinEffect;
         public static Texture2D EnemySpear;
         public static Texture2D GoblinSheet;
+        public static Texture2D GoblinInvincibleSheet;
 
         //Shop graphics
         public static Texture2D GoldCoin;
@@ -73,6 +74,7 @@ namespace Defend_Your_Castle
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");
             EnemySpear = LoadGraphic(Content, "Enemy Spear");
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
+            GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");
