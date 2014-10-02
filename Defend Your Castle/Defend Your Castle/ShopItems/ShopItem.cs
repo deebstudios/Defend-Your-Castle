@@ -46,15 +46,20 @@ namespace Defend_Your_Castle
             get { return description; }
             set { description = value; }
         }
-        
-        //The level and max level of the shop item (how many times it can be upgraded)
-        protected int MaxLevel;
-        protected int CurLevel;
 
         public int Price
         {
             get { return price; }
         }
+
+        public String PriceString
+        {
+            get { return price + " Gold"; }
+        }
+
+        //The level and max level of the shop item (how many times it can be upgraded)
+        protected int MaxLevel;
+        protected int CurLevel;
 
         public ShopItem(Player shopPlayer)
         {

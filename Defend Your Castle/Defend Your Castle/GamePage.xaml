@@ -158,6 +158,10 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
+        <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+
         <Style x:Key="Shop_ShopItemsListStyle" TargetType="GridView">
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -185,9 +189,10 @@
                                 <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
                             </Button>
                             
-                            <!-- Shop Item Name + Description -->
+                            <!-- Shop Item Name, Price, + Description -->
                             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}" />
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}"/>
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
                             </StackPanel>
                         </StackPanel>
