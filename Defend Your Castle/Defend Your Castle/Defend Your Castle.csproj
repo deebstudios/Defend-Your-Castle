@@ -181,9 +181,12 @@
     </AppxManifest>
     <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Castle.png" />
+    <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\cursor.png" />
     <Content Include="Content\Graphics\Enemy Spear.png" />
+    <Content Include="Content\Graphics\Goblin Sheet.png" />
     <Content Include="Content\Graphics\Goblin.png" />
+    <Content Include="Content\Graphics\GoblinInvincible Sheet.png" />
     <Content Include="Content\Graphics\Gold Coin Effect.png" />
     <Content Include="Content\Graphics\Gold Coin.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
