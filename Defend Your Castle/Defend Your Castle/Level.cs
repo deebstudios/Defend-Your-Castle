@@ -14,6 +14,13 @@ namespace Defend_Your_Castle
         // Stores the reference to Game1
         private Game1 Game;
 
+        //The constant that helps determine the rate that the fade changes and the fade that changes day to night
+        //The NightFactor determines if a day starts out in day or vice versa
+        private const float FadeRate = 255f;
+        private const float CelestialDepth = .01f;
+        private Fade NightFade;
+        private int NightFactor;
+
         // Stores the level number of the level
         private int LevelNum;
 
@@ -75,6 +82,10 @@ namespace Defend_Your_Castle
 
             Enemies = new List<LevelObject>();
 
+            //Start out at day
+            StartDayNight(true);
+            CreateNightFade();
+
             // Set the level number to 1 (for testing)
             LevelNum = 1;
 
@@ -100,10 +111,30 @@ namespace Defend_Your_Castle
             get { return (30000 + ((LevelNum - 1) * 1000)); }
         }
 
+        //Creates the night fade based on how long the level lasts
+        private void CreateNightFade()
+        {
+            //Get how long to wait each fade for the level
+            float leveltime = LevelDuration / FadeRate;
+
+            //Starts at 255 (white) and goes down to a value closer to black (darken the sky)
+            //We can reverse it and make the level start at night by simply reversing the -1
+            NightFade = new FadeOnce(Color.White, NightFactor, 0, 255, leveltime);
+        }
+
+        //Choose whether to start the level in the day or at night
+        private void StartDayNight(bool day)
+        {
+            NightFactor = (day == true ? -1 : 1);
+        }
+
         public void StartNextLevel()
         {
             // Increase the level number by 1
             LevelNum += 1;
+
+            //Refresh the night fade
+            CreateNightFade();
 
             // Check if a new enemy can be added to the spawn list, and add the enemy if so
             EnemySpawn.CheckAddSpawnEnemy();
@@ -229,6 +260,9 @@ namespace Defend_Your_Castle
             // Check if the level can be ended
             CheckEndLevel();
 
+            //Update the night fade
+            NightFade.Update();
+
             // Update the enemies
             UpdateEnemies();
 
@@ -251,6 +285,11 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            //Draw the background
+            spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, new Color(NightFade.GetCurFade, NightFade.GetCurFade, NightFade.GetCurFade), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
+            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 75, 305 - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 77, 50 + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+
             DrawEnemies(spriteBatch);
 
             //Draw the player

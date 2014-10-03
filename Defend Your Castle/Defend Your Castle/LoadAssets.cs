@@ -18,6 +18,11 @@ namespace Defend_Your_Castle
         private const string SoundDir = "Sounds/";
         private const string MusicDir = "Music/";
 
+        //Level graphics
+        public static Texture2D LevelBG;
+        public static Texture2D DaySun;
+        public static Texture2D NightMoon;
+
         public static Texture2D Sword;
         public static Texture2D Spear;
         public static Texture2D Warhammer;
@@ -69,6 +74,10 @@ namespace Defend_Your_Castle
 
         private static void LoadGraphics(ContentManager Content)
         {
+            //Level graphics
+            DaySun = LoadGraphic(Content, "Sun");
+            NightMoon = LoadGraphic(Content, "Moon");
+
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Spear = Content.Load<Texture2D>(GraphicsDir + "Spear");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
