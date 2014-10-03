@@ -25,8 +25,9 @@ namespace Defend_Your_Castle
         // The price of the item
         protected int price;
 
-        // The stock of the item in the shop
-        protected int Stock;
+        //The level and max level of the shop item (how many times it can be upgraded)
+        protected int MaxLevel;
+        protected int CurLevel;
 
         // The path to the image used to represent the item
         public String ImagePath
@@ -57,9 +58,10 @@ namespace Defend_Your_Castle
             get { return price + " Gold"; }
         }
 
-        //The level and max level of the shop item (how many times it can be upgraded)
-        protected int MaxLevel;
-        protected int CurLevel;
+        public int GetCurrentLevel
+        {
+            get { return CurLevel; }
+        }
 
         public ShopItem(Player shopPlayer)
         {
@@ -79,6 +81,11 @@ namespace Defend_Your_Castle
         public virtual void UseItem()
         {
             CurLevel++;
+        }
+
+        public void SetCurrentLevel(int level)
+        {
+            CurLevel = level;
         }
 
 

@@ -9,11 +9,12 @@
 
     <SwapChainBackgroundPanel.Resources>
         <!-- Weapon Styles -->
-        <Style x:Key="HUD_WeaponButtonStyle" BasedOn="{StaticResource RoundedButtonStyle}" TargetType="Button">
+        <Style x:Key="HUD_WeaponButtonStyle" BasedOn="{StaticResource RadioButtonStyle}" TargetType="RadioButton">
             <Setter Property="Width" Value="80"/>
             <Setter Property="Height" Value="80"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Background" Value="White"/>
+            <Setter Property="GroupName" Value="HUD_Weapons"/>
         </Style>
         
         <!-- Health Bar Styles -->
@@ -260,9 +261,15 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
-                <Button Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" Click="ChangeWeaponButton" />
-                <Button Name="HUD_WeaponMace" Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0" />
-                <Button Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton" />
+                <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
+                             Click="ChangeWeaponButton">
+                    <Image Source="Content\Graphics\cursor.png" Width="20" Height="20" />
+                </RadioButton>
+
+                <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
+                             Click="ChangeWeaponButton" />
+                
+                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"  />
             </StackPanel>
 
             <Grid Grid.Column="2">
@@ -353,7 +360,7 @@
         </StackPanel>
         
         <!-- Next Button -->
-        <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="ShowShop" />
+        <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="LevelEnd_Next_Click" />
     </Grid>
 
     <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">

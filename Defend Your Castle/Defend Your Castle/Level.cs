@@ -257,6 +257,21 @@ namespace Defend_Your_Castle
             player.Draw(spriteBatch);
         }
 
+        public void LoadLevelData(LevelData levelData)
+        {
+            // Loop until we reach the level the player should be at
+            for (int i = 1; i < levelData.LevelNum; i++)
+            {
+                // Increment the level number by 1
+                LevelNum += 1;
+
+                // Try to add an enemy spawn. This will not work if the level number is set directly because of the switch statement
+                EnemySpawn.CheckAddSpawnEnemy();
+            }
+
+
+        }
+
 
     }
 }

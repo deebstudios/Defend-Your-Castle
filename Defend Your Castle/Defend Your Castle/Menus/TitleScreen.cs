@@ -18,12 +18,15 @@ namespace Defend_Your_Castle
             CursorOffset = new Vector2(40, 0);
 
             TextBlock StartGame = CreateLabel("Start Game", new Vector2(50, 50));
-            TextBlock Options = CreateLabel("Options", new Vector2(50, 100));
+            TextBlock ContinueGame = CreateLabel("Continue Game", new Vector2(50, 100));
+            TextBlock Options = CreateLabel("Options", new Vector2(50, 150));
             
             AllControls.Add(StartGame);
+            AllControls.Add(ContinueGame);
             AllControls.Add(Options);
 
             AddMenuOption(StartGame);
+            AddMenuOption(ContinueGame);
             AddMenuOption(Options);
             
             SetCursorPosition();
@@ -37,7 +40,10 @@ namespace Defend_Your_Castle
                     // Start the game
                     Game.StartGame();
                     break;
-                case 1: // Options
+                case 1: // Continue Game
+                    Game.ContinueGame();
+                    break;
+                case 2: // Options
                     Game.AddScreen(new OptionsScreen(GamePage, Game));
                     break;
             }

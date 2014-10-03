@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
         {
             // Set the properties of the item
             Name = "Fortify Castle";
-
+            
             // Set the health increase
             HealthIncrease = 1500;
 

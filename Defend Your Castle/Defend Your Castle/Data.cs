@@ -70,14 +70,25 @@ namespace Defend_Your_Castle
             return Helpers;
         }
 
-        public static async void SavePlayer(Player player)
+        // Saves the game data
+        public static async void SaveGameData(Shop shop, Level level)
         {
             // Create a new PlayerData object from the player
-            PlayerData playerData = new PlayerData(player.GetHealth, player.GetMaxHealth, player.GetCastleLevel, player.Gold, player.HasInvincibility, GetPlayerHelpers(player));
+            PlayerData playerData = new PlayerData(level.GetPlayer.GetHealth, level.GetPlayer.GetMaxHealth, level.GetPlayer.GetCastleLevel,
+                                                   level.GetPlayer.Gold, level.GetPlayer.HasInvincibility, GetPlayerHelpers(level.GetPlayer));
             //playerData.SetHelpers(GetPlayerHelpers(player));
 
-            // Create a new file for the player's save data, overwriting any existing file
-            StorageFile file = await AppVersionData.LocalFolder.CreateFileAsync("player.sav", CreationCollisionOption.ReplaceExisting);
+            // Create a new ShopData object from the shop
+            ShopData shopData = new ShopData(shop.ShopUpgrades, shop.ShopPrepareRepairs, shop.ShopItems);
+
+            // Create a new LevelData object from the level
+            LevelData levelData = new LevelData(level.GetLevelNum);
+
+            // Create a new GameData object
+            GameData gameData = new GameData(playerData, shopData, levelData);
+            
+            // Create a new file for the game's save data, overwriting any existing file
+            StorageFile file = await AppVersionData.LocalFolder.CreateFileAsync("game.sav", CreationCollisionOption.ReplaceExisting);
 
             // Open a Stream to write to the file
             using (Stream stream = await file.OpenStreamForWriteAsync())
@@ -86,10 +97,10 @@ namespace Defend_Your_Castle
                 using (XmlDictionaryWriter writer = XmlDictionaryWriter.CreateBinaryWriter(stream))
                 {
                     // Initialize a new DataContractSerializer
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(PlayerData));
+                    DataContractSerializer serializer = new DataContractSerializer(typeof(GameData));
 
-                    // Serialize the PlayerData class instance into the .sav file
-                    serializer.WriteObject(writer, playerData);
+                    // Serialize the GameData class instance into the .sav file
+                    serializer.WriteObject(writer, gameData);
 
                     // Flush the buffer to the file
                     writer.Flush();
@@ -100,19 +111,23 @@ namespace Defend_Your_Castle
             }
         }
 
-        public static async Task<Player> LoadPlayer(GamePage page)
+        // Loads the game's data. Returns an object array containing the Shop and Level, in that order
+        public static async Task<object[]> LoadGameData(GamePage page, Game1 game)
         {
             // Try to get the player file from its stored location
-            IStorageItem storageItem = await AppVersionData.LocalFolder.TryGetItemAsync("player.sav");
+            IStorageItem storageItem = await AppVersionData.LocalFolder.TryGetItemAsync("game.sav");
             
-            // Check if the file was found. If it wasn't, return a new player
-            if (storageItem == null) return (new Player(page));
+            // Check if the file was found
+            if (storageItem == null)
+            {
+                goto NoData;
+            }
 
             // Convert the IStorageItem object to a StorageFile
             StorageFile file = (StorageFile)storageItem;
 
-            // Stores the Player data object
-            PlayerData playerData;
+            // Stores the GameData object
+            GameData gameData;
 
             // Open a Stream to read the contents of the StorageFile
             using (Stream stream = await file.OpenStreamForReadAsync())
@@ -121,18 +136,18 @@ namespace Defend_Your_Castle
                 using (XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(stream, XmlDictionaryReaderQuotas.Max))
                 {
                     // Initialize a new DataContractSerializer
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(PlayerData));
+                    DataContractSerializer serializer = new DataContractSerializer(typeof(GameData));
 
                     // Try and Catch the deserialization process
                     try
                     {
-                        // Deserialize the PlayerData object
-                        playerData = (PlayerData)serializer.ReadObject(reader);
+                        // Deserialize the GameData object
+                        gameData = (GameData)serializer.ReadObject(reader);
                     }
                     catch // The data could not be loaded
                     {
-                        // Set the PlayerData object to null
-                        playerData = null;
+                        // Set the GameData object to null
+                        gameData = null;
                     }
 
                     // Dispose of all resources used by the XmlDictionaryReader
@@ -140,23 +155,64 @@ namespace Defend_Your_Castle
                 }
             }
 
-            // Check to make sure player data was found
-            if (playerData != null)
+            // Check to make sure game data was found
+            if (gameData != null)
             {
-                // It was, so create a new player
+                // It was, so create a new Player
                 Player player = new Player(page);
 
                 // Load the player's data
-                player.LoadPlayerData(playerData);
+                player.LoadPlayerData(gameData.playerData);
 
-                // Return the player
-                return player;
+                // Create a new Shop
+                Shop shop = new Shop(page, player);
+
+                // Load the shop data
+                shop.LoadShopData(gameData.shopData);
+                
+                // Create a new Level
+                Level level = new Level(player, game);
+
+                // Load the level data
+                level.LoadLevelData(gameData.levelData);
+
+                // Return the Shop and the Level since the player is contained in the level
+                return (new object[2] { shop, level });
             }
             else // No player data was found
             {
-                // Return a new player
-                return (new Player(page));
+                goto NoData;
             }
+
+            NoData:
+                // Create new Player, Shop, and Level objects
+                Player thePlayer = new Player(page);
+                Shop theShop = new Shop(page, thePlayer);
+                Level theLevel = new Level(thePlayer, game);
+
+                // Return the Shop and the Level
+                return (new object[2] { theShop, theLevel });
+        }
+    }
+
+    // Class for storing the game's data
+    [DataContract(Namespace="")]
+    public class GameData
+    {
+        [DataMember]
+        public PlayerData playerData;
+
+        [DataMember]
+        public ShopData shopData;
+
+        [DataMember]
+        public LevelData levelData;
+
+        public GameData(PlayerData playerdata, ShopData shopdata, LevelData leveldata)
+        {
+            playerData = playerdata;
+            shopData = shopdata;
+            levelData = leveldata;
         }
     }
 
@@ -188,12 +244,6 @@ namespace Defend_Your_Castle
             Invincibility = invincibility;
             Helpers = helpers;
         }
-
-        //I'm not sure if you prefer a separate method like this or to just have it all in the constructor
-        //public void SetHelpers(List<HelperData> helpers)
-        //{
-        //    Helpers = helpers;
-        //}
     }
 
     //Data for the player's helpers
@@ -243,11 +293,68 @@ namespace Defend_Your_Castle
     [DataContract(Namespace="")]
     public class ShopData
     {
-        public int CastleLevel;
+        [DataMember]
+        public List<ShopItemData> ShopUpgrades; // List of available Upgrades
 
-        public ShopData()
+        [DataMember]
+        public List<ShopItemData> ShopPrepareRepairs; // List of available Prepare/Repair ShopItems
+
+        [DataMember]
+        public List<ShopItemData> ShopItems; // List of available Items
+
+        public ShopData(List<ShopItem> shopUpgrades, List<ShopItem> shopPrepareRepairs, List<ShopItem> shopItems)
         {
+            // Initialize the ShopItemData lists
+            ShopUpgrades = new List<ShopItemData>();
+            ShopPrepareRepairs = new List<ShopItemData>();
+            ShopItems = new List<ShopItemData>();
 
+            // Loop through all of the upgrade shop items
+            for (int i = 0; i < shopUpgrades.Count; i++)
+            {
+                // Store the level of each upgrade shop item
+                ShopUpgrades.Add(new ShopItemData(shopUpgrades[i].GetCurrentLevel));
+            }
+
+            // Loop through all of the prepare/repair shop items
+            for (int i = 0; i < shopPrepareRepairs.Count; i++)
+            {
+                // Store the level of each prepare/repair shop item
+                ShopPrepareRepairs.Add(new ShopItemData(shopPrepareRepairs[i].GetCurrentLevel));
+            }
+
+            // Loop through all of the one-use shop items
+            for (int i = 0; i < shopItems.Count; i++)
+            {
+                // Store the level of each one-use shop item
+                ShopItems.Add(new ShopItemData(shopItems[i].GetCurrentLevel));
+            }
         }
     }
+
+    [DataContract(Namespace="")]
+    public class ShopItemData
+    {
+        [DataMember]
+        public int CurLevel;
+
+        public ShopItemData(int currentlevel)
+        {
+            CurLevel = currentlevel;
+        }
+    }
+
+    [DataContract(Namespace="")]
+    public class LevelData
+    {
+        [DataMember]
+        public int LevelNum;
+
+        public LevelData(int levelNum)
+        {
+            LevelNum = levelNum;
+        }
+    }
+
+
 }
