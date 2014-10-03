@@ -43,9 +43,9 @@ namespace Defend_Your_Castle
 
         private void ChangeWeaponButton(object sender, RoutedEventArgs e)
         {
-            // Get the weapon button that was clicked
-            Button WeaponButton = (Button)sender;
-
+            // Get the weapon radio button that was clicked
+            RadioButton WeaponButton = (RadioButton)sender;
+            
             // Switch the player's weapon
             _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
         }
@@ -83,7 +83,14 @@ namespace Defend_Your_Castle
             PauseMenu.Visibility = Visibility.Collapsed;
         }
 
-        private void ShowShop(object sender, RoutedEventArgs e)
+        // Occurs when the "Next" button is clicked on the Level End screen
+        private void LevelEnd_Next_Click(object sender, RoutedEventArgs e)
+        {
+            // Show the shop
+            ShowShop();
+        }
+
+        public void ShowShop()
         {
             // Hide the level end screen
             LevelEnd.Visibility = Visibility.Collapsed;
@@ -110,8 +117,8 @@ namespace Defend_Your_Castle
 
         private void SaveGame(object sender, RoutedEventArgs e)
         {
-            // Save the player
-            Data.SavePlayer(_game.level.GetPlayer);
+            // Save the game
+            Data.SaveGameData(_game.shop, _game.level);
         }
 
 
