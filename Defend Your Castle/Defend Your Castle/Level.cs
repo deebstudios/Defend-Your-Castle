@@ -212,7 +212,7 @@ namespace Defend_Your_Castle
             for (int i = 0; i < Enemies.Count; i++)
             {
                 //Check for the object's weapon weakness
-                if (Enemies[i].CanGetHit(rect) == true && player.CurWeapon >= Enemies[i].GetWeaponWeakness)
+                if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
                 {
                     Enemies[i].Die(this);
 

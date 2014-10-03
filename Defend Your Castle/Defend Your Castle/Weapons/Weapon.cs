@@ -38,6 +38,9 @@ namespace Defend_Your_Castle
             get { return Game1.ActiveTime >= PrevAttack; }
         }
 
+        //Checks if the weapon can hit an object based on its item weaknesses
+        public abstract bool CanHit(int weakness);
+
         //Makes the Weapon available for use
         public void MakeAvailable()
         {

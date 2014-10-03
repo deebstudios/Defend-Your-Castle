@@ -26,7 +26,7 @@ namespace Defend_Your_Castle
             level = theLevel;
 
             // Initialize the enemy spawn chance list
-            EnemySpawnChances = new List<int>() { 33, 33, 34 };
+            EnemySpawnChances = new List<int>() { 25, 25, 25, 25 };
         }
 
         public bool CanEnemySpawn
@@ -137,6 +137,8 @@ namespace Defend_Your_Castle
                     return (new SpearEnemy(level));
                 case 2: //Armored enemy
                     return (new ArmoredEnemy(level));
+                case 3: //Flying enemy
+                    return (new FlyingEnemy(level));
                 case 0: // Melee Enemy
                 default:
                     return (new MeleeEnemy(level));

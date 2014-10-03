@@ -14,7 +14,7 @@ namespace Defend_Your_Castle
     {
         public enum WeaponTypes
         {
-            Sword, Warhammer
+            Sword, Spear, Warhammer
         }
 
         // Reference to GamePage.xaml
@@ -72,7 +72,7 @@ namespace Defend_Your_Castle
             Gold = 100;
 
             // Select the Sword weapon by default
-            Weapons = new Weapon[] { new Sword(), new Warhammer() };
+            Weapons = new Weapon[] { new Sword(), new Spear(), new Warhammer() };
 
             CurWeapon = (int)WeaponTypes.Sword;
 
