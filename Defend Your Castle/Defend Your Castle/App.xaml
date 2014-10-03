@@ -470,6 +470,106 @@
                 </Setter>
             </Style>
             
+            <!-- Base Radio Button Style
+                 This style is almost exactly the same as the Rounded Button Style (below) -->
+            <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+                <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid x:Name="RootGrid" Background="Transparent">
+                                <Ellipse x:Name="Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                         Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" Fill="{TemplateBinding Background}" />
+                                <ContentPresenter x:Name="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        
+                                        <VisualState x:Name="PointerOver"/>
+                                        
+                                        <VisualState x:Name="Pressed">
+                                            <!--<Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1.00"/>
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1.00"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>-->
+                                        </VisualState>
+                                        
+                                        <VisualState x:Name="Disabled"/>
+                                        <!--<Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppBarItemDisabledForegroundThemeBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppBarItemDisabledForegroundThemeBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextLabel" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppBarItemDisabledForegroundThemeBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>-->
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused"/>
+                                        <!--<Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                                 Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                                 Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>-->
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1.00"/>
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1.00"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Unchecked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0.70"/>
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0.70"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Indeterminate"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
             <!-- Rounded Button Style
                  Source: http://stackoverflow.com/questions/6505002/xaml-how-to-create-a-circle-button-with-bound-color/6505119#6505119 -->
             <Style x:Key="RoundedButtonStyle" TargetType="Button">
@@ -487,7 +587,7 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid x:Name="RootGrid" Background="Transparent">
-                                <Ellipse x:Name="Ellipse"  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                <Ellipse x:Name="Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
                                          Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" Fill="{TemplateBinding Background}" />
                                 <ContentPresenter x:Name="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
 

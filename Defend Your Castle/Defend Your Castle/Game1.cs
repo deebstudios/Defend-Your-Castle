@@ -36,9 +36,6 @@ namespace Defend_Your_Castle
         // Half the screen size of the game
         public static readonly Vector2 ScreenHalf;
 
-        // Indicates whether or not the game should exit
-        public static bool ShouldExit;
-
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
@@ -78,9 +75,6 @@ namespace Defend_Your_Castle
 
             // Get half the screen size
             ScreenHalf = (ScreenSize / 2);
-
-            // State that the game should not be exited
-            ShouldExit = false;
         }
 
         public static float ActiveTime
@@ -130,19 +124,6 @@ namespace Defend_Your_Castle
 
             // Unload all content so that the game does not throw an exception when the "Quit" button is clicked
             Content.Unload();
-        }
-
-        private void ExitGame()
-        {
-            // Unload all content
-            UnloadContent();
-
-            // Exit the game
-            Exit();
-
-            // Exit the application
-            Application.Current.Resources.Clear();
-            Application.Current.Exit();
         }
 
         public GameState GameState
@@ -281,28 +262,52 @@ namespace Defend_Your_Castle
             // Remove the Title Screen
             RemoveScreen();
 
-            Animation TestAnim = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            // Create a new level
             level = new Level(new Player(GamePage), this);
-            //level.AddPlayerHelper(new Archer(/*level*/));
-            level.AddEnemy(new MeleeEnemy(level));
-            level.AddEnemy(new SpearEnemy(level));
+
+            //level.AddEnemy(new MeleeEnemy(level));
+            //level.AddEnemy(new SpearEnemy(level));
+            //level.AddEnemy(new FlyingEnemy(level));
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
 
             // Force the HUD Canvas to render itself and its child elements
             GamePage.GameHUD.UpdateLayout();
-
-            // Initialize the Shop
-            shop = new Shop(GamePage, level.GetPlayer);
         }
 
         public void PauseGame()
         {
             // Set the game to paused
             ChangeGameState(GameState.Paused);
+        }
 
+        public void ContinueGame()
+        {
+            // Remove the Title Screen
+            RemoveScreen();
 
+            // Load the game data
+            LoadData();
+
+            // Set the player to shop
+            ChangeGameState(GameState.Shop);
+
+            // Show the shop
+            GamePage.ShowShop();
+        }
+
+        // Loads the player's saved game data
+        public async void LoadData()
+        {
+            // Read the game data
+            object[] GameData = await Data.LoadGameData(GamePage, this);
+
+            // Get the shop
+            shop = (Shop)GameData[0];
+
+            // Get the level
+            level = (Level)GameData[1];
         }
 
         protected override void Update(GameTime gameTime)
@@ -336,16 +341,6 @@ namespace Defend_Your_Castle
                 case GameState.Shop:
                     
                     break;
-            }
-
-            // Check if the game should be exited
-            if (ShouldExit == true)
-            {
-                // Exit the game
-                ExitGame();
-               
-                // Exit the method
-                return;
             }
 
             // Update the global touch state

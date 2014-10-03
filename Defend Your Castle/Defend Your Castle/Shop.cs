@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,16 +13,16 @@ namespace Defend_Your_Castle
         private GamePage gamePage;
 
         // Reference to the player
-        Player ShopPlayer;
+        private Player ShopPlayer;
 
         // List of available Upgrades
-        List<ShopItem> ShopUpgrades;
+        public List<ShopItem> ShopUpgrades;
 
         // List of available Prepare/Repair ShopItems
-        List<ShopItem> ShopPrepareRepairs;
+        public List<ShopItem> ShopPrepareRepairs;
 
         // List of available Items
-        List<ShopItem> ShopItems;
+        public List<ShopItem> ShopItems;
 
         public Shop(GamePage gamepage, Player shopPlayer)
         {
@@ -72,6 +73,24 @@ namespace Defend_Your_Castle
             else // The player doesn't have enough gold for the item
             {
                 // Notify the player of this
+            }
+        }
+
+        public void LoadShopData(ShopData shopData)
+        {
+            for (int i = 0; i < shopData.ShopUpgrades.Count; i++)
+            {
+                ShopUpgrades[i].SetCurrentLevel(shopData.ShopUpgrades[i].CurLevel);
+            }
+
+            for (int i = 0; i < shopData.ShopPrepareRepairs.Count; i++)
+            {
+                ShopPrepareRepairs[i].SetCurrentLevel(shopData.ShopPrepareRepairs[i].CurLevel);
+            }
+
+            for (int i = 0; i < shopData.ShopItems.Count; i++)
+            {
+                ShopItems[i].SetCurrentLevel(shopData.ShopItems[i].CurLevel);
             }
         }
 

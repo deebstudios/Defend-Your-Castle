@@ -16,6 +16,8 @@ namespace Defend_Your_Castle
             InvincibleSheet = LoadAssets.GoblinInvincibleSheet;
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));
 
+            WeaponWeakness = (int)Player.WeaponTypes.Sword;
+
             SetProperties(level);
         }
 

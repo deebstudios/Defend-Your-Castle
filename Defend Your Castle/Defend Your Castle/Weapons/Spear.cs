@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Defend_Your_Castle
 {
-    //The Warhammer can hit armored enemies
-    public sealed class Warhammer : Weapon
+    //The Spear can hit flying enemies
+    public sealed class Spear : Weapon
     {
-        public Warhammer()
+        public Spear()
         {
-            //Set the attack speed
-            AttackSpeed = 300;
+            // Set the attack speed
+            AttackSpeed = 200;
 
-            //Set the sound of the warhammer
+            //Set the sound of the spear to a test sound
             Sound = LoadAssets.TestSound;
 
-            // TEMPORARY
+            //TEMPORARY
             MakeAvailable();
         }
 
         public override bool CanHit(int weakness)
         {
-            return (weakness != (int)Player.WeaponTypes.Spear);
+            return (weakness != (int)Player.WeaponTypes.Warhammer);
         }
     }
 }

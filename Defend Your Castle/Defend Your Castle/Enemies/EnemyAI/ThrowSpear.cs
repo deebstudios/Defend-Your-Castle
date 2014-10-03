@@ -20,7 +20,7 @@ namespace Defend_Your_Castle
 
         private Projectile SpearThrown()
         {
-            return (new Spear(new Vector2(2, -4)));
+            return (new EnemySpear(new Vector2(2, -4)));
         }
 
         public override void Update(Level level)

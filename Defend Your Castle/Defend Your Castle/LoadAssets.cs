@@ -18,7 +18,13 @@ namespace Defend_Your_Castle
         private const string SoundDir = "Sounds/";
         private const string MusicDir = "Music/";
 
+        //Level graphics
+        public static Texture2D LevelBG;
+        public static Texture2D DaySun;
+        public static Texture2D NightMoon;
+
         public static Texture2D Sword;
+        public static Texture2D Spear;
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
         public static Texture2D PlayerCastleInvincible;
@@ -29,6 +35,10 @@ namespace Defend_Your_Castle
         public static Texture2D EnemySpear;
         public static Texture2D GoblinSheet;
         public static Texture2D GoblinInvincibleSheet;
+        public static Texture2D FlyingGoblinSheet;
+        public static Texture2D FlyingGoblinInvincibleSheet;
+        public static Texture2D ArmoredGoblinSheet;
+        public static Texture2D ArmoredGoblinInvincibleSheet;
 
         //Shop graphics
         public static Texture2D GoldCoin;
@@ -64,7 +74,12 @@ namespace Defend_Your_Castle
 
         private static void LoadGraphics(ContentManager Content)
         {
+            //Level graphics
+            DaySun = LoadGraphic(Content, "Sun");
+            NightMoon = LoadGraphic(Content, "Moon");
+
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
+            Spear = Content.Load<Texture2D>(GraphicsDir + "Spear");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
@@ -75,6 +90,8 @@ namespace Defend_Your_Castle
             EnemySpear = LoadGraphic(Content, "Enemy Spear");
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
+            FlyingGoblinSheet = LoadGraphic(Content, "Flying Goblin Sheet");
+            FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");
