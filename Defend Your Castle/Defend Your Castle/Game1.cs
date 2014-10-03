@@ -265,6 +265,8 @@ namespace Defend_Your_Castle
             // Create a new level
             level = new Level(new Player(GamePage), this);
 
+            // Create a new shop
+            shop = new Shop(GamePage, level.GetPlayer);
             //level.AddEnemy(new MeleeEnemy(level));
             //level.AddEnemy(new SpearEnemy(level));
             //level.AddEnemy(new FlyingEnemy(level));
