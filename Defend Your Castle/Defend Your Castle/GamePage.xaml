@@ -209,7 +209,7 @@
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Source" Value="Content/Graphics/CastleIcon.png"/>
+            <Setter Property="Source" Value="Content/Graphics/CastleIconBigger.png"/>
         </Style>
 
         <Style x:Key="Shop_OuterHPBarStyle" BasedOn="{StaticResource HUD_OuterHPBarStyle}" TargetType="Border">
