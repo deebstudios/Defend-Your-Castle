@@ -15,7 +15,11 @@ namespace Defend_Your_Castle
             MoveSpeed = new Vector2(1, 0);
             Range = 150;
 
-            Animation = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            ObjectSheet = LoadAssets.SpearGoblinSheet;
+            InvincibleSheet = LoadAssets.SpearGoblinInvincibleSheet;
+            Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 20, 35), 225, new Vector2(2, 0)));
+
+            WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
             Position = new Vector2(0, 140);
 
@@ -27,9 +31,9 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Throw spears
-                Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 400, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 400, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 400));
+                //Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 400, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 400, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 400));
 
-                CurAction = new ThrowSpear(this, ShootAnim, ShootAnim.MaxFrame);
+                CurAction = new ThrowSpear(this, Animation/*ShootAnim*/, Animation.MaxFrame/*ShootAnim.MaxFrame*/);
             }
         }
     }

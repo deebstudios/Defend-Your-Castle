@@ -484,7 +484,7 @@
                                 <Ellipse x:Name="Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
                                          Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" Fill="{TemplateBinding Background}" />
                                 <ContentPresenter x:Name="Content" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
+                                
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal"/>
