@@ -41,6 +41,12 @@
                 <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
             </Style>
             
+            <!-- StackPanel -->
+            <Style x:Key="StackPanelMenuStyle" TargetType="StackPanel">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            
             <!-- Button 
                  Default Button style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709909.aspx -->
             <Style x:Key="ButtonStyle" TargetType="Button">
@@ -1056,6 +1062,14 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <!-- Background Image -->
+            <Style x:Key="ScreenBackgroundImageStyle" TargetType="Image">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="50"/>
+                <Setter Property="Opacity" Value="0.30"/>
             </Style>
 
         </ResourceDictionary>

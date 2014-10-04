@@ -195,6 +195,7 @@
     <Content Include="Content\Graphics\Gold Coin Effect.png" />
     <Content Include="Content\Graphics\Gold Coin.png" />
     <Content Include="Content\Graphics\Moon.png" />
+    <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
     <Content Include="Content\Graphics\ShopBackground.png" />

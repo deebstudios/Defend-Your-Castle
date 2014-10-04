@@ -190,7 +190,7 @@ namespace Defend_Your_Castle
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
-            if (MenuScreens.Count > 0) GetCurrentScreen().CursorMove(e.VirtualKey);
+            //if (MenuScreens.Count > 0) GetCurrentScreen().CursorMove(e.VirtualKey);
         }
 
         public void AddScreen(MenuScreen screen)

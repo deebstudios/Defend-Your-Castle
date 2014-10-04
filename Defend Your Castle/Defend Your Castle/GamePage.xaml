@@ -89,13 +89,9 @@
         
         
         <!-- Level End Styles -->
-        <Style x:Key="LevelEnd_BackgroundImageStyle" TargetType="Image">
+        <Style x:Key="LevelEnd_BackgroundImageStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
             <Setter Property="Grid.RowSpan" Value="3"/>
             <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="50"/>
-            <Setter Property="Opacity" Value="0.30"/>
         </Style>
         
         <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
@@ -117,7 +113,6 @@
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
         </Style>
-        
         
         <!-- Shop Styles -->
         <Style x:Key="Shop_BackgroundImageStyle" BasedOn="{StaticResource LevelEnd_BackgroundImageStyle}" TargetType="Image">
@@ -242,9 +237,9 @@
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
-    <Canvas Name="CurrentScreen" x:FieldModifier="public">
+    <Grid Name="CurrentScreen" x:FieldModifier="public" HorizontalAlignment="Center" VerticalAlignment="Center">
         
-    </Canvas>
+    </Grid>
     
     <Grid Name="GameHUD" x:FieldModifier="public" Margin="20" Visibility="Collapsed">
         <Grid.RowDefinitions>

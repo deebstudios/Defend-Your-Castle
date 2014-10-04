@@ -16,23 +16,23 @@ namespace Defend_Your_Castle
 {
     public class MenuScreen
     {
-        // All of the controls on the menu
-        public List<UIElement> AllControls;
+        // The controls that are displayed on the menu
+        public List<UIElement> Controls;
 
         // All of the controls on the menu that are menu options
         public List<UIElement> MenuOptions;
 
         // The cursor
-        public Image Cursor;
+        //public Image Cursor;
 
         // The amount to offset the cursor from the menu options
-        public Vector2 CursorOffset;
+        //public Vector2 CursorOffset;
 
         // The option the player currently has selected
         public int SelectedOption;
 
         // The position of the cursor on the menu
-        public Vector2 CursorPos;
+        //public Vector2 CursorPos;
 
         // References to GamePage.xaml and Game1.cs
         public readonly GamePage GamePage;
@@ -41,16 +41,16 @@ namespace Defend_Your_Castle
         public MenuScreen()
         {
             // Initialize the AllControls list
-            AllControls = new List<UIElement>();
+            Controls = new List<UIElement>();
 
             // Initialize the MenuOptions list
             MenuOptions = new List<UIElement>();
 
             // Create a cursor for the menu
-            CreateCursor();
+            //CreateCursor();
 
-            // Automatically add the Cursor to the AllControls list
-            AllControls.Add(Cursor);
+            // Automatically add the Cursor to the Controls list
+            //Controls.Add(Cursor);
         }
 
         public MenuScreen(GamePage page, Game1 game) : this()
@@ -60,62 +60,64 @@ namespace Defend_Your_Castle
             Game = game;
         }
 
-        private void CreateCursor()
-        {
-            // Create a new Image control to represent the cursor
-            Cursor = new Image();
+        // UNUSED - Kept because it can be useful in the future
+        //private void CreateCursor()
+        //{
+        //    // Create a new Image control to represent the cursor
+        //    Cursor = new Image();
 
-            // Get the image for the cursor
-            Cursor.Source = new BitmapImage(new Uri("ms-appx:/Content/Graphics/cursor.png"));
+        //    // Get the image for the cursor
+        //    Cursor.Source = new BitmapImage(new Uri("ms-appx:/Content/Graphics/cursor.png"));
 
-            // Set the Width and Height of the Cursor Image
-            Cursor.Width = 32;
-            Cursor.Height = 32;
-        }
+        //    // Set the Width and Height of the Cursor Image
+        //    Cursor.Width = 32;
+        //    Cursor.Height = 32;
+        //}
 
-        public void CursorMove(VirtualKey key)
-        {
-            // Get the index value of the last item in the MenuOptions list
-            int LastMenuOption = (MenuOptions.Count - 1);
+        // UNUSED - Kept because it can be useful in the future
+        //public void CursorMove(VirtualKey key)
+        //{
+        //    // Get the index value of the last item in the MenuOptions list
+        //    int LastMenuOption = (MenuOptions.Count - 1);
 
-            // Check if the player moved the selection cursor up
-            if (key == VirtualKey.Up && SelectedOption > 0)
-            {
-                SelectedOption -= 1;
-                SetCursorPosition();
-            }
-            // Check if the player moved the selection cursor down
-            if (key == VirtualKey.Down && SelectedOption < LastMenuOption)
-            {
-                SelectedOption += 1;
-                SetCursorPosition();
-            }
-            // Check if the player pressed the "Enter" key
-            if (key == VirtualKey.Enter)
-            {
-                PickOption();
-            }
-        }
+        //    // Check if the player moved the selection cursor up
+        //    if (key == VirtualKey.Up && SelectedOption > 0)
+        //    {
+        //        SelectedOption -= 1;
+        //        SetCursorPosition();
+        //    }
+        //    // Check if the player moved the selection cursor down
+        //    if (key == VirtualKey.Down && SelectedOption < LastMenuOption)
+        //    {
+        //        SelectedOption += 1;
+        //        SetCursorPosition();
+        //    }
+        //    // Check if the player pressed the "Enter" key
+        //    if (key == VirtualKey.Enter)
+        //    {
+        //        PickOption();
+        //    }
+        //}
 
-        private void SetElementPosition(UIElement element, Vector2 Position)
-        {
-            // Set the Left and Top properties of the element in the Canvas
-            element.SetValue(Canvas.LeftProperty, Position.X);
-            element.SetValue(Canvas.TopProperty, Position.Y);
-        }
+        //private void SetElementPosition(UIElement element, Vector2 Position)
+        //{
+        //    // Set the Left and Top properties of the element in the Canvas
+        //    element.SetValue(Canvas.LeftProperty, Position.X);
+        //    element.SetValue(Canvas.TopProperty, Position.Y);
+        //}
 
-        public void SetCursorPosition()
-        {
-            // Get the X and Y position at which the Cursor should be displayed in the canvas
-            float x = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.LeftProperty));
-            float y = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.TopProperty));
+        //public void SetCursorPosition()
+        //{
+        //    // Get the X and Y position at which the Cursor should be displayed in the canvas
+        //    float x = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.LeftProperty));
+        //    float y = (float)((double)MenuOptions[SelectedOption].GetValue(Canvas.TopProperty));
 
-            // Get the new cursor position. Subtract the CursorOffset by the generated position
-            CursorPos = (new Vector2(x, y) - CursorOffset);
+        //    // Get the new cursor position. Subtract the CursorOffset by the generated position
+        //    CursorPos = (new Vector2(x, y) - CursorOffset);
             
-            // Set the position of the Cursor
-            SetElementPosition(Cursor, CursorPos);
-        }
+        //    // Set the position of the Cursor
+        //    SetElementPosition(Cursor, CursorPos);
+        //}
 
         protected Style GetStyle(String StyleName)
         {
@@ -123,7 +125,7 @@ namespace Defend_Your_Castle
             return (Application.Current.Resources[StyleName] as Style);
         }
 
-        protected TextBlock CreateLabel(String Text, Vector2 Position)
+        protected TextBlock CreateLabel(String Text)
         {
             // Create a new TextBlock
             TextBlock txtBlock = new TextBlock();
@@ -134,14 +136,11 @@ namespace Defend_Your_Castle
             // Set the TextBlock's Text
             txtBlock.Text = Text;
 
-            // Set the TextBlock's position
-            SetElementPosition(txtBlock, Position);
-
             // Return the TextBlock
             return txtBlock;
         }
 
-        protected ComboBox CreateDropdown(Vector2 Position)
+        protected ComboBox CreateDropdown()
         {
             // Create a new ComboBox
             ComboBox cmbBox = new ComboBox();
@@ -155,11 +154,77 @@ namespace Defend_Your_Castle
             // Set the ComboBox's SelectedIndex to 0 by default
             if (cmbBox.Items.Count > 0) cmbBox.SelectedIndex = 0;
 
-            // Set the ComboBox's position
-            SetElementPosition(cmbBox, Position);
-
             // Return the ComboBox
             return cmbBox;
+        }
+
+        // Images must be in the Content/Graphics directory
+        protected Image CreateBackgroundImage(String ImageName)
+        {
+            // Create a new Image
+            Image image = new Image();
+
+            // Set the Image's Style
+            image.Style = GetStyle("ScreenBackgroundImageStyle");
+            
+            // Set the source of the image
+            image.Source = new BitmapImage(new Uri("ms-appx:/Content/Graphics/" + ImageName));
+
+            // Return the image
+            return image;
+        }
+
+        protected Button CreateButton(String ButtonText, double ButtonWidth = 0)
+        {
+            // Create a new Button
+            Button button = new Button();
+
+            // Set the Button's Style
+            button.Style = GetStyle("ButtonStyle");
+
+            // Set the Button's Content
+            button.Content = ButtonText;
+
+            // Check if the Button's width was specified
+            if (ButtonWidth > 0)
+            {
+                // It was, so set the Button's width
+                button.Width = ButtonWidth;
+            }
+
+            // Return the Button
+            return button;
+        }
+
+        protected StackPanel CreateVerticalMenu(params UIElement[] MenuItems)
+        {
+            // Create a new StackPanel
+            StackPanel panel = new StackPanel();
+
+            // Set the StackPanel's Style
+            panel.Style = GetStyle("StackPanelMenuStyle");
+
+            // Loop through all of the menu items
+            for (int i = 0; i < MenuItems.Length; i++)
+            {
+                // Add the menu item to the StackPanel
+                panel.Children.Add(MenuItems[i]);
+            }
+
+            // Return the StackPanel
+            return panel;
+        }
+
+        protected StackPanel CreateHorizontalMenu(params UIElement[] MenuItems)
+        {
+            // Create a vertical StackPanel
+            StackPanel panel = CreateVerticalMenu(MenuItems);
+
+            // Set the Orientation to Horizontal
+            panel.Orientation = Orientation.Horizontal;
+
+            // Return the StackPanel
+            return panel;
         }
 
         protected virtual void AddDropdownItems(ComboBox Dropdown)
@@ -181,7 +246,6 @@ namespace Defend_Your_Castle
         {
             // Set the SelectedOption to the tapped MenuOption
             SelectedOption = MenuOptions.IndexOf((UIElement)sender);
-            SetCursorPosition();
 
             // Try to pick the option
             PickOption();
@@ -191,7 +255,6 @@ namespace Defend_Your_Castle
         {
             // Set the SelectedOption to the tapped MenuOption
             SelectedOption = MenuOptions.IndexOf((UIElement)sender);
-            SetCursorPosition();
         }
 
         protected virtual void PickOption()
@@ -205,10 +268,10 @@ namespace Defend_Your_Castle
             GamePage.CurrentScreen.Children.Clear();
             
             // Loop through all of the controls on the menu
-            for (int i = 0; i < AllControls.Count; i++)
+            for (int i = 0; i < Controls.Count; i++)
             {
                 // Add each control to the Canvas
-                GamePage.CurrentScreen.Children.Add(AllControls[i]);
+                GamePage.CurrentScreen.Children.Add(Controls[i]);
             }
         }
 
