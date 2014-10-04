@@ -42,9 +42,9 @@ namespace Defend_Your_Castle
             ObjectSheet = LoadAssets.testanim;
 
             //FOR TESTING INVINCIBILITY
-            InvincibilityLength = 5000f;
-            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
-            UseInvincibility();
+            //InvincibilityLength = 5000f;
+            //InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
+            //UseInvincibility();
 
             Gold = 100;
 

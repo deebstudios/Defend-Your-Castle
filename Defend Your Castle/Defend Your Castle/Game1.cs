@@ -39,6 +39,9 @@ namespace Defend_Your_Castle
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
+        // Checks whether the player has saved data on game load
+        public static bool HasSavedData;
+
         //The level
         public Level level;
 
@@ -288,9 +291,6 @@ namespace Defend_Your_Castle
         {
             // Remove the Title Screen
             RemoveScreen();
-
-            // Load the game data
-            LoadData();
 
             // Set the player to shop
             ChangeGameState(GameState.Shop);

@@ -69,6 +69,7 @@
             <Setter Property="BorderThickness" Value="0,1,0,1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0,10,0,10"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
         
         <Style x:Key="LevelStart_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
@@ -231,6 +232,11 @@
             <Setter Property="Margin" Value="20,0,0,20"/>
         </Style>
 
+        <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
+            <Setter Property="Grid.RowSpan" Value="4"/>
+            <Setter Property="Background" Value="Gold"/>
+        </Style>
+        
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0,0,20,20"/>
@@ -290,7 +296,7 @@
     </Grid>
 
     <!-- Level Start Border -->
-    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}" Visibility="Collapsed">
+    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}">
         <!-- Level Start Text -->
         <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
         
@@ -368,7 +374,25 @@
 
         <!-- Shop Background -->
         <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
-        
+
+        <!-- Game Saved Border -->
+        <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
+            <!-- Game Saved Text -->
+            <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
+
+            <Border.Resources>
+                <!-- Save Game Animation -->
+                <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Opacity"
+                                     From="1.0" To="0.0" Duration="0:0:1"/>
+                </Storyboard>
+            </Border.Resources>
+        </Border>
+
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
             <!-- Shop Title -->

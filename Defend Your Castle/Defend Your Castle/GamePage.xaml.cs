@@ -26,6 +26,9 @@ namespace Defend_Your_Castle
 
             // Set the GamePage of Game1 to the current class
             _game.GamePage = this;
+
+            // Load the player's saved game data
+            _game.LoadData();
         }
 
         private void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)
@@ -119,6 +122,9 @@ namespace Defend_Your_Castle
         {
             // Save the game
             Data.SaveGameData(_game.shop, _game.level);
+
+            // Show the animation that the game was saved
+            Shop_SaveGameAnim.Begin();
         }
 
 

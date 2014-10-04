@@ -23,6 +23,9 @@ namespace Defend_Your_Castle
             // Add additional spacing between all of the Buttons
             ContinueGame.Margin = new Thickness(0, 20, 0, 20);
 
+            // Enable the ContinueGame Button if the user has saved game data; otherwise, disable it
+            ContinueGame.IsEnabled = Game1.HasSavedData;
+
             // Create a vertical menu containing all of the Buttons
             StackPanel VerticalMenu = CreateVerticalMenu(StartGame, ContinueGame, Options);
             
