@@ -18,9 +18,12 @@ namespace Defend_Your_Castle
 
             Gold = 200;
 
+            ObjectSheet = LoadAssets.ArmoredGoblinSheet;
+            InvincibleSheet = LoadAssets.ArmoredGoblinInvincibleSheet;
+
             Position = new Vector2(0, 120);
 
-            Animation = new Animation(new AnimFrame(new Rectangle(5, 0, 9, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(23, 0, 8, 16), 300), new AnimFrame(new Rectangle(40, 0, 8, 16), 300));
+            Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));
 
             SetProperties(level);
         }
@@ -30,9 +33,9 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Attack now
-                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 400, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 400, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 400));
+                //Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 400, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 400, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 400));
 
-                CurAction = new MeleeAttack(this, AttackAnim, 100, 800, 400);
+                CurAction = new MeleeAttack(this, Animation, 150, 450, 225);
             }
         }
     }

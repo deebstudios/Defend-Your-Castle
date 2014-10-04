@@ -181,7 +181,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Content\G Character.png" />
     <Content Include="Content\Graphics\ArcherSheet.png" />
+    <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
+    <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\CastleIconBigger.png" />
@@ -208,12 +211,20 @@
     <Content Include="Content\Graphics\Spear.png" />
     <Content Include="Content\Graphics\Sun.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
+    <Content Include="Content\H Character.png" />
+    <Content Include="Content\I Character.png" />
+    <Content Include="Content\J Character.png" />
+    <Content Include="Content\K Character.png" />
+    <Content Include="Content\L Character.png" />
     <Content Include="Content\M Character.png" />
     <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
     <Content Include="Content\Graphics\ScalableBox.png" />
     <Content Include="Content\N Character.png" />
     <Content Include="Content\O Character.png" />
+    <Content Include="Content\P Character.png" />
+    <Content Include="Content\Q Character.png" />
     <Content Include="Content\R Character.png" />
+    <Content Include="Content\S Character.png" />
     <Content Include="Content\Sounds\test.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -222,7 +233,11 @@
     </Content>
     <Content Include="Content\T Character.png" />
     <Content Include="Content\U Character.png" />
+    <Content Include="Content\V Character.png" />
+    <Content Include="Content\W Character.png" />
+    <Content Include="Content\X Character.png" />
     <Content Include="Content\Y Character.png" />
+    <Content Include="Content\Z Character.png" />
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
