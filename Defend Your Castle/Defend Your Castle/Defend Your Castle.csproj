@@ -198,6 +198,8 @@
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
+    <Content Include="Content\Graphics\Spear Goblin Sheet Invincible.png" />
+    <Content Include="Content\Graphics\Spear Goblin Sheet.png" />
     <Content Include="Content\Graphics\ShopBackground.png" />
     <Content Include="Content\Graphics\ShopIcons\FortifyWallsIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\InvincibilityIcon.png" />
@@ -205,7 +207,9 @@
     <Content Include="Content\Graphics\ShopIcons\RepairWallsIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\RepairWallsx10Icon.png" />
     <Content Include="Content\Graphics\ShopIcons\ShopIcon.png" />
-    <Content Include="Content\Graphics\Spear.png" />
+    <Content Include="Content\Graphics\Spear.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Graphics\Sun.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
     <Content Include="Content\M Character.png" />

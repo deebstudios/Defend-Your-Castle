@@ -154,6 +154,7 @@
 
         <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="MaxWidth" Value="400"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
@@ -264,13 +265,17 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
                              Click="ChangeWeaponButton">
-                    <Image Source="Content\Graphics\cursor.png" Width="20" Height="20" />
+                    <Image Source="Content/Graphics/Alpha Sword.png" Width="16" Height="16" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
-                             Click="ChangeWeaponButton" />
+                             Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="16" Height="16"/>
+                </RadioButton>
 
-                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton" />
+                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Spear.png" Width="16" Height="16"/>
+                </RadioButton>
             </StackPanel>
 
             <Grid Grid.Column="2">
