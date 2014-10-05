@@ -190,6 +190,7 @@ namespace Defend_Your_Castle
 
             // Update the UI with the player's health
             UpdateHealth();
+            UpdateHealthInShop();
         }
 
         //Makes the player lose health when being attacked
@@ -220,8 +221,8 @@ namespace Defend_Your_Castle
         public void IncreaseMaxHealth(int healthIncrease)
         {
             //Increase the player's current and max HP by the designated amount
-            Health += healthIncrease;
             MaxHealth += healthIncrease;
+            Heal(healthIncrease);
         }
 
         public void UpgradeCastle(int healthIncrease)

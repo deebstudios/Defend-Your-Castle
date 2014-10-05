@@ -39,6 +39,9 @@ namespace Defend_Your_Castle
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
 
+        // Checks whether the player has saved data on game load
+        public static bool HasSavedData;
+
         //The level
         public Level level;
 
@@ -190,7 +193,7 @@ namespace Defend_Your_Castle
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
-            if (MenuScreens.Count > 0) GetCurrentScreen().CursorMove(e.VirtualKey);
+            //if (MenuScreens.Count > 0) GetCurrentScreen().CursorMove(e.VirtualKey);
         }
 
         public void AddScreen(MenuScreen screen)
@@ -265,9 +268,8 @@ namespace Defend_Your_Castle
             // Create a new level
             level = new Level(new Player(GamePage), this);
 
-            //level.AddEnemy(new MeleeEnemy(level));
-            //level.AddEnemy(new SpearEnemy(level));
-            //level.AddEnemy(new FlyingEnemy(level));
+            // Create a new shop
+            shop = new Shop(GamePage, level.GetPlayer);
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
@@ -287,7 +289,7 @@ namespace Defend_Your_Castle
             // Remove the Title Screen
             RemoveScreen();
 
-            // Load the game data
+            // Load the player's saved game data
             LoadData();
 
             // Set the player to shop
@@ -366,21 +368,16 @@ namespace Defend_Your_Castle
             switch (GameState)
             {
                 case GameState.Screen: // Draw the current screen
-                    //GetCurrentScreen().Draw(spriteBatch);
+                    // Do nothing since the screens are drawn through XAML
 
                     break;
                 case GameState.InGame: // Draw the in-game objects
                     level.Draw(spriteBatch);
-                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
                     break;
                 case GameState.Paused: // Draw the in-game objects and a dark color overlay
                     level.Draw(spriteBatch);
 
-                    spriteBatch.Draw(LoadAssets.Sword, new Vector2(100, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    spriteBatch.Draw(LoadAssets.Warhammer, new Vector2(120, 200), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                    
                     // Draw color overlay
                     spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(0, 0), null, new Color(Color.Black, 35), 0f, new Vector2(0, 0), new Vector2(ScreenSize.X, ScreenSize.Y), SpriteEffects.None, 1f);
 

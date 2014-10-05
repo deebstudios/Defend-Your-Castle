@@ -69,6 +69,7 @@
             <Setter Property="BorderThickness" Value="0,1,0,1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0,10,0,10"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
         
         <Style x:Key="LevelStart_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
@@ -89,13 +90,9 @@
         
         
         <!-- Level End Styles -->
-        <Style x:Key="LevelEnd_BackgroundImageStyle" TargetType="Image">
+        <Style x:Key="LevelEnd_BackgroundImageStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
             <Setter Property="Grid.RowSpan" Value="3"/>
             <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="50"/>
-            <Setter Property="Opacity" Value="0.30"/>
         </Style>
         
         <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
@@ -117,7 +114,6 @@
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
         </Style>
-        
         
         <!-- Shop Styles -->
         <Style x:Key="Shop_BackgroundImageStyle" BasedOn="{StaticResource LevelEnd_BackgroundImageStyle}" TargetType="Image">
@@ -158,6 +154,7 @@
 
         <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="MaxWidth" Value="400"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
@@ -209,7 +206,7 @@
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Source" Value="Content/Graphics/CastleIcon.png"/>
+            <Setter Property="Source" Value="Content/Graphics/CastleIconBigger.png"/>
         </Style>
 
         <Style x:Key="Shop_OuterHPBarStyle" BasedOn="{StaticResource HUD_OuterHPBarStyle}" TargetType="Border">
@@ -236,15 +233,20 @@
             <Setter Property="Margin" Value="20,0,0,20"/>
         </Style>
 
+        <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
+            <Setter Property="Grid.RowSpan" Value="4"/>
+            <Setter Property="Background" Value="Gold"/>
+        </Style>
+        
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
-    <Canvas Name="CurrentScreen" x:FieldModifier="public">
+    <Grid Name="CurrentScreen" x:FieldModifier="public" HorizontalAlignment="Center" VerticalAlignment="Center">
         
-    </Canvas>
+    </Grid>
     
     <Grid Name="GameHUD" x:FieldModifier="public" Margin="20" Visibility="Collapsed">
         <Grid.RowDefinitions>
@@ -263,13 +265,17 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
                              Click="ChangeWeaponButton">
-                    <Image Source="Content\Graphics\cursor.png" Width="20" Height="20" />
+                    <Image Source="Content/Graphics/Alpha Sword.png" Width="16" Height="16" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
-                             Click="ChangeWeaponButton" />
-                
-                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"  />
+                             Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="16" Height="16"/>
+                </RadioButton>
+
+                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Spear.png" Width="16" Height="16"/>
+                </RadioButton>
             </StackPanel>
 
             <Grid Grid.Column="2">
@@ -295,7 +301,7 @@
     </Grid>
 
     <!-- Level Start Border -->
-    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}" Visibility="Collapsed">
+    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}">
         <!-- Level Start Text -->
         <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
         
@@ -373,7 +379,25 @@
 
         <!-- Shop Background -->
         <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
-        
+
+        <!-- Game Saved Border -->
+        <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
+            <!-- Game Saved Text -->
+            <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
+
+            <Border.Resources>
+                <!-- Save Game Animation -->
+                <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Opacity"
+                                     From="1.0" To="0.0" Duration="0:0:1"/>
+                </Storyboard>
+            </Border.Resources>
+        </Border>
+
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
             <!-- Shop Title -->

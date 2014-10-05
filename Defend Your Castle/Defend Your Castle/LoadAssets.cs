@@ -35,6 +35,8 @@ namespace Defend_Your_Castle
         public static Texture2D EnemySpear;
         public static Texture2D GoblinSheet;
         public static Texture2D GoblinInvincibleSheet;
+        public static Texture2D SpearGoblinSheet;
+        public static Texture2D SpearGoblinInvincibleSheet;
         public static Texture2D FlyingGoblinSheet;
         public static Texture2D FlyingGoblinInvincibleSheet;
         public static Texture2D ArmoredGoblinSheet;
@@ -90,8 +92,12 @@ namespace Defend_Your_Castle
             EnemySpear = LoadGraphic(Content, "Enemy Spear");
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
+            SpearGoblinSheet = LoadGraphic(Content, "Spear Goblin Sheet");
+            SpearGoblinInvincibleSheet = LoadGraphic(Content, "Spear Goblin Sheet Invincible");
             FlyingGoblinSheet = LoadGraphic(Content, "Flying Goblin Sheet");
             FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
+            ArmoredGoblinSheet = LoadGraphic(Content, "Armored Goblin Sheet");
+            ArmoredGoblinInvincibleSheet = LoadGraphic(Content, "Armored Goblin Sheet Invincible");
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");

@@ -158,6 +158,9 @@ namespace Defend_Your_Castle
             // Check to make sure game data was found
             if (gameData != null)
             {
+                // State that the player has saved game data
+                Game1.HasSavedData = true;
+
                 // It was, so create a new Player
                 Player player = new Player(page);
 

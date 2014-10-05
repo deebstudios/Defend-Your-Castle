@@ -15,21 +15,27 @@ namespace Defend_Your_Castle
     {
         public TitleScreen(GamePage page, Game1 game) : base(page, game)
         {
-            CursorOffset = new Vector2(40, 0);
+            // Create the Buttons for the Title screen
+            Button StartGame = CreateButton("Start Game", 250);
+            Button ContinueGame = CreateButton("Continue Game", 250);
+            Button Options = CreateButton("Options", 250);
 
-            TextBlock StartGame = CreateLabel("Start Game", new Vector2(50, 50));
-            TextBlock ContinueGame = CreateLabel("Continue Game", new Vector2(50, 100));
-            TextBlock Options = CreateLabel("Options", new Vector2(50, 150));
+            // Add additional spacing between all of the Buttons
+            ContinueGame.Margin = new Thickness(0, 20, 0, 20);
+
+            // Enable the ContinueGame Button if the user has saved game data; otherwise, disable it
+            ContinueGame.IsEnabled = Game1.HasSavedData;
+
+            // Create a vertical menu containing all of the Buttons
+            StackPanel VerticalMenu = CreateVerticalMenu(StartGame, ContinueGame, Options);
             
-            AllControls.Add(StartGame);
-            AllControls.Add(ContinueGame);
-            AllControls.Add(Options);
+            // Add the vertical menu to the controls on the screen
+            Controls.Add(VerticalMenu);
 
+            // Add each of the Buttons as a menu option so they can be selected
             AddMenuOption(StartGame);
             AddMenuOption(ContinueGame);
             AddMenuOption(Options);
-            
-            SetCursorPosition();
         }
 
         protected override void PickOption()
@@ -37,7 +43,6 @@ namespace Defend_Your_Castle
             switch (SelectedOption)
             {
                 case 0: // Start Game
-                    // Start the game
                     Game.StartGame();
                     break;
                 case 1: // Continue Game
