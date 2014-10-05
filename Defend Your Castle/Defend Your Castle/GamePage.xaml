@@ -105,6 +105,7 @@
             <Setter Property="FontSize" Value="44"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="Margin" Value="0,20,0,0"/>
+            <Setter Property="Opacity" Value="0"/>
         </Style>
         
         <Style x:Key="LevelEnd_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
@@ -113,8 +114,11 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Opacity" Value="0"/>
         </Style>
-        
+
+
         <!-- Shop Styles -->
         <Style x:Key="Shop_BackgroundImageStyle" BasedOn="{StaticResource LevelEnd_BackgroundImageStyle}" TargetType="Image">
             <Setter Property="Grid.RowSpan" Value="4"/>
@@ -346,15 +350,15 @@
 
         <!-- Level Complete Text -->
         <TextBlock Name="LevelEnd_LevelCompleteText" Style="{StaticResource LevelEnd_LevelCompleteTextStyle}" x:FieldModifier="public" />
-        
+
         <!-- Level Statistics -->
         <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <!-- Kills -->
             <TextBlock Name="LevelEnd_Kills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
-            
+
             <!-- Helper Kills -->
             <TextBlock Name="LevelEnd_HelperKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
-            
+
             <!-- Total Kills -->
             <TextBlock Name="LevelEnd_TotalKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
             
@@ -367,6 +371,39 @@
         
         <!-- Next Button -->
         <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="LevelEnd_Next_Click" />
+
+        <!-- Level End Animation -->
+        <Grid.Resources>
+            <Storyboard x:Name="LevelEnd_Anim" x:FieldModifier="public">
+                <!-- Player Kills -->
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_Kills" Storyboard.TargetProperty="Opacity" 
+                                 BeginTime="0:0:0" From="0" To="1" Duration="0:0:0" />
+
+                <!-- Helper Kills -->
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_HelperKills" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:1" From="0" To="1" Duration="0:0:0" />
+
+                <!-- Total Kills -->
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_TotalKills" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:2" From="0" To="1" Duration="0:0:0" />
+
+                <!-- Accuracy Rate -->
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_AccuracyRate" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:3" From="0" To="1" Duration="0:0:0" />
+
+                <!-- Gold Earned -->
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_GoldEarned" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:4" From="0" To="1" Duration="0:0:0" />
+                
+                <!-- Next Button -->
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="IsEnabled"
+                                 BeginTime="0:0:5">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimation Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:5" From="0" To="1" Duration="0:0:0" />
+            </Storyboard>
+        </Grid.Resources>
     </Grid>
 
     <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">
