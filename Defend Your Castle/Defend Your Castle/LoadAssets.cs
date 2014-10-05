@@ -89,7 +89,7 @@ namespace Defend_Your_Castle
 
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");
-            EnemySpear = LoadGraphic(Content, "Enemy Spear");
+            EnemySpear = LoadGraphic(Content, "Enemy Spear (Complete)");
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
             SpearGoblinSheet = LoadGraphic(Content, "Spear Goblin Sheet");

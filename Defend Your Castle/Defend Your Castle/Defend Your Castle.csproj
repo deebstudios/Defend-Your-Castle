@@ -189,6 +189,7 @@
     <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\CastleIconBigger.png" />
     <Content Include="Content\Graphics\cursor.png" />
+    <Content Include="Content\Graphics\Enemy Spear %28Complete%29.png" />
     <Content Include="Content\Graphics\Enemy Spear.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet.png" />
