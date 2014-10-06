@@ -190,7 +190,6 @@
     <Content Include="Content\Graphics\CastleIconBigger.png" />
     <Content Include="Content\Graphics\cursor.png" />
     <Content Include="Content\Graphics\Enemy Spear %28Complete%29.png" />
-    <Content Include="Content\Graphics\Enemy Spear.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet.png" />
     <Content Include="Content\Graphics\Goblin Sheet.png" />
@@ -198,6 +197,7 @@
     <Content Include="Content\Graphics\GoblinInvincible Sheet.png" />
     <Content Include="Content\Graphics\Gold Coin Effect.png" />
     <Content Include="Content\Graphics\Gold Coin.png" />
+    <Content Include="Content\Graphics\HUD - Final Mockup.png" />
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
@@ -243,6 +243,7 @@
     <Content Include="Content\X Character.png" />
     <Content Include="Content\Y Character.png" />
     <Content Include="Content\Z Character.png" />
+    <None Include="Content\Graphics\Level Background.ai" />
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
