@@ -269,16 +269,16 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
                              Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Sword.png" Width="16" Height="16" />
+                    <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
                              Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="16" Height="16"/>
+                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Spear.png" Width="16" Height="16"/>
+                    <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
                 </RadioButton>
             </StackPanel>
 
@@ -377,7 +377,7 @@
             <Storyboard x:Name="LevelEnd_Anim" x:FieldModifier="public">
                 <!-- Player Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_Kills" Storyboard.TargetProperty="Opacity" 
-                                 BeginTime="0:0:0" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:0.5" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Helper Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_HelperKills" Storyboard.TargetProperty="Opacity"
@@ -385,23 +385,23 @@
 
                 <!-- Total Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_TotalKills" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:2" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:1.5" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Accuracy Rate -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_AccuracyRate" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:3" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:2" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Gold Earned -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_GoldEarned" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:4" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:2.5" From="0" To="1" Duration="0:0:0" />
                 
                 <!-- Next Button -->
                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="IsEnabled"
-                                 BeginTime="0:0:5">
+                                 BeginTime="0:0:3">
                     <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
                 </ObjectAnimationUsingKeyFrames>
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:5" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:3" From="0" To="1" Duration="0:0:0" />
             </Storyboard>
         </Grid.Resources>
     </Grid>
