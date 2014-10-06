@@ -104,6 +104,15 @@ namespace Defend_Your_Castle
             
             // Show the shop
             Shop.Visibility = Visibility.Visible;
+
+            // Reset the animation
+
+            // Set the opacity of all the level stats and the "Next" button to 0
+            LevelEnd_Kills.Opacity = LevelEnd_HelperKills.Opacity = LevelEnd_TotalKills.Opacity = LevelEnd_AccuracyRate.Opacity =
+            LevelEnd_GoldEarned.Opacity = LevelEnd_Next.Opacity = 0;
+
+            // Disable the "Next" button again
+            LevelEnd_Next.IsEnabled = false;
         }
 
         private void StartNextLevel(object sender, RoutedEventArgs e)

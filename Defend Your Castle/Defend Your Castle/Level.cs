@@ -191,6 +191,9 @@ namespace Defend_Your_Castle
             player.GetGamePage.LevelEnd_AccuracyRate.Text = "Accuracy Rate: " + PlayerAccuracyRate + "%";
             player.GetGamePage.LevelEnd_GoldEarned.Text = "Gold Earned: " + GoldEarned;
 
+            // Begin the animation to display the level stats
+            player.GetGamePage.LevelEnd_Anim.Begin();
+            
             // Set the game state to Shop
             Game.ChangeGameState(GameState.Shop);
         }
