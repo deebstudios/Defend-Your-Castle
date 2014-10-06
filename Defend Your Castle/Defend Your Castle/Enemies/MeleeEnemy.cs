@@ -26,9 +26,9 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Attack now
-                //Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 300, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 300));
+                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 300), new AnimFrame(new Rectangle(20, 36, 17, 35), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(42, 38, 17, 33), 300, new Vector2(0, -2)));
 
-                CurAction = new MeleeAttack(this, /*AttackAnim*/Animation, 50, 600, 300);
+                CurAction = new MeleeAttack(this, AttackAnim, 50, 600, 300);
             }
         }
     }
