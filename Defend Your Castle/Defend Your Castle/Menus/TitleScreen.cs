@@ -8,6 +8,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Defend_Your_Castle
 {
@@ -15,10 +16,34 @@ namespace Defend_Your_Castle
     {
         public TitleScreen(GamePage page, Game1 game) : base(page, game)
         {
+            Grid RootGrid = new Grid();
+
+            RowDefinition row = new RowDefinition();
+            RowDefinition row2 = new RowDefinition();
+            
+            row.Height = new GridLength(1, GridUnitType.Star);
+            row2.Height = new GridLength(1, GridUnitType.Auto);
+
+            RootGrid.RowDefinitions.Add(row);
+            RootGrid.RowDefinitions.Add(row2);
+
             // Create the Buttons for the Title screen
             Button StartGame = CreateButton("Start Game", 250);
             Button ContinueGame = CreateButton("Continue Game", 250);
             Button Options = CreateButton("Options", 250);
+
+            StartGame.HorizontalAlignment = HorizontalAlignment.Center;
+            ContinueGame.HorizontalAlignment = HorizontalAlignment.Center;
+            Options.HorizontalAlignment = HorizontalAlignment.Center;
+
+            Image Logo = new Image();
+            Logo.Source = new BitmapImage(new Uri("ms-appx:/Content/Graphics/DefendYourFortLogo.png"));
+          
+            Logo.HorizontalAlignment = HorizontalAlignment.Center;
+            Logo.VerticalAlignment = VerticalAlignment.Top;
+
+            // Add a margin to the logo to make it smaller
+            Logo.Margin = new Thickness(50);
 
             // Add additional spacing between all of the Buttons
             ContinueGame.Margin = new Thickness(0, 20, 0, 20);
@@ -28,9 +53,19 @@ namespace Defend_Your_Castle
 
             // Create a vertical menu containing all of the Buttons
             StackPanel VerticalMenu = CreateVerticalMenu(StartGame, ContinueGame, Options);
+
+            VerticalMenu.Margin = new Thickness(0, 30, 0, 100);
+
+            VerticalMenu.SetValue(Grid.RowProperty, 1);
+
+            RootGrid.Children.Add(Logo);
+            RootGrid.Children.Add(VerticalMenu);
             
+
             // Add the vertical menu to the controls on the screen
-            Controls.Add(VerticalMenu);
+            Controls.Add(RootGrid);
+            //Controls.Add(Logo);
+            //Controls.Add(VerticalMenu);
 
             // Add each of the Buttons as a menu option so they can be selected
             AddMenuOption(StartGame);
