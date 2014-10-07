@@ -92,6 +92,16 @@ namespace Defend_Your_Castle
             get { return (Loops != InfiniteLoops && CurLoops >= Loops); }
         }
 
+        //Gets the color of the fade added or subtracted to the fade value
+        public Color GetColorPlusFade(bool add)
+        {
+            int fadeval = CurFade;
+
+            if (add == false) fadeval = -fadeval;
+
+            return new Color(FadeColor.R + fadeval, FadeColor.G + fadeval, FadeColor.B + fadeval);
+        }
+
         public void FlipFade()
         {
             FadeAmount = -FadeAmount;

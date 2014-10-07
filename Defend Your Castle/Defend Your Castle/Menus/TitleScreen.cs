@@ -20,9 +20,9 @@ namespace Defend_Your_Castle
 
             RowDefinition row = new RowDefinition();
             RowDefinition row2 = new RowDefinition();
-            
+
             row.Height = new GridLength(1, GridUnitType.Star);
-            row2.Height = new GridLength(1, GridUnitType.Auto);
+            row2.Height = new GridLength(0.6, GridUnitType.Star);
 
             RootGrid.RowDefinitions.Add(row);
             RootGrid.RowDefinitions.Add(row2);
@@ -38,7 +38,7 @@ namespace Defend_Your_Castle
 
             Image Logo = new Image();
             Logo.Source = new BitmapImage(new Uri("ms-appx:/Content/Graphics/DefendYourFortLogo.png"));
-          
+
             Logo.HorizontalAlignment = HorizontalAlignment.Center;
             Logo.VerticalAlignment = VerticalAlignment.Top;
 
@@ -56,11 +56,15 @@ namespace Defend_Your_Castle
 
             VerticalMenu.Margin = new Thickness(0, 30, 0, 100);
 
-            VerticalMenu.SetValue(Grid.RowProperty, 1);
+            //VerticalMenu.SetValue(Grid.RowProperty, 1);
+
+            Viewbox box = new Viewbox();
+
+            box.Child = VerticalMenu;
+            box.SetValue(Grid.RowProperty, 1);
 
             RootGrid.Children.Add(Logo);
-            RootGrid.Children.Add(VerticalMenu);
-            
+            RootGrid.Children.Add(box);
 
             // Add the vertical menu to the controls on the screen
             Controls.Add(RootGrid);
