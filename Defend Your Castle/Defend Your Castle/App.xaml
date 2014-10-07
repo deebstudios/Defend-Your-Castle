@@ -440,10 +440,10 @@
                                         <VisualState x:Name="PointerFocused" />
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-                                
+
+                                <!-- BELOW: Removed Margin="3" -->
                                 <Border x:Name="Border" Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                        Margin="3">
+                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                     <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"
                                                       ContentTransitions="{TemplateBinding ContentTransitions}"
                                                       ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -1050,6 +1050,25 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+            
+            <!-- GridView Style
+                 Default GridView style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709916.aspx -->
+            <Style x:Key="GridViewStyle" TargetType="GridView">
+                <Setter Property="SelectionMode" Value="None"/>
+                <Setter Property="CanDragItems" Value="False"/>
+                <Setter Property="CanReorderItems" Value="False"/>
+                <Setter Property="IsSwipeEnabled" Value="False"/>
+                <Setter Property="IsItemClickEnabled" Value="False"/>
+                <Setter Property="IsHoldingEnabled" Value="False"/>
+                <Setter Property="IsRightTapEnabled" Value="False"/>
+                <Setter Property="IsDoubleTapEnabled" Value="False"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+                <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+                <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+                <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource GridViewItemStyle}"/>
             </Style>
 
             <!-- Background Image -->
