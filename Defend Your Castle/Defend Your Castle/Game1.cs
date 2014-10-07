@@ -271,11 +271,11 @@ namespace Defend_Your_Castle
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
 
+            // Force the HUD Canvas to render itself and its child elements
+            //GamePage.GameHUD.UpdateLayout();
+
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
-
-            // Force the HUD Canvas to render itself and its child elements
-            GamePage.GameHUD.UpdateLayout();
         }
 
         public void PauseGame()
@@ -315,7 +315,7 @@ namespace Defend_Your_Castle
         protected override void Update(GameTime gameTime)
         {
             //Update active time if the game is not paused
-            if (GameState != GameState.Paused) activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (GameState == GameState.InGame) activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // Check which game state the player is in
             switch (GameState)

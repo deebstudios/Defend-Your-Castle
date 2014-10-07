@@ -16,10 +16,14 @@ namespace Defend_Your_Castle
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
-        private const float FadeRate = 255f;
+        private const float FadeRate = 235f;
         private const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
+
+        //Starting Y positions of the sun and moon, respectively
+        private const float SunY = 50f;
+        private const float MoonY = 305f;
 
         // Stores the level number of the level
         private int LevelNum;
@@ -82,12 +86,12 @@ namespace Defend_Your_Castle
 
             Enemies = new List<LevelObject>();
 
+            // Set the level number to 1 (for testing)
+            LevelNum = 1;
+
             //Start out at day
             StartDayNight(true);
             CreateNightFade();
-
-            // Set the level number to 1 (for testing)
-            LevelNum = 1;
 
             // Set the starting gold to the player's gold amount
             StartingGold = player.Gold;
@@ -117,15 +121,15 @@ namespace Defend_Your_Castle
             //Get how long to wait each fade for the level
             float leveltime = LevelDuration / FadeRate;
 
-            //Starts at 255 (white) and goes down to a value closer to black (darken the sky)
-            //We can reverse it and make the level start at night by simply reversing the -1
-            NightFade = new FadeOnce(Color.White, NightFactor, 0, 255, leveltime);
+            //Starts sky blue and goes down to a value closer to purple (darken the sky)
+            //We can reverse it and make the level start at night by simply reversing the value of NightFactor
+            NightFade = new FadeOnce(Color.LightSkyBlue, NightFactor, 0, (int)FadeRate, leveltime);
         }
 
         //Choose whether to start the level in the day or at night
         private void StartDayNight(bool day)
         {
-            NightFactor = (day == true ? -1 : 1);
+            NightFactor = (day == true ? 1 : -1);
         }
 
         public void StartNextLevel()
@@ -142,15 +146,15 @@ namespace Defend_Your_Castle
             // Set the level end time
             LevelEndTime = Game1.ActiveTime + LevelDuration;
 
-            // Set the game state to InGame
-            Game.ChangeGameState(GameState.InGame);
-
             // Reset the tracked information
             ResetTrackedInfo();
 
             // Update the player's HP and Gold on the UI
             player.UpdateHealth();
             player.UpdateGoldAmount();
+
+            // Set the game state to InGame
+            Game.ChangeGameState(GameState.InGame);
         }
         
         // Resets the information that is tracked during the level
@@ -289,9 +293,9 @@ namespace Defend_Your_Castle
         public void Draw(SpriteBatch spriteBatch)
         {
             //Draw the background
-            spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, new Color(NightFade.GetCurFade, NightFade.GetCurFade, NightFade.GetCurFade), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
-            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 75, 305 - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
-            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 77, 50 + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, NightFade.GetColorPlusFade(false), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
+            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 75, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 77, (MoonY - (MoonY - FadeRate)) - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
             DrawEnemies(spriteBatch);
 

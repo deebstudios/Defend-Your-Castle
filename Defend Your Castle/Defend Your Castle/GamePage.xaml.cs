@@ -105,7 +105,7 @@ namespace Defend_Your_Castle
             // Show the shop
             Shop.Visibility = Visibility.Visible;
 
-            // Reset the animation
+            // Reset the effects of the Level End animation
 
             // Set the opacity of all the level stats and the "Next" button to 0
             LevelEnd_Kills.Opacity = LevelEnd_HelperKills.Opacity = LevelEnd_TotalKills.Opacity = LevelEnd_AccuracyRate.Opacity =
