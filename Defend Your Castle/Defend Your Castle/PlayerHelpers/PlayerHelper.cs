@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Defend_Your_Castle
 {
@@ -30,6 +31,9 @@ namespace Defend_Your_Castle
             get { return HelperLevel; }
         }
         
+        //Sets the position of the helper
+        public abstract void SetPosition(Level level);
+
         //Increase the level and stats of the helper
         public void IncreaseLevel()
         {

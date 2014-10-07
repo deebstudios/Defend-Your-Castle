@@ -182,6 +182,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Content\G Character.png" />
+    <Content Include="Content\Graphics\Archer.png" />
     <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />

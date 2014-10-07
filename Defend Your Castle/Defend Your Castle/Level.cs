@@ -209,9 +209,10 @@ namespace Defend_Your_Castle
         }
 
         //Adds a player-helping object to the player
-        public void AddPlayerHelper(LevelObject helper)
+        public void AddPlayerHelper(PlayerHelper helper)
         {
             player.AddChild(helper);
+            helper.SetPosition(this);
         }
 
         //Adds a player-harming object to the level; these objects always have no parents and are added here if removed from their parents

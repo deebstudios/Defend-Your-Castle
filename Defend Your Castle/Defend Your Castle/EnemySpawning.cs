@@ -133,12 +133,12 @@ namespace Defend_Your_Castle
 
             switch (EnemyIndex)
             {
-                case 1: // Spear Enemy
-                    return (new SpearEnemy(level));
-                case 2: //Armored enemy
-                    return (new ArmoredEnemy(level));
-                case 3: //Flying enemy
-                    return (new FlyingEnemy(level));
+                //case 1: // Spear Enemy
+                //    return (new SpearEnemy(level));
+                //case 2: //Armored enemy
+                //    return (new ArmoredEnemy(level));
+                //case 3: //Flying enemy
+                //    return (new FlyingEnemy(level));
                 case 0: // Melee Enemy
                 default:
                     return (new MeleeEnemy(level));
