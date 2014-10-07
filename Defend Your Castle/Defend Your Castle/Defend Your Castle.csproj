@@ -199,6 +199,7 @@
     <Content Include="Content\Graphics\Gold Coin Effect.png" />
     <Content Include="Content\Graphics\Gold Coin.png" />
     <Content Include="Content\Graphics\HUD - Final Mockup.png" />
+    <Content Include="Content\Graphics\Level Background.png" />
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
@@ -244,7 +245,6 @@
     <Content Include="Content\X Character.png" />
     <Content Include="Content\Y Character.png" />
     <Content Include="Content\Z Character.png" />
-    <None Include="Content\Graphics\Level Background.ai" />
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

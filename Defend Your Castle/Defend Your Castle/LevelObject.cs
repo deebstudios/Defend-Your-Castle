@@ -177,7 +177,7 @@ namespace Defend_Your_Castle
         {
             get 
             {
-                float depth = (Position.Y / 10000f);
+                float depth = (Position.Y / 1000f);
                 if (depth <= 0) depth = .001f;
 
                 return depth;

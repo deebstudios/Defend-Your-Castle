@@ -77,6 +77,7 @@ namespace Defend_Your_Castle
         private static void LoadGraphics(ContentManager Content)
         {
             //Level graphics
+            LevelBG = LoadGraphic(Content, "Level Background");
             DaySun = LoadGraphic(Content, "Sun");
             NightMoon = LoadGraphic(Content, "Moon");
 

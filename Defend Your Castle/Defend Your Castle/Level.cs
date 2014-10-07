@@ -16,7 +16,7 @@ namespace Defend_Your_Castle
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
-        private const float FadeRate = 235f;
+        private const float FadeRate = 220f;
         private const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
@@ -292,7 +292,11 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            Vector2 BGscale = new Vector2(Game1.ScreenSize.X / LoadAssets.LevelBG.Width, Game1.ScreenSize.Y / LoadAssets.LevelBG.Height);
+            Color BGcolor = new Color(255 - NightFade.GetCurFade, 255 - NightFade.GetCurFade, 255 - NightFade.GetCurFade);
+
             //Draw the background
+            spriteBatch.Draw(LoadAssets.LevelBG, Vector2.Zero, null, BGcolor, 0f, Vector2.Zero, BGscale, SpriteEffects.None, CelestialDepth + .0001f);
             spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, NightFade.GetColorPlusFade(false), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
             spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 75, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
             spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 77, (MoonY - (MoonY - FadeRate)) - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
