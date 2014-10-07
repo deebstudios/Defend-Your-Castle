@@ -94,6 +94,12 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void AddConsumableToHUD(ShopItem consumable)
+        {
+            // Add the consumable to the consumables GridView on the HUD
+            gamePage.HUD_ConsumablesList.Items.Add(consumable);
+        }
+
 
     }
 }

@@ -22,7 +22,7 @@ namespace Defend_Your_Castle
             RowDefinition row2 = new RowDefinition();
             
             row.Height = new GridLength(1, GridUnitType.Star);
-            row2.Height = new GridLength(1, GridUnitType.Auto);
+            row2.Height = new GridLength(0.6, GridUnitType.Star);
 
             RootGrid.RowDefinitions.Add(row);
             RootGrid.RowDefinitions.Add(row2);
@@ -54,18 +54,24 @@ namespace Defend_Your_Castle
             // Create a vertical menu containing all of the Buttons
             StackPanel VerticalMenu = CreateVerticalMenu(StartGame, ContinueGame, Options);
 
+            // Set the margin
             VerticalMenu.Margin = new Thickness(0, 30, 0, 100);
 
-            VerticalMenu.SetValue(Grid.RowProperty, 1);
+            // Create a ViewBox
+            Viewbox MenuViewBox = new Viewbox();
 
+            // Add the vertical menu to the ViewBox so it scales proportionately on different screen resolutions
+            MenuViewBox.Child = VerticalMenu;
+
+            // Put the ViewBox in the second row of the Grid
+            MenuViewBox.SetValue(Grid.RowProperty, 1);
+
+            // Add the logo and the ViewBox to the screen
             RootGrid.Children.Add(Logo);
-            RootGrid.Children.Add(VerticalMenu);
-            
+            RootGrid.Children.Add(MenuViewBox);
 
-            // Add the vertical menu to the controls on the screen
+            // Add the root Grid to the controls on the screen
             Controls.Add(RootGrid);
-            //Controls.Add(Logo);
-            //Controls.Add(VerticalMenu);
 
             // Add each of the Buttons as a menu option so they can be selected
             AddMenuOption(StartGame);
