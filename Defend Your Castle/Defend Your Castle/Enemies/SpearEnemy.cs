@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //An enemy that goes up to the tower and throws spears at it
     public sealed class SpearEnemy : Enemy
     {
-        public SpearEnemy(Level level)
+        public SpearEnemy(Level level, float Y)
         {
             MoveSpeed = new Vector2(1, 0);
             Range = 150;
@@ -21,7 +21,7 @@ namespace Defend_Your_Castle
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
-            Position = new Vector2(0, 140);
+            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             SetProperties(level);
         }

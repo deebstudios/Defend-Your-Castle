@@ -21,7 +21,8 @@ namespace Defend_Your_Castle
         private Fade NightFade;
         private int NightFactor;
 
-        //Starting Y position of the sun
+        //Starting X and Y position of the sun, respectively
+        private const float SunX = 45f;
         private const float SunY = 10f;
 
         // Stores the level number of the level
@@ -252,13 +253,23 @@ namespace Defend_Your_Castle
         }
 
         //Make the player hit an enemy if it attacked
+        //NOTE: We need to change this so if more than one enemy is selected at a Y position, the one with the highest Y position is chosen
         public void EnemyHit(Rectangle rect)
         {
             // Increment the player's number of attacks by 1
             NumAttacks += 1;
 
+            //Find all the enemies we hit
+            //List<Enemy> enemies = new List<Enemy>();
+
             for (int i = 0; i < Enemies.Count; i++)
             {
+                /*if (Enemies[i].CanGetHit(rect) == true)
+                  {
+                      enemies.Add(Enemies[i]);
+                  }
+                 */
+
                 //Check for the object's weapon weakness
                 if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
                 {
@@ -270,6 +281,28 @@ namespace Defend_Your_Castle
                     break;
                 }
             }
+
+            /*Find highest Y
+              float highestY = 0;
+              int index = -1;
+              
+              for (int i = 0; i < enemies.Count; i++)
+              {
+                  if (enemies[i].GetPosition.Y > highestY)
+                  {
+                      highestY = enemies[i].GetPosition.Y;
+                      index = i;
+                  }
+              }
+              
+              if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
+              {
+                  Enemies[i].Die(this);
+              
+                  // Increment the player's kill count by 1
+                  NumPlayerKills += 1;
+              }
+             */
         }
 
         public void Update()
@@ -308,8 +341,8 @@ namespace Defend_Your_Castle
             //Draw the background
             spriteBatch.Draw(LoadAssets.LevelBG, Vector2.Zero, null, BGcolor, 0f, Vector2.Zero, BGscale, SpriteEffects.None, CelestialDepth + .0001f);
             spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, NightFade.GetColorPlusFade(false), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
-            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 55, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
-            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 57, MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + SunX, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + (SunX + 2), MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
             DrawEnemies(spriteBatch);
 
