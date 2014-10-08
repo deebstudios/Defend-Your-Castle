@@ -21,6 +21,9 @@ namespace Defend_Your_Castle
         // Reference to GamePage.xaml
         public GamePage GamePage;
 
+        //The number of frames per second the game runs
+        public const float FPS = 60f;
+
         //Time the game is active
         private static float activeTime;
 
@@ -353,7 +356,6 @@ namespace Defend_Your_Castle
             //Debug commands
             Debug.Update();
 #endif
-
             base.Update(gameTime);
         }
 

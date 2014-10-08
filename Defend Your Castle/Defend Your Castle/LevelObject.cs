@@ -147,7 +147,7 @@ namespace Defend_Your_Castle
         }
 
         //Gets the invincibility's current fade
-        public int GetInvincibilityFade
+        public float GetInvincibilityFade
         {
             get { return InvincibilityFade.GetCurFade; }
         }

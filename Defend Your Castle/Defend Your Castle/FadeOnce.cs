@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //A Fade that only fades in or out once
     public sealed class FadeOnce : Fade
     {
-        public FadeOnce(Color startingcolor, int fadeamount, int minfade, int maxfade, float fadetime) : base(startingcolor, fadeamount, minfade, maxfade, 0, fadetime)
+        public FadeOnce(Color startingcolor, float fadeamount, float minfade, float maxfade, float fadetime) : base(startingcolor, fadeamount, minfade, maxfade, 0, fadetime)
         {
 
         }
