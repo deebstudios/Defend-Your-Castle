@@ -146,7 +146,7 @@ namespace Defend_Your_Castle
             //Draw gold dropping animation
             if (FakeDead == true)
             {
-                spriteBatch.DrawString(LoadAssets.bmpFont, "+" + Gold, new Vector2(Position.X - 20, Position.Y - 10), GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, .999f);
+                spriteBatch.DrawString(LoadAssets.DYFFont, "+" + Gold, new Vector2(Position.X - 20, Position.Y - 10), GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, .999f);
                 spriteBatch.Draw(LoadAssets.GoldCoinEffect, Position, null, GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             }
 

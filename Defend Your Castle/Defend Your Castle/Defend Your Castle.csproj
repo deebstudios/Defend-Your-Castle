@@ -235,9 +235,6 @@
     <Content Include="Content\Sounds\test.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Fonts\SOR2 Bitmap Font.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\T Character.png" />
     <Content Include="Content\U Character.png" />
     <Content Include="Content\V Character.png" />
@@ -245,6 +242,9 @@
     <Content Include="Content\X Character.png" />
     <Content Include="Content\Y Character.png" />
     <Content Include="Content\Z Character.png" />
+    <Content Include="Content\Fonts\DYFFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -51,7 +51,7 @@ namespace Defend_Your_Castle
         public static Texture2D RepairWallsx10;
 
         //Fonts
-        public static SpriteFont bmpFont;
+        public static SpriteFont DYFFont;
 
         //Debug graphics
         public static Texture2D ScalableBox;
@@ -66,7 +66,7 @@ namespace Defend_Your_Castle
             LoadSounds(Content);
             LoadMusic(Content);
 
-            bmpFont = Content.Load<SpriteFont>("Fonts/SOR2 Bitmap Font");
+            DYFFont = Content.Load<SpriteFont>("Fonts/DYFFont");
         }
 
         private static Texture2D LoadGraphic(ContentManager Content, string filename)
