@@ -131,17 +131,19 @@ namespace Defend_Your_Castle
             // Get the Enemy number to spawn
             int EnemyIndex = FindEnemyNumToSpawn(RandNum);
 
+            float Y = (new Random().Next(Player.GateStart, Player.GateEnd)) + level.GetPlayer.GetPosition.Y;
+
             switch (EnemyIndex)
             {
                 case 1: // Spear Enemy
-                    return (new SpearEnemy(level));
+                    return (new SpearEnemy(level, Y));
                 case 2: //Armored enemy
-                    return (new ArmoredEnemy(level));
+                    return (new ArmoredEnemy(level, Y));
                 case 3: //Flying enemy
-                    return (new FlyingEnemy(level));
+                    return (new FlyingEnemy(level, Y));
                 case 0: // Melee Enemy
                 default:
-                    return (new MeleeEnemy(level));
+                    return (new MeleeEnemy(level, Y));
             }
         }
 

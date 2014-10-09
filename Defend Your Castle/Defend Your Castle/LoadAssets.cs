@@ -77,6 +77,7 @@ namespace Defend_Your_Castle
         private static void LoadGraphics(ContentManager Content)
         {
             //Level graphics
+            LevelBG = LoadGraphic(Content, "Level Background");
             DaySun = LoadGraphic(Content, "Sun");
             NightMoon = LoadGraphic(Content, "Moon");
 
@@ -85,7 +86,7 @@ namespace Defend_Your_Castle
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
-            PlayerArcher = LoadGraphic(Content, "ArcherSheet");
+            PlayerArcher = LoadGraphic(Content, "Archer");
 
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");

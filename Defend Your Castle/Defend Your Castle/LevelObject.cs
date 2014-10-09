@@ -147,7 +147,7 @@ namespace Defend_Your_Castle
         }
 
         //Gets the invincibility's current fade
-        public int GetInvincibilityFade
+        public float GetInvincibilityFade
         {
             get { return InvincibilityFade.GetCurFade; }
         }
@@ -177,7 +177,7 @@ namespace Defend_Your_Castle
         {
             get 
             {
-                float depth = (Position.Y / 10000f);
+                float depth = (Position.Y / 1000f);
                 if (depth <= 0) depth = .001f;
 
                 return depth;
@@ -297,7 +297,7 @@ namespace Defend_Your_Castle
         //Checks if the object can get hit
         public virtual bool CanGetHit(Rectangle rect)
         {
-            return (hurtbox == null || (hurtbox.CanBeHit(rect) == true && IsInvincible == false));
+            return (hurtbox == null || (hurtbox.CanBeHit(rect) == true && IsInvincible == false && IsDying == false && IsDead == false));
         }
 
         //Uses invincibility

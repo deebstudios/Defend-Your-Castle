@@ -17,13 +17,13 @@ namespace Defend_Your_Castle
         protected Color FadeColor;
 
         //The amount to fade and the min and max fade amounts
-        protected int FadeAmount;
-        protected int CurFade;
-        protected int MinFadeAmount;
-        protected int MaxFadeAmount;
+        protected float FadeAmount;
+        protected float CurFade;
+        protected float MinFadeAmount;
+        protected float MaxFadeAmount;
 
         //Start value for tracking loops
-        protected int StartFade;
+        protected float StartFade;
 
         //The number of times the fade loops
         protected int Loops;
@@ -33,7 +33,7 @@ namespace Defend_Your_Castle
         protected float FadeTime;
         protected float PrevFade;
 
-        public Fade(Color startingcolor, int fadeamount, int minfade, int maxfade, int loops, float fadetime)
+        public Fade(Color startingcolor, float fadeamount, float minfade, float maxfade, int loops, float fadetime)
         {
             FadeColor = startingcolor;
 
@@ -69,7 +69,7 @@ namespace Defend_Your_Castle
             get { return (FadeAmount < 0); }
         }
 
-        public int GetCurFade
+        public float GetCurFade
         {
             get { return CurFade; }
         }
@@ -95,11 +95,11 @@ namespace Defend_Your_Castle
         //Gets the color of the fade added or subtracted to the fade value
         public Color GetColorPlusFade(bool add)
         {
-            int fadeval = CurFade;
+            float fadeval = CurFade;
 
             if (add == false) fadeval = -fadeval;
 
-            return new Color(FadeColor.R + fadeval, FadeColor.G + fadeval, FadeColor.B + fadeval);
+            return new Color(FadeColor.R + (int)fadeval, FadeColor.G + (int)fadeval, FadeColor.B + (int)fadeval);
         }
 
         public void FlipFade()

@@ -10,12 +10,14 @@ namespace Defend_Your_Castle
     //An enemy that attacks with Melee
     public sealed class FlyingEnemy : Enemy
     {
-        public FlyingEnemy(Level level)
+        public FlyingEnemy(Level level, float Y)
         {
             ObjectSheet = LoadAssets.FlyingGoblinSheet;
             InvincibleSheet = LoadAssets.FlyingGoblinInvincibleSheet;
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
+
+            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Spear;
 
@@ -26,8 +28,10 @@ namespace Defend_Your_Castle
         {
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
+                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(3, 39, 31, 29), 300), new AnimFrame(new Rectangle(39, 39, 29, 29), 300), new AnimFrame(new Rectangle(75, 40, 32, 28), 300, new Vector2(0, -1)));
+
                 //Attack now
-                CurAction = new MeleeAttack(this, /*AttackAnim*/Animation, 50, 600, 300);
+                CurAction = new MeleeAttack(this, AttackAnim, 50, 600, 300);
             }
         }
     }

@@ -62,8 +62,6 @@ namespace Defend_Your_Castle
 
             // Add the vertical menu to the ViewBox so it scales proportionately on different screen resolutions
             MenuViewBox.Child = VerticalMenu;
-            box.Child = VerticalMenu;
-            box.SetValue(Grid.RowProperty, 1);
 
             // Put the ViewBox in the second row of the Grid
             MenuViewBox.SetValue(Grid.RowProperty, 1);

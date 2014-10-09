@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -125,13 +126,16 @@ namespace Defend_Your_Castle
             return (Application.Current.Resources[StyleName] as Style);
         }
 
-        protected TextBlock CreateLabel(String Text)
+        protected TextBlock CreateLabel(String Text, bool ShouldBold = false)
         {
             // Create a new TextBlock
             TextBlock txtBlock = new TextBlock();
 
             // Set the TextBlock's Style
             txtBlock.Style = GetStyle("TextBlockStyle");
+
+            // Bold the text if the TextBlock was specified to have bold text
+            if (ShouldBold == true) txtBlock.FontWeight = FontWeights.Bold;
 
             // Set the TextBlock's Text
             txtBlock.Text = Text;

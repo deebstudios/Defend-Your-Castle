@@ -10,11 +10,13 @@ namespace Defend_Your_Castle
     //An enemy that goes up to the castle and attacks
     public sealed class MeleeEnemy : Enemy
     {
-        public MeleeEnemy(Level level)
+        public MeleeEnemy(Level level, float Y)
         {
             ObjectSheet = LoadAssets.GoblinSheet;
             InvincibleSheet = LoadAssets.GoblinInvincibleSheet;
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));
+
+            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 

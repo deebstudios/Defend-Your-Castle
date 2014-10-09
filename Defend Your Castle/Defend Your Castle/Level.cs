@@ -16,14 +16,14 @@ namespace Defend_Your_Castle
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
-        private const float FadeRate = 235f;
+        private const float FadeRate = 220f;
         private const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
 
-        //Starting Y positions of the sun and moon, respectively
-        private const float SunY = 50f;
-        private const float MoonY = 305f;
+        //Starting X and Y position of the sun, respectively
+        private const float SunX = 45f;
+        private const float SunY = 10f;
 
         // Stores the level number of the level
         private int LevelNum;
@@ -53,6 +53,12 @@ namespace Defend_Your_Castle
 
         // Stores the number of enemies the player's helpers have killed
         public int NumHelperKills;
+
+        //The starting Y position of the moon
+        private float MoonY
+        {
+            get { return (SunY + FadeRate); }
+        }
 
         // Returns the number of total kills the player earned in the round
         private int NumTotalKills
@@ -91,7 +97,7 @@ namespace Defend_Your_Castle
 
             //Start out at day
             StartDayNight(true);
-            CreateNightFade();
+            CreateNightFade(true);
 
             // Set the starting gold to the player's gold amount
             StartingGold = player.Gold;
@@ -116,14 +122,18 @@ namespace Defend_Your_Castle
         }
 
         //Creates the night fade based on how long the level lasts
-        private void CreateNightFade()
+        private void CreateNightFade(bool day)
         {
-            //Get how long to wait each fade for the level
-            float leveltime = LevelDuration / FadeRate;
+            //Get how long the level lasts in frames each fade for the level
+            int numframes = (int)(LevelDuration / 16.666f);
+            float amount = (float)(FadeRate / numframes);
+
+            //Start at night
+            if (day == false) amount = -amount;
 
             //Starts sky blue and goes down to a value closer to purple (darken the sky)
             //We can reverse it and make the level start at night by simply reversing the value of NightFactor
-            NightFade = new FadeOnce(Color.LightSkyBlue, NightFactor, 0, (int)FadeRate, leveltime);
+            NightFade = new FadeOnce(Color.LightSkyBlue, amount, 0, FadeRate, 0f);
         }
 
         //Choose whether to start the level in the day or at night
@@ -138,7 +148,7 @@ namespace Defend_Your_Castle
             LevelNum += 1;
 
             //Refresh the night fade
-            CreateNightFade();
+            CreateNightFade(true);
 
             // Check if a new enemy can be added to the spawn list, and add the enemy if so
             EnemySpawn.CheckAddSpawnEnemy();
@@ -209,9 +219,10 @@ namespace Defend_Your_Castle
         }
 
         //Adds a player-helping object to the player
-        public void AddPlayerHelper(LevelObject helper)
+        public void AddPlayerHelper(PlayerHelper helper)
         {
             player.AddChild(helper);
+            helper.SetPosition();
         }
 
         //Adds a player-harming object to the level; these objects always have no parents and are added here if removed from their parents
@@ -242,24 +253,54 @@ namespace Defend_Your_Castle
         }
 
         //Make the player hit an enemy if it attacked
+        //NOTE: We need to change this so if more than one enemy is selected at a Y position, the one with the highest Y position is chosen
         public void EnemyHit(Rectangle rect)
         {
             // Increment the player's number of attacks by 1
             NumAttacks += 1;
 
+            //Find all the enemies we hit
+            List<LevelObject> enemies = new List<LevelObject>();
+
             for (int i = 0; i < Enemies.Count; i++)
             {
-                //Check for the object's weapon weakness
-                if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
+                if (Enemies[i].CanGetHit(rect) == true)
                 {
-                    Enemies[i].Die(this);
-
-                    // Increment the player's kill count by 1
-                    NumPlayerKills += 1;
-
-                    break;
+                    enemies.Add(Enemies[i]);
                 }
+
+                //Check for the object's weapon weakness
+                //if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
+                //{
+                //    Enemies[i].Die(this);
+                //
+                //    // Increment the player's kill count by 1
+                //    NumPlayerKills += 1;
+                //
+                //    break;
+                //}
             }
+
+              //Find highest Y
+              float highestY = 0;
+              int index = -1;
+              
+              for (int i = 0; i < enemies.Count; i++)
+              {
+                  if (enemies[i].GetPosition.Y > highestY)
+                  {
+                      highestY = enemies[i].GetPosition.Y;
+                      index = i;
+                  }
+              }
+              
+              if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
+              {
+                  enemies[index].Die(this);
+              
+                  // Increment the player's kill count by 1
+                  NumPlayerKills += 1;
+              }
         }
 
         public void Update()
@@ -292,10 +333,14 @@ namespace Defend_Your_Castle
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            Vector2 BGscale = new Vector2(Game1.ScreenSize.X / LoadAssets.LevelBG.Width, Game1.ScreenSize.Y / LoadAssets.LevelBG.Height);
+            Color BGcolor = new Color(255 - (int)NightFade.GetCurFade, 255 - (int)NightFade.GetCurFade, 255 - (int)NightFade.GetCurFade);
+
             //Draw the background
+            spriteBatch.Draw(LoadAssets.LevelBG, Vector2.Zero, null, BGcolor, 0f, Vector2.Zero, BGscale, SpriteEffects.None, CelestialDepth + .0001f);
             spriteBatch.Draw(LoadAssets.ScalableBox, Vector2.Zero, null, NightFade.GetColorPlusFade(false), 0f, Vector2.Zero, new Vector2(Game1.ScreenSize.X, Game1.ScreenSize.Y), SpriteEffects.None, 0f);
-            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + 75, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
-            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + 77, (MoonY - (MoonY - FadeRate)) - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + SunX, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
+            spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + (SunX + 2), MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
             DrawEnemies(spriteBatch);
 

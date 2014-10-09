@@ -58,7 +58,7 @@ namespace Defend_Your_Castle
             SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y, new Vector2(10));
 
             //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, ((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
+            CurAction = new MoveForward(this, Animation, StopAtCastle(level.GetPlayer.GetPosition));//((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
         }
 
         //Gets the movespeed of the enemy
@@ -75,17 +75,46 @@ namespace Defend_Your_Castle
 
         public override bool IsDying
         {
-            get { return FakeDead; }
+            get { return (FakeDead == true); }
+        }
+
+        //Gets the fade color of the GoldDrop animation
+        public Color GetGoldDropColor
+        {
+            get 
+            {
+                if (GoldDrop != null) return GoldDrop.GetFadeColor;
+                else return Color.White;
+            }
+        }
+
+        //Gets the X position to stop the enemy in front of the player's castle, taking the Y position into account
+        //Higher Y positions move slightly further to the right
+        public int StopAtCastle(Vector2 playerpos)
+        {
+            //The base position to stop; 13 is the amount of X space between the player position and the entrance to the gate
+            int stop = (int)playerpos.X - (int)Animation.CurrentAnimFrame.FrameSize.X - Range + 13;// +(int)Animation.CurrentAnimFrame.FrameSize.X;
+
+            //Based on the Y position of the enemy, add more to the X stop position
+            int playerentrance = (int)(Position.Y - playerpos.Y + Animation.CurrentAnimFrame.FrameSize.Y);
+
+            stop += (playerentrance - Player.GateStart);
+
+            return stop;
         }
 
         //Checks if the enemy can get hit
-        public override bool CanGetHit(Rectangle rect)
-        {
-            return (base.CanGetHit(rect) == true && FakeDead == false);
-        }
+        //public override bool CanGetHit(Rectangle rect)
+        //{
+        //    return (base.CanGetHit(rect) == true && FakeDead == false);
+        //}
 
         public override void Die(Level level)
         {
+            //Find out the total amount of gold to give. If the player is using a suboptimal weapon (Ex. Warhammer instead of Sword), cut gold by 1/3
+            if (WeaponWeakness == (int)Player.WeaponTypes.Sword && level.GetPlayer.CurWeapon != WeaponWeakness)
+                Gold = (int)(Gold * (float)(2/3f));
+
             level.GetPlayer.ReceiveGold(Gold);
             FakeDead = true;
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
@@ -113,9 +142,9 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (FakeDead == false) CurAction.Draw(spriteBatch, ObjectSheet);
+            CurAction.Draw(spriteBatch, ObjectSheet);
             //Draw gold dropping animation
-            else
+            if (FakeDead == true)
             {
                 spriteBatch.DrawString(LoadAssets.bmpFont, "+" + Gold, new Vector2(Position.X - 20, Position.Y - 10), GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, .999f);
                 spriteBatch.Draw(LoadAssets.GoldCoinEffect, Position, null, GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);

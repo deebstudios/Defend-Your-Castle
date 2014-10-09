@@ -23,6 +23,11 @@ namespace Defend_Your_Castle
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
         private const int HUDYBounds = 75;
 
+        //The start and end of the castle entrance, respectively
+        //They must be added to the player's Y position to get the true positions
+        public const int GateStart = 197;
+        public const int GateEnd = 225;
+
         //Sees whether the player has an invincibility powerup or not
         protected bool InvincibilityAvailable;
 
@@ -282,7 +287,10 @@ namespace Defend_Your_Castle
             //Use the helper data to add the helpers to the player
             for (int i = 0; i < playerData.Helpers.Count; i++)
             {
-                AddChild(playerData.Helpers[i].CreateHelper());
+                PlayerHelper helper = playerData.Helpers[i].CreateHelper();
+
+                AddChild(helper);
+                helper.SetPosition();
             }
         }
 

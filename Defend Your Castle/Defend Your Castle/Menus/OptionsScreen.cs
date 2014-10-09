@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Windows.UI;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace Defend_Your_Castle
 {
@@ -15,50 +17,80 @@ namespace Defend_Your_Castle
     {
         public OptionsScreen(GamePage page, Game1 game) : base(page, game)
         {
+            // Create a Grid to hold all of the content on the screen
             Grid RootGrid = new Grid();
 
+            // Create two rows for the Grid
             RowDefinition row = new RowDefinition();
             RowDefinition row2 = new RowDefinition();
 
+            // Set the Height property of each row
             row.Height = new GridLength(0.1, GridUnitType.Star);
             row2.Height = new GridLength(1, GridUnitType.Star);
-
+            
+            // Add the rows to the Grid
             RootGrid.RowDefinitions.Add(row);
             RootGrid.RowDefinitions.Add(row2);
 
-            // Create a background image for the screen
+            // Background Image
+
+            // Create a background image for the screen and set it to span across both rows of the root Grid
             Image BackgroundImage = CreateBackgroundImage("OptionsScreenBackground.png");
             BackgroundImage.SetValue(Grid.RowSpanProperty, 2);
 
+            // Screen Title
+
+            // Create a new ViewBox for the screen title TextBlock
             Viewbox TitleBox = new Viewbox();
 
-            // Create the screen title
-            TextBlock ScreenTitle = CreateLabel("Options");
-
-            TitleBox.Child = ScreenTitle;
-
+            // Set the Horizontal and Vertical alignment of the ViewBox
             TitleBox.HorizontalAlignment = HorizontalAlignment.Center;
             TitleBox.VerticalAlignment = VerticalAlignment.Top;
-            TitleBox.Margin = new Thickness(0, 0, 0, 0);
 
-            // Create the "Music Volume" label, and add spacing to it
-            TextBlock MusicVol = CreateLabel("Music Volume: ");
+            // Create the screen title
+            TextBlock ScreenTitle = CreateLabel("Options", true);
+
+            // Add the title screen TextBlock to its ViewBox
+            TitleBox.Child = ScreenTitle;
+
+            // Volume Controls
+
+            // Create the "Music Volume" TextBlock
+            TextBlock MusicVol = CreateLabel("Music Volume: ", true);
+
+            // Add right spacing to the TextBlock
             MusicVol.Margin = new Thickness(0, 0, 20, 0);
+
+            // Vertically center the TextBlock
+            MusicVol.VerticalAlignment = VerticalAlignment.Center;
 
             // Create the Music volume ComboBox
             ComboBox MusicVolumes = CreateDropdown();
 
-            // Create the "Sound Volume" label, and add spacing to it
-            TextBlock SoundVol = CreateLabel("Sound Volume: ");
+            // Create the "Sound Volume" TextBlock
+            TextBlock SoundVol = CreateLabel("Sound Volume: ", true);
+
+            // Add right spacing to the TextBlock
             SoundVol.Margin = new Thickness(0, 0, 20, 0);
+
+            // Vertically center the TextBlock
+            SoundVol.VerticalAlignment = VerticalAlignment.Center;
 
             // Create the Sound volume ComboBox
             ComboBox SoundVolumes = CreateDropdown();
 
-            // Create the Back button
-            Button Back = CreateButton("Back", 250);
+            // Back Button
 
+            // Create the Back button
+            Button Back = CreateButton("Back");
+
+            // Add top spacing to the TextBlock
             Back.Margin = new Thickness(0, 30, 0, 0);
+
+            // Stretch the Back Button horizontally
+            Back.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+            // Volume Controls (Continued)
 
             // Set the SelectedIndex of MusicVolumes and SoundVolumes to the current volume
             MusicVolumes.SelectedIndex = (int)Math.Round((SoundManager.MusicVolume * 10));
@@ -68,48 +100,85 @@ namespace Defend_Your_Castle
             MusicVolumes.SelectionChanged += MusicVolumes_SelectionChanged;
             SoundVolumes.SelectionChanged += SoundVolumes_SelectionChanged;
 
-            // Put the Music volume controls in a horizontal menu
+            // Put the Music volume controls in a horizontal menu, and vertically center this menu
             StackPanel MusicMenu = CreateHorizontalMenu(MusicVol, MusicVolumes);
+            MusicMenu.VerticalAlignment = VerticalAlignment.Center;
 
-            // Put the Sound volume controls in a horizontal menu, and add spacing to this menu
+            // Put the Sound volume controls in a horizontal menu, and add spacing and vertically center this menu
             StackPanel SoundMenu = CreateHorizontalMenu(SoundVol, SoundVolumes);
-            SoundMenu.Margin = new Thickness(0, 20, 0, 20);
+            SoundMenu.Margin = new Thickness(20, 20, 20, 0);
+            SoundMenu.VerticalAlignment = VerticalAlignment.Center;
 
-            // Put all of the horizontal menus and the Back button in a vertical menu
-            StackPanel VerticalMenu = CreateVerticalMenu(MusicMenu, SoundMenu, Back);
+            // Create a vertical menu to stack both horizontal menus
+            StackPanel VolumeVerticalMenu = CreateVerticalMenu(MusicMenu, SoundMenu);
 
-            // Create a ViewBox
+            // Border for Volume Controls
+
+            // Create a Border to hold the vertical menu
+            Border TheBorder = new Border();
+
+            // Set the properties of the Border
+            TheBorder.Background = (Application.Current.Resources["GameButtonBackgroundColor"] as SolidColorBrush);
+            TheBorder.BorderBrush = new SolidColorBrush(Colors.Black);
+            TheBorder.BorderThickness = new Thickness(2);
+            TheBorder.Padding = new Thickness(0, 20, 0, 20);
+
+            // Add the volume vertical menu to the Border
+            TheBorder.Child = VolumeVerticalMenu;
+
+            // Vertical Menu for the Border and Back Button
+
+            // Put the Border and the Back button in a vertical menu
+            StackPanel VerticalMenu = CreateVerticalMenu(TheBorder, Back);
+
+            // ViewBox for the Vertical Menu
+
+            // Create a ViewBox for the rest of the screen
             Viewbox MenuViewBox = new Viewbox();
 
             // Add the vertical menu to the ViewBox so it scales proportionately on different screen resolutions
             MenuViewBox.Child = VerticalMenu;
 
-            // Put the ViewBox in the second row of the Grid
-            MenuViewBox.SetValue(Grid.RowProperty, 1);
-
+            // Horizontally and vertically center the ViewBox on screen
             MenuViewBox.HorizontalAlignment = HorizontalAlignment.Center;
             MenuViewBox.VerticalAlignment = VerticalAlignment.Center;
 
-            MenuViewBox.Margin = new Thickness(75);
+            // Grid for the Menu ViewBox
 
-            // This does not adjust automatically when new 
-            MenuViewBox.MaxWidth = (Window.Current.Bounds.Width/ 4);
-            MenuViewBox.MaxHeight = (Window.Current.Bounds.Height / 4);
+            // Create a new Grid to hold the MenuViewBox
+            Grid ContentGrid = new Grid();
 
+            // Create two new rows for the ContentGrid
+            row = new RowDefinition();
+            row2 = new RowDefinition();
+
+            // Set the Height property of each row
+            // The second row is there to make the MenuViewBox smaller without having to specify any specific size values
+            // This adds automatic support for scaling to different screen sizes and resolutions
+            row.Height = new GridLength(0.33, GridUnitType.Star);
+            row2.Height = new GridLength(1, GridUnitType.Star);
+
+            // Add the rows to the Grid
+            ContentGrid.RowDefinitions.Add(row);
+            ContentGrid.RowDefinitions.Add(row2);
+
+            // Horizontally and vertically center the Grid on screen
+            ContentGrid.HorizontalAlignment = HorizontalAlignment.Center;
+            ContentGrid.VerticalAlignment = VerticalAlignment.Center;
+
+            // Add the MenuViewBox to the Grid
+            ContentGrid.Children.Add(MenuViewBox);
+
+            // Move the ContentGrid to the second row of the Grid so it appears under the TitleBox
+            ContentGrid.SetValue(Grid.RowProperty, 1);
+
+            // Add the background image, screen title, and the rest of the screen content to the RootGrid
             RootGrid.Children.Add(BackgroundImage);
             RootGrid.Children.Add(TitleBox);
-            RootGrid.Children.Add(MenuViewBox);
+            RootGrid.Children.Add(ContentGrid);
 
+            // Add the RootGrid to the screen
             Controls.Add(RootGrid);
-
-            // Add the background image to the screen
-            //Controls.Add(BackgroundImage);
-
-            // Add the Screen Title to the screen
-            //Controls.Add(ScreenTitle);
-
-            // Add the ViewBox to the controls on the screen
-            //Controls.Add(MenuViewBox);
 
             // Add the volume ComboBoxes and the Back button as a menu options so they can be selected
             AddMenuOption(MusicVol);

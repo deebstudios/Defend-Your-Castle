@@ -30,7 +30,7 @@ namespace Defend_Your_Castle
         private float AttackTime;
         private float PrevAttack;
 
-        public Archer(/*Level level*/)
+        public Archer()
         {
             Victim = null;
 
@@ -38,8 +38,8 @@ namespace Defend_Your_Castle
 
             MaxLevel = 4;
 
-            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 9, 16), 0f));
-            AttackingAnim = new Animation(new AnimFrame(new Rectangle(9, 0, 7, 16), 500f), new AnimFrame(new Rectangle(16, 0, 7, 16), 300f));
+            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 22, 35), 0f));
+            AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 500f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 300f, new Vector2(4, 0)));
 
             AttackRange = 50;
             AttackChance = 6;
@@ -48,7 +48,7 @@ namespace Defend_Your_Castle
             PrevAttack = 0f;
 
             //TEMPORARY
-            Position = new Vector2(/*level.GetPlayer.GetPosition.X - 20*/Game1.ScreenSize.X - LoadAssets.PlayerCastle.Width - 20, 140);
+            //Position = new Vector2(/*level.GetPlayer.GetPosition.X - 20*/Game1.ScreenSize.X - LoadAssets.PlayerCastle.Width - 20, 140);
         }
 
         public bool IsAttacking
@@ -74,7 +74,7 @@ namespace Defend_Your_Castle
         private void CheckAttackEnemy(Level level, LevelObject enemy)
         {
             //If the object is an enemy, can be killed by the Sword, and is within a certain range, there is a chance of attacking it based on AttackChance
-            if (enemy.GetObjectType == ObjectType.Enemy && enemy.GetWeaponWeakness == (int)Player.WeaponTypes.Sword && enemy.IsDying == false && enemy.GetPosition.X >= AttackDistance(level))
+            if (enemy.GetObjectType == ObjectType.Enemy && enemy.GetWeaponWeakness == (int)Player.WeaponTypes.Sword && enemy.IsDying == false && enemy.IsInvincible == false && enemy.GetPosition.X >= AttackDistance(level))
             {
                 Random random = new Random();
                 int randnum = random.Next(0, AttackChance);
@@ -94,6 +94,11 @@ namespace Defend_Your_Castle
         private void StopShooting()
         {
             Victim = null;
+        }
+
+        public override void SetPosition()
+        {
+            Position = new Vector2(Parent.GetPosition.X - 20, 140);
         }
 
         //Make the archer attack faster, further, and more successfully
@@ -140,7 +145,7 @@ namespace Defend_Your_Castle
                     // Kill the designated enemy
                     Victim.Die(level);
                     
-                    // Stop the helper from shopping
+                    // Stop the helper from shooting
                     StopShooting();
                 }
             }
