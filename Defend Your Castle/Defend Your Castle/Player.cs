@@ -287,7 +287,10 @@ namespace Defend_Your_Castle
             //Use the helper data to add the helpers to the player
             for (int i = 0; i < playerData.Helpers.Count; i++)
             {
-                AddChild(playerData.Helpers[i].CreateHelper());
+                PlayerHelper helper = playerData.Helpers[i].CreateHelper();
+
+                AddChild(helper);
+                helper.SetPosition();
             }
         }
 

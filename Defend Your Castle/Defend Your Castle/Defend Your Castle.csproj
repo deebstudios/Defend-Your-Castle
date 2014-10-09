@@ -186,7 +186,6 @@
     <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
-    <Content Include="Content\Graphics\Castle.png" />
     <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\CastleIconBigger.png" />
     <Content Include="Content\Graphics\cursor.png" />
