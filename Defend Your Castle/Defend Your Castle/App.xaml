@@ -38,7 +38,9 @@
             <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
                 <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
                 <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
+                <Setter Property="IsTabStop" Value="False"/>
             </Style>
             
             <!-- StackPanel -->
@@ -102,10 +104,10 @@
                                         <VisualState x:Name="PointerFocused" />
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-
+                                
+                                <!-- BELOW: Removed Margin="3" -->
                                 <Border x:Name="Border" Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                        Margin="3">
+                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                     <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"
                                                       ContentTransitions="{TemplateBinding ContentTransitions}"
                                                       ContentTemplate="{TemplateBinding ContentTemplate}"
