@@ -222,7 +222,7 @@ namespace Defend_Your_Castle
         public void AddPlayerHelper(PlayerHelper helper)
         {
             player.AddChild(helper);
-            helper.SetPosition(this);
+            helper.SetPosition();
         }
 
         //Adds a player-harming object to the level; these objects always have no parents and are added here if removed from their parents
@@ -260,29 +260,28 @@ namespace Defend_Your_Castle
             NumAttacks += 1;
 
             //Find all the enemies we hit
-            //List<Enemy> enemies = new List<Enemy>();
+            List<LevelObject> enemies = new List<LevelObject>();
 
             for (int i = 0; i < Enemies.Count; i++)
             {
-                /*if (Enemies[i].CanGetHit(rect) == true)
-                  {
-                      enemies.Add(Enemies[i]);
-                  }
-                 */
+                if (Enemies[i].CanGetHit(rect) == true)
+                {
+                    enemies.Add(Enemies[i]);
+                }
 
                 //Check for the object's weapon weakness
-                if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
-                {
-                    Enemies[i].Die(this);
-
-                    // Increment the player's kill count by 1
-                    NumPlayerKills += 1;
-
-                    break;
-                }
+                //if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
+                //{
+                //    Enemies[i].Die(this);
+                //
+                //    // Increment the player's kill count by 1
+                //    NumPlayerKills += 1;
+                //
+                //    break;
+                //}
             }
 
-            /*Find highest Y
+              //Find highest Y
               float highestY = 0;
               int index = -1;
               
@@ -297,12 +296,11 @@ namespace Defend_Your_Castle
               
               if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
               {
-                  Enemies[i].Die(this);
+                  enemies[index].Die(this);
               
                   // Increment the player's kill count by 1
                   NumPlayerKills += 1;
               }
-             */
         }
 
         public void Update()

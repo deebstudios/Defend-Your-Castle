@@ -96,9 +96,9 @@ namespace Defend_Your_Castle
             Victim = null;
         }
 
-        public override void SetPosition(Level level)
+        public override void SetPosition()
         {
-            Position = new Vector2(level.GetPlayer.GetPosition.X - 20, 140);
+            Position = new Vector2(Parent.GetPosition.X - 20, 140);
         }
 
         //Make the archer attack faster, further, and more successfully

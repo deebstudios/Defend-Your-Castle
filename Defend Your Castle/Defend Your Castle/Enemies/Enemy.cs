@@ -75,7 +75,7 @@ namespace Defend_Your_Castle
 
         public override bool IsDying
         {
-            get { return FakeDead; }
+            get { return (FakeDead == true); }
         }
 
         //Gets the fade color of the GoldDrop animation
@@ -104,10 +104,10 @@ namespace Defend_Your_Castle
         }
 
         //Checks if the enemy can get hit
-        public override bool CanGetHit(Rectangle rect)
-        {
-            return (base.CanGetHit(rect) == true && FakeDead == false);
-        }
+        //public override bool CanGetHit(Rectangle rect)
+        //{
+        //    return (base.CanGetHit(rect) == true && FakeDead == false);
+        //}
 
         public override void Die(Level level)
         {

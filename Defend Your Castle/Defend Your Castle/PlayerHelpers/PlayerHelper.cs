@@ -32,7 +32,7 @@ namespace Defend_Your_Castle
         }
         
         //Sets the position of the helper
-        public abstract void SetPosition(Level level);
+        public abstract void SetPosition();
 
         //Increase the level and stats of the helper
         public void IncreaseLevel()
