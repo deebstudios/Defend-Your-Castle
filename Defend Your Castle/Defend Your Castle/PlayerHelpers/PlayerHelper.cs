@@ -15,6 +15,10 @@ namespace Defend_Your_Castle
         //The level of the helper
         protected int HelperLevel;
 
+        //The index of the helper
+        //This is useful if the player can buy more than one of a particular helper (Ex. Archers) and helps set their positions
+        protected int HelperIndex;
+
         public PlayerHelper()
         {
             MaxLevel = 0;

@@ -31,9 +31,9 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Throw spears
-                //Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(6, 16, 6, 16), 400, new Vector2(2, 0)), new AnimFrame(new Rectangle(23, 16, 7, 16), 400, new Vector2(1, 0)), new AnimFrame(new Rectangle(40, 16, 8, 16), 400));
+                Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 400), new AnimFrame(new Rectangle(21, 36, 17, 35), 400), new AnimFrame(new Rectangle(42, 36, 18, 35), 400));
 
-                CurAction = new ThrowSpear(this, Animation/*ShootAnim*/, Animation.MaxFrame/*ShootAnim.MaxFrame*/);
+                CurAction = new ThrowSpear(this, ShootAnim, ShootAnim.MaxFrame);
             }
         }
     }

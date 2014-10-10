@@ -300,6 +300,12 @@ namespace Defend_Your_Castle
             return (hurtbox == null || (hurtbox.CanBeHit(rect) == true && IsInvincible == false && IsDying == false && IsDead == false));
         }
 
+        //Gives gold to the player
+        public virtual void GrantGold(Level level, bool killedbyplayer)
+        {
+
+        }
+
         //Uses invincibility
         public virtual void UseInvincibility()
         {

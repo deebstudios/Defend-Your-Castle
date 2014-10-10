@@ -109,13 +109,21 @@ namespace Defend_Your_Castle
         //    return (base.CanGetHit(rect) == true && FakeDead == false);
         //}
 
-        public override void Die(Level level)
+        public override void GrantGold(Level level, bool killedbyplayer)
         {
-            //Find out the total amount of gold to give. If the player is using a suboptimal weapon (Ex. Warhammer instead of Sword), cut gold by 1/3
-            if (WeaponWeakness == (int)Player.WeaponTypes.Sword && level.GetPlayer.CurWeapon != WeaponWeakness)
-                Gold = (int)(Gold * (float)(2/3f));
+            //Check if the enemy is killed by a player or not
+            if (killedbyplayer == true)
+            {
+                //Find out the total amount of gold to give. If the player is using a suboptimal weapon (Ex. Warhammer instead of Sword), cut gold by 1/3
+                if (WeaponWeakness == (int)Player.WeaponTypes.Sword && level.GetPlayer.CurWeapon != WeaponWeakness)
+                    Gold = (int)(Gold * (float)(2 / 3f));
+            }
 
             level.GetPlayer.ReceiveGold(Gold);
+        }
+
+        public override void Die(Level level)
+        {
             FakeDead = true;
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
         }
@@ -146,8 +154,12 @@ namespace Defend_Your_Castle
             //Draw gold dropping animation
             if (FakeDead == true)
             {
-                spriteBatch.DrawString(LoadAssets.DYFFont, "+" + Gold, new Vector2(Position.X - 20, Position.Y - 10), GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, .999f);
-                spriteBatch.Draw(LoadAssets.GoldCoinEffect, Position, null, GoldDrop.GetFadeColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                //Center the text and gold icon above the enemy you killed
+                Vector2 center = new Vector2(Position.X + (int)(Animation.CurrentAnimFrame.FrameSize.X / 2), Position.Y - 10);
+                Vector2 textsize = LoadAssets.DYFFont.MeasureString(Gold.ToString()) / 2;
+
+                spriteBatch.DrawString(LoadAssets.DYFFont, Gold.ToString(), new Vector2(center.X, center.Y - 10), GoldDrop.GetFadeColor, 0f, textsize, 1f, SpriteEffects.None, .999f);
+                spriteBatch.Draw(LoadAssets.GoldCoinEffect, center, null, GoldDrop.GetFadeColor, 0f, new Vector2(LoadAssets.GoldCoinEffect.Width / 2, LoadAssets.GoldCoinEffect.Height / 2), 1f, SpriteEffects.None, 1f);
             }
 
             base.Draw(spriteBatch);

@@ -268,17 +268,6 @@ namespace Defend_Your_Castle
                 {
                     enemies.Add(Enemies[i]);
                 }
-
-                //Check for the object's weapon weakness
-                //if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
-                //{
-                //    Enemies[i].Die(this);
-                //
-                //    // Increment the player's kill count by 1
-                //    NumPlayerKills += 1;
-                //
-                //    break;
-                //}
             }
 
               //Find highest Y
@@ -297,7 +286,8 @@ namespace Defend_Your_Castle
               if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
               {
                   enemies[index].Die(this);
-              
+                  enemies[index].GrantGold(this, true);
+
                   // Increment the player's kill count by 1
                   NumPlayerKills += 1;
               }

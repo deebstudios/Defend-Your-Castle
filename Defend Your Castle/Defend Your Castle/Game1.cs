@@ -270,7 +270,7 @@ namespace Defend_Your_Castle
 
             // Create a new level
             level = new Level(new Player(GamePage), this);
-            level.AddPlayerHelper(new Archer());
+            level.AddPlayerHelper(new Archer(0));
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
