@@ -28,7 +28,7 @@ namespace Defend_Your_Castle
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
         public static Texture2D PlayerCastleInvincible;
-        public static Texture2D PlayerArcher;
+        public static Texture2D[] PlayerArcher;
 
         //Enemy graphics
         public static Texture2D GoldCoinEffect;
@@ -86,7 +86,7 @@ namespace Defend_Your_Castle
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
-            PlayerArcher = LoadGraphic(Content, "Archer");
+            PlayerArcher = new Texture2D[3] { LoadGraphic(Content, "Archer"), LoadGraphic(Content, "ArcherLvl2"), LoadGraphic(Content, "ArcherLvl3") };
 
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");

@@ -34,7 +34,7 @@ namespace Defend_Your_Castle
         {
             Victim = null;
 
-            ObjectSheet = LoadAssets.PlayerArcher;
+            ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
 
             MaxLevel = 4;
 
@@ -120,6 +120,10 @@ namespace Defend_Your_Castle
             AttackChance -= ChanceIncrease;
             AttackRange += RangeIncrease;
             AttackTime -= SpeedIncrease;
+
+            //Ensure that we don't access a value out of bounds
+            if (HelperLevel < LoadAssets.PlayerArcher.Length)
+                ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
         }
 
         public override HelperData ConvertHelperToData()
