@@ -243,6 +243,7 @@ namespace Defend_Your_Castle
             {
                 case GameState.Screen:
                     ShowCanvas_Screen();
+                    ChangePauseMenuState(Visibility.Collapsed);
 
                     break;
                 case GameState.InGame:
@@ -258,6 +259,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.Shop:
                     ShowGrid_Shop();
+                    ChangePauseMenuState(Visibility.Collapsed);
 
                     break;
             }
@@ -274,9 +276,6 @@ namespace Defend_Your_Castle
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
-
-            // Force the HUD Canvas to render itself and its child elements
-            //GamePage.GameHUD.UpdateLayout();
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);

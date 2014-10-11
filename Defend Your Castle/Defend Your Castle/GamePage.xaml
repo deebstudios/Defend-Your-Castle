@@ -140,6 +140,24 @@
             <Setter Property="Padding" Value="10"/>
         </Style>
         
+        <Style x:Key="PauseMenu_VolumeBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,20,0,20"/>
+        </Style>
+        
+        <Style x:Key="PauseMenu_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        
+        <Style x:Key="PauseMenu_VolumeTextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+        
         
         <!-- Level End Styles -->
         <Style x:Key="LevelEnd_BackgroundImageStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
@@ -184,6 +202,12 @@
 
         <Style x:Key="Shop_ShopSubtitleStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="56"/>
+        </Style>
+        
+        <Style x:Key="Shop_NextLevelStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,50,20"/>
         </Style>
         
         <Style x:Key="Shop_ShopSectionStyle" TargetType="Border">
@@ -245,8 +269,8 @@
         </Style>
 
         <Style x:Key="Shop_CastleIconStyle" TargetType="Image">
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="10,0,10,0"/>
             <Setter Property="Source" Value="Content/Graphics/CastleIconBigger.png"/>
         </Style>
@@ -268,7 +292,6 @@
         </Style>
 
         <Style x:Key="Shop_SaveGameStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <Setter Property="Grid.Row" Value="2"/>
             <Setter Property="FontSize" Value="48"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
@@ -388,20 +411,28 @@
         </Border.Resources>
     </Border>
 
+    <!-- Pause Menu -->
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume"
+                    Click="PauseMenu_Resume_Click" />
+            
+            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
+                        <ComboBox Name="PauseMenu_MusicVolume" Style="{StaticResource ComboBoxStyle}" FontWeight="Bold"/>
+                    </StackPanel>
 
-            <Button Style="{StaticResource ButtonStyle}" Content="Shop" Click="PauseMenuOption1_Click" />
-            <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Content="Menu Option 2" />
-            <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Content="Menu Option 2" />
-            <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Content="Menu Option 2" />
-        </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
+                        <ComboBox Name="PauseMenu_SoundVolume" Style="{StaticResource ComboBoxStyle}" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit" Click="PauseMenu_Quit_Click" />
+        </StackPanel>
     </Border>
 
     <Grid Name="LevelEnd" x:FieldModifier="public" Visibility="Collapsed">
@@ -595,9 +626,21 @@
                 </GridView.ItemsPanel>
             </GridView>
 
-            <!-- Save + Done Buttons -->
-            <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
-            <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
+            <!-- Save Button, Next Level Text, + Done Button -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Save Button -->
+                <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
+                
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock Name="Shop_NextLevel" Style="{StaticResource Shop_NextLevelStyle}" x:FieldModifier="public" Text="Next Level: 2" />
+                    <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </SwapChainBackgroundPanel>
