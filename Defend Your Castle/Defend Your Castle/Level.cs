@@ -75,7 +75,7 @@ namespace Defend_Your_Castle
                 if (NumAttacks == 0) return 0;
 
                 // Divide the number of player kills by the number of attacks to get the accuracy rate
-                return Math.Round((((double)NumPlayerKills / (double)NumAttacks) * 100d), 2);
+                return Math.Round((((double)NumPlayerKills / (double)NumAttacks) * 100d));
             }
         }
 
@@ -226,11 +226,8 @@ namespace Defend_Your_Castle
             // Give the player the bonus gold
             player.ReceiveGold(BonusGold);
 
-            // Show the next level in the shop
-            player.GetGamePage.Shop_NextLevel.Text = "Next Level: " + (LevelNum + 1);
-
-            // Set the game state to Shop
-            Game.ChangeGameState(GameState.Shop);
+            // Set the game state to LevelEnd
+            Game.ChangeGameState(GameState.LevelEnd);
         }
 
         public void QuitLevel()
