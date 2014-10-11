@@ -68,10 +68,10 @@ namespace Defend_Your_Castle
 
             if (enemy.IsInvincible == true && enemy.GetInvincibleSheet != null) 
             {
-                Anim.Draw(spriteBatch, enemy.GetInvincibleSheet, enemy.GetPosition, enemy.GetDirection, enemy.GetInvincibilityColor(true), 0f, depth + .0001f);
+                Anim.Draw(spriteBatch, enemy.GetInvincibleSheet, enemy.GetTruePosition, enemy.GetDirection, enemy.GetInvincibilityColor(true), 0f, depth + .0001f);
             }
 
-            Anim.Draw(spriteBatch, spritesheet, enemy.GetPosition, enemy.GetDirection, enemy.GetGoldDropColor, 0f, depth);
+            Anim.Draw(spriteBatch, spritesheet, enemy.GetTruePosition, enemy.GetDirection, enemy.GetGoldDropColor, 0f, depth);
         }
     }
 }

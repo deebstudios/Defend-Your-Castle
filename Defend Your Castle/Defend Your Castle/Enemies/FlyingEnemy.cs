@@ -10,18 +10,31 @@ namespace Defend_Your_Castle
     //An enemy that attacks with Melee
     public sealed class FlyingEnemy : Enemy
     {
-        public FlyingEnemy(Level level, float Y)
+        //The min and max flying heights for the Flying Enemy
+        public const int MinFlyingHeight = 40;
+        public const int MaxFlyingHeight = 70;
+
+        //The height the enemy flies
+        private float FlyingHeight;
+
+        public FlyingEnemy(Level level, float Y, float flyingheight)
         {
             ObjectSheet = LoadAssets.FlyingGoblinSheet;
             InvincibleSheet = LoadAssets.FlyingGoblinInvincibleSheet;
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
 
+            FlyingHeight = flyingheight;
             Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Spear;
 
             SetProperties(level);
+        }
+
+        public override Vector2 GetTruePosition
+        {
+            get { return new Vector2(Position.X, Position.Y - FlyingHeight); }
         }
 
         protected override void ChooseNextAction(Level level)

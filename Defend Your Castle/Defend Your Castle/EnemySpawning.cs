@@ -20,10 +20,15 @@ namespace Defend_Your_Castle
         // The time at which the next enemy will be spawned
         private float NextSpawnTime;
 
+        //Our random number generator
+        private Random RandGenerator;
+
         public EnemySpawning(Level theLevel)
         {
             // Get the reference to the level
             level = theLevel;
+
+            RandGenerator = new Random();
 
             // Initialize the enemy spawn chance list
             EnemySpawnChances = new List<int>() { 25, 25, 25, 25 };
@@ -123,7 +128,7 @@ namespace Defend_Your_Castle
             }
 
             // Spawn a random enemy if, for some reason, no enemy can be found
-            return (new Random().Next(0, EnemySpawnChances.Count));
+            return (RandGenerator.Next(0, EnemySpawnChances.Count));
         }
 
         private Enemy FindEnemyToSpawn(int RandNum)
@@ -131,7 +136,7 @@ namespace Defend_Your_Castle
             // Get the Enemy number to spawn
             int EnemyIndex = FindEnemyNumToSpawn(RandNum);
 
-            float Y = (new Random().Next(Player.GateStart, Player.GateEnd)) + level.GetPlayer.GetPosition.Y;
+            float Y = (RandGenerator.Next(Player.GateStart, Player.GateEnd)) + level.GetPlayer.GetPosition.Y;
 
             switch (EnemyIndex)
             {
@@ -140,7 +145,7 @@ namespace Defend_Your_Castle
                 case 2: //Armored enemy
                     return (new ArmoredEnemy(level, Y));
                 case 3: //Flying enemy
-                    return (new FlyingEnemy(level, Y));
+                    return (new FlyingEnemy(level, Y, RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1)));
                 case 0: // Melee Enemy
                 default:
                     return (new MeleeEnemy(level, Y));
@@ -153,7 +158,7 @@ namespace Defend_Your_Castle
             if (CanEnemySpawn == true)
             {
                 // Find an enemy to spawn
-                Enemy EnemyToSpawn = FindEnemyToSpawn(new Random().Next(1, 100));
+                Enemy EnemyToSpawn = FindEnemyToSpawn(RandGenerator.Next(1, 100));
 
                 // Add the enemy that should be spawned
                 level.AddEnemy(EnemyToSpawn);
@@ -168,7 +173,7 @@ namespace Defend_Your_Castle
                 int MaxSpawnTime = (MinSpawnTime * 2) + 1;
 
                 // Randomly generate the next spawn time for the enemy
-                SpawnTime = (new Random()).Next(MinSpawnTime, MaxSpawnTime);
+                SpawnTime = RandGenerator.Next(MinSpawnTime, MaxSpawnTime);
 
                 // Set the next time an enemy will be spawned
                 NextSpawnTime = Game1.ActiveTime + SpawnTime;

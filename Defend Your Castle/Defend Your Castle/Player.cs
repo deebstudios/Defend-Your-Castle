@@ -85,7 +85,7 @@ namespace Defend_Your_Castle
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, ObjectSheet.Width, ObjectSheet.Height), 0f));
 
             // Set the position of the player
-            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 70);
+            Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 100);
 
             // Update the UI with the new gold amount
             UpdateGoldAmount();

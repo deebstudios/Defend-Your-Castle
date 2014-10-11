@@ -58,8 +58,14 @@ namespace Defend_Your_Castle
             SetHurtbox((int)Animation.CurrentAnimFrame.FrameSize.X, (int)Animation.CurrentAnimFrame.FrameSize.Y, new Vector2(10));
 
             //By default, enemies start out moving right
-            CurAction = new MoveForward(this, Animation, StopAtCastle(level.GetPlayer.GetPosition));//((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
+            CurAction = new MoveForward(this, Animation, StopAtCastle(level.GetPlayer.GetPosition, Animation.CurrentAnimFrame.FrameSize, Range));//((int)level.GetPlayer.GetPosition.X - hurtbox.Width - Range));
         }
+
+        //The amount to offset the Y position when drawing used ONLY for flying enemies right now)
+        //public virtual float YDrawOffset
+        //{
+        //    get { return 0f; } 
+        //}
 
         //Gets the movespeed of the enemy
         public Vector2 GetMoveSpeed
@@ -86,21 +92,6 @@ namespace Defend_Your_Castle
                 if (GoldDrop != null) return GoldDrop.GetFadeColor;
                 else return Color.White;
             }
-        }
-
-        //Gets the X position to stop the enemy in front of the player's castle, taking the Y position into account
-        //Higher Y positions move slightly further to the right
-        public int StopAtCastle(Vector2 playerpos)
-        {
-            //The base position to stop; 13 is the amount of X space between the player position and the entrance to the gate
-            int stop = (int)playerpos.X - (int)Animation.CurrentAnimFrame.FrameSize.X - Range + 13;// +(int)Animation.CurrentAnimFrame.FrameSize.X;
-
-            //Based on the Y position of the enemy, add more to the X stop position
-            int playerentrance = (int)(Position.Y - playerpos.Y + Animation.CurrentAnimFrame.FrameSize.Y);
-
-            stop += (playerentrance - Player.GateStart);
-
-            return stop;
         }
 
         //Checks if the enemy can get hit
@@ -155,7 +146,7 @@ namespace Defend_Your_Castle
             if (FakeDead == true)
             {
                 //Center the text and gold icon above the enemy you killed
-                Vector2 center = new Vector2(Position.X + (int)(Animation.CurrentAnimFrame.FrameSize.X / 2), Position.Y - 10);
+                Vector2 center = new Vector2(Position.X + (int)(Animation.CurrentAnimFrame.FrameSize.X / 2), GetTruePosition.Y - 10);
                 Vector2 textsize = LoadAssets.DYFFont.MeasureString(Gold.ToString()) / 2;
 
                 spriteBatch.DrawString(LoadAssets.DYFFont, Gold.ToString(), new Vector2(center.X, center.Y - 10), GoldDrop.GetFadeColor, 0f, textsize, 1f, SpriteEffects.None, .999f);

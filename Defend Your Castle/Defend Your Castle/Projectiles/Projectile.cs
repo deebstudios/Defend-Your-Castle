@@ -21,6 +21,9 @@ namespace Defend_Your_Castle
         protected Vector2 Velocity;
         protected Vector2 CurVelocity;
 
+        //The position to stop and damage the castle
+        protected int StopX;
+
         protected AnimFrame Sprite;
 
         public Projectile()
@@ -47,7 +50,7 @@ namespace Defend_Your_Castle
         }
 
         //Launches the projectile
-        public void Launch(Vector2 position)
+        public void Launch(Vector2 position, Vector2 animsize, Vector2 playerpos)
         {
             Position = position;
             CurVelocity = Velocity;
@@ -59,6 +62,7 @@ namespace Defend_Your_Castle
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);
             SetHurtbox(width, height, new Vector2(5, 5));
+            StopX = StopAtCastle(playerpos, Sprite.FrameSize + new Vector2(0, animsize.Y), 0);
 
             Launched = true;
         }
@@ -79,7 +83,7 @@ namespace Defend_Your_Castle
                 base.Update(level);
 
                 //If the projectile hitbox touches the player, make the player take damage and remove the projectile from the level
-                if (hitbox.GetRect.Right >= level.GetPlayer.GetPosition.X)
+                if (hitbox.GetRect.Right >= StopX)
                 {
                     level.GetPlayer.TakeDamage(Damage, level);
                     Die(level);

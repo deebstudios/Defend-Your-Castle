@@ -116,6 +116,12 @@ namespace Defend_Your_Castle
             get { return (Game1.ActiveTime < PrevInvincibility); }
         }
 
+        //The true position of the object - this is used in specific cases, such as the Flying Enemy's height
+        public virtual Vector2 GetTruePosition
+        {
+            get { return Position; }
+        }
+
         //Get the position of the object
         public Vector2 GetPosition
         {
@@ -168,7 +174,7 @@ namespace Defend_Your_Castle
         //Sets the hurtbox of the object
         public void SetHurtbox(int width, int height, Vector2 padamount)
         {
-            hurtbox = new Hurtbox(Position, width, height, padamount);
+            hurtbox = new Hurtbox(GetTruePosition, width, height, padamount);
             AddChild(hurtbox);
         }
 
@@ -298,6 +304,25 @@ namespace Defend_Your_Castle
         public virtual bool CanGetHit(Rectangle rect)
         {
             return (hurtbox == null || (hurtbox.CanBeHit(rect) == true && IsInvincible == false && IsDying == false && IsDead == false));
+        }
+
+        //Gets the X position to stop the object in front of the player's castle, taking the Y position into account
+        //Higher Y positions move slightly further to the right
+        public int StopAtCastle(Vector2 playerpos, Vector2 animsize, int Range)
+        {
+            //The base position to stop; 13 is the amount of X space between the player position and the entrance to the gate
+            int stop = (int)playerpos.X - (int)animsize.X - Range + 13;
+
+            //float ypos = Position.Y;
+            //if (Position.Y < (playerpos.Y + Player.GateStart))
+            //    ypos = Position.Y - playerpos.Y;
+
+            //Based on the Y position of the object, add more to the X stop position
+            int playerentrance = (int)((Position.Y - playerpos.Y) + animsize.Y);
+
+            stop += (playerentrance - Player.GateStart);
+
+            return stop;
         }
 
         //Gives gold to the player

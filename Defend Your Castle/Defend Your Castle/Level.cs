@@ -16,14 +16,14 @@ namespace Defend_Your_Castle
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
-        private const float FadeRate = 220f;
+        private const float FadeRate = 185f;
         private const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
 
         //Starting X and Y position of the sun, respectively
         private const float SunX = 45f;
-        private const float SunY = 10f;
+        private const float SunY = 25f;
 
         // Stores the level number of the level
         private int LevelNum;

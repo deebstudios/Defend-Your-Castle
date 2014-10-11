@@ -111,7 +111,7 @@ namespace Defend_Your_Castle
             //    default: break;
             //}
 
-            Position = new Vector2(X, 75);
+            Position = new Vector2(X, Parent.GetPosition.Y + 5);
         }
 
         //Make the archer attack faster, further, and more successfully
