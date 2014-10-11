@@ -76,7 +76,7 @@ namespace Defend_Your_Castle
             if (_game.GameState == GameState.InGame)
             {
                 // Pause the game
-                _game.ChangeGameState(GameState.Paused);
+                _game.PauseGame();
             }
             else if (_game.GameState == GameState.Paused) // The game is paused
             {
@@ -142,8 +142,8 @@ namespace Defend_Your_Castle
         // Occurs when the "Next" button is clicked on the Level End screen
         private void LevelEnd_Next_Click(object sender, RoutedEventArgs e)
         {
-            // Show the shop
-            ShowShop();
+            // Change the game state to Shop
+            _game.ChangeGameState(GameState.Shop);
         }
 
         public void ShowShop()

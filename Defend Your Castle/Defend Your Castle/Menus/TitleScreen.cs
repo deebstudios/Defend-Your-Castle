@@ -72,7 +72,7 @@ namespace Defend_Your_Castle
 
             // Add the root Grid to the controls on the screen
             Controls.Add(RootGrid);
-
+            
             // Add each of the Buttons as a menu option so they can be selected
             AddMenuOption(StartGame);
             AddMenuOption(ContinueGame);

@@ -307,25 +307,40 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
+
+        
+        <!-- Full Screen Notice Styles -->
+        <Style x:Key="FullScreenNotice_ImageStyle" TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="50"/>
+            <Setter Property="Source" Value="Content/Graphics/DefendYourFortLogo.png"/>
+        </Style>
+        
+        <Style x:Key="FullScreenNotice_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
     </SwapChainBackgroundPanel.Resources>
 
+    <!-- Container for the Title Screen and Options Screen -->
     <Grid Name="CurrentScreen" x:FieldModifier="public" HorizontalAlignment="Center" VerticalAlignment="Center">
         
     </Grid>
     
-    <Grid Name="GameHUD" x:FieldModifier="public" Margin="20" Visibility="Collapsed">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <Grid Name="HUD_TopRow">
+    <!-- Game HUD -->
+    <Grid Name="GameHUD" x:FieldModifier="public" Visibility="Collapsed">
+        <!-- Grid that contains all of the HUD -->
+        <Grid Name="GameHUD_Contents" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- First Column - Helpers -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <Border Name="HUD_Helper1Border" Style="{StaticResource HUD_HelperStyle}" x:FieldModifier="public">
@@ -342,16 +357,16 @@
                     </Grid>
                 </Border>
             </StackPanel>
-            
+
             <!-- Second Column - Weapon Buttons -->
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
-                             Click="ChangeWeaponButton">
+                            Click="ChangeWeaponButton">
                     <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
-                             Click="ChangeWeaponButton">
+                            Click="ChangeWeaponButton">
                     <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
                 </RadioButton>
 
@@ -366,7 +381,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <!-- Health Bar -->
                 <Border Name="HUD_OuterHPBar" Style="{StaticResource HUD_OuterHPBarStyle}">
                     <Border Name="HUD_InnerHPBar" Style="{StaticResource HUD_InnerHPBarStyle}" x:FieldModifier="public" />
@@ -383,33 +398,33 @@
                         <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
                         <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="0" x:FieldModifier="public" />
                     </StackPanel>
-                    
+
                     <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />
                 </Grid>
             </Grid>
-            
+
             <!-- Fourth Column - Pause Button -->
             <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" Click="PauseGame" />
         </Grid>
-    </Grid>
 
-    <!-- Level Start Border -->
-    <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}">
-        <!-- Level Start Text -->
-        <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
-        
-        <Border.Resources>
-            <!-- Level Start Animation -->
-            <Storyboard x:Name="LevelStart_Anim" x:FieldModifier="public">
-                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Visibility">
-                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                </ObjectAnimationUsingKeyFrames>
+        <!-- Level Start Border -->
+        <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}">
+            <!-- Level Start Text -->
+            <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
 
-                <DoubleAnimation Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0"
+            <Border.Resources>
+                <!-- Level Start Animation -->
+                <Storyboard x:Name="LevelStart_Anim" x:FieldModifier="public">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <DoubleAnimation Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0"
                                  Duration="0:0:2"/>
-            </Storyboard>
-        </Border.Resources>
-    </Border>
+                </Storyboard>
+            </Border.Resources>
+        </Border>
+    </Grid>
 
     <!-- Pause Menu -->
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
@@ -435,6 +450,7 @@
         </StackPanel>
     </Border>
 
+    <!-- Level End Screen -->
     <Grid Name="LevelEnd" x:FieldModifier="public" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -481,43 +497,44 @@
             <Storyboard x:Name="LevelEnd_Anim" x:FieldModifier="public">
                 <!-- Player Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_Kills" Storyboard.TargetProperty="Opacity" 
-                                 BeginTime="0:0:0.5" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:0.25" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Helper Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_HelperKills" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:1" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:0.50" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Total Kills -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_TotalKills" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:1.5" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:0.75" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Accuracy Rate -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_AccuracyRate" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:2" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:1" From="0" To="1" Duration="0:0:0" />
                 
                 <!-- Bonus Gold -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_BonusGold" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:2.5" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:1.25" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Gold Earned -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_GoldEarned" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:3" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:1.50" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Total Gold Earned -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_TotalGoldEarned" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:3.5" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:1.75" From="0" To="1" Duration="0:0:0" />
 
                 <!-- Next Button -->
                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="IsEnabled"
-                                 BeginTime="0:0:4">
+                                 BeginTime="0:0:2.00">
                     <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
                 </ObjectAnimationUsingKeyFrames>
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_Next" Storyboard.TargetProperty="Opacity"
-                                 BeginTime="0:0:4" From="0" To="1" Duration="0:0:0" />
+                                 BeginTime="0:0:2.00" From="0" To="1" Duration="0:0:0" />
             </Storyboard>
         </Grid.Resources>
     </Grid>
 
+    <!-- Shop Screen -->
     <Grid Name="Shop" x:FieldModifier="public" Background="White" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -656,6 +673,32 @@
                     <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
                 </StackPanel>
             </Grid>
+        </Grid>
+    </Grid>
+
+    <!-- Full Screen Notice - Notifies the player that the game must be in full screen -->
+    <Grid Name="FullScreenNotice" x:FieldModifier="public" Visibility="Collapsed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Defend Your Fort Logo -->
+        <Image Style="{StaticResource FullScreenNotice_ImageStyle}" />
+
+        <!-- Message Text -->
+        <Grid Grid.Row="1">
+            <!-- The first and third columns act as margins that adjust to different screen sizes and resolutions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.025*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.025*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Viewbox Grid.Column="1">
+                <TextBlock Name="FullScreenNotice_Message" Style="{StaticResource FullScreenNotice_MessageStyle}"
+                           Text="Display window in full screen to continue playing..." />
+            </Viewbox>
         </Grid>
     </Grid>
 </SwapChainBackgroundPanel>
