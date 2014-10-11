@@ -109,8 +109,8 @@ namespace Defend_Your_Castle
             Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
             RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
             RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
-            BuyArcher = LoadGraphic(Content, "ArcherIcon");
-            UpgradeArcher = LoadGraphic(Content, "UpgradeArcherIcon");
+            BuyArcher = LoadGraphic(Content, "ShopIcons/ArcherIcon");
+            UpgradeArcher = LoadGraphic(Content, "ShopIcons/UpgradeArcherIcon");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");

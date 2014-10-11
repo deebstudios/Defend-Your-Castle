@@ -85,6 +85,19 @@ namespace Defend_Your_Castle
             get { return (player.Gold - StartingGold); }
         }
 
+        // Calculates the amount of bonus gold the player has earned at the end of the level
+        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * 5]
+        private int BonusGold
+        {
+            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * 5)); }
+        }
+
+        // Returns the total amount of gold the player has earned in the level
+        private int TotalGoldEarned
+        {
+            get { return (GoldEarned + BonusGold); }
+        }
+
         public Level(Player play, Game1 game)
         {
             player = play;
@@ -203,10 +216,15 @@ namespace Defend_Your_Castle
             player.GetGamePage.LevelEnd_HelperKills.Text = "Helper Kills: " + NumHelperKills;
             player.GetGamePage.LevelEnd_TotalKills.Text = "Total Kills: " + NumTotalKills;
             player.GetGamePage.LevelEnd_AccuracyRate.Text = "Accuracy Rate: " + PlayerAccuracyRate + "%";
+            player.GetGamePage.LevelEnd_BonusGold.Text = "Bonus Gold: " + BonusGold;
             player.GetGamePage.LevelEnd_GoldEarned.Text = "Gold Earned: " + GoldEarned;
+            player.GetGamePage.LevelEnd_TotalGoldEarned.Text = "Total Gold Earned: " + TotalGoldEarned;
 
             // Begin the animation to display the level stats
             player.GetGamePage.LevelEnd_Anim.Begin();
+
+            // Give the player the bonus gold
+            player.ReceiveGold(BonusGold);
 
             // Show the next level in the shop
             player.GetGamePage.Shop_NextLevel.Text = "Next Level: " + (LevelNum + 1);
