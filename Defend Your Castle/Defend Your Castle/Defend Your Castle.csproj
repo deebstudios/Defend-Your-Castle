@@ -183,6 +183,8 @@
     </AppxManifest>
     <Content Include="Content\G Character.png" />
     <Content Include="Content\Graphics\Archer.png" />
+    <Content Include="Content\Graphics\ArcherLvl2.png" />
+    <Content Include="Content\Graphics\ArcherLvl3.png" />
     <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
@@ -204,6 +206,9 @@
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
+    <Content Include="Content\Graphics\RangedGoblinSheet.png" />
+    <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet.png" />
     <Content Include="Content\Graphics\ShopBackground.png" />
@@ -235,9 +240,6 @@
     <Content Include="Content\Sounds\test.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Fonts\SOR2 Bitmap Font.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\T Character.png" />
     <Content Include="Content\U Character.png" />
     <Content Include="Content\V Character.png" />
@@ -245,6 +247,9 @@
     <Content Include="Content\X Character.png" />
     <Content Include="Content\Y Character.png" />
     <Content Include="Content\Z Character.png" />
+    <Content Include="Content\Fonts\DYFFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -60,7 +60,7 @@ namespace Defend_Your_Castle
             for (int i = 0; i < player.GetChildren.Count; i++)
             {
                 PlayerHelper helper = player.GetChildren[i] as PlayerHelper;
-                //Conver the helper to a HelperData so we can store its values
+                //Convert the helper to a HelperData so we can store its values
                 if (helper != null)
                 {
                     Helpers.Add(helper.ConvertHelperToData());
@@ -257,6 +257,9 @@ namespace Defend_Your_Castle
         [DataMember]
         public int Level;
 
+        [DataMember]
+        public int Index;
+
         public HelperData()
         {
 
@@ -275,14 +278,15 @@ namespace Defend_Your_Castle
     [DataContract(Namespace="")]
     public class ArcherData : HelperData
     {
-        public ArcherData(int currentlevel)
+        public ArcherData(int currentlevel, int index)
         {
             Level = currentlevel;
+            Index = index;
         }
 
         public override PlayerHelper CreateHelper()
         {
-            Archer playerarcher = new Archer();
+            Archer playerarcher = new Archer(Index);
             
             //Level up the archer until its at the appropriate level; we will definitely have a SetLevel method later to avoid the unnecessary loop
             for (int i = 0; i < Level; i++)

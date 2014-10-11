@@ -28,7 +28,7 @@ namespace Defend_Your_Castle
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
         public static Texture2D PlayerCastleInvincible;
-        public static Texture2D PlayerArcher;
+        public static Texture2D[] PlayerArcher;
 
         //Enemy graphics
         public static Texture2D GoldCoinEffect;
@@ -49,9 +49,11 @@ namespace Defend_Your_Castle
         public static Texture2D Invincibility;
         public static Texture2D RepairWalls;
         public static Texture2D RepairWallsx10;
+        public static Texture2D BuyArcher;
+        public static Texture2D UpgradeArcher;
 
         //Fonts
-        public static SpriteFont bmpFont;
+        public static SpriteFont DYFFont;
 
         //Debug graphics
         public static Texture2D ScalableBox;
@@ -66,7 +68,7 @@ namespace Defend_Your_Castle
             LoadSounds(Content);
             LoadMusic(Content);
 
-            bmpFont = Content.Load<SpriteFont>("Fonts/SOR2 Bitmap Font");
+            DYFFont = Content.Load<SpriteFont>("Fonts/DYFFont");
         }
 
         private static Texture2D LoadGraphic(ContentManager Content, string filename)
@@ -86,14 +88,14 @@ namespace Defend_Your_Castle
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
-            PlayerArcher = LoadGraphic(Content, "Archer");
+            PlayerArcher = new Texture2D[3] { LoadGraphic(Content, "Archer"), LoadGraphic(Content, "ArcherLvl2"), LoadGraphic(Content, "ArcherLvl3") };
 
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");
             EnemySpear = LoadGraphic(Content, "Enemy Spear (Complete)");
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
-            SpearGoblinSheet = LoadGraphic(Content, "Spear Goblin Sheet");
+            SpearGoblinSheet = LoadGraphic(Content, "RangedGoblinSheet");
             SpearGoblinInvincibleSheet = LoadGraphic(Content, "Spear Goblin Sheet Invincible");
             FlyingGoblinSheet = LoadGraphic(Content, "Flying Goblin Sheet");
             FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
@@ -107,6 +109,8 @@ namespace Defend_Your_Castle
             Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
             RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
             RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
+            BuyArcher = LoadGraphic(Content, "ShopIcons/ArcherIcon");
+            UpgradeArcher = LoadGraphic(Content, "ShopIcons/UpgradeArcherIcon");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");

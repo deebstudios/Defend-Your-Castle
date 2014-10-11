@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -11,7 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Defend_Your_Castle
 {
     // Global enum to represent the game state
-    public enum GameState : byte { Screen, InGame, Paused, Shop }
+    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop }
 
     public class Game1 : Game
     {
@@ -41,6 +42,9 @@ namespace Defend_Your_Castle
 
         // The scale factor that converts actual screen coordinates to game screen coordinates
         public static Vector2 ResolutionScaleFactor;
+
+        // Stores the game state before the full screen notice
+        private GameState PrevGameState;
 
         // Checks whether the player has saved data on game load
         public static bool HasSavedData;
@@ -90,7 +94,12 @@ namespace Defend_Your_Castle
 
         protected override void OnDeactivated(object sender, System.EventArgs args)
         {
-            // Code pausing here
+            // Check if the user is ingame
+            if (GameState == GameState.InGame)
+            {
+                // Pause the game
+                PauseGame();
+            }
         }
 
         protected override void Initialize()
@@ -135,30 +144,14 @@ namespace Defend_Your_Castle
         public GameState GameState
         {
             get { return gameState; }
-            set
-            {
-                gameState = value;
-
-                if (value == GameState.InGame)
-                {
-                    // Remove the KeyDown event from the game window
-                    Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
-                }
-                else
-                {
-                    // Remove the KeyDown event from the game window in case it was added before
-                    Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
-
-                    // Handle the KeyDown event for the game window
-                    Windows.UI.Xaml.Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-                }
-            }
+            set { gameState = value; }
         }
 
-        private void ShowCanvas_Screen()
+        private void ShowGrid_Screen()
         {
             GamePage.CurrentScreen.Visibility = Visibility.Visible;
             GamePage.GameHUD.Visibility = Visibility.Collapsed;
+            GamePage.LevelEnd.Visibility = Visibility.Collapsed;
             GamePage.Shop.Visibility = Visibility.Collapsed;
         }
 
@@ -166,12 +159,51 @@ namespace Defend_Your_Castle
         {
             GamePage.GameHUD.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
+            GamePage.LevelEnd.Visibility = Visibility.Collapsed;
+            GamePage.Shop.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowGrid_LevelEnd()
+        {
+            GamePage.LevelEnd.Visibility = Visibility.Visible;
+            GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
+            GamePage.GameHUD.Visibility = Visibility.Collapsed;
             GamePage.Shop.Visibility = Visibility.Collapsed;
         }
 
         private void ChangePauseMenuState(Visibility visibility)
         {
             GamePage.PauseMenu.Visibility = visibility;
+        }
+
+        private void ChangeFullScreenNoticeState(Visibility visibility)
+        {
+            // Set the visibility of the full screen notice
+            GamePage.FullScreenNotice.Visibility = visibility;
+
+            // Check if the full screen notice will be shown
+            if (visibility == Visibility.Visible)
+            {
+                // Store the current game state if it is not Screen (the default)
+                if (GameState != GameState.Screen) PrevGameState = GameState;
+
+                // Change the game state to screen
+                ChangeGameState(GameState.Screen);
+
+                // Hide the CurrentScreen Grid
+                GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
+            }
+            else // The full screen notice will be hidden
+            {
+                // Change the game state to what it was before
+                ChangeGameState(PrevGameState);
+
+                // If the previous game state was paused, show the HUD
+                if (PrevGameState == GameState.Paused) ShowGrid_InGame();
+
+                // Set the stored game state back to the default
+                PrevGameState = GameState.Screen;
+            }
         }
 
         private void ChangeLevelStartAnimState(bool ShouldPause)
@@ -185,18 +217,6 @@ namespace Defend_Your_Castle
                 else // The animation should not be paused, so resume it
                     GamePage.LevelStart_Anim.Resume();
             }
-        }
-
-        private void ShowGrid_Shop()
-        {
-            GamePage.LevelEnd.Visibility = Visibility.Visible;
-            GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
-            GamePage.GameHUD.Visibility = Visibility.Collapsed;
-        }
-
-        private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
-        {
-            //if (MenuScreens.Count > 0) GetCurrentScreen().CursorMove(e.VirtualKey);
         }
 
         public void AddScreen(MenuScreen screen)
@@ -242,7 +262,8 @@ namespace Defend_Your_Castle
             switch (GameState)
             {
                 case GameState.Screen:
-                    ShowCanvas_Screen();
+                    ShowGrid_Screen();
+                    ChangePauseMenuState(Visibility.Collapsed);
 
                     break;
                 case GameState.InGame:
@@ -256,8 +277,13 @@ namespace Defend_Your_Castle
                     ChangeLevelStartAnimState(true);
 
                     break;
+                case GameState.LevelEnd:
+                    ShowGrid_LevelEnd();
+                    ChangePauseMenuState(Visibility.Collapsed);
+
+                    break;
                 case GameState.Shop:
-                    ShowGrid_Shop();
+                    GamePage.ShowShop();
 
                     break;
             }
@@ -270,13 +296,10 @@ namespace Defend_Your_Castle
 
             // Create a new level
             level = new Level(new Player(GamePage), this);
-            level.AddPlayerHelper(new Archer());
+            level.AddPlayerHelper(new Archer(0));
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
-
-            // Force the HUD Canvas to render itself and its child elements
-            //GamePage.GameHUD.UpdateLayout();
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
@@ -344,6 +367,7 @@ namespace Defend_Your_Castle
                     }
 
                     break;
+                case GameState.LevelEnd:
                 case GameState.Shop:
                     
                     break;
@@ -352,10 +376,11 @@ namespace Defend_Your_Castle
             // Update the global touch state
             Input.TouchState = TouchPanel.GetState(Window);
 
-#if DEBUG
-            //Debug commands
-            Debug.Update();
-#endif
+            #if DEBUG
+                //Debug commands
+                Debug.Update();
+            #endif
+
             base.Update(gameTime);
         }
 
@@ -385,6 +410,7 @@ namespace Defend_Your_Castle
                     spriteBatch.Draw(LoadAssets.ScalableBox, new Vector2(0, 0), null, new Color(Color.Black, 35), 0f, new Vector2(0, 0), new Vector2(ScreenSize.X, ScreenSize.Y), SpriteEffects.None, 1f);
 
                     break;
+                case GameState.LevelEnd:
                 case GameState.Shop:
 
                     break;
@@ -398,11 +424,22 @@ namespace Defend_Your_Castle
         private void Window_ClientSizeChanged(object sender, System.EventArgs e)
         {
             // Readjust the resolution scale factor based on the new screen resolution/size
-
-            // TODO: This is not perfect. It doesn't properly take into account the snapping of the game
-            // TODO: This is not perfect. It doesn't properly take into account the snapping of the game
-            // TODO: This is not perfect. It doesn't properly take into account the snapping of the game
             ResolutionScaleFactor = new Vector2((ScreenSize.X / Window.ClientBounds.Width), (ScreenSize.Y / Window.ClientBounds.Height));
+
+            // Check if the user is NOT in full screen mode
+            if (ApplicationView.GetForCurrentView().IsFullScreen == false)
+            {
+                // If the user is in-game, pause the game
+                if (GameState == GameState.InGame) PauseGame();
+
+                // Show the full screen notice
+                ChangeFullScreenNoticeState(Visibility.Visible);
+            }
+            else // The user is in full screen mode
+            {
+                // Hide the full screen notice
+                ChangeFullScreenNoticeState(Visibility.Collapsed);
+            }
         }
 
 

@@ -16,14 +16,14 @@ namespace Defend_Your_Castle
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
-        private const float FadeRate = 220f;
+        private const float FadeRate = 185f;
         private const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
 
         //Starting X and Y position of the sun, respectively
         private const float SunX = 45f;
-        private const float SunY = 10f;
+        private const float SunY = 25f;
 
         // Stores the level number of the level
         private int LevelNum;
@@ -75,7 +75,7 @@ namespace Defend_Your_Castle
                 if (NumAttacks == 0) return 0;
 
                 // Divide the number of player kills by the number of attacks to get the accuracy rate
-                return Math.Round((((double)NumPlayerKills / (double)NumAttacks) * 100d), 2);
+                return Math.Round((((double)NumPlayerKills / (double)NumAttacks) * 100d));
             }
         }
 
@@ -83,6 +83,19 @@ namespace Defend_Your_Castle
         private int GoldEarned
         {
             get { return (player.Gold - StartingGold); }
+        }
+
+        // Calculates the amount of bonus gold the player has earned at the end of the level
+        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * 5]
+        private int BonusGold
+        {
+            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * 5)); }
+        }
+
+        // Returns the total amount of gold the player has earned in the level
+        private int TotalGoldEarned
+        {
+            get { return (GoldEarned + BonusGold); }
         }
 
         public Level(Player play, Game1 game)
@@ -203,13 +216,36 @@ namespace Defend_Your_Castle
             player.GetGamePage.LevelEnd_HelperKills.Text = "Helper Kills: " + NumHelperKills;
             player.GetGamePage.LevelEnd_TotalKills.Text = "Total Kills: " + NumTotalKills;
             player.GetGamePage.LevelEnd_AccuracyRate.Text = "Accuracy Rate: " + PlayerAccuracyRate + "%";
+            player.GetGamePage.LevelEnd_BonusGold.Text = "Bonus Gold: " + BonusGold;
             player.GetGamePage.LevelEnd_GoldEarned.Text = "Gold Earned: " + GoldEarned;
+            player.GetGamePage.LevelEnd_TotalGoldEarned.Text = "Total Gold Earned: " + TotalGoldEarned;
 
             // Begin the animation to display the level stats
             player.GetGamePage.LevelEnd_Anim.Begin();
-            
-            // Set the game state to Shop
-            Game.ChangeGameState(GameState.Shop);
+
+            // Give the player the bonus gold
+            player.ReceiveGold(BonusGold);
+
+            // Set the game state to LevelEnd
+            Game.ChangeGameState(GameState.LevelEnd);
+        }
+
+        public void QuitLevel()
+        {
+            // Clear the enemies list
+            Enemies.Clear();
+
+            // Stop the Level Start animation if it is running
+            Game.GamePage.LevelStart_Anim.Stop();
+
+            // Create a new Title Screen
+            TitleScreen screen = new TitleScreen(Game.GamePage, Game);
+
+            // Add the Title Screen to the MenuScreens Stack
+            Game.AddScreen(screen);
+
+            // Set the game state to Screen
+            Game.ChangeGameState(GameState.Screen);
         }
 
         //Returns the player reference
@@ -268,17 +304,6 @@ namespace Defend_Your_Castle
                 {
                     enemies.Add(Enemies[i]);
                 }
-
-                //Check for the object's weapon weakness
-                //if (Enemies[i].CanGetHit(rect) == true && player.CurrentWeapon.CanHit(Enemies[i].GetWeaponWeakness))
-                //{
-                //    Enemies[i].Die(this);
-                //
-                //    // Increment the player's kill count by 1
-                //    NumPlayerKills += 1;
-                //
-                //    break;
-                //}
             }
 
               //Find highest Y
@@ -297,7 +322,8 @@ namespace Defend_Your_Castle
               if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
               {
                   enemies[index].Die(this);
-              
+                  enemies[index].GrantGold(this, true);
+
                   // Increment the player's kill count by 1
                   NumPlayerKills += 1;
               }

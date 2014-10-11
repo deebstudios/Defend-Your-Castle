@@ -31,8 +31,10 @@ namespace Defend_Your_Castle
 
             if (Anim.CurrentFrame != curframe && Anim.CurrentFrame == FrameThrow)
             {
+                //Vector2 launchpos = new Vector2(enemy.GetPosition.X, enemy.GetPosition.Y + Anim.CurrentAnimFrame.FrameSize.Y);
+
                 Projectile spear = SpearThrown();
-                spear.Launch(enemy.GetPosition);
+                spear.Launch(enemy.GetPosition, Anim.CurrentAnimFrame.FrameSize, level.GetPlayer.GetPosition);
                 level.AddEnemy(spear);
             }
         }

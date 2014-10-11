@@ -30,11 +30,11 @@ namespace Defend_Your_Castle
         private float AttackTime;
         private float PrevAttack;
 
-        public Archer()
+        public Archer(int index)
         {
             Victim = null;
 
-            ObjectSheet = LoadAssets.PlayerArcher;
+            ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
 
             MaxLevel = 4;
 
@@ -47,6 +47,7 @@ namespace Defend_Your_Castle
             AttackTime = 1000;
             PrevAttack = 0f;
 
+            HelperIndex = index;
             //TEMPORARY
             //Position = new Vector2(/*level.GetPlayer.GetPosition.X - 20*/Game1.ScreenSize.X - LoadAssets.PlayerCastle.Width - 20, 140);
         }
@@ -98,7 +99,19 @@ namespace Defend_Your_Castle
 
         public override void SetPosition()
         {
-            Position = new Vector2(Parent.GetPosition.X - 20, 140);
+            float X = Parent.GetPosition.X + 48 + (HelperIndex * 55);
+
+            //Find out how much to increase the Archer's X location based on its index
+            //switch(HelperIndex)
+            //{
+            //    case 1: X += 55;
+            //        break;
+            //    case 2: X += 110;
+            //        break;
+            //    default: break;
+            //}
+
+            Position = new Vector2(X, Parent.GetPosition.Y + 5);
         }
 
         //Make the archer attack faster, further, and more successfully
@@ -107,11 +120,15 @@ namespace Defend_Your_Castle
             AttackChance -= ChanceIncrease;
             AttackRange += RangeIncrease;
             AttackTime -= SpeedIncrease;
+
+            //Ensure that we don't access a value out of bounds
+            if (HelperLevel < LoadAssets.PlayerArcher.Length)
+                ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
         }
 
         public override HelperData ConvertHelperToData()
         {
-            return new ArcherData(HelperLevel);
+            return new ArcherData(HelperLevel, HelperIndex);
         }
 
         public override void Update(Level level)
@@ -144,6 +161,7 @@ namespace Defend_Your_Castle
                     
                     // Kill the designated enemy
                     Victim.Die(level);
+                    Victim.GrantGold(level, false);
                     
                     // Stop the helper from shooting
                     StopShooting();
@@ -153,7 +171,7 @@ namespace Defend_Your_Castle
             base.Update(level);
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Animation drawanim = IsAttacking == false ? Animation : AttackingAnim;
 
