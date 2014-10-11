@@ -207,9 +207,30 @@ namespace Defend_Your_Castle
 
             // Begin the animation to display the level stats
             player.GetGamePage.LevelEnd_Anim.Begin();
-            
+
+            // Show the next level in the shop
+            player.GetGamePage.Shop_NextLevel.Text = "Next Level: " + (LevelNum + 1);
+
             // Set the game state to Shop
             Game.ChangeGameState(GameState.Shop);
+        }
+
+        public void QuitLevel()
+        {
+            // Clear the enemies list
+            Enemies.Clear();
+
+            // Stop the Level Start animation if it is running
+            Game.GamePage.LevelStart_Anim.Stop();
+
+            // Create a new Title Screen
+            TitleScreen screen = new TitleScreen(Game.GamePage, Game);
+
+            // Add the Title Screen to the MenuScreens Stack
+            Game.AddScreen(screen);
+
+            // Set the game state to Screen
+            Game.ChangeGameState(GameState.Screen);
         }
 
         //Returns the player reference
