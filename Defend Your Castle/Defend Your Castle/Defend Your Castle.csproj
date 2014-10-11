@@ -207,6 +207,8 @@
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
     <Content Include="Content\Graphics\RangedGoblinSheet.png" />
+    <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet.png" />
     <Content Include="Content\Graphics\ShopBackground.png" />

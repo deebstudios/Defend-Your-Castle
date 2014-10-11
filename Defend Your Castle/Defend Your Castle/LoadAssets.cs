@@ -49,6 +49,8 @@ namespace Defend_Your_Castle
         public static Texture2D Invincibility;
         public static Texture2D RepairWalls;
         public static Texture2D RepairWallsx10;
+        public static Texture2D BuyArcher;
+        public static Texture2D UpgradeArcher;
 
         //Fonts
         public static SpriteFont DYFFont;
@@ -107,6 +109,8 @@ namespace Defend_Your_Castle
             Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
             RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
             RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
+            BuyArcher = LoadGraphic(Content, "ArcherIcon");
+            UpgradeArcher = LoadGraphic(Content, "UpgradeArcherIcon");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");
