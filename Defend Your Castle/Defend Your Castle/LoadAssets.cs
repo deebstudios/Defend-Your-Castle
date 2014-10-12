@@ -96,7 +96,7 @@ namespace Defend_Your_Castle
             GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
             SpearGoblinSheet = LoadGraphic(Content, "RangedGoblinSheet");
-            SpearGoblinInvincibleSheet = LoadGraphic(Content, "Spear Goblin Sheet Invincible");
+            SpearGoblinInvincibleSheet = LoadGraphic(Content, "RangedGoblinSheetInvincible");
             FlyingGoblinSheet = LoadGraphic(Content, "Flying Goblin Sheet");
             FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
             ArmoredGoblinSheet = LoadGraphic(Content, "Armored Goblin Sheet");
