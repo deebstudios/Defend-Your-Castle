@@ -86,6 +86,9 @@ namespace Defend_Your_Castle
 
             // Set the position of the player
             Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 100);
+            
+            // Update the UI with the health amount
+            UpdateHealth();
 
             // Update the UI with the new gold amount
             UpdateGoldAmount();
@@ -221,6 +224,18 @@ namespace Defend_Your_Castle
                 // Update the UI with the player's health
                 UpdateHealth();
             }
+        }
+
+        public override void Die(Level level)
+        {
+            // Call the base Die method
+            base.Die(level);
+
+            // Show the Game Over screen
+            level.Game.screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
+
+            // Change the game mode to Screen
+            level.Game.ChangeGameState(GameState.Screen);
         }
 
         public void IncreaseMaxHealth(int healthIncrease)

@@ -12,7 +12,7 @@ namespace Defend_Your_Castle
     public sealed class Level
     {
         // Stores the reference to Game1
-        private Game1 Game;
+        public Game1 Game;
 
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
@@ -238,11 +238,8 @@ namespace Defend_Your_Castle
             // Stop the Level Start animation if it is running
             Game.GamePage.LevelStart_Anim.Stop();
 
-            // Create a new Title Screen
-            TitleScreen screen = new TitleScreen(Game.GamePage, Game);
-
-            // Add the Title Screen to the MenuScreens Stack
-            Game.AddScreen(screen);
+            // Show the Title Screen
+            Game.screenManager.ChangeScreen(ScreenManager.Screens.TitleScreen);
 
             // Set the game state to Screen
             Game.ChangeGameState(GameState.Screen);
