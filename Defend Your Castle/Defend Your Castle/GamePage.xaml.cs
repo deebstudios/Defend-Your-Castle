@@ -26,13 +26,13 @@ namespace Defend_Your_Castle
 
             // Set the GamePage of Game1 to the current class
             _game.GamePage = this;
-
-            // Load the player's saved game data
-            _game.LoadData();
         }
 
-        private void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)
+        private async void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)
         {
+            // Load the player's saved game data
+            await _game.LoadData();
+
             // Create a new Title Screen
             TitleScreen screen = new TitleScreen(_game.GamePage, _game);
             
@@ -190,6 +190,9 @@ namespace Defend_Your_Castle
 
             // Show the animation that the game was saved
             Shop_SaveGameAnim.Begin();
+
+            // State that the player has saved data
+            Game1.HasSavedData = true;
         }
 
 

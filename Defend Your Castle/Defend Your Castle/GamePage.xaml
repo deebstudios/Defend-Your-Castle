@@ -145,7 +145,7 @@
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Padding" Value="20"/>
-            <Setter Property="Margin" Value="0,20,0,20"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
         
         <Style x:Key="PauseMenu_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
@@ -427,11 +427,8 @@
     </Grid>
 
     <!-- Pause Menu -->
-    <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
+    <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Visible">
         <StackPanel>
-            <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume"
-                    Click="PauseMenu_Resume_Click" />
-            
             <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -445,6 +442,9 @@
                     </StackPanel>
                 </StackPanel>
             </Border>
+
+            <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume" Margin="0,0,0,20"
+                    Click="PauseMenu_Resume_Click" />
 
             <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit" Click="PauseMenu_Quit_Click" />
         </StackPanel>

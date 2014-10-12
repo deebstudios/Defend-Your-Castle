@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -311,23 +312,26 @@ namespace Defend_Your_Castle
             ChangeGameState(GameState.Paused);
         }
 
-        public void ContinueGame()
+        public async Task<bool> ContinueGame()
         {
             // Remove the Title Screen
             RemoveScreen();
 
-            // Load the player's saved game data
-            LoadData();
-
             // Set the player to shop
             ChangeGameState(GameState.Shop);
 
+            // Load the player's saved game data
+            await LoadData();
+
             // Show the shop
             GamePage.ShowShop();
+
+            // Return true
+            return true;
         }
 
         // Loads the player's saved game data
-        public async void LoadData()
+        public async Task<bool> LoadData()
         {
             // Read the game data
             object[] GameData = await Data.LoadGameData(GamePage, this);
@@ -337,6 +341,9 @@ namespace Defend_Your_Castle
 
             // Get the level
             level = (Level)GameData[1];
+
+            // Return true
+            return true;
         }
 
         protected override void Update(GameTime gameTime)
