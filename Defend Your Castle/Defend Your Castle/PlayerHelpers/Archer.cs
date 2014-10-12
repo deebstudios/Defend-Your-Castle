@@ -39,7 +39,7 @@ namespace Defend_Your_Castle
             MaxLevel = 4;
 
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 22, 35), 0f));
-            AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 500f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 300f, new Vector2(4, 0)));
+            AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 200f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 500f, new Vector2(4, 0)));
 
             AttackRange = 50;
             AttackChance = 6;
