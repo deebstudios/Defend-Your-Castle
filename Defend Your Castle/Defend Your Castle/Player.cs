@@ -226,6 +226,18 @@ namespace Defend_Your_Castle
             }
         }
 
+        public override void Die(Level level)
+        {
+            // Call the base Die method
+            base.Die(level);
+
+            // Show the Game Over screen
+            level.Game.screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
+
+            // Change the game mode to Screen
+            level.Game.ChangeGameState(GameState.Screen);
+        }
+
         public void IncreaseMaxHealth(int healthIncrease)
         {
             //Increase the player's current and max HP by the designated amount

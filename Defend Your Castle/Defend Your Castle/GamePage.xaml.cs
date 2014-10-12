@@ -37,15 +37,80 @@ namespace Defend_Your_Castle
             // Load the player's saved game data
             await _game.LoadData();
 
-            // Create a new Title Screen
-            TitleScreen screen = new TitleScreen(_game.GamePage, _game);
-            
-            // Add the Title Screen to the MenuScreens Stack
-            _game.AddScreen(screen);
+            // Disable/enable the Continue Game button based on whether or not the player has saved game data
+            TitleScreen_ContinueGame.IsEnabled = Game1.HasSavedData;
 
-            // Configure the pause menu
-            ConfigurePauseMenu();
+            // Configure the volume controls
+            ConfigureVolumeControls();
+
+            // Initialize the Screen Manager
+            _game.screenManager = new ScreenManager(_game, this);
+
+            // Set up the screen events
+            _game.screenManager.SetUpEvents();
         }
+
+        // General Methods
+
+        private void ConfigureVolumeControls()
+        {
+            // Add the dropdown items to all ComboBoxes
+            ComboBox_AddDropdownItems();
+
+            // Get the stored Music and Sound volumes
+            int MusicVolume = (int)Math.Round((SoundManager.MusicVolume * 10));
+            int SoundVolume = (int)Math.Round((SoundManager.SoundVolume * 10));
+
+            // Set the selected index for the Music and Sound volume on the Options screen
+            OptionsScreen_MusicVolume.SelectedIndex = MusicVolume;
+            OptionsScreen_SoundVolume.SelectedIndex = SoundVolume;
+
+            // Set the selected index for the Music and Sound volume on the Pause Menu
+            PauseMenu_MusicVolume.SelectedIndex = MusicVolume;
+            PauseMenu_SoundVolume.SelectedIndex = SoundVolume;
+
+            // Add the SelectionChanged events to the ComboBoxes on the Options screen
+            OptionsScreen_MusicVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+            OptionsScreen_SoundVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+
+            // Add the SelectionChanged events to the ComboBoxes on the Pause Menu
+            PauseMenu_MusicVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+            PauseMenu_SoundVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+        }
+
+        private void ComboBox_AddDropdownItems()
+        {
+            // Add volume choices of 0 to 10 to both the Music and Sound volume ComboBoxes
+            for (int i = 0; i <= 10; i++)
+            {
+                // Options Screen
+                OptionsScreen_MusicVolume.Items.Add(i);
+                OptionsScreen_SoundVolume.Items.Add(i);
+
+                // Pause Menu
+                PauseMenu_MusicVolume.Items.Add(i);
+                PauseMenu_SoundVolume.Items.Add(i);
+            }
+        }
+
+        private void ComboBox_Volume_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Get the ComboBox that had its value changed
+            ComboBox box = (ComboBox)sender;
+
+            // Get the volume based on the ComboBox's SelectedIndex
+            float thevol = ((float)box.SelectedIndex / 10);
+
+            // Check if the ComboBox controls the music volume
+            if (box == PauseMenu_MusicVolume || box == OptionsScreen_MusicVolume)
+                // Set the music volume
+                SoundManager.SetMusicVolume(thevol);
+            else
+                // Set the sound volume
+                SoundManager.SetSoundVolume(thevol);
+        }
+
+        // HUD
 
         private void ChangeWeaponButton(object sender, RoutedEventArgs e)
         {
@@ -59,20 +124,6 @@ namespace Defend_Your_Castle
                 _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
             }
         }
-
-        private void ShopItem_Click(object sender, RoutedEventArgs e)
-        {
-            // Get the Button that was clicked
-            Button TheButton = (Button)sender;
-
-            // Get the ShopItem associated with the Button
-            ShopItem shopItem = (ShopItem)TheButton.DataContext;
-
-            // Buy the item if possible
-            _game.shop.BuyItem(shopItem);
-        }
-
-        // Pause Menu
 
         private void PauseGame(object sender, RoutedEventArgs e)
         {
@@ -89,51 +140,12 @@ namespace Defend_Your_Castle
             }
         }
 
-        private void ConfigurePauseMenu()
-        {
-            // Add the dropdown items to the pause menu
-            PauseMenu_AddDropdownItems();
-
-            // Set the selected index for the Music and Sound volume
-            PauseMenu_MusicVolume.SelectedIndex = (int)Math.Round((SoundManager.MusicVolume * 10));
-            PauseMenu_SoundVolume.SelectedIndex = (int)Math.Round((SoundManager.SoundVolume * 10));
-
-            // Add the SelectionChanged events to the ComboBoxes
-            PauseMenu_MusicVolume.SelectionChanged += PauseMenu_Volume_SelectionChanged;
-            PauseMenu_SoundVolume.SelectionChanged += PauseMenu_Volume_SelectionChanged;
-        }
-
-        private void PauseMenu_AddDropdownItems()
-        {
-            // Add volume choices of 0 to 10 to both the Music and Sound volume ComboBoxes
-            for (int i = 0; i <= 10; i++)
-            {
-                PauseMenu_MusicVolume.Items.Add(i);
-                PauseMenu_SoundVolume.Items.Add(i);
-            }
-        }
+        // Pause Menu
 
         private void PauseMenu_Resume_Click(object sender, RoutedEventArgs e)
         {
             // Resume the game
             _game.ChangeGameState(GameState.InGame);
-        }
-
-        private void PauseMenu_Volume_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Get the ComboBox that had its value changed
-            ComboBox box = (ComboBox)sender;
-
-            // Get the volume based on the ComboBox's SelectedIndex
-            float thevol = ((float)box.SelectedIndex / 10);
-
-            // Check if the ComboBox controls the music volume
-            if (box == PauseMenu_MusicVolume)
-                // Set the music volume
-                SoundManager.SetMusicVolume(thevol);
-            else
-                // Set the sound volume
-                SoundManager.SetSoundVolume(thevol);
         }
 
         private void PauseMenu_Quit_Click(object sender, RoutedEventArgs e)
@@ -149,6 +161,8 @@ namespace Defend_Your_Castle
             // Change the game state to Shop
             _game.ChangeGameState(GameState.Shop);
         }
+
+        // Shop
 
         public void ShowShop()
         {
@@ -173,6 +187,18 @@ namespace Defend_Your_Castle
 
             // Disable the "Next" button again
             LevelEnd_Next.IsEnabled = false;
+        }
+
+        private void ShopItem_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the Button that was clicked
+            Button TheButton = (Button)sender;
+
+            // Get the ShopItem associated with the Button
+            ShopItem shopItem = (ShopItem)TheButton.DataContext;
+
+            // Buy the item if possible
+            _game.shop.BuyItem(shopItem);
         }
 
         private void StartNextLevel(object sender, RoutedEventArgs e)

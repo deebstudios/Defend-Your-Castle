@@ -29,8 +29,8 @@ namespace Defend_Your_Castle
         //Time the game is active
         private static float activeTime;
 
-        // Stack of MenuScreen objects
-        private Stack<MenuScreen> MenuScreens;
+        // Used to manage the screens
+        public ScreenManager screenManager;
 
         // Keeps track of the current game state
         private GameState gameState;
@@ -108,9 +108,6 @@ namespace Defend_Your_Castle
             // TODO: Add your initialization logic here
             base.Initialize();
 
-            // Create a new stack of MenuScreen objects
-            MenuScreens = new Stack<MenuScreen>();
-
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
             
@@ -150,26 +147,29 @@ namespace Defend_Your_Castle
 
         private void ShowGrid_Screen()
         {
-            GamePage.CurrentScreen.Visibility = Visibility.Visible;
             GamePage.GameHUD.Visibility = Visibility.Collapsed;
             GamePage.LevelEnd.Visibility = Visibility.Collapsed;
             GamePage.Shop.Visibility = Visibility.Collapsed;
+
+            GamePage.CurrentScreen.Visibility = Visibility.Visible;
         }
 
         private void ShowGrid_InGame()
         {
-            GamePage.GameHUD.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
             GamePage.LevelEnd.Visibility = Visibility.Collapsed;
             GamePage.Shop.Visibility = Visibility.Collapsed;
+
+            GamePage.GameHUD.Visibility = Visibility.Visible;
         }
 
         private void ShowGrid_LevelEnd()
         {
-            GamePage.LevelEnd.Visibility = Visibility.Visible;
             GamePage.CurrentScreen.Visibility = Visibility.Collapsed;
             GamePage.GameHUD.Visibility = Visibility.Collapsed;
             GamePage.Shop.Visibility = Visibility.Collapsed;
+
+            GamePage.LevelEnd.Visibility = Visibility.Visible;
         }
 
         private void ChangePauseMenuState(Visibility visibility)
@@ -228,40 +228,6 @@ namespace Defend_Your_Castle
             }
         }
 
-        public void AddScreen(MenuScreen screen)
-        {
-            MenuScreens.Push(screen);
-            screen.ShowScreen();
-        }
-
-        public MenuScreen GetCurrentScreen()
-        {
-            // Return the next screen if one exists; otherwise, return null to indicate that there are no screens left
-            return ((MenuScreens.Count > 0) ? MenuScreens.Peek() : null);
-        }
-
-        public void RemoveScreen()
-        {
-            // Check if another screen exists
-            if (MenuScreens.Count > 0)
-            {
-                // Remove the next screen
-                MenuScreens.Pop();
-
-                // Check if the current screen exists
-                if (GetCurrentScreen() != null)
-                {
-                    // Show the current screen
-                    MenuScreens.Peek().ShowScreen();
-                }
-                else // No screen exists
-                {
-                    // Clear all of the children from the Canvas
-                    GamePage.CurrentScreen.Children.Clear();
-                }
-            }
-        }
-
         public void ChangeGameState(GameState state)
         {
             // Set the game state to the specified state
@@ -302,9 +268,6 @@ namespace Defend_Your_Castle
 
         public void StartGame()
         {
-            // Remove the Title Screen
-            RemoveScreen();
-
             // Create a new level
             level = new Level(new Player(GamePage), this);
             level.AddPlayerHelper(new Archer(0));
@@ -324,9 +287,6 @@ namespace Defend_Your_Castle
 
         public async Task<bool> ContinueGame()
         {
-            // Remove the Title Screen
-            RemoveScreen();
-
             // Set the player to shop
             ChangeGameState(GameState.Shop);
 

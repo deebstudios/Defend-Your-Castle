@@ -158,15 +158,13 @@
     <Compile Include="Level.cs" />
     <Compile Include="LevelObject.cs" />
     <Compile Include="LoadAssets.cs" />
-    <Compile Include="Menus\MenuScreen.cs" />
-    <Compile Include="Menus\OptionsScreen.cs" />
-    <Compile Include="Menus\TitleScreen.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerHelpers\Archer.cs" />
     <Compile Include="PlayerHelpers\PlayerHelper.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Projectiles\EnemySpear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenManager.cs" />
     <Compile Include="Shop.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />

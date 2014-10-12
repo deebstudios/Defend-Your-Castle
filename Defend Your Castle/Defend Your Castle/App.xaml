@@ -33,7 +33,7 @@
                 <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
                 <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
             </Style>
-
+            
             <!-- ComboBox -->
             <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
                 <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>

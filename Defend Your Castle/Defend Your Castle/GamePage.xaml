@@ -306,7 +306,7 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
-
+        
         
         <!-- Full Screen Notice Styles -->
         <Style x:Key="FullScreenNotice_ImageStyle" TargetType="Image">
@@ -324,9 +324,166 @@
         </Style>
     </SwapChainBackgroundPanel.Resources>
 
-    <!-- Container for the Title Screen and Options Screen -->
-    <Grid Name="CurrentScreen" x:FieldModifier="public" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <!-- Screens Container -->
+    <Grid Name="CurrentScreen" x:FieldModifier="public">
+        <!-- Title Screen -->
+        <Grid Name="TitleScreen" x:FieldModifier="public" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.6*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Title Screen Styles -->
+            <Grid.Resources>
+                <Style x:Key="TitleScreen_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+                    <Setter Property="Width" Value="250" />
+                </Style>
+                
+                <Style x:Key="TitleScreen_LogoStyle" TargetType="Image">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Margin" Value="50"/>
+                    <Setter Property="Source" Value="Content/Graphics/DefendYourFortLogo.png"/>
+                </Style>
+            </Grid.Resources>
+            
+            <Image Style="{StaticResource TitleScreen_LogoStyle}" />
+            
+            <Viewbox Grid.Row="1">
+                <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,100">
+                    <Button Name="TitleScreen_StartGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Start Game"
+                            x:FieldModifier="public" />
+                    <Button Name="TitleScreen_ContinueGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Continue Game"
+                            Margin="0,20,0,20" x:FieldModifier="public" />
+                    <Button Name="TitleScreen_Options" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Options"
+                            x:FieldModifier="public" />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+
+        <!-- Options Screen -->
+        <Grid Name="OptionsScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Game Over Styles -->
+            <Grid.Resources>
+                <Style x:Key="OptionsScreen_BackgroundStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
+                    <Setter Property="Grid.RowSpan" Value="2"/>
+                    <Setter Property="Source" Value="Content/Graphics/OptionsScreenBackground.png"/>
+                </Style>
+                
+                <Style x:Key="OptionsScreen_TitleStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+                
+                <Style x:Key="OptionsScreen_VolumeBorderStyle" TargetType="Border">
+                    <Setter Property="Background" Value="{StaticResource GameButtonBackgroundColor}"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="0,20,0,20"/>
+                </Style>
+                
+                <Style x:Key="OptionsScreen_VolumeStackPanelStyle" BasedOn="{StaticResource StackPanelMenuStyle}" TargetType="StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                
+                <Style x:Key="OptionsScreen_VolumeTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="0,0,20,0"/>
+                </Style>
+                
+                <Style x:Key="OptionsScreen_BackButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="0,30,0,0"/>
+                    <Setter Property="Content" Value="Back"/>
+                </Style>
+            </Grid.Resources>
+
+            <!-- Background image -->
+            <Image Style="{StaticResource OptionsScreen_BackgroundStyle}" />
+            
+            <!-- Screen Title -->
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock Style="{StaticResource OptionsScreen_TitleStyle}" Text="Options" />
+            </Viewbox>
+            
+            <!-- Volume Controls + Back Button -->
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.33*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ViewBox for the Volume Controls + Back Button -->
+                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Style="{StaticResource StackPanelMenuStyle}">
+                        <!-- Volume Controls -->
+                        <Border Style="{StaticResource OptionsScreen_VolumeBorderStyle}">
+                            <StackPanel Style="{StaticResource StackPanelMenuStyle}">
+                                <!-- Music Volume -->
+                                <StackPanel Style="{StaticResource OptionsScreen_VolumeStackPanelStyle}">
+                                    <TextBlock Style="{StaticResource OptionsScreen_VolumeTextStyle}" Text="Music Volume: " />
+                                    <ComboBox Name="OptionsScreen_MusicVolume" Style="{StaticResource ComboBoxStyle}"
+                                              x:FieldModifier="public" />
+                                </StackPanel>
+
+                                <!-- Sound Volume -->
+                                <StackPanel Style="{StaticResource OptionsScreen_VolumeStackPanelStyle}" Margin="20,20,20,0">
+                                    <TextBlock Style="{StaticResource OptionsScreen_VolumeTextStyle}" Text="Sound Volume: " />
+                                    <ComboBox Name="OptionsScreen_SoundVolume" Style="{StaticResource ComboBoxStyle}"
+                                              x:FieldModifier="public" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Back Button -->
+                        <Button Name="OptionsScreen_Back" Style="{StaticResource OptionsScreen_BackButtonStyle}"
+                                x:FieldModifier="public" />
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
+        </Grid>
         
+        <!-- Game Over Screen -->
+        <Grid Name="GameOverScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Game Over Styles -->
+            <Grid.Resources>
+                <Style x:Key="GameOverScreen_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+            </Grid.Resources>
+
+            <!-- Game Over Message -->
+            <Viewbox>
+                <TextBlock Style="{StaticResource GameOverScreen_TextBlockStyle}" Text="You were defeated" />
+            </Viewbox>
+
+            <!-- Grid for the Continue Button -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="1">
+                    <!-- Continue Button -->
+                    <Button Name="GameOverScreen_Continue" Style="{StaticResource ButtonStyle}" Content="Alright, fine"
+                            Margin="20" x:FieldModifier="public" />
+                </Viewbox>
+            </Grid>
+        </Grid>
     </Grid>
     
     <!-- Game HUD -->
@@ -677,7 +834,7 @@
             </Grid>
         </Grid>
     </Grid>
-
+    
     <!-- Full Screen Notice - Notifies the player that the game must be in full screen -->
     <Grid Name="FullScreenNotice" x:FieldModifier="public" Visibility="Collapsed">
         <Grid.RowDefinitions>
