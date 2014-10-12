@@ -36,22 +36,20 @@
         
         <!-- Health Bar Styles -->
         <Style x:Key="HUD_OuterHPBarStyle" TargetType="Border">
-            <Setter Property="Width" Value="442"/>
+            <Setter Property="Width" Value="352"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Background" Value="Black"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
         
         <Style x:Key="HUD_InnerHPBarStyle" TargetType="Border">
-            <Setter Property="Width" Value="440"/>
+            <Setter Property="Width" Value="350"/>
             <Setter Property="Background" Value="Red"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CornerRadius" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
@@ -80,6 +78,7 @@
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
                     <TransitionCollection>
@@ -337,7 +336,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -361,16 +360,17 @@
             <!-- Second Column - Weapon Buttons -->
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
-                            Click="ChangeWeaponButton">
+                             x:FieldModifier="public" Click="ChangeWeaponButton">
                     <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
-                            Click="ChangeWeaponButton">
+                             x:FieldModifier="public" Click="ChangeWeaponButton">
                     <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
                 </RadioButton>
 
-                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1" Click="ChangeWeaponButton">
+                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
+                             x:FieldModifier="public" Click="ChangeWeaponButton">
                     <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
                 </RadioButton>
             </StackPanel>
@@ -388,19 +388,21 @@
                 </Border>
 
                 <!-- Gold + Consumables -->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <Border Grid.Row="1" Background="Orange" BorderBrush="Black" BorderThickness="1,0,1,1" Padding="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
-                        <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="0" x:FieldModifier="public" />
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
+                            <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="100000" x:FieldModifier="public" />
+                        </StackPanel>
 
-                    <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />
-                </Grid>
+                        <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />
+                    </Grid>
+                </Border>
             </Grid>
 
             <!-- Fourth Column - Pause Button -->
@@ -427,7 +429,7 @@
     </Grid>
 
     <!-- Pause Menu -->
-    <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Visible">
+    <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
         <StackPanel>
             <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
                 <StackPanel>

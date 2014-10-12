@@ -177,6 +177,27 @@ namespace Defend_Your_Castle
             GamePage.PauseMenu.Visibility = visibility;
         }
 
+        public void ChangeWeaponButtonState(bool IsEnabled)
+        {
+            // Set the IsEnabled property of the Weapon buttons
+            GamePage.HUD_WeaponSword.IsEnabled = IsEnabled;
+            GamePage.HUD_WeaponWarhammer.IsEnabled = IsEnabled;
+            GamePage.HUD_WeaponSpear.IsEnabled = IsEnabled;
+        }
+
+        private void ChangeLevelStartAnimState(bool ShouldPause)
+        {
+            // Check if the level animation is active
+            if (GamePage.LevelStart_Anim.GetCurrentState() == Windows.UI.Xaml.Media.Animation.ClockState.Active)
+            {
+                // It is, so check if the animation should be paused, and pause it if so
+                if (ShouldPause == true)
+                    GamePage.LevelStart_Anim.Pause();
+                else // The animation should not be paused, so resume it
+                    GamePage.LevelStart_Anim.Resume();
+            }
+        }
+
         private void ChangeFullScreenNoticeState(Visibility visibility)
         {
             // Set the visibility of the full screen notice
@@ -204,19 +225,6 @@ namespace Defend_Your_Castle
 
                 // Set the stored game state back to the default
                 PrevGameState = GameState.Screen;
-            }
-        }
-
-        private void ChangeLevelStartAnimState(bool ShouldPause)
-        {
-            // Check if the level animation is active
-            if (GamePage.LevelStart_Anim.GetCurrentState() == Windows.UI.Xaml.Media.Animation.ClockState.Active)
-            {
-                // It is, so check if the animation should be paused, and pause it if so
-                if (ShouldPause == true)
-                    GamePage.LevelStart_Anim.Pause();
-                else // The animation should not be paused, so resume it
-                    GamePage.LevelStart_Anim.Resume();
             }
         }
 
@@ -269,12 +277,14 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.InGame:
                     ChangePauseMenuState(Visibility.Collapsed);
+                    ChangeWeaponButtonState(true);
                     ChangeLevelStartAnimState(false);
                     ShowGrid_InGame();
 
                     break;
                 case GameState.Paused:
                     ChangePauseMenuState(Visibility.Visible);
+                    ChangeWeaponButtonState(false);
                     ChangeLevelStartAnimState(true);
 
                     break;

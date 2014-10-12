@@ -86,6 +86,9 @@ namespace Defend_Your_Castle
 
             // Set the position of the player
             Position = new Vector2(Game1.ScreenSize.X - Animation.CurrentAnimFrame.FrameSize.X, 100);
+            
+            // Update the UI with the health amount
+            UpdateHealth();
 
             // Update the UI with the new gold amount
             UpdateGoldAmount();

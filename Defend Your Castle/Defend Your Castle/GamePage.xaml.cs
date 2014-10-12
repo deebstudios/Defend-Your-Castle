@@ -30,6 +30,10 @@ namespace Defend_Your_Castle
 
         private async void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)
         {
+            // Store the width of the HP Bars in the HUD and the Shop
+            Shop_InnerHPBarWidth = Shop_InnerHPBar.Width;
+            HUD_InnerHPBarWidth = HUD_InnerHPBar.Width;
+
             // Load the player's saved game data
             await _game.LoadData();
 
@@ -39,21 +43,21 @@ namespace Defend_Your_Castle
             // Add the Title Screen to the MenuScreens Stack
             _game.AddScreen(screen);
 
-            // Store the width of the HP Bars in the HUD and the Shop
-            HUD_InnerHPBarWidth = HUD_InnerHPBar.Width;
-            Shop_InnerHPBarWidth = Shop_InnerHPBar.Width;
-
             // Configure the pause menu
             ConfigurePauseMenu();
         }
 
         private void ChangeWeaponButton(object sender, RoutedEventArgs e)
         {
-            // Get the weapon radio button that was clicked
-            RadioButton WeaponButton = (RadioButton)sender;
-            
-            // Switch the player's weapon
-            _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
+            // Make sure the player is in game
+            if (_game.GameState == GameState.InGame)
+            {
+                // Get the weapon radio button that was clicked
+                RadioButton WeaponButton = (RadioButton)sender;
+
+                // Switch the player's weapon
+                _game.level.GetPlayer.SwitchWeapon(Convert.ToInt32(WeaponButton.Tag));
+            }
         }
 
         private void ShopItem_Click(object sender, RoutedEventArgs e)
