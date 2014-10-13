@@ -10,9 +10,9 @@ namespace Defend_Your_Castle
     //An armored enemy
     public sealed class ArmoredEnemy : Enemy
     {
-        public ArmoredEnemy(Level level, float Y)
+        public ArmoredEnemy(Level level, float Y, int speedadd)
         {
-            MoveSpeed = new Vector2(1, 0);
+            MoveSpeed = new Vector2(1 + speedadd, 0);
 
             WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
 

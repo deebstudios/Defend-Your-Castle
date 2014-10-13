@@ -10,9 +10,9 @@ namespace Defend_Your_Castle
     //An enemy that goes up to the tower and throws spears at it
     public sealed class SpearEnemy : Enemy
     {
-        public SpearEnemy(Level level, float Y)
+        public SpearEnemy(Level level, float Y, int speedadd)
         {
-            MoveSpeed = new Vector2(1, 0);
+            MoveSpeed = new Vector2(1 + speedadd, 0);
             Range = 150;
 
             ObjectSheet = LoadAssets.SpearGoblinSheet;
