@@ -137,6 +137,7 @@
     <Compile Include="Data.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Enemies\ArmoredEnemy.cs" />
+    <Compile Include="Enemies\ArmoredSpearEnemy.cs" />
     <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Enemies\EnemyAI\Action.cs" />
     <Compile Include="Enemies\EnemyAI\MeleeAttack.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="ScreenManager.cs" />
     <Compile Include="Shop.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
+    <Compile Include="ShopItems\FortifyCastle.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />
     <Compile Include="ShopItems\ShopItem.cs" />
     <Compile Include="SoundManager.cs" />
@@ -203,7 +205,10 @@
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
+    <Content Include="Content\Graphics\PlayerCastleFortified.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
+    <Content Include="Content\Graphics\RangedArmoredGoblin.png" />
+    <Content Include="Content\Graphics\RangedArmoredGoblinInvincible.png" />
     <Content Include="Content\Graphics\RangedGoblinSheet.png" />
     <Content Include="Content\Graphics\RangedGoblinSheetInvincible.png" />
     <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />

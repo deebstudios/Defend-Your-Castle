@@ -27,6 +27,7 @@ namespace Defend_Your_Castle
         public static Texture2D Spear;
         public static Texture2D Warhammer;
         public static Texture2D PlayerCastle;
+        public static Texture2D PlayerCastleFortified;
         public static Texture2D PlayerCastleInvincible;
         public static Texture2D[] PlayerArcher;
 
@@ -41,6 +42,8 @@ namespace Defend_Your_Castle
         public static Texture2D FlyingGoblinInvincibleSheet;
         public static Texture2D ArmoredGoblinSheet;
         public static Texture2D ArmoredGoblinInvincibleSheet;
+        public static Texture2D RangedArmoredGoblin;
+        public static Texture2D RangedArmoredGoblinInvincible;
 
         //Shop graphics
         public static Texture2D GoldCoin;
@@ -87,6 +90,7 @@ namespace Defend_Your_Castle
             Spear = Content.Load<Texture2D>(GraphicsDir + "Spear");
             Warhammer = Content.Load<Texture2D>(GraphicsDir + "Alpha Warhammer");
             PlayerCastle = Content.Load<Texture2D>(GraphicsDir + "PlayerCastle");
+            PlayerCastleFortified = Content.Load<Texture2D>(GraphicsDir + "PlayerCastleFortified");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
             PlayerArcher = new Texture2D[3] { LoadGraphic(Content, "Archer"), LoadGraphic(Content, "ArcherLvl2"), LoadGraphic(Content, "ArcherLvl3") };
 
@@ -101,6 +105,8 @@ namespace Defend_Your_Castle
             FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
             ArmoredGoblinSheet = LoadGraphic(Content, "Armored Goblin Sheet");
             ArmoredGoblinInvincibleSheet = LoadGraphic(Content, "Armored Goblin Sheet Invincible");
+            RangedArmoredGoblin = LoadGraphic(Content, "RangedArmoredGoblin");
+            RangedArmoredGoblinInvincible = LoadGraphic(Content, "RangedArmoredGoblinInvincible");
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");

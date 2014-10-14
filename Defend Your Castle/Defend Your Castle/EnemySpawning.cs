@@ -10,8 +10,8 @@ namespace Defend_Your_Castle
     {
         //The number of levels required for the min and max speed enemies increase their base speed by to go up by 1
         //Ex. If MinSpeedIncrease = 5, every 5 levels the minimum amount enemies increase their base speed by goes up by 1
-        private const int MinSpeedIncrease = 7;
-        private const int MaxSpeedIncrease = 4;
+        private const int MinSpeedIncrease = 10;
+        private const int MaxSpeedIncrease = 7;
 
         // Reference to the level
         private Level level;
@@ -158,6 +158,8 @@ namespace Defend_Your_Castle
                 case 3: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
                     return (new FlyingEnemy(level, Y, flyheight, speedincrease));
+                //case 4: //Armored Spear enemy
+                //    return (new ArmoredSpearEnemy(level, Y, speedincrease));
                 case 0: // Melee Enemy
                 default:
                     return (new MeleeEnemy(level, Y, speedincrease));
@@ -177,8 +179,8 @@ namespace Defend_Your_Castle
 
                 // NOTE: This calculation will need to be changed. It was just set up with these values for now
                 // Set the minimum spawn time to depend on the level of the player
-                // The minimum spawn time decreases by 75 milliseconds each level
-                int MinSpawnTime = (3000 - (75 * (level.GetLevelNum - 1)));
+                // The minimum spawn time decreases by 48 milliseconds each level
+                int MinSpawnTime = (3000 - (48 * (level.GetLevelNum - 1)));
 
                 // Set the maximum spawn time to be 1.5x the minimum spawn time
                 // Add 1 to include the maximum spawn time

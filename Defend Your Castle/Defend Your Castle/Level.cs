@@ -131,7 +131,7 @@ namespace Defend_Your_Castle
         private float LevelDuration
         {
             // NOTE: This calculation will need to be changed
-            get { return (30000 + ((LevelNum - 1) * 1000)); }
+            get { return (20000 + ((LevelNum - 1) * 900)); }
         }
 
         //Creates the night fade based on how long the level lasts

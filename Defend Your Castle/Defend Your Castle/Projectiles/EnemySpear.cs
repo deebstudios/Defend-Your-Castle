@@ -11,12 +11,12 @@ namespace Defend_Your_Castle
     //A spear for ranged enemies to throw
     public sealed class EnemySpear : Projectile
     {
-        public EnemySpear(Vector2 velocity) : base(velocity)
+        public EnemySpear(int damage, Vector2 velocity) : base(velocity)
         {
             ObjectSheet = LoadAssets.EnemySpear;
             Sprite = new AnimFrame(new Rectangle(0, 0, LoadAssets.EnemySpear.Width, LoadAssets.EnemySpear.Height), 0f);
 
-            Damage = 20;
+            Damage = damage;
         }
 
         //The spear is oriented diagonally, so we'll simply change it as we see fit
