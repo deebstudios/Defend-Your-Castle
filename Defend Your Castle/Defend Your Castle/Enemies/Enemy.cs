@@ -19,6 +19,15 @@ namespace Defend_Your_Castle
         // Movement speed
         protected Vector2 MoveSpeed;
 
+        // Minimum movement speed
+        protected Vector2 MinimumMoveSpeed;
+
+        // The amount to slow the enemy
+        protected Vector2 SlowAmount;
+
+        // The time until the enemy should be slowed
+        protected float SlowTime;
+
         // Range of the Enemy. Use 1 for melee enemies
         protected int Range;
 
@@ -40,6 +49,12 @@ namespace Defend_Your_Castle
             GoldDrop = null;
 
             ObjectSheet = LoadAssets.testanim;
+
+            // Set the slow amount
+            SlowAmount = new Vector2(0, 0);
+
+            // Set the minimum movement speed
+            MinimumMoveSpeed = new Vector2(0.1f, 0);
 
             //FOR TESTING INVINCIBILITY
             //InvincibilityLength = 5000f;
@@ -70,7 +85,14 @@ namespace Defend_Your_Castle
         //Gets the movespeed of the enemy
         public Vector2 GetMoveSpeed
         {
-            get { return MoveSpeed; }
+            get
+            {
+                // Get the true movement speed, taking into account any slows applied to the enemy
+                Vector2 TrueMoveSpeed = (MoveSpeed - SlowAmount);
+
+                // Return the true movement speed. If it is less than the minimum movement speed, return the minimum
+                return ((TrueMoveSpeed.X >= MinimumMoveSpeed.X) ? TrueMoveSpeed : MinimumMoveSpeed);
+            }
         }
 
         //Gets the amount of gold the enemy grants upon being killed
@@ -119,6 +141,21 @@ namespace Defend_Your_Castle
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
         }
 
+        public virtual void ApplySlow(Vector2 slowAmount, float slowDur)
+        {
+            // Set the slow amount
+            SlowAmount = slowAmount;
+
+            // Set the slow time
+            SlowTime = (Game1.ActiveTime + slowDur);
+        }
+
+        public virtual void CheckEndSlow()
+        {
+            // If the game
+            if (Game1.ActiveTime >= SlowTime) SlowAmount = new Vector2(0, 0);
+        }
+
         protected abstract void ChooseNextAction(Level level);
 
         public override void Update(Level level)
@@ -135,6 +172,9 @@ namespace Defend_Your_Castle
                 GoldDrop.Update();
                 if (GoldDrop.DoneFading == true) base.Die(level);
             }
+
+            // Check if the enemy's slow has ended
+            CheckEndSlow();
 
             base.Update(level);
         }

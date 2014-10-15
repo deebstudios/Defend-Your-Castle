@@ -270,10 +270,13 @@ namespace Defend_Your_Castle
         {
             // Create a new level
             level = new Level(new Player(GamePage), this);
-            level.AddPlayerHelper(new Archer(0));
+            level.AddPlayerHelper(new Slower(0)); // Archer(0));
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
+
+            // Select the Sword
+            SelectSwordWeapon();
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
@@ -292,6 +295,9 @@ namespace Defend_Your_Castle
 
             // Load the player's saved game data
             await LoadData();
+
+            // Select the Sword
+            SelectSwordWeapon();
 
             // Show the shop
             GamePage.ShowShop();
@@ -314,6 +320,16 @@ namespace Defend_Your_Castle
 
             // Return true
             return true;
+        }
+
+        // Selects the Sword weapon when a new game is started or an existing game is continued
+        private void SelectSwordWeapon()
+        {
+            // Set the player's selected weapon to the sword
+            level.GetPlayer.SwitchWeapon(0);
+
+            // Select the Sword on the UI
+            GamePage.HUD_WeaponSword.IsChecked = true;
         }
 
         protected override void Update(GameTime gameTime)

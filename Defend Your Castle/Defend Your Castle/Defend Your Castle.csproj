@@ -162,6 +162,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="PlayerHelpers\Archer.cs" />
     <Compile Include="PlayerHelpers\PlayerHelper.cs" />
+    <Compile Include="PlayerHelpers\Slower.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Projectiles\EnemySpear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
