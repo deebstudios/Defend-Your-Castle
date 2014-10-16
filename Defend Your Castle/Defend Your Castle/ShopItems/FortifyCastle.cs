@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //A ShopItem that makes the player's castle stronger and take less damage from attacks
     public sealed class FortifyCastle : ShopItem
     {
-        public FortifyCastle(Player shopPlayer) : base(shopPlayer)
+        public FortifyCastle(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
             Name = "Fortify Castle";

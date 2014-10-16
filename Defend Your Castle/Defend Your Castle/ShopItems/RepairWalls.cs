@@ -12,7 +12,7 @@ namespace Defend_Your_Castle
     {
         private int HealAmount;
 
-        public RepairWalls(Player shopPlayer) : base(shopPlayer)
+        public RepairWalls(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             Name = "Repair Walls";
 

@@ -16,6 +16,9 @@ namespace Defend_Your_Castle
         // Reference to the player. The reference is the same as ShopItem's ShopPlayer
         protected Player ShopPlayer;
 
+        // Reference to the shop
+        protected Shop TheShop;
+
         // The name of the item
         protected String name;
 
@@ -63,10 +66,13 @@ namespace Defend_Your_Castle
             get { return CurLevel; }
         }
 
-        public ShopItem(Player shopPlayer)
+        public ShopItem(Player shopPlayer, Shop shop)
         {
             // Get the current player shopping
             ShopPlayer = shopPlayer;
+
+            // Get the shop
+            TheShop = shop;
 
             MaxLevel = InfinitePurchases;
             CurLevel = 0;
@@ -81,6 +87,12 @@ namespace Defend_Your_Castle
         public virtual void UseItem()
         {
             CurLevel++;
+        }
+
+        // Performs the action of the shop item when used on the HUD (used by consumables only)
+        public virtual void UseItemInGame()
+        {
+            
         }
 
         public void SetCurrentLevel(int level)

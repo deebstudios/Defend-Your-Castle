@@ -159,6 +159,7 @@ namespace Defend_Your_Castle
                     // Stores the randomly-generated enemy index
                     int randEnemyIndex;
 
+                    // Loop until the Slower finds an enemy to slow or has tried too many times
                     while (IsSlowing == false && numSlowTries < maxNumTries)
                     {
                         // Get a random enemy index

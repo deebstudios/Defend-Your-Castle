@@ -35,13 +35,13 @@ namespace Defend_Your_Castle
             // Initialize the three ShopItems lists. Change these lists to modify the items in the shop
             
             // Upgrades
-            ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer) };
+            ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer, this), new FortifyCastle(shopPlayer, this) };
 
             // Prepare/Repair
-            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer) };
+            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer, this) };
 
             // Items
-            ShopItems = new List<ShopItem>();
+            ShopItems = new List<ShopItem>() { new Invincibility(shopPlayer, this) };
 
             // Assign the shop items to the Shop
             AssignShopItems();

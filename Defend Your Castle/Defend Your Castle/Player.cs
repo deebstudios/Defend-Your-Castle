@@ -75,7 +75,7 @@ namespace Defend_Your_Castle
             InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
 
             Fortified = false;
-            PercentDamage = .9f;
+            PercentDamage = 1f;
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
