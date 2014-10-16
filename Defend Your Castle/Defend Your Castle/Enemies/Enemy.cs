@@ -22,6 +22,9 @@ namespace Defend_Your_Castle
         // Minimum movement speed
         protected Vector2 MinimumMoveSpeed;
 
+        // Tracks whether or not the enemy is slowed
+        protected bool IsSlowed;
+
         // The amount to slow the enemy
         protected Vector2 SlowAmount;
 
@@ -107,12 +110,21 @@ namespace Defend_Your_Castle
         }
 
         //Gets the fade color of the GoldDrop animation
-        public Color GetGoldDropColor
+        public Color GetColor
         {
             get 
             {
-                if (GoldDrop != null) return GoldDrop.GetFadeColor;
-                else return Color.White;
+                // Check if the Enemy was killed and has begun the GoldDrop animation
+                if (GoldDrop != null)
+                {
+                    // Return the fade color
+                    return GoldDrop.GetFadeColor;
+                }
+                else
+                {
+                    // Return Light Coral if the enemy is slowed and White if not
+                    return ((IsSlowed == true) ? Color.LightCoral : Color.White);
+                }
             }
         }
 
@@ -148,12 +160,22 @@ namespace Defend_Your_Castle
 
             // Set the slow time
             SlowTime = (Game1.ActiveTime + slowDur);
+
+            // State that the enemy is slowed
+            IsSlowed = true;
         }
 
         public virtual void CheckEndSlow()
         {
-            // If the game
-            if (Game1.ActiveTime >= SlowTime) SlowAmount = new Vector2(0, 0);
+            // Check if the enemy is currently marked as slowed but should no longer be slowed
+            if ((IsSlowed == true) && (Game1.ActiveTime >= SlowTime))
+            {
+                // Reset the slow amount
+                SlowAmount = new Vector2(0, 0);
+
+                // State that the enemy is no longer slowed
+                IsSlowed = false;
+            }
         }
 
         protected abstract void ChooseNextAction(Level level);

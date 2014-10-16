@@ -71,7 +71,7 @@ namespace Defend_Your_Castle
                 Anim.Draw(spriteBatch, enemy.GetInvincibleSheet, enemy.GetTruePosition, enemy.GetDirection, enemy.GetInvincibilityColor(true), 0f, depth + .0001f);
             }
 
-            Anim.Draw(spriteBatch, spritesheet, enemy.GetTruePosition, enemy.GetDirection, enemy.GetGoldDropColor, 0f, depth);
+            Anim.Draw(spriteBatch, spritesheet, enemy.GetTruePosition, enemy.GetDirection, enemy.GetColor, 0f, depth);
         }
     }
 }
