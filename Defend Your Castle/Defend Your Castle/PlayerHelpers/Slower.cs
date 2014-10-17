@@ -24,11 +24,11 @@ namespace Defend_Your_Castle
         // The enemy the Slower is targeting
         private LevelObject Victim;
 
-        // The Slower's attacking animation
-        private Animation AttackingAnim;
+        // The Slower's slowing animation
+        private Animation SlowingAnim;
 
         // The Slower's chance of slowing a nearby enemy
-        private int AttackChance;
+        private int SlowChance;
 
         // The amount to slow the movement speed of enemies
         private Vector2 SlowAmount;
@@ -43,14 +43,14 @@ namespace Defend_Your_Castle
         {
             Victim = null;
 
-            ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
+            ObjectSheet = LoadAssets.PlayerSlower[HelperLevel];
 
             MaxLevel = 4;
 
-            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 22, 35), 0f));
-            AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 200f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 500f, new Vector2(4, 0)));
+            Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 35), 0f));
+            SlowingAnim = new Animation(true, new AnimFrame(new Rectangle(21, 0, 17, 35), 100f), new AnimFrame(new Rectangle(43, 0, 17, 35), 300f));
 
-            AttackChance = 4;
+            SlowChance = 4;
 
             SlowAmount = new Vector2(0.5f, 0);
             SlowDur = 3000;
@@ -85,13 +85,13 @@ namespace Defend_Your_Castle
             if (enemy.GetObjectType == ObjectType.Enemy && enemy.IsDying == false && enemy.IsInvincible == false)
             {
                 Random random = new Random();
-                int randnum = random.Next(0, AttackChance);
+                int randnum = random.Next(0, SlowChance);
 
                 //We selected the enemy as our victim, so set it and start the attacking animation
                 if (randnum == 0)
                 {
                     Victim = enemy;
-                    AttackingAnim.Restart();
+                    SlowingAnim.Restart();
                 }
 
                 //Whether we failed to slow the enemy or not, start the cooldown
@@ -99,7 +99,7 @@ namespace Defend_Your_Castle
             }
         }
 
-        private void StopAttacking()
+        private void StopSlowing()
         {
             Victim = null;
         }
@@ -124,7 +124,7 @@ namespace Defend_Your_Castle
         //Make the Slower attack faster, further, and more successfully
         public override void IncreaseStats()
         {
-            AttackChance -= ChanceIncrease;
+            SlowChance -= ChanceIncrease;
             AttackTime -= SpeedIncrease;
             SlowAmount += SlowAmountIncrease;
             SlowDur += SlowDurIncrease;
@@ -178,18 +178,18 @@ namespace Defend_Your_Castle
             }
             else
             {
-                AttackingAnim.Update();
+                SlowingAnim.Update();
 
                 // If the enemy already died while the Slower was attacking, stop
                 if (Victim.IsDying == true)
-                    StopAttacking();
-                else if (AttackingAnim.IsAnimationComplete == true)
+                    StopSlowing();
+                else if (SlowingAnim.IsAnimationComplete == true)
                 {
                     // Slow the designated target
                     (Victim as Enemy).ApplySlow(SlowAmount, SlowDur);
 
                     // Stop the helper from shooting
-                    StopAttacking();
+                    StopSlowing();
                 }
             }
 
@@ -198,7 +198,7 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation drawanim = ((IsSlowing == false) ? Animation : AttackingAnim);
+            Animation drawanim = ((IsSlowing == false) ? Animation : SlowingAnim);
 
             drawanim.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, .998f);
 
