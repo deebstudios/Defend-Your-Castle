@@ -31,6 +31,10 @@ namespace Defend_Your_Castle
         //Sees whether the player has an invincibility powerup or not
         protected bool InvincibilityAvailable;
 
+        //Checks whether the player's castle is fortified and takes reduced damage or not
+        protected bool Fortified;
+        protected float PercentDamage;
+
         // The amount of health of the player
         private int Health;
 
@@ -69,6 +73,9 @@ namespace Defend_Your_Castle
             InvincibilityLength = 5000f;
             InvincibilityAvailable = false;
             InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
+
+            Fortified = false;
+            PercentDamage = 1f;
 
             // Set the player's base health and maximum health
             Health = MaxHealth = 1500;
@@ -201,6 +208,15 @@ namespace Defend_Your_Castle
             UpdateHealthInShop();
         }
 
+        //Calculates the total damage dealt to the player
+        private int CalculateDamage(int damage)
+        {
+            //Keep a float for accuracy
+            float newdamage = damage * PercentDamage;
+
+            return (int)newdamage;
+        }
+
         //Makes the player lose health when being attacked
         public void TakeDamage(int damage, Level level)
         {
@@ -208,7 +224,7 @@ namespace Defend_Your_Castle
             if (IsInvincible == false)
             {
                 //Subtract an amount of damage
-                Health -= damage;
+                Health -= CalculateDamage(damage);
 
                 SoundManager.PlaySound(LoadAssets.TestSound);
 
@@ -243,6 +259,18 @@ namespace Defend_Your_Castle
             //Increase the player's current and max HP by the designated amount
             MaxHealth += healthIncrease;
             Heal(healthIncrease);
+        }
+
+        //Fortify's the castle by decreasing all damage dealt by a certain percentage (ONE TIME UPGRADE)
+        public void FortifyCastle()
+        {
+            Fortified = true;
+
+            //Change the castle graphic
+            ObjectSheet = LoadAssets.PlayerCastleFortified;
+
+            //Reduce all damage by 10%
+            PercentDamage = .9f;
         }
 
         public void UpgradeCastle(int healthIncrease)

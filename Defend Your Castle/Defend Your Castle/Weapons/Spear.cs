@@ -12,7 +12,7 @@ namespace Defend_Your_Castle
         public Spear()
         {
             // Set the attack speed
-            AttackSpeed = 200;
+            AttackSpeed = 50;
 
             //Set the sound of the spear to a test sound
             Sound = LoadAssets.TestSound;

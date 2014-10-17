@@ -1,9 +1,9 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using MonoGame.Framework;
 using Windows.ApplicationModel.Activation;
-
 
 namespace Defend_Your_Castle
 {
@@ -140,6 +140,18 @@ namespace Defend_Your_Castle
             }
         }
 
+        private void HUD_ConsumablesListItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // Get the shop item that was tapped
+            ShopItem item = (ShopItem)((Image)sender).DataContext;
+
+            // Use the item while in game
+            item.UseItemInGame();
+
+            // Remove the item from the HUD
+            HUD_ConsumablesList.Items.Remove(item);
+        }
+
         // Pause Menu
 
         private void PauseMenu_Resume_Click(object sender, RoutedEventArgs e)
@@ -224,6 +236,12 @@ namespace Defend_Your_Castle
             // State that the player has saved data
             Game1.HasSavedData = true;
         }
+
+        
+
+       
+
+        
 
 
     }

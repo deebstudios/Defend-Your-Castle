@@ -95,7 +95,8 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Image Style="{StaticResource HUD_ConsumablesList_ImageStyle}" Source="{Binding Path=ImagePath}" />
+                        <Image Style="{StaticResource HUD_ConsumablesList_ImageStyle}" Source="{Binding Path=ImagePath}"
+                               Tapped="HUD_ConsumablesListItem_Tapped" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -215,8 +216,8 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
         </Style>
         
         <Style x:Key="Shop_ShopItemsList_ImageStyle" TargetType="Image">
@@ -235,11 +236,13 @@
             <Setter Property="MaxWidth" Value="400"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Grid.Row" Value="2"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Grid.Row" Value="1"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
@@ -249,19 +252,30 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
                             <!-- Shop Item Image -->
-                            <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click" FontFamily="Global User Interface">
+                            <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click">
                                 <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
                             </Button>
-                            
+
                             <!-- Shop Item Name, Price, + Description -->
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                            <Grid Grid.Column="1" Margin="5,0,5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}" />
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}"/>
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}" />
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
-                            </StackPanel>
-                        </StackPanel>
+                            </Grid>
+                        </Grid>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>

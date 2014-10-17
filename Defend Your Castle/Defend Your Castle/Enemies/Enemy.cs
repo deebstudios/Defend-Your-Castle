@@ -19,6 +19,15 @@ namespace Defend_Your_Castle
         // Movement speed
         protected Vector2 MoveSpeed;
 
+        // Minimum movement speed
+        protected Vector2 MinimumMoveSpeed;
+
+        // The amount to slow the enemy
+        protected Vector2 SlowAmount;
+
+        // The time until the enemy should be slowed
+        protected float SlowTime;
+
         // Range of the Enemy. Use 1 for melee enemies
         protected int Range;
 
@@ -40,6 +49,12 @@ namespace Defend_Your_Castle
             GoldDrop = null;
 
             ObjectSheet = LoadAssets.testanim;
+
+            // Set the slow amount
+            SlowAmount = new Vector2(0, 0);
+
+            // Set the minimum movement speed
+            MinimumMoveSpeed = new Vector2(0.1f, 0);
 
             //FOR TESTING INVINCIBILITY
             //InvincibilityLength = 5000f;
@@ -70,7 +85,17 @@ namespace Defend_Your_Castle
         //Gets the movespeed of the enemy
         public Vector2 GetMoveSpeed
         {
-            get { return MoveSpeed; }
+            get
+            {
+                // Get the movement speed of the enemy
+                Vector2 TrueMoveSpeed = MoveSpeed;
+
+                // If the enemy is slowed, decrease its movement speed
+                if (IsSlowed == true) TrueMoveSpeed -= SlowAmount;
+
+                // Return the true movement speed. If it is less than the minimum movement speed, return the minimum
+                return ((TrueMoveSpeed.X >= MinimumMoveSpeed.X) ? TrueMoveSpeed : MinimumMoveSpeed);
+            }
         }
 
         //Gets the amount of gold the enemy grants upon being killed
@@ -79,18 +104,32 @@ namespace Defend_Your_Castle
             get { return Gold; }
         }
 
+        public bool IsSlowed
+        {
+            get { return (Game1.ActiveTime < SlowTime); }
+        }
+
         public override bool IsDying
         {
             get { return (FakeDead == true); }
         }
 
-        //Gets the fade color of the GoldDrop animation
-        public Color GetGoldDropColor
+        //Gets the shade color to apply to the enemy
+        public Color GetColor
         {
             get 
             {
-                if (GoldDrop != null) return GoldDrop.GetFadeColor;
-                else return Color.White;
+                // Check if the Enemy was killed and has begun the GoldDrop animation
+                if (GoldDrop != null)
+                {
+                    // Return the fade color of the GoldDrop animation
+                    return GoldDrop.GetFadeColor;
+                }
+                else
+                {
+                    // Return Light Pink if the enemy is slowed and White if not
+                    return ((IsSlowed == true) ? Color.LightPink : Color.White);
+                }
             }
         }
 
@@ -117,6 +156,15 @@ namespace Defend_Your_Castle
         {
             FakeDead = true;
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
+        }
+
+        public virtual void ApplySlow(Vector2 slowAmount, float slowDur)
+        {
+            // Set the slow amount
+            SlowAmount = slowAmount;
+
+            // Set the slow time
+            SlowTime = (Game1.ActiveTime + slowDur);
         }
 
         protected abstract void ChooseNextAction(Level level);

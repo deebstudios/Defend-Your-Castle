@@ -11,7 +11,7 @@ namespace Defend_Your_Castle
         // The amount of health to upgrade the castle
         private int HealthIncrease;
 
-        public CastleUpgrade(Player shopPlayer) : base(shopPlayer)
+        public CastleUpgrade(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
             Name = "Fortify Castle";

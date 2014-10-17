@@ -271,7 +271,7 @@ namespace Defend_Your_Castle
         //The helper types
         private static Type[] GetKnownTypes()
         {
-            return new Type[] { typeof(ArcherData) };
+            return new Type[] { typeof(ArcherData), typeof(SlowerData) };
         }
     }
 
@@ -293,6 +293,27 @@ namespace Defend_Your_Castle
                 playerarcher.IncreaseLevel();
 
             return playerarcher;
+        }
+    }
+
+    [DataContract(Namespace = "")]
+    public class SlowerData : HelperData
+    {
+        public SlowerData(int currentlevel, int index)
+        {
+            Level = currentlevel;
+            Index = index;
+        }
+
+        public override PlayerHelper CreateHelper()
+        {
+            Slower playerslower = new Slower(Index);
+
+            //Level up the slower until its at the appropriate level; we will definitely have a SetLevel method later to avoid the unnecessary loop
+            for (int i = 0; i < Level; i++)
+                playerslower.IncreaseLevel();
+            
+            return playerslower;
         }
     }
 

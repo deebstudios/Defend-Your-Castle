@@ -8,12 +8,17 @@ using Microsoft.Xna.Framework;
 namespace Defend_Your_Castle
 {
     //An enemy that goes up to the tower and throws spears at it
-    public sealed class SpearEnemy : Enemy
+    public class SpearEnemy : Enemy
     {
-        public SpearEnemy(Level level, float Y)
+        //The amount of damage the projectile deals
+        protected int ProjectileDamage;
+
+        public SpearEnemy(Level level, float Y, int speedadd)
         {
-            MoveSpeed = new Vector2(1, 0);
+            MoveSpeed = new Vector2(1 + speedadd, 0);
             Range = 150;
+
+            ProjectileDamage = 20;
 
             ObjectSheet = LoadAssets.SpearGoblinSheet;
             InvincibleSheet = LoadAssets.SpearGoblinInvincibleSheet;
@@ -26,14 +31,14 @@ namespace Defend_Your_Castle
             SetProperties(level);
         }
 
-        protected override void ChooseNextAction(Level level)
+        protected sealed override void ChooseNextAction(Level level)
         {
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Throw spears
                 Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 300), new AnimFrame(new Rectangle(21, 36, 17, 35), 300), new AnimFrame(new Rectangle(42, 36, 17, 35), 400));
 
-                CurAction = new ThrowSpear(this, ShootAnim, ShootAnim.MaxFrame);
+                CurAction = new ThrowSpear(this, ShootAnim, ShootAnim.MaxFrame, ProjectileDamage);
             }
         }
     }

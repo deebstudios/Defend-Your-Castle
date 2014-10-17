@@ -10,17 +10,22 @@ namespace Defend_Your_Castle
     //The spear enemy throws spears at the player castle
     public sealed class ThrowSpear : Action
     {
+        //The amount of damage the projectile does
+        private int Damage;
+
         //The frame the enemy throws the spear
         private int FrameThrow;
 
-        public ThrowSpear(Enemy enem, Animation anim, int framethrow) : base(enem, anim, ActionType.Attacking)
+        public ThrowSpear(Enemy enem, Animation anim, int framethrow, int damage) : base(enem, anim, ActionType.Attacking)
         {
+            Damage = damage;
+
             FrameThrow = framethrow;
         }
 
         private Projectile SpearThrown()
         {
-            return (new EnemySpear(new Vector2(2, -4)));
+            return (new EnemySpear(Damage, new Vector2(2, -4)));
         }
 
         public override void Update(Level level)

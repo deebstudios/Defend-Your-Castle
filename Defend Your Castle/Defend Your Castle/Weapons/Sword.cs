@@ -11,8 +11,8 @@ namespace Defend_Your_Castle
     {
         public Sword()
         {
-            // Set the attack speed to half a second
-            AttackSpeed = 100;
+            // Set the attack speed
+            AttackSpeed = 50;
 
             // Set the sound of the sword to a test sound
             Sound = LoadAssets.TestSound;
