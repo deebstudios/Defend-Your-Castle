@@ -36,6 +36,7 @@ namespace Defend_Your_Castle
         // The duration of time enemies are slowed
         private float SlowDur;
 
+        private const int AttackTimeRange = 100;
         private float AttackTime;
         private float PrevAttack;
 
@@ -57,7 +58,7 @@ namespace Defend_Your_Castle
 
             // Set the slow amount increase
             SlowAmountIncrease = new Vector2(0.2f, 0);
-
+            
             AttackTime = 1000;
             PrevAttack = 0f;
 
@@ -74,9 +75,14 @@ namespace Defend_Your_Castle
             get { return (Game1.ActiveTime >= PrevAttack); }
         }
 
+        private float GetAttackTime
+        {
+            get { return Rand.Next((int)AttackTime - AttackTimeRange, (int)AttackTime + (AttackTimeRange + 1)); }
+        }
+
         private void RefreshAttackTimer()
         {
-            PrevAttack = Game1.ActiveTime + AttackTime;
+            PrevAttack = Game1.ActiveTime + GetAttackTime;
         }
 
         private void CheckSlowEnemy(Level level, LevelObject enemy)
@@ -84,8 +90,7 @@ namespace Defend_Your_Castle
             //If the object is an enemy and is within a certain range, there is a chance of slowing it based on AttackChance
             if (enemy.GetObjectType == ObjectType.Enemy && enemy.IsDying == false && enemy.IsInvincible == false)
             {
-                Random random = new Random();
-                int randnum = random.Next(0, SlowChance);
+                int randnum = Rand.Next(0, SlowChance);
 
                 //We selected the enemy as our victim, so set it and start the attacking animation
                 if (randnum == 0)
@@ -93,9 +98,6 @@ namespace Defend_Your_Castle
                     Victim = enemy;
                     SlowingAnim.Restart();
                 }
-
-                //Whether we failed to slow the enemy or not, start the cooldown
-                RefreshAttackTimer();
             }
         }
 
@@ -106,19 +108,9 @@ namespace Defend_Your_Castle
 
         public override void SetPosition()
         {
-            float X = Parent.GetPosition.X + 48 + (HelperIndex * 55);
+            float X = Parent.GetPosition.X + 5 + (HelperIndex * 56);
 
-            //Find out how much to increase the Archer's X location based on its index
-            //switch(HelperIndex)
-            //{
-            //    case 1: X += 55;
-            //        break;
-            //    case 2: X += 110;
-            //        break;
-            //    default: break;
-            //}
-
-            Position = new Vector2(X, Parent.GetPosition.Y + 5);
+            Position = new Vector2(X, Parent.GetPosition.Y - 29);
         }
 
         //Make the Slower attack faster, further, and more successfully
@@ -130,8 +122,8 @@ namespace Defend_Your_Castle
             SlowDur += SlowDurIncrease;
 
             //Ensure that we don't access a value out of bounds
-            if (HelperLevel < LoadAssets.PlayerArcher.Length)
-                ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
+            if (HelperLevel < LoadAssets.PlayerSlower.Length)
+                ObjectSheet = LoadAssets.PlayerSlower[HelperLevel];
         }
 
         public override HelperData ConvertHelperToData()
@@ -152,9 +144,6 @@ namespace Defend_Your_Castle
 
                     // The number of slow attempts the Slower has performed so far
                     int numSlowTries = 0;
-
-                    // Used to generate a random number
-                    Random random = new Random();
                     
                     // Stores the randomly-generated enemy index
                     int randEnemyIndex;
@@ -163,7 +152,7 @@ namespace Defend_Your_Castle
                     while (IsSlowing == false && numSlowTries < maxNumTries)
                     {
                         // Get a random enemy index
-                        randEnemyIndex = random.Next(0, level.GetEnemies.Count);
+                        randEnemyIndex = Rand.Next(0, level.GetEnemies.Count);
 
                         // Get the random enemy
                         LevelObject enemy = level.GetEnemies[randEnemyIndex];
@@ -174,6 +163,9 @@ namespace Defend_Your_Castle
                         // Increment the number of slow attempts by 1
                         numSlowTries += 1;
                     }
+
+                    //Whether we failed to slow the enemy or not, start the cooldown
+                    RefreshAttackTimer();
                 }
             }
             else

@@ -94,7 +94,7 @@ namespace Defend_Your_Castle
             PlayerCastleFortified = Content.Load<Texture2D>(GraphicsDir + "PlayerCastleFortified");
             PlayerCastleInvincible = LoadGraphic(Content, "PlayerCastleInvincible");
             PlayerArcher = new Texture2D[3] { LoadGraphic(Content, "Archer"), LoadGraphic(Content, "ArcherLvl2"), LoadGraphic(Content, "ArcherLvl3") };
-            PlayerSlower = new Texture2D[3] { LoadGraphic(Content, "SlowerSheet"), LoadGraphic(Content, "SlowerSheet"), LoadGraphic(Content, "SlowerSheet") };
+            PlayerSlower = new Texture2D[3] { LoadGraphic(Content, "SlowerSheet"), LoadGraphic(Content, "SlowerSheet2"), LoadGraphic(Content, "SlowerSheet3") };
 
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");

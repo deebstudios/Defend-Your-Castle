@@ -271,6 +271,11 @@ namespace Defend_Your_Castle
             // Create a new level
             level = new Level(new Player(GamePage), this);
             level.AddPlayerHelper(new Slower(0)); // Archer(0));
+            level.AddPlayerHelper(new Archer(0));
+            level.AddPlayerHelper(new Slower(1));
+            level.AddPlayerHelper(new Slower(2));
+            level.AddPlayerHelper(new Archer(1));
+            level.AddPlayerHelper(new Archer(2));
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
@@ -336,7 +341,7 @@ namespace Defend_Your_Castle
         {
             //Update active time if the game is not paused
             if (GameState == GameState.InGame) activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
+            
             // Check which game state the player is in
             switch (GameState)
             {

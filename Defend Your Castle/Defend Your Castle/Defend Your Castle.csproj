@@ -216,6 +216,8 @@
     <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />
     <Content Include="Content\Graphics\SlowerSheet.png" />
+    <Content Include="Content\Graphics\SlowerSheet2.png" />
+    <Content Include="Content\Graphics\SlowerSheet3.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Spear Goblin Sheet.png" />
     <Content Include="Content\Graphics\ShopBackground.png" />
