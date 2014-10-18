@@ -36,8 +36,8 @@ namespace Defend_Your_Castle
             Victim = null;
 
             ObjectSheet = LoadAssets.PlayerArcher[HelperLevel];
-
-            MaxLevel = 4;
+            
+            MaxLevel = 2;
 
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 22, 35), 0f));
             AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 200f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 500f, new Vector2(4, 0)));
@@ -76,10 +76,21 @@ namespace Defend_Your_Castle
             PrevAttack = Game1.ActiveTime + GetAttackTime;
         }
 
+        private bool CheckWeakness(LevelObject enemy)
+        {
+            //The Archer can hit more types of enemies as it levels up
+            switch (HelperLevel)
+            {
+                case 0: return enemy.GetWeaponWeakness == (int)Player.WeaponTypes.Sword;
+                case 1: return enemy.GetWeaponWeakness != (int)Player.WeaponTypes.Spear;
+                default: return true;
+            }
+        }
+
         private void CheckAttackEnemy(Level level, LevelObject enemy)
         {
-            //If the object is an enemy, can be killed by the Sword, and is within a certain range, there is a chance of attacking it based on AttackChance
-            if (enemy.GetObjectType == ObjectType.Enemy && enemy.GetWeaponWeakness == (int)Player.WeaponTypes.Sword && enemy.IsDying == false && enemy.IsInvincible == false && enemy.GetPosition.X >= AttackDistance(level))
+            //If the object is an enemy and is within a certain range, there is a chance of attacking it based on AttackChance
+            if (enemy.GetObjectType == ObjectType.Enemy && CheckWeakness(enemy) == true && enemy.IsDying == false && enemy.IsInvincible == false && enemy.GetPosition.X >= AttackDistance(level))
             {
                 int randnum = Rand.Next(0, AttackChance);
 

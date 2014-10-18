@@ -46,7 +46,7 @@ namespace Defend_Your_Castle
 
             ObjectSheet = LoadAssets.PlayerSlower[HelperLevel];
 
-            MaxLevel = 4;
+            MaxLevel = 2;
 
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 35), 0f));
             SlowingAnim = new Animation(true, new AnimFrame(new Rectangle(21, 0, 17, 35), 100f), new AnimFrame(new Rectangle(43, 0, 17, 35), 300f));
