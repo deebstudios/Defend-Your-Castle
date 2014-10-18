@@ -19,10 +19,18 @@ namespace Defend_Your_Castle
         //This is useful if the player can buy more than one of a particular helper (Ex. Archers) and helps set their positions
         protected int HelperIndex;
 
+        //A pseudo-random number generator that helpers depend on to act
+        protected static readonly Random Rand;
+
         public PlayerHelper()
         {
             MaxLevel = 0;
             HelperLevel = 0;
+        }
+
+        static PlayerHelper()
+        {
+            Rand = new Random();
         }
 
         public int GetMaxLevel

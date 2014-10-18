@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Defend_Your_Castle
 {
     // Global enum to represent the game state
-    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop }
+    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop, HowToPlay }
 
     public class Game1 : Game
     {
@@ -263,6 +263,11 @@ namespace Defend_Your_Castle
                     GamePage.ShowShop();
 
                     break;
+                case GameState.HowToPlay:
+                    ShowGrid_Screen();
+                    screenManager.ChangeScreen(ScreenManager.Screens.HowToPlayScreen);
+
+                    break;
             }
         }
 
@@ -271,6 +276,11 @@ namespace Defend_Your_Castle
             // Create a new level
             level = new Level(new Player(GamePage), this);
             level.AddPlayerHelper(new Slower(0)); // Archer(0));
+            level.AddPlayerHelper(new Archer(0));
+            level.AddPlayerHelper(new Slower(1));
+            level.AddPlayerHelper(new Slower(2));
+            level.AddPlayerHelper(new Archer(1));
+            level.AddPlayerHelper(new Archer(2));
 
             // Create a new shop
             shop = new Shop(GamePage, level.GetPlayer);
@@ -336,7 +346,7 @@ namespace Defend_Your_Castle
         {
             //Update active time if the game is not paused
             if (GameState == GameState.InGame) activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
+            
             // Check which game state the player is in
             switch (GameState)
             {
@@ -362,6 +372,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.LevelEnd:
                 case GameState.Shop:
+                case GameState.HowToPlay:
                     
                     break;
             }
@@ -405,6 +416,10 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.LevelEnd:
                 case GameState.Shop:
+
+                    break;
+                case GameState.HowToPlay:
+                    level.Draw(spriteBatch);
 
                     break;
             }

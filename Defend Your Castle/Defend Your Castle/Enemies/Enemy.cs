@@ -10,6 +10,9 @@ namespace Defend_Your_Castle
 {
     public abstract class Enemy : LevelObject
     {
+        //The minimum speed an enemy can move
+        protected static readonly Vector2 MinimumMoveSpeed;
+
         //"Fake" death for the enemy, indicating that the gold animation must play now
         protected bool FakeDead;
 
@@ -18,9 +21,6 @@ namespace Defend_Your_Castle
 
         // Movement speed
         protected Vector2 MoveSpeed;
-
-        // Minimum movement speed
-        protected Vector2 MinimumMoveSpeed;
 
         // The amount to slow the enemy
         protected Vector2 SlowAmount;
@@ -53,9 +53,6 @@ namespace Defend_Your_Castle
             // Set the slow amount
             SlowAmount = new Vector2(0, 0);
 
-            // Set the minimum movement speed
-            MinimumMoveSpeed = new Vector2(0.1f, 0);
-
             //FOR TESTING INVINCIBILITY
             //InvincibilityLength = 5000f;
             //InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
@@ -66,6 +63,12 @@ namespace Defend_Your_Castle
             Position = new Vector2(0, 100);
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
+        }
+
+        static Enemy()
+        {
+            // Set the minimum movement speed
+            MinimumMoveSpeed = new Vector2(0.1f, 0);
         }
 
         protected void SetProperties(Level level)
@@ -93,8 +96,10 @@ namespace Defend_Your_Castle
                 // If the enemy is slowed, decrease its movement speed
                 if (IsSlowed == true) TrueMoveSpeed -= SlowAmount;
 
-                // Return the true movement speed. If it is less than the minimum movement speed, return the minimum
-                return ((TrueMoveSpeed.X >= MinimumMoveSpeed.X) ? TrueMoveSpeed : MinimumMoveSpeed);
+                //Check the true movement speed's X value. If it is less than the minimum movement speed's X value, set it to the minimum
+                if (TrueMoveSpeed.X < MinimumMoveSpeed.X) TrueMoveSpeed.X = MinimumMoveSpeed.X;
+
+                return TrueMoveSpeed;
             }
         }
 
