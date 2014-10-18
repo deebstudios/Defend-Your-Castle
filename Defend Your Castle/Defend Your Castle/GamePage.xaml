@@ -364,12 +364,14 @@
             <Image Style="{StaticResource TitleScreen_LogoStyle}" />
             
             <Viewbox Grid.Row="1">
-                <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,100">
+                <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,60">
                     <Button Name="TitleScreen_StartGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Start Game"
                             x:FieldModifier="public" />
                     <Button Name="TitleScreen_ContinueGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Continue Game"
                             Margin="0,20,0,20" x:FieldModifier="public" />
                     <Button Name="TitleScreen_Options" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Options"
+                            x:FieldModifier="public" Margin="0,0,0,20" />
+                    <Button Name="TitleScreen_HowToPlay" Style="{StaticResource TitleScreen_ButtonStyle}" Content="How to Play"
                             x:FieldModifier="public" />
                 </StackPanel>
             </Viewbox>
@@ -382,7 +384,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Game Over Styles -->
+            <!-- Options Styles -->
             <Grid.Resources>
                 <Style x:Key="OptionsScreen_BackgroundStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
                     <Setter Property="Grid.RowSpan" Value="2"/>
@@ -498,11 +500,143 @@
                 </Viewbox>
             </Grid>
         </Grid>
+
+        <!-- How to Play Screen -->
+        <Grid Name="HowToPlayScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <Grid.Resources>
+                
+            </Grid.Resources>
+            
+            <FlipView SelectedIndex="0">
+                <FlipViewItem>
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.80*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="1" Style="{StaticResource PauseMenu_VolumeBorderStyle}" VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24" TextWrapping="Wrap"
+                                       Text="The structure below is your fort. The Goblin tribe wants to take it down, so make sure you defend it well!" />
+                        </Border>
+                    </Grid>
+                </FlipViewItem>
+
+                <FlipViewItem>
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- First Column - Helpers -->
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
+                            <Border Style="{StaticResource HUD_HelperStyle}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- TODO: Put Helper Image here -->
+
+                                    <!-- Helper Quantity -->
+                                    <TextBlock Style="{StaticResource HUD_HelperQuantityStyle}" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Second Column - Weapon Buttons -->
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" BorderBrush="Red" BorderThickness="3"
+                                    Background="Transparent" Padding="0" Width="306" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
+                                            <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
+                                        </RadioButton>
+
+                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
+                                            <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
+                                        </RadioButton>
+
+                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
+                                            <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
+                                        </RadioButton>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24" TextWrapping="Wrap"
+                                               Text="These are your available weapons. You can only have one weapon selected at a time. Each weapon can harm certain types of Goblins." />
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <Image Source="Content/Graphics/Alpha Sword.png" Width="32" />
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
+                                        <Image Source="Content/Graphics/Goblin.png" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" />
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
+                                        <Image Source="Content/Graphics/Armored Goblin.png" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Content/Graphics/Spear.png" Width="32" />
+                                        <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
+                                        <Image Source="Content/Graphics/Flying Goblin.png" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Third Column - Health, Gold, and Consumable Items -->
+                        <Grid Grid.Column="2" Opacity="0.30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Health Bar -->
+                            <Border Style="{StaticResource HUD_OuterHPBarStyle}">
+                                <Border Style="{StaticResource HUD_InnerHPBarStyle}" />
+                            </Border>
+
+                            <!-- Gold + Consumables -->
+                            <Border Grid.Row="1" Background="Orange" BorderBrush="Black" BorderThickness="1,0,1,1" Padding="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Image Style="{StaticResource HUD_GoldImageStyle}" />
+                                        <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
+                                    </StackPanel>
+
+                                    <GridView Style="{StaticResource HUD_ConsumablesListStyle}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!-- Fourth Column - Pause Button -->
+                        <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" Opacity="0.30" />
+                    </Grid>
+                </FlipViewItem>
+            </FlipView>
+        </Grid>
     </Grid>
     
     <!-- Game HUD -->
     <Grid Name="GameHUD" x:FieldModifier="public" Visibility="Collapsed">
-        <!-- Grid that contains all of the HUD -->
+        <!-- Grid that contains the HUD -->
         <Grid Name="GameHUD_Contents" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -568,7 +702,7 @@
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
-                            <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="100000" x:FieldModifier="public" />
+                            <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="100" x:FieldModifier="public" />
                         </StackPanel>
 
                         <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />

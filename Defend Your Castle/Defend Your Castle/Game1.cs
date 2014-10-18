@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Defend_Your_Castle
 {
     // Global enum to represent the game state
-    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop }
+    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop, HowToPlay }
 
     public class Game1 : Game
     {
@@ -263,6 +263,11 @@ namespace Defend_Your_Castle
                     GamePage.ShowShop();
 
                     break;
+                case GameState.HowToPlay:
+                    ShowGrid_Screen();
+                    screenManager.ChangeScreen(ScreenManager.Screens.HowToPlayScreen);
+
+                    break;
             }
         }
 
@@ -367,6 +372,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.LevelEnd:
                 case GameState.Shop:
+                case GameState.HowToPlay:
                     
                     break;
             }
@@ -410,6 +416,10 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.LevelEnd:
                 case GameState.Shop:
+
+                    break;
+                case GameState.HowToPlay:
+                    level.Draw(spriteBatch);
 
                     break;
             }

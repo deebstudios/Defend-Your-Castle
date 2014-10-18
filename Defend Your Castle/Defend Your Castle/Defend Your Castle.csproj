@@ -190,6 +190,7 @@
     <Content Include="Content\Graphics\ArcherSheet.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
+    <Content Include="Content\Graphics\Armored Goblin.png" />
     <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\CastleIconBigger.png" />
     <Content Include="Content\Graphics\cursor.png" />
@@ -197,6 +198,7 @@
     <Content Include="Content\Graphics\Enemy Spear %28Complete%29.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet.png" />
+    <Content Include="Content\Graphics\Flying Goblin.png" />
     <Content Include="Content\Graphics\Goblin Sheet.png" />
     <Content Include="Content\Graphics\Goblin.png" />
     <Content Include="Content\Graphics\GoblinInvincible Sheet.png" />

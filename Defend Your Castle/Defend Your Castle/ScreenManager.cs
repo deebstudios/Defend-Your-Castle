@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Defend_Your_Castle
 {
     public sealed class ScreenManager
     {
         // An enum for each screen in the game
-        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen };
+        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen, HowToPlayScreen };
 
         // References to Game1.cs and GamePage.cs
         public Game1 Game;
@@ -32,16 +33,26 @@ namespace Defend_Your_Castle
                     GamePage.TitleScreen.Visibility = Visibility.Visible;
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
                     GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
+                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
 
                     break;
                 case Screens.OptionsScreen:
                     GamePage.OptionsScreen.Visibility = Visibility.Visible;
                     GamePage.TitleScreen.Visibility = Visibility.Collapsed;
                     GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
+                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
 
                     break;
                 case Screens.GameOverScreen:
                     GamePage.GameOverScreen.Visibility = Visibility.Visible;
+                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
+                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
+                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+
+                    break;
+                case Screens.HowToPlayScreen:
+                    GamePage.HowToPlayScreen.Visibility = Visibility.Visible;
+                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
                     GamePage.TitleScreen.Visibility = Visibility.Collapsed;
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
 
@@ -57,6 +68,7 @@ namespace Defend_Your_Castle
             GamePage.TitleScreen_StartGame.Click += StartGame;
             GamePage.TitleScreen_ContinueGame.Click += ContinueGame;
             GamePage.TitleScreen_Options.Click += TitleScreen_Options_Click;
+            GamePage.TitleScreen_HowToPlay.Click += TitleScreen_HowToPlay_Click;
 
             // Options Screen
             GamePage.OptionsScreen_Back.Click += OptionsScreen_Back_Click;
@@ -83,6 +95,18 @@ namespace Defend_Your_Castle
         {
             // Switch to the Options Screen
             ChangeScreen(Screens.OptionsScreen);
+        }
+
+        private void TitleScreen_HowToPlay_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a new level
+            Game.level = new Level(new Player(GamePage), Game);
+
+            // Create a new shop
+            Game.shop = new Shop(GamePage, Game.level.GetPlayer);
+
+            // Change the game state to How To Play
+            Game.ChangeGameState(GameState.HowToPlay);
         }
 
         // Options Screen
