@@ -188,6 +188,8 @@
     <Content Include="Content\Graphics\ArcherLvl2.png" />
     <Content Include="Content\Graphics\ArcherLvl3.png" />
     <Content Include="Content\Graphics\ArcherSheet.png" />
+    <Content Include="Content\Graphics\Armored Goblin Sheet 2.png" />
+    <Content Include="Content\Graphics\Armored Goblin Sheet 3.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
@@ -196,9 +198,13 @@
     <Content Include="Content\Graphics\cursor.png" />
     <Content Include="Content\Graphics\DefendYourFortLogo.png" />
     <Content Include="Content\Graphics\Enemy Spear %28Complete%29.png" />
+    <Content Include="Content\Graphics\Flying Goblin Sheet 2.png" />
+    <Content Include="Content\Graphics\Flying Goblin Sheet 3.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Flying Goblin Sheet.png" />
     <Content Include="Content\Graphics\Flying Goblin.png" />
+    <Content Include="Content\Graphics\Goblin Sheet 2.png" />
+    <Content Include="Content\Graphics\Goblin Sheet 3.png" />
     <Content Include="Content\Graphics\Goblin Sheet.png" />
     <Content Include="Content\Graphics\Goblin.png" />
     <Content Include="Content\Graphics\GoblinInvincible Sheet.png" />
@@ -211,8 +217,12 @@
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleFortified.png" />
     <Content Include="Content\Graphics\PlayerCastleInvincible.png" />
+    <Content Include="Content\Graphics\RangedArmoredGoblin 2.png" />
+    <Content Include="Content\Graphics\RangedArmoredGoblin 3.png" />
     <Content Include="Content\Graphics\RangedArmoredGoblin.png" />
     <Content Include="Content\Graphics\RangedArmoredGoblinInvincible.png" />
+    <Content Include="Content\Graphics\RangedGoblinSheet 2.png" />
+    <Content Include="Content\Graphics\RangedGoblinSheet 3.png" />
     <Content Include="Content\Graphics\RangedGoblinSheet.png" />
     <Content Include="Content\Graphics\RangedGoblinSheetInvincible.png" />
     <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />

@@ -8,9 +8,9 @@ namespace Defend_Your_Castle
 {
     public sealed class ArmoredSpearEnemy : SpearEnemy
     {
-        public ArmoredSpearEnemy(Level level, float Y, int speedadd) : base(level, Y, speedadd)
+        public ArmoredSpearEnemy(Level level, float Y, int speedadd, int costume) : base(level, Y, speedadd, costume)
         {
-            ObjectSheet = LoadAssets.RangedArmoredGoblin;
+            ObjectSheet = LoadAssets.RangedArmoredGoblin[costume];
             InvincibleSheet = LoadAssets.RangedArmoredGoblinInvincible;
 
             WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
