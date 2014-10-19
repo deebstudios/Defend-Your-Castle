@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //An armored enemy
     public sealed class ArmoredEnemy : Enemy
     {
-        public ArmoredEnemy(Level level, float Y, int speedadd)
+        public ArmoredEnemy(Level level, float Y, int speedadd, int costume)
         {
             MoveSpeed = new Vector2(1 + speedadd, 0);
 
@@ -18,7 +18,7 @@ namespace Defend_Your_Castle
 
             Gold = 200;
 
-            ObjectSheet = LoadAssets.ArmoredGoblinSheet;
+            ObjectSheet = LoadAssets.ArmoredGoblinSheet[costume];
             InvincibleSheet = LoadAssets.ArmoredGoblinInvincibleSheet;
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));

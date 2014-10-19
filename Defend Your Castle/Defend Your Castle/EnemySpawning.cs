@@ -19,6 +19,12 @@ namespace Defend_Your_Castle
         // Stores the spawn chance for each enemy in the spawn list. The sum of all items in the list should be 100
         private List<int> EnemySpawnChances;
 
+        // The spawn delay (in milliseconds) for the spawn timer. Enemies will spawn after the level start animation
+        private const float SpawnDelay = 2000f;
+
+        // The spawn delay timer
+        private float PrevSpawnDelay;
+        
         // The amount of time (in milliseconds) it will take for the next enemy to spawn
         private float SpawnTime;
 
@@ -36,12 +42,25 @@ namespace Defend_Your_Castle
             RandGenerator = new Random();
 
             // Initialize the enemy spawn chance list
-            EnemySpawnChances = new List<int>() { 25, 25, 25, 25 };
+            EnemySpawnChances = new List<int>() { 20, 20, 20, 20, 20 };
         }
 
-        public bool CanEnemySpawn
+        // Determines if any enemies can start spawning for the level
+        private bool CanStartSpawning
+        {
+            get { return (Game1.ActiveTime >= PrevSpawnDelay); }
+        }
+        
+        // Determines if an enemy can spawn
+        private bool CanEnemySpawn
         {
             get { return (Game1.ActiveTime >= NextSpawnTime); }
+        }
+
+        // Resets the spawn delay timer when the next level begins
+        public void ResetSpawnDelayTimer()
+        {
+            PrevSpawnDelay = (Game1.ActiveTime + SpawnDelay);
         }
 
         public void CheckAddSpawnEnemy()
@@ -141,28 +160,33 @@ namespace Defend_Your_Castle
             // Get the Enemy number to spawn
             int EnemyIndex = FindEnemyNumToSpawn(RandNum);
 
+            // Get the Y position at which the enemy will spawn
             float Y = (RandGenerator.Next(Player.GateStart, Player.GateEnd)) + level.GetPlayer.GetPosition.Y;
 
             //Increase the speed the enemies move at based on level
             int minspeedinc = level.GetLevelNum / MinSpeedIncrease;
             int maxspeedinc = level.GetLevelNum / MaxSpeedIncrease;
 
+            // Choose a random value between the minimum speed increase and the maximum speed increase, both inclusive
             int speedincrease = RandGenerator.Next(minspeedinc, maxspeedinc + 1);
+
+            //Get a random costume (recolor) for the enemy to be
+            int costume = RandGenerator.Next(0, 3);
 
             switch (EnemyIndex)
             {
                 case 1: // Spear Enemy
-                    return (new SpearEnemy(level, Y, speedincrease));
+                    return (new SpearEnemy(level, Y, speedincrease, costume));
                 case 2: //Armored enemy
-                    return (new ArmoredEnemy(level, Y, speedincrease));
+                    return (new ArmoredEnemy(level, Y, speedincrease, costume));
                 case 3: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
-                    return (new FlyingEnemy(level, Y, flyheight, speedincrease));
-                //case 4: //Armored Spear enemy
-                //    return (new ArmoredSpearEnemy(level, Y, speedincrease));
+                    return (new FlyingEnemy(level, Y, flyheight, speedincrease, costume));
+                case 4: //Armored Spear enemy
+                    return (new ArmoredSpearEnemy(level, Y, speedincrease, costume));
                 case 0: // Melee Enemy
                 default:
-                    return (new MeleeEnemy(level, Y, speedincrease));
+                    return (new MeleeEnemy(level, Y, speedincrease, costume));
             }
         }
 
@@ -196,8 +220,10 @@ namespace Defend_Your_Castle
 
         public void Update()
         {
-            // Try to spawn a new enemy
-            SpawnEnemy();
+            // Check if enemies can start spawning
+            if (CanStartSpawning == true)
+                // Try to spawn a new enemy
+                SpawnEnemy();
         }
 
 

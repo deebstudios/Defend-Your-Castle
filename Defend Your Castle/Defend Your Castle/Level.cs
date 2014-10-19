@@ -106,7 +106,7 @@ namespace Defend_Your_Castle
             Enemies = new List<LevelObject>();
 
             // Set the level number to 1 (for testing)
-            LevelNum = 50;//1;
+            LevelNum = 25; //1;
 
             //Start out at day
             StartDayNight(true);
@@ -163,6 +163,9 @@ namespace Defend_Your_Castle
             //Refresh the night fade
             CreateNightFade(true);
 
+            // Reset the spawn delay timer
+            EnemySpawn.ResetSpawnDelayTimer();
+            
             // Check if a new enemy can be added to the spawn list, and add the enemy if so
             EnemySpawn.CheckAddSpawnEnemy();
 
@@ -328,9 +331,6 @@ namespace Defend_Your_Castle
 
         public void Update()
         {
-            // Check if the level can be ended
-            CheckEndLevel();
-
             //Update the night fade
             NightFade.Update();
 
@@ -342,6 +342,9 @@ namespace Defend_Your_Castle
 
             // Update the enemy spawn
             EnemySpawn.Update();
+
+            // Check if the level can be ended
+            CheckEndLevel();
         }
 
         private void DrawEnemies(SpriteBatch spriteBatch)
