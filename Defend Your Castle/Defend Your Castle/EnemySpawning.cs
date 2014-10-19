@@ -36,7 +36,7 @@ namespace Defend_Your_Castle
             RandGenerator = new Random();
 
             // Initialize the enemy spawn chance list
-            EnemySpawnChances = new List<int>() { 25, 25, 25, 25 };
+            EnemySpawnChances = new List<int>() { 20, 20, 20, 20, 20 };
         }
 
         public bool CanEnemySpawn
@@ -149,20 +149,23 @@ namespace Defend_Your_Castle
 
             int speedincrease = RandGenerator.Next(minspeedinc, maxspeedinc + 1);
 
+            //Get a random costume (recolor) for the enemy to be
+            int costume = RandGenerator.Next(0, 3);
+
             switch (EnemyIndex)
             {
                 case 1: // Spear Enemy
-                    return (new SpearEnemy(level, Y, speedincrease));
+                    return (new SpearEnemy(level, Y, speedincrease, costume));
                 case 2: //Armored enemy
-                    return (new ArmoredEnemy(level, Y, speedincrease));
+                    return (new ArmoredEnemy(level, Y, speedincrease, costume));
                 case 3: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
-                    return (new FlyingEnemy(level, Y, flyheight, speedincrease));
-                //case 4: //Armored Spear enemy
-                //    return (new ArmoredSpearEnemy(level, Y, speedincrease));
+                    return (new FlyingEnemy(level, Y, flyheight, speedincrease, costume));
+                case 4: //Armored Spear enemy
+                    return (new ArmoredSpearEnemy(level, Y, speedincrease, costume));
                 case 0: // Melee Enemy
                 default:
-                    return (new MeleeEnemy(level, Y, speedincrease));
+                    return (new MeleeEnemy(level, Y, speedincrease, costume));
             }
         }
 

@@ -35,15 +35,15 @@ namespace Defend_Your_Castle
         //Enemy graphics
         public static Texture2D GoldCoinEffect;
         public static Texture2D EnemySpear;
-        public static Texture2D GoblinSheet;
+        public static Texture2D[] GoblinSheet;
         public static Texture2D GoblinInvincibleSheet;
-        public static Texture2D SpearGoblinSheet;
+        public static Texture2D[] SpearGoblinSheet;
         public static Texture2D SpearGoblinInvincibleSheet;
-        public static Texture2D FlyingGoblinSheet;
+        public static Texture2D[] FlyingGoblinSheet;
         public static Texture2D FlyingGoblinInvincibleSheet;
-        public static Texture2D ArmoredGoblinSheet;
+        public static Texture2D[] ArmoredGoblinSheet;
         public static Texture2D ArmoredGoblinInvincibleSheet;
-        public static Texture2D RangedArmoredGoblin;
+        public static Texture2D[] RangedArmoredGoblin;
         public static Texture2D RangedArmoredGoblinInvincible;
 
         //Shop graphics
@@ -99,15 +99,15 @@ namespace Defend_Your_Castle
             //Enemy graphics
             GoldCoinEffect = LoadGraphic(Content, "Gold Coin Effect");
             EnemySpear = LoadGraphic(Content, "Enemy Spear (Complete)");
-            GoblinSheet = LoadGraphic(Content, "Goblin Sheet");
+            GoblinSheet = new Texture2D[3] { LoadGraphic(Content, "Goblin Sheet"), LoadGraphic(Content, "Goblin Sheet 2"), LoadGraphic(Content, "Goblin Sheet 3") };
             GoblinInvincibleSheet = LoadGraphic(Content, "GoblinInvincible Sheet");
-            SpearGoblinSheet = LoadGraphic(Content, "RangedGoblinSheet");
+            SpearGoblinSheet = new Texture2D[3] { LoadGraphic(Content, "RangedGoblinSheet"), LoadGraphic(Content, "RangedGoblinSheet 2"), LoadGraphic(Content, "RangedGoblinSheet 3") };
             SpearGoblinInvincibleSheet = LoadGraphic(Content, "RangedGoblinSheetInvincible");
-            FlyingGoblinSheet = LoadGraphic(Content, "Flying Goblin Sheet");
+            FlyingGoblinSheet = new Texture2D[3] { LoadGraphic(Content, "Flying Goblin Sheet"), LoadGraphic(Content, "Flying Goblin Sheet 2"), LoadGraphic(Content, "Flying Goblin Sheet 3") };
             FlyingGoblinInvincibleSheet = LoadGraphic(Content, "Flying Goblin Sheet Invincible");
-            ArmoredGoblinSheet = LoadGraphic(Content, "Armored Goblin Sheet");
+            ArmoredGoblinSheet = new Texture2D[3] { LoadGraphic(Content, "Armored Goblin Sheet"), LoadGraphic(Content, "Armored Goblin Sheet 2"), LoadGraphic(Content, "Armored Goblin Sheet 3") };
             ArmoredGoblinInvincibleSheet = LoadGraphic(Content, "Armored Goblin Sheet Invincible");
-            RangedArmoredGoblin = LoadGraphic(Content, "RangedArmoredGoblin");
+            RangedArmoredGoblin = new Texture2D[3] { LoadGraphic(Content, "RangedArmoredGoblin"), LoadGraphic(Content, "RangedArmoredGoblin 2"), LoadGraphic(Content, "RangedArmoredGoblin 3") };
             RangedArmoredGoblinInvincible = LoadGraphic(Content, "RangedArmoredGoblinInvincible");
 
             //Shop graphics

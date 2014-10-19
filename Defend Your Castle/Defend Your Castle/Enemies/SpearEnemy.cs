@@ -13,14 +13,14 @@ namespace Defend_Your_Castle
         //The amount of damage the projectile deals
         protected int ProjectileDamage;
 
-        public SpearEnemy(Level level, float Y, int speedadd)
+        public SpearEnemy(Level level, float Y, int speedadd, int costume)
         {
             MoveSpeed = new Vector2(1 + speedadd, 0);
             Range = 150;
 
             ProjectileDamage = 20;
 
-            ObjectSheet = LoadAssets.SpearGoblinSheet;
+            ObjectSheet = LoadAssets.SpearGoblinSheet[costume];
             InvincibleSheet = LoadAssets.SpearGoblinInvincibleSheet;
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 20, 35), 225, new Vector2(2, 0)));
 
