@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using MonoGame.Framework;
 using Windows.ApplicationModel.Activation;
@@ -54,52 +55,34 @@ namespace Defend_Your_Castle
 
         private void ConfigureVolumeControls()
         {
-            // Add the dropdown items to all ComboBoxes
-            ComboBox_AddDropdownItems();
-
             // Get the stored Music and Sound volumes
-            int MusicVolume = (int)Math.Round((SoundManager.MusicVolume * 10));
-            int SoundVolume = (int)Math.Round((SoundManager.SoundVolume * 10));
+            double MusicVolume = (double)Math.Round((SoundManager.MusicVolume * 10));
+            double SoundVolume = (double)Math.Round((SoundManager.SoundVolume * 10));
 
-            // Set the selected index for the Music and Sound volume on the Options screen
-            OptionsScreen_MusicVolume.SelectedIndex = MusicVolume;
-            OptionsScreen_SoundVolume.SelectedIndex = SoundVolume;
+            // Set the value for the Music and Sound volume on the Options screen
+            OptionsScreen_MusicVolume.Value = MusicVolume;
+            OptionsScreen_SoundVolume.Value = SoundVolume;
 
-            // Set the selected index for the Music and Sound volume on the Pause Menu
-            PauseMenu_MusicVolume.SelectedIndex = MusicVolume;
-            PauseMenu_SoundVolume.SelectedIndex = SoundVolume;
+            // Set the value for the Music and Sound volume on the Pause Menu
+            PauseMenu_MusicVolume.Value = MusicVolume;
+            PauseMenu_SoundVolume.Value = SoundVolume;
 
-            // Add the SelectionChanged events to the ComboBoxes on the Options screen
-            OptionsScreen_MusicVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
-            OptionsScreen_SoundVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+            // Add the ValueChanged events to the Sliders on the Options screen
+            OptionsScreen_MusicVolume.ValueChanged += Slider_Volume_ValueChanged;
+            OptionsScreen_SoundVolume.ValueChanged += Slider_Volume_ValueChanged;
 
-            // Add the SelectionChanged events to the ComboBoxes on the Pause Menu
-            PauseMenu_MusicVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
-            PauseMenu_SoundVolume.SelectionChanged += ComboBox_Volume_SelectionChanged;
+            // Add the ValueChanged events to the Sliders on the Pause Menu
+            PauseMenu_MusicVolume.ValueChanged += Slider_Volume_ValueChanged;
+            PauseMenu_SoundVolume.ValueChanged += Slider_Volume_ValueChanged;
         }
 
-        private void ComboBox_AddDropdownItems()
+        private void Slider_Volume_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            // Add volume choices of 0 to 10 to both the Music and Sound volume ComboBoxes
-            for (int i = 0; i <= 10; i++)
-            {
-                // Options Screen
-                OptionsScreen_MusicVolume.Items.Add(i);
-                OptionsScreen_SoundVolume.Items.Add(i);
-
-                // Pause Menu
-                PauseMenu_MusicVolume.Items.Add(i);
-                PauseMenu_SoundVolume.Items.Add(i);
-            }
-        }
-
-        private void ComboBox_Volume_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Get the ComboBox that had its value changed
-            ComboBox box = (ComboBox)sender;
+            // Get the Slider that had its value changed
+            Slider box = (Slider)sender;
 
             // Get the volume based on the ComboBox's SelectedIndex
-            float thevol = ((float)box.SelectedIndex / 10);
+            float thevol = ((float)box.Value / 10);
 
             // Check if the ComboBox controls the music volume
             if (box == PauseMenu_MusicVolume || box == OptionsScreen_MusicVolume)
