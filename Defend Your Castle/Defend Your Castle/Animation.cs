@@ -23,6 +23,9 @@ namespace Defend_Your_Castle
         //private int MaxLoops;
         //private int CurLoop;
 
+        //The rate at which the animation plays - 1 is normal speed, > 1 is slower than normal, and < 1 is faster than normal
+        private float PlayRate;
+
         //The full duration of the animation, excluding water
         private float FullAnimDuration;
 
@@ -40,6 +43,8 @@ namespace Defend_Your_Castle
 
             CurFrame = 0;
             CurReverse = false;
+
+            PlayRate = 1f;
 
             AnimationEnd = false;
         }
@@ -106,6 +111,36 @@ namespace Defend_Your_Castle
         public bool IsAnimationComplete
         {
             get { return AnimationEnd; }
+        }
+
+        public float GetSpeed
+        {
+            get { return PlayRate; }
+        }
+
+        public void RestoreAnimSpeed()
+        {
+            PlayRate = 1f;
+
+            for (int i = 0; i < Frames.Count; i++)
+                Frames[i].RestoreFrameSpeed();
+        }
+
+        public void SetAnimSpeed(float speed)
+        {
+            PlayRate = speed;
+
+            for (int i = 0; i < Frames.Count; i++)
+                Frames[i].SetFrameSpeed(speed);
+        }
+
+        //Pass in a positive amount to slow the animation and a negative amount to speed it up
+        public void ChangeAnimSpeed(float amount)
+        {
+            PlayRate += amount;
+
+            for (int i = 0; i < Frames.Count; i++)
+                Frames[i].ChangeFrameSpeed(amount);
         }
 
         //Restarts the animation
@@ -194,6 +229,9 @@ namespace Defend_Your_Castle
         //The amount to offset the default drawing origin
         private Vector2 OffsetOrigin;
 
+        //The rate at which the frame plays - 1 is normal speed, > 1 is slower than normal, and < 1 is faster than normal
+        private float PlayRate;
+
         //How long this frame lasts
         private float FrameDuration;
         private float PrevDuration;
@@ -201,6 +239,8 @@ namespace Defend_Your_Castle
         private AnimFrame()
         {
             PrevDuration = 0f;
+
+            PlayRate = 1f;
 
             DrawSection = Rectangle.Empty;
             OffsetOrigin = Vector2.Zero;
@@ -227,7 +267,7 @@ namespace Defend_Your_Castle
 
         public float GetDuration
         {
-            get { return FrameDuration; }
+            get { return (FrameDuration * PlayRate); }
         }
 
         //The size of the animation frame
@@ -272,6 +312,21 @@ namespace Defend_Your_Castle
             }
 
             return (Position + trueoffset + rotationoffset);
+        }
+
+        public void RestoreFrameSpeed()
+        {
+            PlayRate = 1f;
+        }
+
+        public void SetFrameSpeed(float speed)
+        {
+            PlayRate = speed;
+        }
+
+        public void ChangeFrameSpeed(float amount)
+        {
+            PlayRate += amount;
         }
 
         //Resets the frame's duration

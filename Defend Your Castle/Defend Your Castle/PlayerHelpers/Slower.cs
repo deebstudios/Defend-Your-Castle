@@ -178,7 +178,7 @@ namespace Defend_Your_Castle
                 else if (SlowingAnim.IsAnimationComplete == true)
                 {
                     // Slow the designated target
-                    (Victim as Enemy).ApplySlow(SlowAmount, SlowDur);
+                    (Victim as Enemy).ApplySlow(SlowAmount, SlowDur, HelperLevel);
 
                     // Stop the helper from shooting
                     StopSlowing();

@@ -91,10 +91,10 @@ namespace Defend_Your_Castle
             get
             {
                 // Get the movement speed of the enemy
-                Vector2 TrueMoveSpeed = MoveSpeed;
+                Vector2 TrueMoveSpeed = MoveSpeed - SlowAmount;
 
                 // If the enemy is slowed, decrease its movement speed
-                if (IsSlowed == true) TrueMoveSpeed -= SlowAmount;
+                //if (IsSlowed == true) TrueMoveSpeed -= SlowAmount;
 
                 //Check the true movement speed's X value. If it is less than the minimum movement speed's X value, set it to the minimum
                 if (TrueMoveSpeed.X < MinimumMoveSpeed.X) TrueMoveSpeed.X = MinimumMoveSpeed.X;
@@ -163,21 +163,37 @@ namespace Defend_Your_Castle
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
         }
 
-        public virtual void ApplySlow(Vector2 slowAmount, float slowDur)
+        public void ApplySlow(Vector2 slowAmount, float slowDur, int slowerlevel)
         {
             // Set the slow amount
             SlowAmount = slowAmount;
 
             // Set the slow time
             SlowTime = (Game1.ActiveTime + slowDur);
+
+            //Slow down the current animation
+            float slowamount = .15f + (.5f * slowerlevel);
+            CurAction.GetAnim.ChangeAnimSpeed(slowamount);
         }
 
         protected abstract void ChooseNextAction(Level level);
 
-        public override void Update(Level level)
+        protected void CheckEndSlow()
+        {
+            if (SlowAmount != Vector2.Zero && IsSlowed == false)
+            {
+                SlowAmount = Vector2.Zero;
+
+                CurAction.GetAnim.RestoreAnimSpeed();
+            }
+        }
+
+        public sealed override void Update(Level level)
         {
             if (FakeDead == false)
             {
+                CheckEndSlow();
+
                 if (IsInvincible == true) InvincibilityFade.Update();
                 CurAction.Update(level);
                 if (CurAction.IsComplete == true) ChooseNextAction(level);

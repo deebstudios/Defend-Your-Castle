@@ -36,7 +36,8 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Throw spears
-                Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 300), new AnimFrame(new Rectangle(21, 36, 17, 35), 300), new AnimFrame(new Rectangle(42, 36, 17, 35), 400));
+                Animation ShootAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 225), new AnimFrame(new Rectangle(21, 36, 17, 35), 150), new AnimFrame(new Rectangle(42, 36, 17, 35), 400));
+                ShootAnim.SetAnimSpeed(Animation.GetSpeed);
 
                 CurAction = new ThrowSpear(this, ShootAnim, ShootAnim.MaxFrame, ProjectileDamage);
             }

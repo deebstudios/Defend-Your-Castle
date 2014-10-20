@@ -556,15 +556,15 @@
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
-                                            <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
+                                            <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                                         </RadioButton>
 
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
-                                            <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
+                                            <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                                         </RadioButton>
 
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
-                                            <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
+                                            <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
                                         </RadioButton>
                                     </StackPanel>
                                 </StackPanel>
@@ -576,19 +576,19 @@
                                                Text="These are your available weapons. You can only have one weapon selected at a time. Each weapon can harm certain types of Goblins." />
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <Image Source="Content/Graphics/Alpha Sword.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Sword.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Goblin.png" />
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Warhammer.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Armored Goblin.png" />
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="Content/Graphics/Spear.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Spear.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Flying Goblin.png" />
                                     </StackPanel>
@@ -666,17 +666,17 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
                 <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
                              x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
+                    <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
                              x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
+                    <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                 </RadioButton>
 
                 <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
                              x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
+                    <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
                 </RadioButton>
             </StackPanel>
 
