@@ -86,10 +86,10 @@ namespace Defend_Your_Castle
         }
 
         // Calculates the amount of bonus gold the player has earned at the end of the level
-        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * 5]
+        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * 10]
         private int BonusGold
         {
-            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * 5)); }
+            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * 10)); }
         }
 
         // Returns the total amount of gold the player has earned in the level
@@ -106,7 +106,7 @@ namespace Defend_Your_Castle
             Enemies = new List<LevelObject>();
 
             // Set the level number to 1 (for testing)
-            LevelNum = 25; //1;
+            LevelNum = 15;
 
             //Start out at day
             StartDayNight(true);

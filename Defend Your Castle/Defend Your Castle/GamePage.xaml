@@ -33,7 +33,7 @@
             <Setter Property="Background" Value="White"/>
             <Setter Property="GroupName" Value="HUD_Weapons"/>
         </Style>
-        
+
         <!-- Health Bar Styles -->
         <Style x:Key="HUD_OuterHPBarStyle" TargetType="Border">
             <Setter Property="Width" Value="352"/>
@@ -44,7 +44,7 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
-        
+
         <Style x:Key="HUD_InnerHPBarStyle" TargetType="Border">
             <Setter Property="Width" Value="350"/>
             <Setter Property="Background" Value="Red"/>
@@ -60,7 +60,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Source" Value="Content/Graphics/ShopIcons/ShopIcon.png"/>
         </Style>
-        
+
         <Style x:Key="HUD_GoldAmountStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="Grid.Column" Value="1"/>
@@ -73,11 +73,10 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
-        
+
         <Style x:Key="HUD_ConsumablesListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
-            <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="20,0,0,0"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
@@ -104,16 +103,14 @@
 
         <!-- Pause Button Styles -->
         <Style x:Key="HUD_PauseButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
-            <Setter Property="Height" Value="50"/>
             <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Grid.Column" Value="4"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Padding" Value="8,4,8,4"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>
-        
+
         <!-- Level Start Styles -->
         <Style x:Key="LevelStart_BorderStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
@@ -123,7 +120,7 @@
             <Setter Property="Padding" Value="0,10,0,10"/>
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
-        
+
         <Style x:Key="LevelStart_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="56"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -139,7 +136,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="10"/>
         </Style>
-        
+
         <Style x:Key="PauseMenu_VolumeBorderStyle" TargetType="Border">
             <Setter Property="Background" Value="Orange"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -147,37 +144,37 @@
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
-        
+
         <Style x:Key="PauseMenu_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
-        
+
         <Style x:Key="PauseMenu_VolumeTextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,20,0"/>
         </Style>
-        
-        
+
+
         <!-- Level End Styles -->
         <Style x:Key="LevelEnd_BackgroundImageStyle" BasedOn="{StaticResource ScreenBackgroundImageStyle}" TargetType="Image">
             <Setter Property="Grid.RowSpan" Value="3"/>
             <Setter Property="Source" Value="Content/Graphics/ShopBackground.png"/>
         </Style>
-        
+
         <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="56"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         </Style>
-        
+
         <Style x:Key="LevelEnd_StatsTextStyle" BasedOn="{StaticResource LevelEnd_LevelCompleteTextStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="44"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="Margin" Value="0,20,0,0"/>
             <Setter Property="Opacity" Value="0"/>
         </Style>
-        
+
         <Style x:Key="LevelEnd_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="FontSize" Value="48"/>
             <Setter Property="Grid.Row" Value="2"/>
@@ -203,13 +200,13 @@
         <Style x:Key="Shop_ShopSubtitleStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="56"/>
         </Style>
-        
+
         <Style x:Key="Shop_NextLevelStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="36"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,50,20"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopSectionStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
@@ -219,12 +216,12 @@
             <Setter Property="Width" Value="80"/>
             <Setter Property="Height" Value="80"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopItemsList_ImageStyle" TargetType="Image">
             <Setter Property="Width" Value="48"/>
             <Setter Property="Height" Value="48"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopItemsList_NameStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -315,13 +312,13 @@
             <Setter Property="Grid.RowSpan" Value="4"/>
             <Setter Property="Background" Value="Gold"/>
         </Style>
-        
+
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
-        
-        
+
+
         <!-- Full Screen Notice Styles -->
         <Style x:Key="FullScreenNotice_ImageStyle" TargetType="Image">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -329,7 +326,7 @@
             <Setter Property="Margin" Value="50"/>
             <Setter Property="Source" Value="Content/Graphics/DefendYourFortLogo.png"/>
         </Style>
-        
+
         <Style x:Key="FullScreenNotice_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -346,13 +343,13 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="0.6*"/>
             </Grid.RowDefinitions>
-            
+
             <!-- Title Screen Styles -->
             <Grid.Resources>
                 <Style x:Key="TitleScreen_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
                     <Setter Property="Width" Value="250" />
                 </Style>
-                
+
                 <Style x:Key="TitleScreen_LogoStyle" TargetType="Image">
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
@@ -360,9 +357,9 @@
                     <Setter Property="Source" Value="Content/Graphics/DefendYourFortLogo.png"/>
                 </Style>
             </Grid.Resources>
-            
+
             <Image Style="{StaticResource TitleScreen_LogoStyle}" />
-            
+
             <Viewbox Grid.Row="1">
                 <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,60">
                     <Button Name="TitleScreen_StartGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Start Game"
@@ -390,29 +387,29 @@
                     <Setter Property="Grid.RowSpan" Value="2"/>
                     <Setter Property="Source" Value="Content/Graphics/OptionsScreenBackground.png"/>
                 </Style>
-                
+
                 <Style x:Key="OptionsScreen_TitleStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
-                
+
                 <Style x:Key="OptionsScreen_VolumeBorderStyle" TargetType="Border">
                     <Setter Property="Background" Value="{StaticResource GameButtonBackgroundColor}"/>
                     <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Padding" Value="0,20,0,20"/>
                 </Style>
-                
+
                 <Style x:Key="OptionsScreen_VolumeStackPanelStyle" BasedOn="{StaticResource StackPanelMenuStyle}" TargetType="StackPanel">
                     <Setter Property="Orientation" Value="Horizontal"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
-                
+
                 <Style x:Key="OptionsScreen_VolumeTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="0,0,20,0"/>
                 </Style>
-                
+
                 <Style x:Key="OptionsScreen_BackButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     <Setter Property="Margin" Value="0,30,0,0"/>
@@ -422,12 +419,12 @@
 
             <!-- Background image -->
             <Image Style="{StaticResource OptionsScreen_BackgroundStyle}" />
-            
+
             <!-- Screen Title -->
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top">
                 <TextBlock Style="{StaticResource OptionsScreen_TitleStyle}" Text="Options" />
             </Viewbox>
-            
+
             <!-- Volume Controls + Back Button -->
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -444,15 +441,15 @@
                                 <!-- Music Volume -->
                                 <StackPanel Style="{StaticResource OptionsScreen_VolumeStackPanelStyle}">
                                     <TextBlock Style="{StaticResource OptionsScreen_VolumeTextStyle}" Text="Music Volume: " />
-                                    <ComboBox Name="OptionsScreen_MusicVolume" Style="{StaticResource ComboBoxStyle}"
-                                              x:FieldModifier="public" />
+                                    <Slider Name="OptionsScreen_MusicVolume" Style="{StaticResource SliderStyle}"
+                                            x:FieldModifier="public" />
                                 </StackPanel>
 
                                 <!-- Sound Volume -->
                                 <StackPanel Style="{StaticResource OptionsScreen_VolumeStackPanelStyle}" Margin="20,20,20,0">
                                     <TextBlock Style="{StaticResource OptionsScreen_VolumeTextStyle}" Text="Sound Volume: " />
-                                    <ComboBox Name="OptionsScreen_SoundVolume" Style="{StaticResource ComboBoxStyle}"
-                                              x:FieldModifier="public" />
+                                    <Slider Name="OptionsScreen_SoundVolume" Style="{StaticResource SliderStyle}"
+                                            x:FieldModifier="public" />
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -464,7 +461,7 @@
                 </Viewbox>
             </Grid>
         </Grid>
-        
+
         <!-- Game Over Screen -->
         <Grid Name="GameOverScreen" x:FieldModifier="public" Visibility="Collapsed">
             <Grid.RowDefinitions>
@@ -504,9 +501,9 @@
         <!-- How to Play Screen -->
         <Grid Name="HowToPlayScreen" x:FieldModifier="public" Visibility="Collapsed">
             <Grid.Resources>
-                
+
             </Grid.Resources>
-            
+
             <FlipView SelectedIndex="0">
                 <FlipViewItem>
                     <Grid Margin="20">
@@ -531,7 +528,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!-- First Column - Helpers -->
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
                             <Border Style="{StaticResource HUD_HelperStyle}">
@@ -556,15 +553,15 @@
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
-                                            <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
+                                            <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                                         </RadioButton>
 
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
-                                            <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
+                                            <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                                         </RadioButton>
 
                                         <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
-                                            <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
+                                            <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
                                         </RadioButton>
                                     </StackPanel>
                                 </StackPanel>
@@ -576,19 +573,19 @@
                                                Text="These are your available weapons. You can only have one weapon selected at a time. Each weapon can harm certain types of Goblins." />
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <Image Source="Content/Graphics/Alpha Sword.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Sword.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Goblin.png" />
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Warhammer.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Armored Goblin.png" />
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="Content/Graphics/Spear.png" Width="32" />
+                                        <Image Source="Content/Graphics/Big Spear.png" Width="32" />
                                         <TextBlock Style="{StaticResource TextBlockStyle}" Margin="10,0,10,0" FontSize="36" Text="=" VerticalAlignment="Center" />
                                         <Image Source="Content/Graphics/Flying Goblin.png" />
                                     </StackPanel>
@@ -633,7 +630,7 @@
             </FlipView>
         </Grid>
     </Grid>
-    
+
     <!-- Game HUD -->
     <Grid Name="GameHUD" x:FieldModifier="public" Visibility="Collapsed">
         <!-- Grid that contains the HUD -->
@@ -663,55 +660,87 @@
             </StackPanel>
 
             <!-- Second Column - Weapon Buttons -->
-            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
-                <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
-                             x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Sword.png" Width="32" Height="32" />
-                </RadioButton>
+            <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.09*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2" Margin="30,0,30,0"
-                             x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Alpha Warhammer.png" Width="32" Height="32"/>
-                </RadioButton>
+                <Viewbox>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Name="HUD_WeaponSword" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="0" IsChecked="True"
+                                     x:FieldModifier="public" Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
+                        </RadioButton>
 
-                <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
-                             x:FieldModifier="public" Click="ChangeWeaponButton">
-                    <Image Source="Content/Graphics/Spear.png" Width="32" Height="32"/>
-                </RadioButton>
-            </StackPanel>
+                        <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2"
+                                     Margin="30,0,30,0" x:FieldModifier="public" Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
+                        </RadioButton>
+
+                        <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
+                                     x:FieldModifier="public" Click="ChangeWeaponButton">
+                    <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
+                        </RadioButton>
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
 
             <!-- Third Column - Health, Gold, and Consumable Items -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="0.12*" />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Health Bar -->
-                <Border Name="HUD_OuterHPBar" Style="{StaticResource HUD_OuterHPBarStyle}">
-                    <Border Name="HUD_InnerHPBar" Style="{StaticResource HUD_InnerHPBarStyle}" x:FieldModifier="public" />
-                </Border>
+                <!-- Grid for Health, Gold, and Consumable Items -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Gold + Consumables -->
-                <Border Grid.Row="1" Background="Orange" BorderBrush="Black" BorderThickness="1,0,1,1" Padding="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <!-- Health Bar -->
+                    <Viewbox>
+                        <Border Name="HUD_OuterHPBar" Style="{StaticResource HUD_OuterHPBarStyle}">
+                            <Border Name="HUD_InnerHPBar" Style="{StaticResource HUD_InnerHPBarStyle}" x:FieldModifier="public" />
+                        </Border>
+                    </Viewbox>
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
-                            <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="100" x:FieldModifier="public" />
-                        </StackPanel>
+                    <!-- Gold + Consumables -->
+                    <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />
-                    </Grid>
-                </Border>
+                            <Viewbox HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Image Name="HUD_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" />
+                                    <TextBlock Name="HUD_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" Text="999999" x:FieldModifier="public" />
+                                </StackPanel>
+                            </Viewbox>
+
+                            <Viewbox Grid.Column="1">
+                                <GridView Name="HUD_ConsumablesList" Style="{StaticResource HUD_ConsumablesListStyle}" x:FieldModifier="public" />
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
 
             <!-- Fourth Column - Pause Button -->
-            <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" Click="PauseGame" />
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.0565*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox>
+                    <Button Name="HUD_PauseButton" Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" Click="PauseGame" />
+                </Viewbox>
+            </Grid>
         </Grid>
 
         <!-- Level Start Border -->
@@ -731,6 +760,7 @@
                 </Storyboard>
             </Border.Resources>
         </Border>
+
     </Grid>
 
     <!-- Pause Menu -->
@@ -740,12 +770,12 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
-                        <ComboBox Name="PauseMenu_MusicVolume" Style="{StaticResource ComboBoxStyle}" FontWeight="Bold"/>
+                        <Slider Name="PauseMenu_MusicVolume" Style="{StaticResource SliderStyle}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                         <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
-                        <ComboBox Name="PauseMenu_SoundVolume" Style="{StaticResource ComboBoxStyle}" FontWeight="Bold"/>
+                        <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -781,7 +811,7 @@
 
             <!-- Total Kills -->
             <TextBlock Name="LevelEnd_TotalKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
-            
+
             <!-- Accuracy Rate -->
             <TextBlock Name="LevelEnd_AccuracyRate" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
@@ -790,12 +820,12 @@
 
             <!-- Gold Earned -->
             <TextBlock Name="LevelEnd_GoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
-            
+
             <!-- Total Gold Earned -->
             <TextBlock Name="LevelEnd_TotalGoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" FontWeight="Bold"
                        x:FieldModifier="public" />
         </StackPanel>
-        
+
         <!-- Next Button -->
         <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="LevelEnd_Next_Click" />
 
@@ -817,7 +847,7 @@
                 <!-- Accuracy Rate -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_AccuracyRate" Storyboard.TargetProperty="Opacity"
                                  BeginTime="0:0:1" From="0" To="1" Duration="0:0:0" />
-                
+
                 <!-- Bonus Gold -->
                 <DoubleAnimation Storyboard.TargetName="LevelEnd_BonusGold" Storyboard.TargetProperty="Opacity"
                                  BeginTime="0:0:1.25" From="0" To="1" Duration="0:0:0" />
@@ -876,13 +906,13 @@
             <!-- Shop Title -->
             <TextBlock Name="Shop_ShopText" Style="{StaticResource Shop_ShopTitleStyle}" Text="- Shop -" />
         </Border>
-        
+
         <!-- Row 2 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <!-- Castle Icon -->
                 <Image Style="{StaticResource Shop_CastleIconStyle}" />
-                
+
                 <!-- Player Outer HP Bar -->
                 <Border Name="Shop_OuterHPBar" Style="{StaticResource Shop_OuterHPBarStyle}">
                     <Grid>
@@ -906,7 +936,7 @@
                 </Grid>
             </StackPanel>
         </Border>
-        
+
         <!-- Row 3 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="2">
             <Grid>
@@ -955,7 +985,7 @@
 
             <!-- Items Text -->
             <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
-            
+
             <!-- Items -->
             <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public">
                 <GridView.ItemsPanel>
@@ -974,7 +1004,7 @@
 
                 <!-- Save Button -->
                 <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
-                
+
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                     <TextBlock Name="Shop_NextLevel" Style="{StaticResource Shop_NextLevelStyle}" x:FieldModifier="public" Text="Next Level: 2" />
                     <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
@@ -982,7 +1012,7 @@
             </Grid>
         </Grid>
     </Grid>
-    
+
     <!-- Full Screen Notice - Notifies the player that the game must be in full screen -->
     <Grid Name="FullScreenNotice" x:FieldModifier="public" Visibility="Collapsed">
         <Grid.RowDefinitions>
@@ -1001,7 +1031,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.025*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Viewbox Grid.Column="1">
                 <TextBlock Name="FullScreenNotice_Message" Style="{StaticResource FullScreenNotice_MessageStyle}"
                            Text="Display window in full screen to continue playing..." />
