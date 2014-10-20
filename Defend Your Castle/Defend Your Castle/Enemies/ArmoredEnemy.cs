@@ -34,8 +34,9 @@ namespace Defend_Your_Castle
             {
                 //Attack now
                 Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 225), new AnimFrame(new Rectangle(20, 36, 17, 35), 225, new Vector2(1, 0)), new AnimFrame(new Rectangle(42, 37, 18, 34), 225, new Vector2(0, -1)));
+                AttackAnim.SetAnimSpeed(Animation.GetSpeed);
 
-                CurAction = new MeleeAttack(this, AttackAnim, 150, 450, 225);
+                CurAction = new MeleeAttack(this, AttackAnim, 150, AttackAnim.MaxFrame);
             }
         }
     }

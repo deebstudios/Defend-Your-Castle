@@ -193,6 +193,9 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\Big Spear.png" />
+    <Content Include="Content\Graphics\Big Sword.png" />
+    <Content Include="Content\Graphics\Big Warhammer.png" />
     <Content Include="Content\Graphics\CastleIcon.png" />
     <Content Include="Content\Graphics\CastleIconBigger.png" />
     <Content Include="Content\Graphics\cursor.png" />
@@ -226,6 +229,8 @@
     <Content Include="Content\Graphics\RangedGoblinSheet.png" />
     <Content Include="Content\Graphics\RangedGoblinSheetInvincible.png" />
     <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\SlowerIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\SlowerUpgradeIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />
     <Content Include="Content\Graphics\SlowerSheet.png" />
     <Content Include="Content\Graphics\SlowerSheet2.png" />
@@ -243,6 +248,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Graphics\Sun.png" />
+    <Content Include="Content\Graphics\Sword.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
     <Content Include="Content\H Character.png" />
     <Content Include="Content\I Character.png" />

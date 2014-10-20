@@ -14,41 +14,26 @@ namespace Defend_Your_Castle
         //The damage of the attack
         private int Damage;
 
-        //The rate at which the damage is applied
-        private float AttackRate;
-        private float PrevAttackRate;
+        //The frame the enemy attacks
+        private int FrameAttack;
 
-        //A possible delay for the attack
-        //This can be used for looping animations where the attack starts on a designated frame, in which it would be shorter on the first attack
-        /*Ex. 3 Frame animation, 300 ms each in duration. The attack starts on the 3rd frame, so after 600 ms. The next time the 3rd frame starts
-          again would be 900 ms, so set the delay to 300 so all subsequent attacks start when the 3rd frame starts*/
-        private float AttackDelay;
-
-        public MeleeAttack(Enemy enem, Animation anim, int damage, float attackrate, float attackdelay) : base(enem, anim, ActionType.Attacking)
+        public MeleeAttack(Enemy enem, Animation anim, int damage, int frameattack) : base(enem, anim, ActionType.Attacking)
         {
             Damage = damage;
 
-            AttackRate = attackrate;
-            AttackDelay = attackdelay;
-            RefreshAttack(false);
-        }
-
-        //Refreshes the attack timer
-        private void RefreshAttack(bool delay)
-        {
-            PrevAttackRate = Game1.ActiveTime + AttackRate;
-            if (delay == true) PrevAttackRate += AttackDelay;
+            FrameAttack = frameattack;
         }
 
         public override void Update(Level level)
         {
+            int curframe = Anim.CurrentFrame;
+
             base.Update(level);
 
-            //Check the attack rate
-            if (Game1.ActiveTime >= PrevAttackRate)
+            //Check if the enemy should attack
+            if (Anim.CurrentFrame != curframe && Anim.CurrentFrame == FrameAttack)
             {
                 level.GetPlayer.TakeDamage(Damage, level);
-                RefreshAttack(true);
             }
         }
     }
