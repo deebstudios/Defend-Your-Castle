@@ -38,13 +38,23 @@ namespace Defend_Your_Castle
             ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer, this), new FortifyCastle(shopPlayer, this) };
 
             // Prepare/Repair
-            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer, this) };
+            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer, this), new BuyArcher(shopPlayer, this), new BuySlower(shopPlayer, this), new UpgradeArcher(shopPlayer, this), new UpgradeSlower(shopPlayer, this) };
 
             // Items
             ShopItems = new List<ShopItem>() { new Invincibility(shopPlayer, this) };
 
             // Assign the shop items to the Shop
             AssignShopItems();
+        }
+
+        public int GetArcherLevel
+        {
+            get { return ShopPrepareRepairs[3].GetCurrentLevel; }
+        }
+
+        public int GetSlowerLevel
+        {
+            get { return ShopPrepareRepairs[4].GetCurrentLevel; }
         }
 
         public void AssignShopItems()

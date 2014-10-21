@@ -21,7 +21,7 @@ namespace Defend_Your_Castle
             Description = "Repair your castle walls.\n+" + HealAmount + " Health";
 
             // Get the path to the image of the item
-            ImagePath = "Content/Graphics/ShopIcons/RepairWallsIcon.png";
+            ImagePath = "Content/Graphics/ShopIcons/Big RepairWallsIcon.png";
         }
 
         public override bool CanBuy(Player ShopPlayer)

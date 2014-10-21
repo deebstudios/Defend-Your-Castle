@@ -58,7 +58,7 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Source" Value="Content/Graphics/ShopIcons/ShopIcon.png"/>
+            <Setter Property="Source" Value="Content/Graphics/ShopIcons/Big ShopIcon.png"/>
         </Style>
 
         <Style x:Key="HUD_GoldAmountStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">

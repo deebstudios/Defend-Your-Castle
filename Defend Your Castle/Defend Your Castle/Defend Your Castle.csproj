@@ -168,11 +168,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager.cs" />
     <Compile Include="Shop.cs" />
+    <Compile Include="ShopItems\BuyArcher.cs" />
+    <Compile Include="ShopItems\BuySlower.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
     <Compile Include="ShopItems\FortifyCastle.cs" />
     <Compile Include="ShopItems\Invincibility.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />
     <Compile Include="ShopItems\ShopItem.cs" />
+    <Compile Include="ShopItems\UpgradeArcher.cs" />
+    <Compile Include="ShopItems\UpgradeSlower.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="Weapons\Spear.cs" />
     <Compile Include="Weapons\Sword.cs" />
@@ -193,6 +197,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
     <Content Include="Content\Graphics\Big Sword.png" />
     <Content Include="Content\Graphics\Big Warhammer.png" />
@@ -229,6 +234,12 @@
     <Content Include="Content\Graphics\RangedGoblinSheet.png" />
     <Content Include="Content\Graphics\RangedGoblinSheetInvincible.png" />
     <Content Include="Content\Graphics\ShopIcons\ArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big ArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big FortifyWallsIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big RepairWallsIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big RepairWallsx10Icon.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big UpgradeArcherIcon.png" />
+    <Content Include="Content\Graphics\ShopIcons\FortifyCastleIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\SlowerIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\SlowerUpgradeIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />

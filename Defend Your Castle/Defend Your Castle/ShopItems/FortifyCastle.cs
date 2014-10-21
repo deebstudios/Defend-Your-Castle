@@ -13,16 +13,16 @@ namespace Defend_Your_Castle
         public FortifyCastle(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
-            Name = "Fortify Castle";
+            Name = "Strengthen Walls";
 
             MaxLevel = 1;
 
             price = 20000;
 
-            Description = "Fortify your castle to better defend your walls against enemy attacks! +10% reduced damage from all attacks";
+            Description = "Strengthen your fort's walls to better defend against enemy attacks! +10% reduced damage from all attacks";
 
             // Get the path to the image of the item
-            ImagePath = "Content/Graphics/ShopIcons/FortifyWallsIcon.png";
+            ImagePath = "Content/Graphics/ShopIcons/FortifyCastleIcon.png";
         }
 
         public override void UseItem()

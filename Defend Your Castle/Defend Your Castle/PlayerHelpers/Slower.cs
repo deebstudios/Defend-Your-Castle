@@ -114,7 +114,7 @@ namespace Defend_Your_Castle
         }
 
         //Make the Slower attack faster, further, and more successfully
-        public override void IncreaseStats()
+        protected override void IncreaseStats()
         {
             SlowChance -= ChanceIncrease;
             AttackTime -= SpeedIncrease;

@@ -48,7 +48,7 @@ namespace Defend_Your_Castle
 
         //Shop graphics
         public static Texture2D GoldCoin;
-        public static Texture2D ShopIcon;
+        //public static Texture2D ShopIcon;
         public static Texture2D FortifyWalls;
         public static Texture2D Invincibility;
         public static Texture2D RepairWalls;
@@ -112,7 +112,7 @@ namespace Defend_Your_Castle
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");
-            ShopIcon = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/ShopIcon");
+            //ShopIcon = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/ShopIcon");
             FortifyWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/FortifyWallsIcon");
             Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
             RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
