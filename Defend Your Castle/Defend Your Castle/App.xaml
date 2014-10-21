@@ -295,7 +295,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="IsTabStop" Value="False"/>
                 <Setter Property="Minimum" Value="0"/>
-                <Setter Property="Maximum" Value="10"/>
+                <Setter Property="Maximum" Value="20"/>
                 <Setter Property="ManipulationMode" Value="None" />
                 <Setter Property="Template">
                     <Setter.Value>

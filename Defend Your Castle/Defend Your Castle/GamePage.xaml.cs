@@ -56,8 +56,8 @@ namespace Defend_Your_Castle
         private void ConfigureVolumeControls()
         {
             // Get the stored Music and Sound volumes
-            double MusicVolume = (double)Math.Round((SoundManager.MusicVolume * 10));
-            double SoundVolume = (double)Math.Round((SoundManager.SoundVolume * 10));
+            double MusicVolume = (double)(SoundManager.MusicVolume * 20);
+            double SoundVolume = (double)(SoundManager.SoundVolume * 20);
 
             // Set the value for the Music and Sound volume on the Options screen
             OptionsScreen_MusicVolume.Value = MusicVolume;
@@ -79,18 +79,48 @@ namespace Defend_Your_Castle
         private void Slider_Volume_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             // Get the Slider that had its value changed
-            Slider box = (Slider)sender;
+            Slider slider = (Slider)sender;
 
-            // Get the volume based on the ComboBox's SelectedIndex
-            float thevol = ((float)box.Value / 10);
+            // Get the volume based on the Slider's value
+            float thevol = (float)(slider.Value / 20);
 
-            // Check if the ComboBox controls the music volume
-            if (box == PauseMenu_MusicVolume || box == OptionsScreen_MusicVolume)
+            // Check if the Slider controls the music volume
+            if (slider == PauseMenu_MusicVolume || slider == OptionsScreen_MusicVolume)
+            {
                 // Set the music volume
                 SoundManager.SetMusicVolume(thevol);
-            else
+
+                // Remove the ValueChanged events from the Sliders on the Options and Pause Menus
+                // This is done so that the the ValueChanged event will not proc again for the slider that was updated
+                OptionsScreen_MusicVolume.ValueChanged -= Slider_Volume_ValueChanged;
+                PauseMenu_MusicVolume.ValueChanged -= Slider_Volume_ValueChanged;
+
+                // Set the value of both music volume Sliders
+                OptionsScreen_MusicVolume.Value = slider.Value;
+                PauseMenu_MusicVolume.Value = slider.Value;
+
+                // Add the ValueChanged events back to the Sliders
+                OptionsScreen_MusicVolume.ValueChanged += Slider_Volume_ValueChanged;
+                PauseMenu_MusicVolume.ValueChanged += Slider_Volume_ValueChanged;
+            }
+            else // The Slider controls the sound volume
+            {
                 // Set the sound volume
                 SoundManager.SetSoundVolume(thevol);
+
+                // Remove the ValueChanged events from the Sliders on the Options and Pause Menus
+                // This is done so that the the ValueChanged event will not proc again for the slider that was updated
+                OptionsScreen_SoundVolume.ValueChanged -= Slider_Volume_ValueChanged;
+                PauseMenu_SoundVolume.ValueChanged -= Slider_Volume_ValueChanged;
+
+                // Set the value of both sound volume Sliders
+                OptionsScreen_SoundVolume.Value = slider.Value;
+                PauseMenu_SoundVolume.Value = slider.Value;
+
+                // Add the ValueChanged events back to the Sliders
+                OptionsScreen_SoundVolume.ValueChanged += Slider_Volume_ValueChanged;
+                PauseMenu_SoundVolume.ValueChanged += Slider_Volume_ValueChanged;
+            }
         }
 
         // HUD
