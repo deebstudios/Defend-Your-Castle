@@ -18,7 +18,7 @@ namespace Defend_Your_Castle
 
             MoveSpeed = new Vector2(1 + speedadd, 0);
 
-            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 

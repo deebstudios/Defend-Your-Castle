@@ -20,7 +20,7 @@ namespace Defend_Your_Castle
             Description = "Shields your fort with an impervious energy for 5 seconds.";
 
             // Get the path to the image of the item
-            ImagePath = "Content/Graphics/ShopIcons/InvincibilityIcon2.png";
+            ImagePath = "Content/Graphics/ShopIcons/Big InvincibilityIcon.png";
         }
 
         public override void UseItem()

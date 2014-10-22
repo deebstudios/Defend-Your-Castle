@@ -14,9 +14,6 @@ namespace Defend_Your_Castle
             // Set the attack speed
             AttackSpeed = 50;
 
-            // Set the sound of the sword to a test sound
-            Sound = LoadAssets.TestSound;
-
             //The Sword is available from the start, so make it available
             MakeAvailable();
         }

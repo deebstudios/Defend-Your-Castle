@@ -197,6 +197,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
     <Content Include="Content\Graphics\Big Sword.png" />
@@ -287,6 +288,15 @@
     <Content Include="Content\Z Character.png" />
     <Content Include="Content\Fonts\DYFFont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\Goblin Death %28spookymodem__goblin-death%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\Purchase Item %28d-w__coins-01%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>

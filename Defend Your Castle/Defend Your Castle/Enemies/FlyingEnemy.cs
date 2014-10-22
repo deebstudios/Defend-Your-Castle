@@ -22,12 +22,14 @@ namespace Defend_Your_Castle
             ObjectSheet = LoadAssets.FlyingGoblinSheet[costume];
             InvincibleSheet = LoadAssets.FlyingGoblinInvincibleSheet;
 
+            Gold = 150;
+
             MoveSpeed = new Vector2(2 + speedadd, 0);
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
 
             FlyingHeight = flyingheight;
-            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Spear;
 
@@ -43,11 +45,11 @@ namespace Defend_Your_Castle
         {
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
-                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(3, 39, 31, 29), 300), new AnimFrame(new Rectangle(39, 39, 29, 29), 400), new AnimFrame(new Rectangle(75, 40, 32, 28), 100, new Vector2(0, -1)));
+                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(3, 39, 31, 29), 200), new AnimFrame(new Rectangle(39, 39, 29, 29), 275), new AnimFrame(new Rectangle(75, 40, 32, 28), 75, new Vector2(0, -1)));
                 AttackAnim.SetAnimSpeed(Animation.GetSpeed);
 
                 //Attack now
-                CurAction = new MeleeAttack(this, AttackAnim, 50, AttackAnim.MaxFrame);
+                CurAction = new MeleeAttack(this, AttackAnim, 75, AttackAnim.MaxFrame);
             }
         }
     }
