@@ -13,10 +13,12 @@ namespace Defend_Your_Castle
             ObjectSheet = LoadAssets.RangedArmoredGoblin[costume];
             InvincibleSheet = LoadAssets.RangedArmoredGoblinInvincible;
 
+            Gold = 150;
+
             WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
             Range = 120;
 
-            ProjectileDamage = 40;
+            ProjectileDamage = 50;
         }
     }
 }

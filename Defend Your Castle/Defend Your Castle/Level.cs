@@ -105,8 +105,8 @@ namespace Defend_Your_Castle
 
             Enemies = new List<LevelObject>();
 
-            // Set the level number to 1 (for testing)
-            LevelNum = 1;
+            // Set the level number to 1
+            LevelNum = 50;
 
             //Start out at day
             StartDayNight(true);

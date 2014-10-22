@@ -226,8 +226,6 @@ namespace Defend_Your_Castle
                 //Subtract an amount of damage
                 Health -= CalculateDamage(damage);
 
-                SoundManager.PlaySound(LoadAssets.TestSound);
-
                 //Don't show negative health
                 if (Health < 0)
                 {

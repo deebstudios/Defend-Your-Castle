@@ -54,6 +54,32 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Goblin Death %28spookymodem__goblin-death%29.wav">
+      <Name>Goblin Death %28spookymodem__goblin-death%29</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Purchase Item %28d-w__coins-01%29.wav">
+      <Name>Purchase Item %28d-w__coins-01%29</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Weapon Swing %28qubodup__sharp-swosh-18_01%29.wav">
+      <Name>Weapon Swing %28qubodup__sharp-swosh-18_01%29</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Goblin Death %28spookymodem__goblin-death%29 %28Original%29.wav">
+      <Name>Goblin Death %28spookymodem__goblin-death%29 %28Original%29</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 

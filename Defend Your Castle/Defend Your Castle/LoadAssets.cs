@@ -48,7 +48,6 @@ namespace Defend_Your_Castle
 
         //Shop graphics
         public static Texture2D GoldCoin;
-        //public static Texture2D ShopIcon;
         public static Texture2D FortifyWalls;
         public static Texture2D Invincibility;
         public static Texture2D RepairWalls;
@@ -58,6 +57,13 @@ namespace Defend_Your_Castle
 
         //Fonts
         public static SpriteFont DYFFont;
+
+        //Music
+
+        //Sounds
+        public static SoundEffect WeaponSwing;
+        public static SoundEffect PurchaseItem;
+        public static SoundEffect GoblinDeath;
 
         //Debug graphics
         public static Texture2D ScalableBox;
@@ -112,7 +118,6 @@ namespace Defend_Your_Castle
 
             //Shop graphics
             GoldCoin = LoadGraphic(Content, "Gold Coin");
-            //ShopIcon = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/ShopIcon");
             FortifyWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/FortifyWallsIcon");
             Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
             RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
@@ -128,6 +133,10 @@ namespace Defend_Your_Castle
         private static void LoadSounds(ContentManager Content)
         {
             TestSound = Content.Load<SoundEffect>(SoundDir + "test");
+
+            GoblinDeath = Content.Load<SoundEffect>(SoundDir + "Goblin Death (spookymodem__goblin-death)");
+            PurchaseItem = Content.Load<SoundEffect>(SoundDir + "Purchase Item (d-w__coins-01)");
+            WeaponSwing = Content.Load<SoundEffect>(SoundDir + "Weapon Swing (qubodup__sharp-swosh-18_01)");
         }
 
         private static void LoadMusic(ContentManager Content)
