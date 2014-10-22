@@ -16,14 +16,14 @@ namespace Defend_Your_Castle
 
             WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
 
-            Gold = 200;
+            Gold = 150;
 
             ObjectSheet = LoadAssets.ArmoredGoblinSheet[costume];
             InvincibleSheet = LoadAssets.ArmoredGoblinInvincibleSheet;
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));
 
-            Position = new Vector2(0, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             SetProperties(level);
         }
@@ -33,7 +33,7 @@ namespace Defend_Your_Castle
             if (CurAction.GetActionType == Action.ActionType.Moving)
             {
                 //Attack now
-                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 225), new AnimFrame(new Rectangle(20, 36, 17, 35), 225, new Vector2(1, 0)), new AnimFrame(new Rectangle(42, 37, 18, 34), 225, new Vector2(0, -1)));
+                Animation AttackAnim = new Animation(new AnimFrame(new Rectangle(0, 36, 17, 35), 225), new AnimFrame(new Rectangle(20, 36, 17, 35), 300, new Vector2(1, 0)), new AnimFrame(new Rectangle(42, 37, 18, 34), 100, new Vector2(0, -1)));
                 AttackAnim.SetAnimSpeed(Animation.GetSpeed);
 
                 CurAction = new MeleeAttack(this, AttackAnim, 150, AttackAnim.MaxFrame);

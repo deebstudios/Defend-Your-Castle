@@ -38,13 +38,23 @@ namespace Defend_Your_Castle
             ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer, this), new FortifyCastle(shopPlayer, this) };
 
             // Prepare/Repair
-            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer, this) };
+            ShopPrepareRepairs = new List<ShopItem>() { new RepairWalls(shopPlayer, this), new BuyArcher(shopPlayer, this), new BuySlower(shopPlayer, this), new UpgradeArcher(shopPlayer, this), new UpgradeSlower(shopPlayer, this) };
 
             // Items
             ShopItems = new List<ShopItem>() { new Invincibility(shopPlayer, this) };
 
             // Assign the shop items to the Shop
             AssignShopItems();
+        }
+
+        public int GetArcherLevel
+        {
+            get { return ShopPrepareRepairs[3].GetCurrentLevel; }
+        }
+
+        public int GetSlowerLevel
+        {
+            get { return ShopPrepareRepairs[4].GetCurrentLevel; }
         }
 
         public void AssignShopItems()
@@ -94,10 +104,30 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void AddConsumablesToHUD()
+        {
+            // Loop through all the consumables
+            for (int i = 0; i < ShopItems.Count; i++)
+            {
+                // Check if the consumable was purchased
+                if (ShopItems[i].GetCurrentLevel > 0)
+                {
+                    // Add the consumable to the HUD
+                    AddConsumableToHUD(ShopItems[i]);
+                }
+            }
+        }
+
         public void AddConsumableToHUD(ShopItem consumable)
         {
             // Add the consumable to the consumables GridView on the HUD
             gamePage.HUD_ConsumablesList.Items.Add(consumable);
+        }
+
+        public void RemoveConsumablesFromHUD()
+        {
+            // Clear all the items from the HUD
+            gamePage.HUD_ConsumablesList.Items.Clear();
         }
 
 

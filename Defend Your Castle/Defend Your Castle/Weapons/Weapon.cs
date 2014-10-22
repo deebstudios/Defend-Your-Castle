@@ -24,6 +24,8 @@ namespace Defend_Your_Castle
         {
             PrevAttack = 0f;
 
+            Sound = LoadAssets.WeaponSwing;
+
             //Weapons start out not available by default
             Available = false;
         }

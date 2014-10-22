@@ -61,9 +61,9 @@ namespace Defend_Your_Castle
             get { return (Game1.ActiveTime >= PrevAttack); }
         }
 
-        private float AttackDistance(Level level)
+        private float AttackDistance
         {
-            return (level.GetPlayer.GetPosition.X - AttackRange);
+            get { return (Parent.GetPosition.X - AttackRange); }
         }
 
         private float GetAttackTime
@@ -90,7 +90,7 @@ namespace Defend_Your_Castle
         private void CheckAttackEnemy(Level level, LevelObject enemy)
         {
             //If the object is an enemy and is within a certain range, there is a chance of attacking it based on AttackChance
-            if (enemy.GetObjectType == ObjectType.Enemy && CheckWeakness(enemy) == true && enemy.IsDying == false && enemy.IsInvincible == false && enemy.GetPosition.X >= AttackDistance(level))
+            if (enemy.GetObjectType == ObjectType.Enemy && CheckWeakness(enemy) == true && enemy.IsDying == false && enemy.IsInvincible == false && enemy.GetPosition.X >= AttackDistance)
             {
                 int randnum = Rand.Next(0, AttackChance);
 
@@ -126,7 +126,7 @@ namespace Defend_Your_Castle
         }
 
         //Make the archer attack faster, further, and more successfully
-        public override void IncreaseStats()
+        protected override void IncreaseStats()
         {
             AttackChance -= ChanceIncrease;
             AttackRange += RangeIncrease;

@@ -14,9 +14,6 @@ namespace Defend_Your_Castle
             // Set the attack speed
             AttackSpeed = 50;
 
-            //Set the sound of the spear to a test sound
-            Sound = LoadAssets.TestSound;
-
             //TEMPORARY
             MakeAvailable();
         }

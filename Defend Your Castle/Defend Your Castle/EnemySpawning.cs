@@ -13,6 +13,10 @@ namespace Defend_Your_Castle
         private const int MinSpeedIncrease = 10;
         private const int MaxSpeedIncrease = 7;
 
+        //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
+        private const int FirstInvLevel = 15;
+        private const float MaxInvDuration = 1900f;
+
         // Reference to the level
         private Level level;
 
@@ -173,21 +177,53 @@ namespace Defend_Your_Castle
             //Get a random costume (recolor) for the enemy to be
             int costume = RandGenerator.Next(0, 3);
 
+            Enemy enem = null;
+
             switch (EnemyIndex)
             {
                 case 1: // Spear Enemy
-                    return (new SpearEnemy(level, Y, speedincrease, costume));
+                    enem = new SpearEnemy(level, Y, speedincrease, costume);
+                    break;
                 case 2: //Armored enemy
-                    return (new ArmoredEnemy(level, Y, speedincrease, costume));
+                    enem = new ArmoredEnemy(level, Y, speedincrease, costume);
+                    break;
                 case 3: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
-                    return (new FlyingEnemy(level, Y, flyheight, speedincrease, costume));
+                    enem = new FlyingEnemy(level, Y, flyheight, speedincrease, costume);
+                    break;
                 case 4: //Armored Spear enemy
-                    return (new ArmoredSpearEnemy(level, Y, speedincrease, costume));
+                    enem = new ArmoredSpearEnemy(level, Y, speedincrease, costume);
+                    break;
                 case 0: // Melee Enemy
                 default:
-                    return (new MeleeEnemy(level, Y, speedincrease, costume));
+                    enem = new MeleeEnemy(level, Y, speedincrease, costume);
+                    break;
             }
+
+            //Check the level to see if the enemy can spawn with invincibility
+            if (level.GetLevelNum >= FirstInvLevel)
+            {
+                //1/10 chance of having the enemy be invincible
+                int invchance = RandGenerator.Next(0, 1);
+
+                if (invchance == 0)
+                {
+
+                    /*We want the invincibility value to be at around 200f on the last level due to how fast enemies move
+                      It should decrease a little every few levels*/
+
+                    //Decrease by 100 ms every level
+                    int leveldiff = (level.GetLevelNum - FirstInvLevel) * 50;
+                    float invduration = MaxInvDuration - leveldiff;
+
+                    //If the enemy is ranged, subtract 100 ms from the duration since they don't have to travel as far
+                    if (EnemyIndex == 0 || EnemyIndex == 4) invduration -= 100f;
+
+                    enem.SetInvincible(invduration);
+                }
+            }
+
+            return enem;
         }
 
         public void SpawnEnemy()
@@ -201,10 +237,9 @@ namespace Defend_Your_Castle
                 // Add the enemy that should be spawned
                 level.AddEnemy(EnemyToSpawn);
 
-                // NOTE: This calculation will need to be changed. It was just set up with these values for now
-                // Set the minimum spawn time to depend on the level of the player
+                // Set the minimum spawn time to depend on the level the player is on
                 // The minimum spawn time decreases by 48 milliseconds each level
-                int MinSpawnTime = (3000 - (48 * (level.GetLevelNum - 1)));
+                int MinSpawnTime = (2750 - (48 * (level.GetLevelNum - 1)));
 
                 // Set the maximum spawn time to be 1.5x the minimum spawn time
                 // Add 1 to include the maximum spawn time

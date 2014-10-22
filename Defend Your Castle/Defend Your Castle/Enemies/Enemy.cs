@@ -53,10 +53,9 @@ namespace Defend_Your_Castle
             // Set the slow amount
             SlowAmount = new Vector2(0, 0);
 
-            //FOR TESTING INVINCIBILITY
-            //InvincibilityLength = 5000f;
-            //InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
-            //UseInvincibility();
+            //Default length
+            InvincibilityLength = 1500f;
+            InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
 
             Gold = 100;
 
@@ -159,6 +158,8 @@ namespace Defend_Your_Castle
 
         public override void Die(Level level)
         {
+            SoundManager.PlaySound(LoadAssets.GoblinDeath);
+
             FakeDead = true;
             GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
         }
@@ -174,6 +175,12 @@ namespace Defend_Your_Castle
             //Slow down the current animation
             float slowamount = .15f + (.5f * slowerlevel);
             CurAction.GetAnim.ChangeAnimSpeed(slowamount);
+        }
+
+        public void SetInvincible(float invincibilityduration)
+        {
+            InvincibilityLength = invincibilityduration;
+            UseInvincibility();
         }
 
         protected abstract void ChooseNextAction(Level level);

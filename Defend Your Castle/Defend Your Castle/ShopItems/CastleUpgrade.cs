@@ -14,17 +14,17 @@ namespace Defend_Your_Castle
         public CastleUpgrade(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
-            Name = "Fortify Castle";
+            Name = "Reinforce Fort";
             
             // Set the health increase
             HealthIncrease = 1500;
 
             price = 400;
 
-            Description = "Upgrade your castle to a more premium metal. +" + HealthIncrease + " Max Health";
+            Description = "Increase the durability of your fort's walls. +" + HealthIncrease + " Max Health";
 
             // Get the path to the image of the item
-            ImagePath = "Content/Graphics/ShopIcons/FortifyWallsIcon.png";
+            ImagePath = "Content/Graphics/ShopIcons/Big FortifyWallsIcon.png";
         }
 
         public override void UseItem()

@@ -59,7 +59,7 @@ namespace Defend_Your_Castle
         }
 
         //Increases the stats of the PlayerHelper
-        public abstract void IncreaseStats();
+        protected abstract void IncreaseStats();
 
         //For saving data; convert the player helper into a HelperData
         public abstract HelperData ConvertHelperToData();
