@@ -197,6 +197,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
     <Content Include="Content\Graphics\Big Sword.png" />

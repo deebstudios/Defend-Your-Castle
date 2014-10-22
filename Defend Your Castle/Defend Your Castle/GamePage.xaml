@@ -65,7 +65,7 @@
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="Margin" Value="5,5,0,0"/>
         </Style>
 
         <!-- Consumables Styles -->
@@ -73,10 +73,11 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
-
+        
         <Style x:Key="HUD_ConsumablesListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="16,0,0,16"/>
             <Setter Property="Margin" Value="20,0,0,0"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
@@ -708,7 +709,7 @@
                     </Viewbox>
 
                     <!-- Gold + Consumables -->
-                    <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,5">
+                    <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>

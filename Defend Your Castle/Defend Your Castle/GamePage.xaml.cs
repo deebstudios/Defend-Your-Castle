@@ -107,7 +107,7 @@ namespace Defend_Your_Castle
             {
                 // Set the sound volume
                 SoundManager.SetSoundVolume(thevol);
-
+                
                 // Remove the ValueChanged events from the Sliders on the Options and Pause Menus
                 // This is done so that the the ValueChanged event will not proc again for the slider that was updated
                 OptionsScreen_SoundVolume.ValueChanged -= Slider_Volume_ValueChanged;
@@ -249,12 +249,6 @@ namespace Defend_Your_Castle
             // State that the player has saved data
             Game1.HasSavedData = true;
         }
-
-        
-
-       
-
-        
 
 
     }

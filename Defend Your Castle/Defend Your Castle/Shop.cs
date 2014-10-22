@@ -104,10 +104,30 @@ namespace Defend_Your_Castle
             }
         }
 
+        public void AddConsumablesToHUD()
+        {
+            // Loop through all the consumables
+            for (int i = 0; i < ShopItems.Count; i++)
+            {
+                // Check if the consumable was purchased
+                if (ShopItems[i].GetCurrentLevel > 0)
+                {
+                    // Add the consumable to the HUD
+                    AddConsumableToHUD(ShopItems[i]);
+                }
+            }
+        }
+
         public void AddConsumableToHUD(ShopItem consumable)
         {
             // Add the consumable to the consumables GridView on the HUD
             gamePage.HUD_ConsumablesList.Items.Add(consumable);
+        }
+
+        public void RemoveConsumablesFromHUD()
+        {
+            // Clear all the items from the HUD
+            gamePage.HUD_ConsumablesList.Items.Clear();
         }
 
 
