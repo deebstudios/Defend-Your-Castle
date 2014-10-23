@@ -70,6 +70,7 @@ namespace Defend_Your_Castle
             if (item.CanBuy(ShopPlayer) == true)
             {
                 // Play the "purchase" sound
+                SoundManager.PlaySound(LoadAssets.PurchaseItem);
 
                 // Subtract the item price from the player's gold
                 ShopPlayer.Gold -= item.Price;

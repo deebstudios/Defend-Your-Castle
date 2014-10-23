@@ -106,7 +106,7 @@ namespace Defend_Your_Castle
             Enemies = new List<LevelObject>();
 
             // Set the level number to 1
-            LevelNum = 50;
+            LevelNum = 1;
 
             //Start out at day
             StartDayNight(true);
@@ -231,6 +231,9 @@ namespace Defend_Your_Castle
 
             // Set the game state to LevelEnd
             Game.ChangeGameState(GameState.LevelEnd);
+
+            //Play victory music
+            SoundManager.PlaySound(LoadAssets.LevelComplete);
         }
 
         public void QuitLevel()

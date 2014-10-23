@@ -64,13 +64,13 @@ namespace Defend_Your_Castle
         public static SoundEffect WeaponSwing;
         public static SoundEffect PurchaseItem;
         public static SoundEffect GoblinDeath;
+        public static SoundEffect LevelComplete;
 
         //Debug graphics
         public static Texture2D ScalableBox;
         public static Texture2D testanim;
 
         public static Song TestSong;
-        public static SoundEffect TestSound;
 
         public static void LoadContent(ContentManager Content)
         {
@@ -132,11 +132,10 @@ namespace Defend_Your_Castle
 
         private static void LoadSounds(ContentManager Content)
         {
-            TestSound = Content.Load<SoundEffect>(SoundDir + "test");
-
-            GoblinDeath = Content.Load<SoundEffect>(SoundDir + "Goblin Death (spookymodem__goblin-death)");
+            GoblinDeath = Content.Load<SoundEffect>(SoundDir + "Goblin Death (sihil__ogre1)");
             PurchaseItem = Content.Load<SoundEffect>(SoundDir + "Purchase Item (d-w__coins-01)");
             WeaponSwing = Content.Load<SoundEffect>(SoundDir + "Weapon Swing (qubodup__sharp-swosh-18_01)");
+            LevelComplete = Content.Load<SoundEffect>(SoundDir + "Level Complete (Bart Kelsey - orchestra)");
         }
 
         private static void LoadMusic(ContentManager Content)

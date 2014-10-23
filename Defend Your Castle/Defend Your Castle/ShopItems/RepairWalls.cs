@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Defend_Your_Castle
 {
-    public sealed class RepairWalls : ShopItem
+    public class RepairWalls : ShopItem
     {
-        private int HealAmount;
+        protected int HealAmount;
 
         public RepairWalls(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
@@ -18,18 +18,18 @@ namespace Defend_Your_Castle
 
             HealAmount = 1000;
 
-            Description = "Repair your castle walls.\n+" + HealAmount + " Health";
+            Description = "Repair your fort's walls.\n+" + HealAmount + " Health";
 
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big RepairWallsIcon.png";
         }
 
-        public override bool CanBuy(Player ShopPlayer)
+        public sealed override bool CanBuy(Player ShopPlayer)
         {
             return (base.CanBuy(ShopPlayer) == true && ShopPlayer.GetHealth < ShopPlayer.GetMaxHealth);
         }
 
-        public override void UseItem()
+        public sealed override void UseItem()
         {
             base.UseItem();
 
