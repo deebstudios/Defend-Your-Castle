@@ -59,6 +59,7 @@ namespace Defend_Your_Castle
         public static SpriteFont DYFFont;
 
         //Music
+        public static Song ShopSong;
 
         //Sounds
         public static SoundEffect WeaponSwing;
@@ -140,7 +141,7 @@ namespace Defend_Your_Castle
 
         private static void LoadMusic(ContentManager Content)
         {
-            TestSong = Content.Load<Song>(MusicDir + "Mario Party - Peaceful Mushroom Village");
+            ShopSong = Content.Load<Song>(MusicDir + "Pixel Peeker Polka - slower");
         }
 
 
