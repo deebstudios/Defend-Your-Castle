@@ -198,6 +198,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\Game Over Sprite.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
@@ -263,6 +264,7 @@
     <Content Include="Content\Graphics\Sun.png" />
     <Content Include="Content\Graphics\Sword.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
+    <Content Include="Content\Graphics\Title Screen Background.png" />
     <Content Include="Content\H Character.png" />
     <Content Include="Content\I Character.png" />
     <Content Include="Content\J Character.png" />
