@@ -344,7 +344,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="0.6*"/>
             </Grid.RowDefinitions>
-
+            
             <!-- Title Screen Styles -->
             <Grid.Resources>
                 <Style x:Key="TitleScreen_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
@@ -359,8 +359,14 @@
                 </Style>
             </Grid.Resources>
 
+            <!-- Background Image -->
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
+                   Source="Content/Graphics/Title Screen Background.png" />
+            
+            <!-- Defend Your Fort Logo -->
             <Image Style="{StaticResource TitleScreen_LogoStyle}" />
 
+            <!-- Buttons -->
             <Viewbox Grid.Row="1">
                 <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,60">
                     <Button Name="TitleScreen_StartGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Start Game"
@@ -418,7 +424,7 @@
                 </Style>
             </Grid.Resources>
 
-            <!-- Background image -->
+            <!-- Background Image -->
             <Image Style="{StaticResource OptionsScreen_BackgroundStyle}" />
 
             <!-- Screen Title -->
@@ -479,6 +485,10 @@
                 </Style>
             </Grid.Resources>
 
+            <!-- Background Image -->
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
+                   Source="Content/Graphics/Game Over Sprite.png" />
+            
             <!-- Game Over Message -->
             <Viewbox>
                 <TextBlock Style="{StaticResource GameOverScreen_TextBlockStyle}" Text="You were defeated" />
