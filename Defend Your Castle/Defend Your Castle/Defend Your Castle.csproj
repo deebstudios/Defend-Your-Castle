@@ -174,6 +174,7 @@
     <Compile Include="ShopItems\FortifyCastle.cs" />
     <Compile Include="ShopItems\Invincibility.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />
+    <Compile Include="ShopItems\RepairWallsx10.cs" />
     <Compile Include="ShopItems\ShopItem.cs" />
     <Compile Include="ShopItems\UpgradeArcher.cs" />
     <Compile Include="ShopItems\UpgradeSlower.cs" />
@@ -276,9 +277,6 @@
     <Content Include="Content\Q Character.png" />
     <Content Include="Content\R Character.png" />
     <Content Include="Content\S Character.png" />
-    <Content Include="Content\Sounds\test.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\T Character.png" />
     <Content Include="Content\U Character.png" />
     <Content Include="Content\V Character.png" />
@@ -289,10 +287,13 @@
     <Content Include="Content\Fonts\DYFFont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Sounds\Goblin Death %28spookymodem__goblin-death%29.xnb">
+    <Content Include="Content\Sounds\Purchase Item %28d-w__coins-01%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Sounds\Purchase Item %28d-w__coins-01%29.xnb">
+    <Content Include="Content\Sounds\Goblin Death %28sihil__ogre1%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\Level Complete %28Bart Kelsey - orchestra%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
