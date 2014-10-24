@@ -57,6 +57,11 @@ namespace Defend_Your_Castle
             get { return ShopPrepareRepairs[4].GetCurrentLevel; }
         }
 
+        public int GetStrengthenWallsLevel
+        {
+            get { return ShopUpgrades[1].GetCurrentLevel; }
+        }
+
         public void AssignShopItems()
         {
             gamePage.Shop_UpgradesList.ItemsSource = ShopUpgrades;

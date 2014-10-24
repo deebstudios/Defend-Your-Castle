@@ -59,7 +59,8 @@ namespace Defend_Your_Castle
         public static SpriteFont DYFFont;
 
         //Music
-        public static Song ShopSong;
+        public static Song TitleScreenMusic;
+        public static Song ShopMusic;
 
         //Sounds
         public static SoundEffect WeaponSwing;
@@ -69,9 +70,6 @@ namespace Defend_Your_Castle
 
         //Debug graphics
         public static Texture2D ScalableBox;
-        public static Texture2D testanim;
-
-        public static Song TestSong;
 
         public static void LoadContent(ContentManager Content)
         {
@@ -128,7 +126,6 @@ namespace Defend_Your_Castle
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");
-            testanim = Content.Load<Texture2D>(GraphicsDir + "TestAnim");
         }
 
         private static void LoadSounds(ContentManager Content)
@@ -141,7 +138,8 @@ namespace Defend_Your_Castle
 
         private static void LoadMusic(ContentManager Content)
         {
-            ShopSong = Content.Load<Song>(MusicDir + "Pixel Peeker Polka - slower");
+            TitleScreenMusic = Content.Load<Song>(MusicDir + "Home Base Groove");
+            ShopMusic = Content.Load<Song>(MusicDir + "Itty Bitty 8 Bit");
         }
 
 

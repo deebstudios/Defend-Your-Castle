@@ -75,7 +75,7 @@ namespace Defend_Your_Castle
         {
             // Create a new PlayerData object from the player
             PlayerData playerData = new PlayerData(level.GetPlayer.GetHealth, level.GetPlayer.GetMaxHealth, level.GetPlayer.GetCastleLevel,
-                                                   level.GetPlayer.Gold, level.GetPlayer.HasInvincibility, GetPlayerHelpers(level.GetPlayer));
+                                                   level.GetPlayer.Gold, GetPlayerHelpers(level.GetPlayer));
             //playerData.SetHelpers(GetPlayerHelpers(player));
 
             // Create a new ShopData object from the shop
@@ -231,20 +231,17 @@ namespace Defend_Your_Castle
         public int CastleLevel;
         [DataMember]
         public int Gold;
-        [DataMember]
-        public bool Invincibility;
 
         [DataMember]
         public List<HelperData> Helpers;
 
-        public PlayerData(int health, int maxHealth, int castleLevel, int gold, bool invincibility, List<HelperData> helpers)
+        public PlayerData(int health, int maxHealth, int castleLevel, int gold, List<HelperData> helpers)
         {
             Health = health;
             MaxHealth = maxHealth;
             CastleLevel = castleLevel;
             Gold = gold;
 
-            Invincibility = invincibility;
             Helpers = helpers;
         }
     }

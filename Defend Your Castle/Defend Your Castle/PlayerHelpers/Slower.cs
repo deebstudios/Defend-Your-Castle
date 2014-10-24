@@ -21,12 +21,6 @@ namespace Defend_Your_Castle
         private Vector2 SlowAmountIncrease;
         private const float SlowDurIncrease = 250f;
 
-        // The enemy the Slower is targeting
-        private LevelObject Victim;
-
-        // The Slower's slowing animation
-        private Animation SlowingAnim;
-
         // The Slower's chance of slowing a nearby enemy
         private int SlowChance;
 
@@ -49,7 +43,7 @@ namespace Defend_Your_Castle
             MaxLevel = 2;
 
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 17, 35), 0f));
-            SlowingAnim = new Animation(true, new AnimFrame(new Rectangle(21, 0, 17, 35), 100f), new AnimFrame(new Rectangle(43, 0, 17, 35), 300f));
+            AttackingAnim = new Animation(true, new AnimFrame(new Rectangle(21, 0, 17, 35), 100f), new AnimFrame(new Rectangle(43, 0, 17, 35), 300f));
 
             SlowChance = 4;
 
@@ -96,14 +90,9 @@ namespace Defend_Your_Castle
                 if (randnum == 0)
                 {
                     Victim = enemy;
-                    SlowingAnim.Restart();
+                    AttackingAnim.Restart();
                 }
             }
-        }
-
-        private void StopSlowing()
-        {
-            Victim = null;
         }
 
         public override void SetPosition()
@@ -170,18 +159,18 @@ namespace Defend_Your_Castle
             }
             else
             {
-                SlowingAnim.Update();
+                AttackingAnim.Update();
 
                 // If the enemy already died while the Slower was attacking, stop
                 if (Victim.IsDying == true)
-                    StopSlowing();
-                else if (SlowingAnim.IsAnimationComplete == true)
+                    StopAttacking();
+                else if (AttackingAnim.IsAnimationComplete == true)
                 {
                     // Slow the designated target
                     (Victim as Enemy).ApplySlow(SlowAmount, SlowDur, HelperLevel);
 
                     // Stop the helper from shooting
-                    StopSlowing();
+                    StopAttacking();
                 }
             }
 
@@ -190,7 +179,7 @@ namespace Defend_Your_Castle
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Animation drawanim = ((IsSlowing == false) ? Animation : SlowingAnim);
+            Animation drawanim = ((IsSlowing == false) ? Animation : AttackingAnim);
 
             drawanim.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, .998f);
 

@@ -125,7 +125,7 @@ namespace Defend_Your_Castle
 
             LoadAssets.LoadContent(Content);
 
-            //SoundManager.PlaySong(LoadAssets.TestSong);
+            SoundManager.PlaySong(LoadAssets.TitleScreenMusic);
         }
 
         protected override void UnloadContent()
@@ -233,8 +233,6 @@ namespace Defend_Your_Castle
             // Set the game state to the specified state
             GameState = state;
 
-            SoundManager.StopSong();
-
             // Switch the main canvas depending on the new game state
             switch (GameState)
             {
@@ -263,7 +261,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.Shop:
                     GamePage.ShowShop();
-                    SoundManager.PlaySong(LoadAssets.ShopSong);
+                    SoundManager.PlaySong(LoadAssets.ShopMusic, true, false);
 
                     break;
                 case GameState.HowToPlay:
@@ -317,6 +315,8 @@ namespace Defend_Your_Castle
 
             // Add all consumables to the HUD
             shop.AddConsumablesToHUD();
+            if (shop.GetStrengthenWallsLevel >= 1)
+                level.GetPlayer.FortifyCastle();
 
             // Select the Sword
             SelectSwordWeapon();

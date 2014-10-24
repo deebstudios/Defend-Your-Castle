@@ -25,6 +25,9 @@ namespace Defend_Your_Castle
         private const float SunX = 45f;
         private const float SunY = 25f;
 
+        //The game's max level
+        public const int MaxLevel = 50;
+
         // Stores the level number of the level
         private int LevelNum;
 
@@ -207,6 +210,7 @@ namespace Defend_Your_Castle
         {
             // Clear the enemies list
             Enemies.Clear();
+            player.ResetHelpers();
 
             // Stop the Player's Invincibility if it is active
             player.EndInvincibility();
@@ -249,6 +253,8 @@ namespace Defend_Your_Castle
 
             // Set the game state to Screen
             Game.ChangeGameState(GameState.Screen);
+
+            SoundManager.PlaySong(LoadAssets.TitleScreenMusic);
         }
 
         //Returns the player reference
