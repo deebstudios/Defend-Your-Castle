@@ -238,6 +238,7 @@ namespace Defend_Your_Castle
 
             //Play victory music
             SoundManager.PlaySound(LoadAssets.LevelComplete);
+            SoundManager.StopSong();
         }
 
         public void QuitLevel()

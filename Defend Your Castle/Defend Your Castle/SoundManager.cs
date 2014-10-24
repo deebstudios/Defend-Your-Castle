@@ -62,7 +62,7 @@ namespace Defend_Your_Castle
             {
                 if (stop == true) StopSong();
                 MediaPlayer.Play(song);
-                if (stop == true) MediaPlayer.IsRepeating = loop;
+                MediaPlayer.IsRepeating = loop;
             }
         }
 
