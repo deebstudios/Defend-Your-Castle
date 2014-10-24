@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Defend_Your_Castle
 {
@@ -69,7 +71,7 @@ namespace Defend_Your_Castle
             gamePage.Shop_ItemsList.ItemsSource = ShopItems;
         }
 
-        public void BuyItem(ShopItem item)
+        public void BuyItem(ShopItem item, Button TheButton)
         {
             // Check if the player can buy the item
             if (item.CanBuy(ShopPlayer) == true)
@@ -89,6 +91,7 @@ namespace Defend_Your_Castle
             else // The player doesn't have enough gold for the item
             {
                 // Notify the player of this
+                gamePage.Shop_NotEnoughGoldFlyout.ShowAt(TheButton);
             }
         }
 

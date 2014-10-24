@@ -41,7 +41,7 @@ namespace Defend_Your_Castle
         public static void SetMusicVolume(float volume)
         {
             MusicVolume = MediaPlayer.Volume = volume;
-
+            
             // Save the volume settings
             SaveVolumeSettings();
         }

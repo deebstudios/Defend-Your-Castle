@@ -221,9 +221,9 @@ namespace Defend_Your_Castle
 
             // Get the ShopItem associated with the Button
             ShopItem shopItem = (ShopItem)TheButton.DataContext;
-
+            
             // Buy the item if possible
-            _game.shop.BuyItem(shopItem);
+            _game.shop.BuyItem(shopItem, TheButton);
         }
 
         private void StartNextLevel(object sender, RoutedEventArgs e)
