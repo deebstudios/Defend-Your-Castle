@@ -319,6 +319,20 @@
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
 
+        <!-- "Not Enough Gold" Flyout -->
+        <Flyout x:Name="Shop_NotEnoughGoldFlyout" x:Key="Shop_NotEnoughGoldFlyout" x:FieldModifier="public" Placement="Bottom">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            
+            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" BorderThickness="0" Margin="0" Padding="10">
+                <Viewbox>
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
+                </Viewbox>
+            </Border>
+        </Flyout>
 
         <!-- Full Screen Notice Styles -->
         <Style x:Key="FullScreenNotice_ImageStyle" TargetType="Image">
@@ -344,7 +358,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="0.6*"/>
             </Grid.RowDefinitions>
-
+            
             <!-- Title Screen Styles -->
             <Grid.Resources>
                 <Style x:Key="TitleScreen_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
@@ -359,8 +373,14 @@
                 </Style>
             </Grid.Resources>
 
+            <!-- Background Image -->
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
+                   Source="Content/Graphics/Title Screen Background.png" />
+            
+            <!-- Defend Your Fort Logo -->
             <Image Style="{StaticResource TitleScreen_LogoStyle}" />
 
+            <!-- Buttons -->
             <Viewbox Grid.Row="1">
                 <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="0,30,0,60">
                     <Button Name="TitleScreen_StartGame" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Start Game"
@@ -418,7 +438,7 @@
                 </Style>
             </Grid.Resources>
 
-            <!-- Background image -->
+            <!-- Background Image -->
             <Image Style="{StaticResource OptionsScreen_BackgroundStyle}" />
 
             <!-- Screen Title -->
@@ -479,6 +499,10 @@
                 </Style>
             </Grid.Resources>
 
+            <!-- Background Image -->
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
+                   Source="Content/Graphics/Game Over Sprite.png" />
+            
             <!-- Game Over Message -->
             <Viewbox>
                 <TextBlock Style="{StaticResource GameOverScreen_TextBlockStyle}" Text="You were defeated" />
@@ -1066,24 +1090,6 @@
         <!-- Shop Background -->
         <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
 
-        <!-- Game Saved Border -->
-        <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
-            <!-- Game Saved Text -->
-            <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
-
-            <Border.Resources>
-                <!-- Save Game Animation -->
-                <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                    </ObjectAnimationUsingKeyFrames>
-
-                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Opacity"
-                                     From="1.0" To="0.0" Duration="0:0:1"/>
-                </Storyboard>
-            </Border.Resources>
-        </Border>
-
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
             <!-- Shop Title -->
@@ -1194,6 +1200,24 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        
+        <!-- Game Saved Border -->
+        <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
+            <!-- Game Saved Text -->
+            <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
+
+            <Border.Resources>
+                <!-- Save Game Animation -->
+                <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Opacity"
+                                     From="1.0" To="0.0" Duration="0:0:1"/>
+                </Storyboard>
+            </Border.Resources>
+        </Border>
     </Grid>
 
     <!-- Full Screen Notice - Notifies the player that the game must be in full screen -->

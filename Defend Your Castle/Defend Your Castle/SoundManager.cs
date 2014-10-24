@@ -41,7 +41,7 @@ namespace Defend_Your_Castle
         public static void SetMusicVolume(float volume)
         {
             MusicVolume = MediaPlayer.Volume = volume;
-
+            
             // Save the volume settings
             SaveVolumeSettings();
         }
@@ -56,13 +56,13 @@ namespace Defend_Your_Castle
         }
 
         //Plays a song, stopping the previous song first - you can choose to not loop the song if you wish, but the default will be set to loop
-        public static void PlaySong(Song song, bool loop = true)
+        public static void PlaySong(Song song, bool loop = true, bool stop = true)
         {
             if (song != null)
             {
-                StopSong();
+                if (stop == true) StopSong();
                 MediaPlayer.Play(song);
-                MediaPlayer.IsRepeating = loop;
+                if (stop == true) MediaPlayer.IsRepeating = loop;
             }
         }
 

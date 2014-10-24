@@ -48,7 +48,7 @@ namespace Defend_Your_Castle
             FakeDead = false;
             GoldDrop = null;
 
-            ObjectSheet = LoadAssets.testanim;
+            ObjectSheet = LoadAssets.GoblinSheet[0];
 
             // Set the slow amount
             SlowAmount = new Vector2(0, 0);

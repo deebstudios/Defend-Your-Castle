@@ -158,6 +158,21 @@ namespace Defend_Your_Castle
             }
         }
 
+        //Resets player helpers
+        public void ResetHelpers()
+        {
+            for (int i = 0; i < Children.Count; i++)
+            {
+                PlayerHelper helper = Children[i] as PlayerHelper;
+
+                //Make the helper stop attacking
+                if (helper != null)
+                {
+                    helper.StopAttacking();
+                }
+            }
+        }
+
         //Set goldamount to a negative value when subtracting gold
         public void ReceiveGold(int goldamount)
         {
@@ -322,8 +337,6 @@ namespace Defend_Your_Castle
             MaxHealth = playerData.MaxHealth;
             CastleLevel = playerData.CastleLevel;
             Gold = playerData.Gold;
-
-            InvincibilityAvailable = playerData.Invincibility;
 
             //Use the helper data to add the helpers to the player
             for (int i = 0; i < playerData.Helpers.Count; i++)

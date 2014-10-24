@@ -19,6 +19,12 @@ namespace Defend_Your_Castle
         //This is useful if the player can buy more than one of a particular helper (Ex. Archers) and helps set their positions
         protected int HelperIndex;
 
+        //The enemy the helper is targetting
+        protected LevelObject Victim;
+
+        //The attacking animation of the helper
+        protected Animation AttackingAnim;
+
         //A pseudo-random number generator that helpers depend on to act
         protected static readonly Random Rand;
 
@@ -26,6 +32,8 @@ namespace Defend_Your_Castle
         {
             MaxLevel = 0;
             HelperLevel = 0;
+
+            Victim = null;
         }
 
         static PlayerHelper()
@@ -63,5 +71,10 @@ namespace Defend_Your_Castle
 
         //For saving data; convert the player helper into a HelperData
         public abstract HelperData ConvertHelperToData();
+
+        public void StopAttacking()
+        {
+            Victim = null;
+        }
     }
 }

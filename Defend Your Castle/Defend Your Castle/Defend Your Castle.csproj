@@ -198,6 +198,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet Invincible.png" />
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
+    <Content Include="Content\Graphics\Game Over Sprite.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
@@ -263,14 +264,20 @@
     <Content Include="Content\Graphics\Sun.png" />
     <Content Include="Content\Graphics\Sword.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
+    <Content Include="Content\Graphics\Title Screen Background.png" />
     <Content Include="Content\H Character.png" />
     <Content Include="Content\I Character.png" />
     <Content Include="Content\J Character.png" />
     <Content Include="Content\K Character.png" />
     <Content Include="Content\L Character.png" />
     <Content Include="Content\M Character.png" />
-    <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.xnb" />
     <Content Include="Content\Graphics\ScalableBox.png" />
+    <Content Include="Content\Music\Home Base Groove.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Music\Itty Bitty 8 Bit.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\N Character.png" />
     <Content Include="Content\O Character.png" />
     <Content Include="Content\P Character.png" />
@@ -299,6 +306,12 @@
     <Content Include="Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Music\Home Base Groove.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Music\Itty Bitty 8 Bit.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +322,6 @@
     <Content Include="Content\A Character.png" />
     <Content Include="Content\Graphics\Alpha Sword.png" />
     <Content Include="Content\Graphics\Alpha Warhammer.png" />
-    <Content Include="Content\Music\Mario Party - Peaceful Mushroom Village.wma">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\B Character.png" />
     <Content Include="Content\C Character.png" />
     <Content Include="Content\D Character.png" />

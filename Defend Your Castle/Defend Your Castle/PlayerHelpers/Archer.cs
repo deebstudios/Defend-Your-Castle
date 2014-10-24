@@ -18,11 +18,6 @@ namespace Defend_Your_Castle
         private const int RangeIncrease = 50;
         private const float SpeedIncrease = 200f;
 
-        //The enemy the archer is attacking
-        private LevelObject Victim;
-
-        private Animation AttackingAnim;
-
         //The range of the archer and its chance of hitting a nearby enemy; these can be increased with level
         private int AttackRange;
         private int AttackChance;
@@ -103,11 +98,6 @@ namespace Defend_Your_Castle
             }
         }
 
-        private void StopShooting()
-        {
-            Victim = null;
-        }
-
         public override void SetPosition()
         {
             float X = Parent.GetPosition.X + 48 + (HelperIndex * 55);
@@ -167,7 +157,7 @@ namespace Defend_Your_Castle
 
                 //If the enemy already died while the archer was shooting, stop
                 if (Victim.IsDying == true)
-                    StopShooting();
+                    StopAttacking();
                 else if (AttackingAnim.IsAnimationComplete == true)
                 {
                     // Add a helper kill
@@ -178,7 +168,7 @@ namespace Defend_Your_Castle
                     Victim.GrantGold(level, false);
                     
                     // Stop the helper from shooting
-                    StopShooting();
+                    StopAttacking();
                 }
             }
 
