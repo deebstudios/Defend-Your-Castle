@@ -525,13 +525,14 @@
 
         <!-- How to Play Screen -->
         <Grid Name="HowToPlayScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <!-- HTP = How To Play -->
             <Grid.Resources>
-                <Style x:Key="HowToPlayScreen_BorderStyle" BasedOn="{StaticResource PauseMenu_VolumeBorderStyle}" TargetType="Border">
+                <Style x:Key="HTP_BorderStyle" BasedOn="{StaticResource PauseMenu_VolumeBorderStyle}" TargetType="Border">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
                 
-                <Style x:Key="HowToPlayScreen_RedBoxStyle" BasedOn="{StaticResource HowToPlayScreen_BorderStyle}" TargetType="Border">
+                <Style x:Key="HTP_RedBoxStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="Red"/>
                     <Setter Property="BorderThickness" Value="3"/>
@@ -539,7 +540,12 @@
                     <Setter Property="Margin" Value="0"/>
                 </Style>
                 
-                <Style x:Key="HowToPlayScreen_SecondScreen_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                <Style x:Key="HTP_ArrowButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
+                    <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+                    <Setter Property="Padding" Value="6,2,6,2"/>
+                </Style>
+                
+                <Style x:Key="HTP_SecondScreen_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
                     <Setter Property="FontSize" Value="36"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="10,0,10,0"/>
@@ -553,288 +559,190 @@
                        tutorial. UI elements will be collapsed and made visible instantly when one of these buttons is clicked -->
             
             <!-- Button Grid -->
-            <Grid Name="HowToPlayScreen_ButtonGrid">
+            <Grid Name="HowToPlayScreen_ButtonGrid" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.08*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.08*"/>
                 </Grid.ColumnDefinitions>
                 
-                
+                <!-- Left arrow button -->
+                <Viewbox>
+                    <Button Name="HTP_LeftArrowButton" Style="{StaticResource HTP_ArrowButtonStyle}" BorderThickness="0,1,1,1"
+                            Content="&#xE27F;" x:FieldModifier="public" Visibility="Collapsed" />
+                </Viewbox>
+
+                <Viewbox Grid.Column="2">
+                    <Button Name="HTP_RightArrowButton" Style="{StaticResource HTP_ArrowButtonStyle}" BorderThickness="1,1,0,1"
+                            Content="&#xE27E;" x:FieldModifier="public" />
+                </Viewbox>
             </Grid>
             
             <!-- HUD Grid -->
-            <Grid Name="HowToPlayScreen_HUD">
-                
-            </Grid>
-            
-            <FlipView SelectedIndex="0">
-                <!-- First Screen - Intro -->
-                <FlipViewItem>
-                    <Grid Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.80*"/>
-                        </Grid.ColumnDefinitions>
+            <Grid Name="HowToPlayScreen_HUD" Margin="20" x:FieldModifier="public">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                        <Border Style="{StaticResource HowToPlayScreen_BorderStyle}" Grid.Column="1" HorizontalAlignment="Center">
-                            <Viewbox>
+                <!-- Screen #1 - Intro -->
+                <Grid Name="HTP_HUD_Screen1_Intro" Grid.ColumnSpan="4" x:FieldModifier="public">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.80*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource HTP_BorderStyle}" Grid.Column="1" HorizontalAlignment="Center">
+                        <Viewbox>
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
+                                <Run>The structure below is your fort. The</Run>
+                                <LineBreak />
+                                <Run>Goblin tribe wants to take it down, so</Run>
+                                <LineBreak />
+                                <Run>make sure you defend it well!</Run>
+                            </TextBlock>
+                        </Viewbox>
+                    </Border>
+                </Grid>
+                
+                <!-- First Column - Helpers -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
+                    <Border Style="{StaticResource HUD_HelperStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- TODO: Put Helper Image here -->
+
+                            <!-- Helper Quantity -->
+                            <TextBlock Style="{StaticResource HUD_HelperQuantityStyle}" />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- Second Column - Weapon Buttons -->
+                <Grid Name="HTP_HUD_WeaponButtonColumn" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"
+                      x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.09*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Screen #3 - Weapon Red Box -->
+                    <Border Name="HTP_HUD_Screen3_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
+                            BorderThickness="0">
+                        <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
+                                    <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
+                                </RadioButton>
+
+                                <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
+                                    <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
+                                </RadioButton>
+
+                                <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
+                                    <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
+                                </RadioButton>
+                            </StackPanel>
+                        </Viewbox>
+                    </Border>
+
+                    <!-- Screen #3 - Weapon Information -->
+                    <Viewbox Name="HTP_HUD_Screen3_WeaponInfo"  Grid.Row="1" x:FieldModifier="public" Visibility="Collapsed">
+                        <Border Style="{StaticResource HTP_BorderStyle}" Margin="0,20,20,0">
+                            <StackPanel Orientation="Vertical">
                                 <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
-                                    <Run>The structure below is your fort. The</Run>
+                                    <Run>These are your available weapons. You</Run>
                                     <LineBreak />
-                                    <Run>Goblin tribe wants to take it down, so</Run>
+                                    <Run>can only have one weapon selected at a</Run>
                                     <LineBreak />
-                                    <Run>make sure you defend it well!</Run>
+                                    <Run>time. Each weapon can harm certain</Run>
+                                    <LineBreak />
+                                    <Run>types of Goblins.</Run>
                                 </TextBlock>
-                            </Viewbox>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <Image Source="Content/Graphics/Big Sword.png" Width="32" />
+                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <Image Source="Content/Graphics/Goblin.png" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Content/Graphics/Big Warhammer.png" Width="32" />
+                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <Image Source="Content/Graphics/Armored Goblin.png" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Content/Graphics/Big Spear.png" Width="32" />
+                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <Image Source="Content/Graphics/Flying Goblin.png" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Viewbox>
+                </Grid>
+
+                <!-- Third Column - Health, Gold, and Consumable Items -->
+                <Grid Name="HTP_HUD_HealthGoldColumn" Grid.Column="2" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.12*" />
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Grid for Health, Gold, and Consumable Items -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Health Bar -->
+                        <Viewbox>
+                            <Border Style="{StaticResource HUD_OuterHPBarStyle}" Background="Red" />
+                        </Viewbox>
+
+                        <!-- Gold + Consumables -->
+                        <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                                                VerticalAlignment="Center">
+                                        <Image Style="{StaticResource HUD_GoldImageStyle}" />
+                                        <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
+                                    </StackPanel>
+                                </Viewbox>
+                            </Grid>
                         </Border>
                     </Grid>
-                </FlipViewItem>
+                </Grid>
 
-                <!-- Second Screen - Weapons -->
-                <FlipViewItem>
-                    <Grid Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <!-- Fourth Column - Pause Button -->
+                <Grid Name="HTP_HUD_PauseColumn" Grid.Column="3" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.0565*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                        <!-- First Column - Helpers -->
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
-                            <Border Style="{StaticResource HUD_HelperStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <!-- TODO: Put Helper Image here -->
-
-                                    <!-- Helper Quantity -->
-                                    <TextBlock Style="{StaticResource HUD_HelperQuantityStyle}" />
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-
-                        <!-- Second Column - Weapon Buttons -->
-                        <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.09*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Border Style="{StaticResource HowToPlayScreen_RedBoxStyle}">
-                                <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
-                                    <StackPanel Orientation="Horizontal">
-                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
-                                            <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
-                                        </RadioButton>
-
-                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
-                                            <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
-                                        </RadioButton>
-
-                                        <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
-                                            <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
-                                        </RadioButton>
-                                    </StackPanel>
-                                </Viewbox>
-                            </Border>
-
-                            <Viewbox Grid.Row="1">
-                                <Border Style="{StaticResource HowToPlayScreen_BorderStyle}" Margin="0,20,20,0">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
-                                            <Run>These are your available weapons. You</Run>
-                                            <LineBreak />
-                                            <Run>can only have one weapon selected at a</Run>
-                                            <LineBreak />
-                                            <Run>time. Each weapon can harm certain</Run>
-                                            <LineBreak />
-                                            <Run>types of Goblins.</Run>
-                                        </TextBlock>
-
-                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                            <Image Source="Content/Graphics/Big Sword.png" Width="32" />
-                                            <TextBlock Style="{StaticResource HowToPlayScreen_SecondScreen_TextBlockStyle}" />
-                                            <Image Source="Content/Graphics/Goblin.png" />
-                                        </StackPanel>
-
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="Content/Graphics/Big Warhammer.png" Width="32" />
-                                            <TextBlock Style="{StaticResource HowToPlayScreen_SecondScreen_TextBlockStyle}" />
-                                            <Image Source="Content/Graphics/Armored Goblin.png" />
-                                        </StackPanel>
-
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="Content/Graphics/Big Spear.png" Width="32" />
-                                            <TextBlock Style="{StaticResource HowToPlayScreen_SecondScreen_TextBlockStyle}" />
-                                            <Image Source="Content/Graphics/Flying Goblin.png" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Viewbox>
-                        </Grid>
-
-                        <!-- Third Column - Health, Gold, and Consumable Items -->
-                        <Grid Grid.Column="2" Opacity="0.30">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.12*" />
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Grid for Health, Gold, and Consumable Items -->
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <!-- Health Bar -->
-                                <Viewbox>
-                                    <Border Style="{StaticResource HUD_OuterHPBarStyle}" Background="Red" />
-                                </Viewbox>
-
-                                <!-- Gold + Consumables -->
-                                <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Viewbox HorizontalAlignment="Left">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                                <Image Style="{StaticResource HUD_GoldImageStyle}" />
-                                                <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
-                                            </StackPanel>
-                                        </Viewbox>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Grid>
-
-                        <!-- Fourth Column - Pause Button -->
-                        <Grid Grid.Column="3" Opacity="0.30">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.0565*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Viewbox>
-                                <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
-                            </Viewbox>
-                        </Grid>
-                    </Grid>
-                </FlipViewItem>
-
-                <!-- Third Screen - Health, Gold, and Pause Button --><!--
-                <FlipViewItem>
-                    <Grid Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        --><!-- First Column - Helpers --><!--
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
-                            <Border Style="{StaticResource HUD_HelperStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    --><!-- TODO: Put Helper Image here -->
-
-                                    <!-- Helper Quantity --><!--
-                                    <TextBlock Style="{StaticResource HUD_HelperQuantityStyle}" />
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-
-                        --><!-- Second Column - Weapon Buttons --><!--
-                        <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Opacity="0.30">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.09*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal">
-                                    <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
-                                        <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
-                                    </RadioButton>
-
-                                    <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
-                                        <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
-                                    </RadioButton>
-
-                                    <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}">
-                                        <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
-                                    </RadioButton>
-                                </StackPanel>
-                            </Viewbox>
-                        </Grid>
-
-                        --><!-- Third Column - Health, Gold, and Consumable Items --><!--
-                        <Grid Grid.Column="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.12*" />
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            --><!-- Grid for Health, Gold, and Consumable Items --><!--
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                --><!-- Health Bar --><!--
-                                <Viewbox>
-                                    <Border Style="{StaticResource HUD_OuterHPBarStyle}" Background="Red" />
-                                </Viewbox>
-
-                                --><!-- Gold + Consumables --><!--
-                                <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Viewbox HorizontalAlignment="Left">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                                <Image Style="{StaticResource HUD_GoldImageStyle}" />
-                                                <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
-                                            </StackPanel>
-                                        </Viewbox>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Grid>
-
-                        --><!-- Fourth Column - Pause Button --><!--
-                        <Grid Grid.Column="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.0565*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Viewbox>
-                                <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
-                            </Viewbox>
-                        </Grid>
-                        
-                        <Border Grid.Column="2" Grid.ColumnSpan="2"
-                    </Grid>
-                </FlipViewItem>-->
-            </FlipView>
+                    <Viewbox>
+                        <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
+                    </Viewbox>
+                </Grid>
+            </Grid>
+            
+            <Grid Name="HowToPlayScreen_Shop">
+                
+            </Grid>
         </Grid>
     </Grid>
 
