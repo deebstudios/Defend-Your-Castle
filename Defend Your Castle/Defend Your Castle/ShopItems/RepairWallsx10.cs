@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Defend_Your_Castle.ShopItems
+namespace Defend_Your_Castle
 {
     public sealed class RepairWallsx10 : RepairWalls
     {
         public RepairWallsx10(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
-            HealAmount = 10000;
+            Name = "Repair Wallsx10";
+
+            HealAmount *= 10;
+
+            price *= 10;
 
             Description = "Greatly repair your fort's walls.\n+" + HealAmount + " Health";
 

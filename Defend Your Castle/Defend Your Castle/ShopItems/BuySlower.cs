@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
 
             MaxLevel = 3;
             
-            price = 0;//20000;
+            price = 15000;
 
             Description = "A loyal helper that slows enemy movement and attack speeds.";
 

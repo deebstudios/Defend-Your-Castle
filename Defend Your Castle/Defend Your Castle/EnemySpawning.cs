@@ -10,18 +10,29 @@ namespace Defend_Your_Castle
     {
         //The number of levels required for the min and max speed enemies increase their base speed by to go up by 1
         //Ex. If MinSpeedIncrease = 5, every 5 levels the minimum amount enemies increase their base speed by goes up by 1
-        private const int MinSpeedIncrease = 10;
-        private const int MaxSpeedIncrease = 7;
+        private const int MinSpeedIncrease = 12;
+        private const int MaxSpeedIncrease = 8;
+
+        //The starting level and number of levels the max number of enemies that can spawn increases
+        private const int StartMoreSpawn = 4;
+        private const int MaxNumIncrease = 7;
 
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
         private const int FirstInvLevel = 15;
         private const float MaxInvDuration = 1900f;
+
+        //The chance for an enemy to be invincible
+        private const int InvChance = 10;
+
+        public const int StartNewEnem = 3;
+        public const int NextNewEnem = 5;
 
         // Reference to the level
         private Level level;
 
         // Stores the spawn chance for each enemy in the spawn list. The sum of all items in the list should be 100
         private List<int> EnemySpawnChances;
+        private int ListIndex;
 
         // The spawn delay (in milliseconds) for the spawn timer. Enemies will spawn after the level start animation
         private const float SpawnDelay = 2000f;
@@ -46,7 +57,8 @@ namespace Defend_Your_Castle
             RandGenerator = new Random();
 
             // Initialize the enemy spawn chance list
-            EnemySpawnChances = new List<int>() { 20, 20, 20, 20, 20 };
+            EnemySpawnChances = new List<int>() { 25, 20, 20, 15, 20 };
+            ListIndex = 1;
         }
 
         // Determines if any enemies can start spawning for the level
@@ -67,21 +79,50 @@ namespace Defend_Your_Castle
             PrevSpawnDelay = (Game1.ActiveTime + SpawnDelay);
         }
 
+        private void RefreshSpawnTime()
+        {
+            // Set the minimum spawn time to depend on the level the player is on
+            // The minimum spawn time decreases by 48 milliseconds each level
+            int MinSpawnTime = (2750 - (48 * (level.GetLevelNum - 1)));
+
+            // Set the maximum spawn time to be 1.5x the minimum spawn time
+            // Add 1 to include the maximum spawn time
+            int MaxSpawnTime = (int)(MinSpawnTime * 1.5f) + 1;
+
+            // Randomly generate the next spawn time for the enemy
+            SpawnTime = RandGenerator.Next(MinSpawnTime, MaxSpawnTime);
+
+            // Set the next time an enemy will be spawned
+            NextSpawnTime = Game1.ActiveTime + SpawnTime;
+        }
+
+        public void AddEnemy(int amount)
+        {
+            int newval = ListIndex + amount;
+
+            if (newval <= EnemySpawnChances.Count)
+            {
+                ListIndex = newval;
+            }
+        }
+
         public void CheckAddSpawnEnemy()
         {
             switch (level.GetLevelNum)
             {
+                case 3:
+                case 8:
                 case 13:
+                case 18:
                     // Add a new enemy to the enemy spawn list
-                    AddSpawnEnemy(10);
-
+                    AddEnemy(1);
                     break;
                 default:
                     break;
             }
         }
 
-        private void AddSpawnEnemy(int NewEnemySpawnChance)
+        /*private void AddSpawnEnemy(int NewEnemySpawnChance)
         {
             // Calculate the number of points to reduce the other spawn chances to accommodate the new spawn chance
             // Round up to the nearest integer
@@ -118,7 +159,7 @@ namespace Defend_Your_Castle
 
             // Add the new enemy spawn chance to the list
             EnemySpawnChances.Add(NewEnemySpawnChance);
-        }
+        }*/
 
         private int GetSpawnChancesSum()
         {
@@ -126,7 +167,7 @@ namespace Defend_Your_Castle
             int Sum = 0;
 
             // Loop through all of the enemy spawn chances
-            for (int i = 0; i < EnemySpawnChances.Count; i++)
+            for (int i = 0; i < ListIndex; i++)
             {
                 // Add the spawn chance to the sum
                 Sum += EnemySpawnChances[i];
@@ -142,7 +183,7 @@ namespace Defend_Your_Castle
             int CumulativePercent = 0;
 
             // Loop through all of the enemy spawn chances - this acts as a restriction for which enemies can be spawned
-            for (int i = 0; i < EnemySpawnChances.Count; i++)
+            for (int i = 0; i < ListIndex; i++)
             {
                 // Add the enemy's spawn chance to the cumulative percentage
                 CumulativePercent += EnemySpawnChances[i];
@@ -156,7 +197,7 @@ namespace Defend_Your_Castle
             }
 
             // Spawn a random enemy if, for some reason, no enemy can be found
-            return (RandGenerator.Next(0, EnemySpawnChances.Count));
+            return (RandGenerator.Next(0, ListIndex));
         }
 
         private Enemy FindEnemyToSpawn(int RandNum)
@@ -187,12 +228,12 @@ namespace Defend_Your_Castle
                 case 2: //Armored enemy
                     enem = new ArmoredEnemy(level, Y, speedincrease, costume);
                     break;
-                case 3: //Flying enemy
+                case 3: //Armored Spear enemy
+                    enem = new ArmoredSpearEnemy(level, Y, speedincrease, costume);
+                    break;
+                case 4: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
                     enem = new FlyingEnemy(level, Y, flyheight, speedincrease, costume);
-                    break;
-                case 4: //Armored Spear enemy
-                    enem = new ArmoredSpearEnemy(level, Y, speedincrease, costume);
                     break;
                 case 0: // Melee Enemy
                 default:
@@ -203,8 +244,8 @@ namespace Defend_Your_Castle
             //Check the level to see if the enemy can spawn with invincibility
             if (level.GetLevelNum >= FirstInvLevel)
             {
-                //1/10 chance of having the enemy be invincible
-                int invchance = RandGenerator.Next(0, 1);
+                //There's a chance of having the enemy be invincible
+                int invchance = RandGenerator.Next(0, InvChance);
 
                 if (invchance == 0)
                 {
@@ -231,25 +272,25 @@ namespace Defend_Your_Castle
             // Check if an enemy can be spawned
             if (CanEnemySpawn == true)
             {
-                // Find an enemy to spawn
-                Enemy EnemyToSpawn = FindEnemyToSpawn(RandGenerator.Next(1, 100));
+                //Check how many enemies to spawn; 1 minimum
+                int numenemies = 1;
+                if (level.GetLevelNum >= StartMoreSpawn)
+                {
+                    //Add more enemies
+                    int addenem = (level.GetLevelNum - StartMoreSpawn) / MaxNumIncrease;
+                    numenemies += RandGenerator.Next(0, addenem + 1);
+                }
 
-                // Add the enemy that should be spawned
-                level.AddEnemy(EnemyToSpawn);
+                for (int i = 0; i < numenemies; i++)
+                {
+                    // Find an enemy to spawn
+                    Enemy EnemyToSpawn = FindEnemyToSpawn(RandGenerator.Next(0, GetSpawnChancesSum()));
 
-                // Set the minimum spawn time to depend on the level the player is on
-                // The minimum spawn time decreases by 48 milliseconds each level
-                int MinSpawnTime = (2750 - (48 * (level.GetLevelNum - 1)));
+                    // Add the enemy that should be spawned
+                    level.AddEnemy(EnemyToSpawn);
+                }
 
-                // Set the maximum spawn time to be 1.5x the minimum spawn time
-                // Add 1 to include the maximum spawn time
-                int MaxSpawnTime = (int)(MinSpawnTime * 1.5f) + 1;
-
-                // Randomly generate the next spawn time for the enemy
-                SpawnTime = RandGenerator.Next(MinSpawnTime, MaxSpawnTime);
-
-                // Set the next time an enemy will be spawned
-                NextSpawnTime = Game1.ActiveTime + SpawnTime;
+                RefreshSpawnTime();
             }
         }
 

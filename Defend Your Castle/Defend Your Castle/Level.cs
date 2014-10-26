@@ -121,6 +121,14 @@ namespace Defend_Your_Castle
             // Initialize the EnemySpawning class
             EnemySpawn = new EnemySpawning(this);
 
+            //TEMPORARY
+            if (LevelNum >= EnemySpawning.StartNewEnem)
+            {
+                //+1 for reaching the value
+                int newenemies = ((LevelNum - EnemySpawning.StartNewEnem) / EnemySpawning.NextNewEnem) + 1;
+                EnemySpawn.AddEnemy(newenemies);
+            }
+
             // Set the level end time
             LevelEndTime = Game1.ActiveTime + LevelDuration;
         }
@@ -386,17 +394,24 @@ namespace Defend_Your_Castle
 
         public void LoadLevelData(LevelData levelData)
         {
-            // Loop until we reach the level the player should be at
-            for (int i = 1; i < levelData.LevelNum; i++)
-            {
-                // Increment the level number by 1
-                LevelNum += 1;
+            LevelNum = levelData.LevelNum;
 
-                // Try to add an enemy spawn. This will not work if the level number is set directly because of the switch statement
-                EnemySpawn.CheckAddSpawnEnemy();
+            if (LevelNum >= EnemySpawning.StartNewEnem)
+            {
+                //+1 for reaching the value
+                int newenemies = ((LevelNum - EnemySpawning.StartNewEnem) / EnemySpawning.NextNewEnem) + 1;
+                EnemySpawn.AddEnemy(newenemies);
             }
 
-
+            // Loop until we reach the level the player should be at
+            //for (int i = 1; i < levelData.LevelNum; i++)
+            //{
+            //    // Increment the level number by 1
+            //    LevelNum += 1;
+            //
+            //    // Try to add an enemy spawn. This will not work if the level number is set directly because of the switch statement
+            //    EnemySpawn.CheckAddSpawnEnemy();
+            //}
         }
 
 

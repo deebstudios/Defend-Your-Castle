@@ -261,7 +261,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.Shop:
                     GamePage.ShowShop();
-                    SoundManager.PlaySong(LoadAssets.ShopMusic, true, false);
+                    SoundManager.PlaySong(LoadAssets.ShopMusic);
 
                     break;
                 case GameState.HowToPlay:
