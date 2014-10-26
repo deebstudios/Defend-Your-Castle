@@ -553,11 +553,6 @@
                 </Style>
             </Grid.Resources>
 
-            <!-- TODO: Replace FlipView with three separate Grids.
-                       Grid #1 = Grid with Left and Right Buttons | Grid #2 = HUD | Grid #3 = Shop
-                       The player will click on the Left or Right Button to move backwards or forward, respectively, in the
-                       tutorial. UI elements will be collapsed and made visible instantly when one of these buttons is clicked -->
-            
             <!-- Button Grid -->
             <Grid Name="HowToPlayScreen_ButtonGrid" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
@@ -572,9 +567,16 @@
                             Content="&#xE27F;" x:FieldModifier="public" Visibility="Collapsed" />
                 </Viewbox>
 
+                <!-- Right arrow button -->
                 <Viewbox Grid.Column="2">
                     <Button Name="HTP_RightArrowButton" Style="{StaticResource HTP_ArrowButtonStyle}" BorderThickness="1,1,0,1"
                             Content="&#xE27E;" x:FieldModifier="public" />
+                </Viewbox>
+                
+                <!-- Exit button -->
+                <Viewbox Grid.Column="2" VerticalAlignment="Bottom">
+                    <Button Name="HTP_ExitButton" Style="{StaticResource HUDButtonStyle}" BorderThickness="1,1,0,0"
+                            Content="Exit" x:FieldModifier="public" />
                 </Viewbox>
             </Grid>
             
@@ -588,7 +590,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Screen #1 - Intro -->
-                <Grid Name="HTP_HUD_Screen1_Intro" Grid.ColumnSpan="4" x:FieldModifier="public">
+                <Grid Name="HTP_HUD_Screen1_Intro" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Visible">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="0.80*"/>
@@ -606,8 +608,42 @@
                         </Viewbox>
                     </Border>
                 </Grid>
-                
-                <!-- First Column - Helpers -->
+
+                <!-- Screen #2 - Goblin -->
+                <Grid Name="HTP_HUD_Screen2_Goblin" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.50*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource HTP_BorderStyle}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
+                        <Viewbox>
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
+                                <Run>This is a Goblin. There are several types</Run>
+                                <LineBreak />
+                                <Run>of Goblins, and they all have one common</Run>
+                                <LineBreak />
+                                <Run>goal: to destroy your fort. They use a</Run>
+                                <LineBreak />
+                                <Run>variety of equipment to both attack your</Run>
+                                <LineBreak />
+                                <Run>fort and protect themselves from you.</Run>
+                                <LineBreak />
+                                <LineBreak />
+                                <Run>Kill a Goblin by tapping or clicking on it.</Run>
+                            </TextBlock>
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
+                <!-- HUD First Column - Helpers -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Opacity="0.30">
                     <Border Style="{StaticResource HUD_HelperStyle}">
                         <Grid>
@@ -624,7 +660,7 @@
                     </Border>
                 </StackPanel>
 
-                <!-- Second Column - Weapon Buttons -->
+                <!-- HUD Second Column - Weapon Buttons -->
                 <Grid Name="HTP_HUD_WeaponButtonColumn" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"
                       x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
@@ -688,46 +724,88 @@
                     </Viewbox>
                 </Grid>
 
-                <!-- Third Column - Health, Gold, and Consumable Items -->
+                <!-- HUD Third Column - Health, Gold, and Consumable Items -->
                 <Grid Name="HTP_HUD_HealthGoldColumn" Grid.Column="2" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.12*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Grid for Health, Gold, and Consumable Items -->
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <!-- Screen #4 - Health, Gold, and Consumables Red Box -->
+                    <Border Name="HTP_HUD_Screen4_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
+                            BorderThickness="0">
+                        <!-- Grid for Health, Gold, and Consumable Items -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                        <!-- Health Bar -->
-                        <Viewbox>
-                            <Border Style="{StaticResource HUD_OuterHPBarStyle}" Background="Red" />
-                        </Viewbox>
+                            <!-- Health Bar -->
+                            <Viewbox>
+                                <Border Style="{StaticResource HUD_OuterHPBarStyle}" Background="Red" />
+                            </Viewbox>
 
-                        <!-- Gold + Consumables -->
-                        <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <!-- Gold + Consumables -->
+                            <Border Grid.Row="1" Background="Transparent" Padding="0,5,5,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Viewbox HorizontalAlignment="Left">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                                    <Viewbox HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
                                                 VerticalAlignment="Center">
-                                        <Image Style="{StaticResource HUD_GoldImageStyle}" />
-                                        <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
-                                    </StackPanel>
-                                </Viewbox>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                                            <Image Style="{StaticResource HUD_GoldImageStyle}" />
+                                            <TextBlock Style="{StaticResource HUD_GoldAmountStyle}" Text="100" />
+                                        </StackPanel>
+                                    </Viewbox>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
                 </Grid>
 
-                <!-- Fourth Column - Pause Button -->
+                <!-- Screen #4 - Health, Gold, and Consumables Information -->
+                <Grid Name="HTP_HUD_Screen4_HealthGoldInfo" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.20*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.30*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource HTP_BorderStyle}" Grid.Row="1" Grid.Column="1">
+                        <Viewbox>
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
+                                <Run>The red bar is your health. This decreases</Run>
+                                <LineBreak />
+                                <Run>when you take damage from Goblins. When your</Run>
+                                <LineBreak />
+                                <Run>health gets down to 0, you lose.</Run>
+                                <LineBreak /><LineBreak />
+                                <Run>The number under your health bar is your gold.</Run>
+                                <LineBreak />
+                                <Run>You gain gold by killing Goblins. You are</Run>
+                                <LineBreak />
+                                <Run>awarded less gold if you kill a Goblin with</Run>
+                                <LineBreak />
+                                <Run>a sub-optimal weapon for that Goblin type.</Run>
+                                <LineBreak />
+                                <Run>For example, killing a grounded, unarmored</Run>
+                                <LineBreak />
+                                <Run>Goblin with the Warhammer will yield less gold.</Run>
+                            </TextBlock>
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
+                <!-- HUD Fourth Column - Pause Button -->
                 <Grid Name="HTP_HUD_PauseColumn" Grid.Column="3" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.0565*"/>

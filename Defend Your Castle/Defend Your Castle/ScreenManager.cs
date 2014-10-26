@@ -22,6 +22,15 @@ namespace Defend_Your_Castle
         // Stores the screen number for the How To Play Screen
         public int HTP_ScreenNum = 1;
 
+        // Stores the max screen number for the How To Play Screen
+        public int HTP_MaxScreenNum = 10;
+
+        // Stores the opacity of focused UI elements on the How To Play Screen
+        public double HTP_Focused_Opacity = 1.0;
+
+        // Stores the opacity of unfocused UI elements on the How To Play Screen
+        public double HTP_Unfocused_Opacity = 0.30;
+
         public ScreenManager(Game1 game, GamePage gamePage)
         {
             // Get the references
@@ -84,6 +93,7 @@ namespace Defend_Your_Castle
             // How To Play Screen
             GamePage.HTP_LeftArrowButton.Click += HowToPlayScreen_ChangeScreens;
             GamePage.HTP_RightArrowButton.Click += HowToPlayScreen_ChangeScreens;
+            GamePage.HTP_ExitButton.Click += HowToPlayScreen_Exit;
         }
 
         // Title Screen
@@ -150,11 +160,27 @@ namespace Defend_Your_Castle
             // Make sure the screen number doesn't go below 1
             if (HTP_ScreenNum < 1) HTP_ScreenNum = 1;
 
+            // Make sure the screen number doesn't go above the maximum
+            if (HTP_ScreenNum > HTP_MaxScreenNum) HTP_ScreenNum = HTP_MaxScreenNum;
+
             // Hide the left arrow button if the screen number is 1
             GamePage.HTP_LeftArrowButton.Visibility = ((HTP_ScreenNum == 1) ? Visibility.Collapsed : Visibility.Visible);
 
+            // Hide the right arrow button if the screen number is the maximum screen number
+            GamePage.HTP_RightArrowButton.Visibility = ((HTP_ScreenNum == HTP_MaxScreenNum) ?
+                                                        Visibility.Collapsed : Visibility.Visible);
+
             // Show the current screen's elements
             ChangeHowToPlayScreen(Visibility.Visible);
+        }
+
+        private void HowToPlayScreen_Exit(object sender, RoutedEventArgs e)
+        {
+            // Change the game state to Screen
+            Game.ChangeGameState(GameState.Screen);
+
+            // Change the screen to the Title Screen
+            ChangeScreen(Screens.TitleScreen);
         }
 
         // Changes the display of the How To Play Screen based on the screen number the player is viewing
@@ -167,6 +193,8 @@ namespace Defend_Your_Castle
 
                     break;
                 case 2: // Goblin
+                    GamePage.HTP_HUD_Screen2_Goblin.Visibility = visibility;
+
                     // Check if the screen is being shown
                     if (visibility == Visibility.Visible)
                     {
@@ -191,14 +219,47 @@ namespace Defend_Your_Castle
                     GamePage.HTP_HUD_Screen3_WeaponInfo.Visibility = visibility;
                     GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
                     GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
-                    
-                    // Add a border thickness of 3 if the screen is being shown
-                    GamePage.HTP_HUD_Screen3_RedBox.BorderThickness = ((visibility == Visibility.Visible) ?
-                                                                       new Thickness(3) : new Thickness(0));
+
+                    // Set the properties of the column
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen3_RedBox, GamePage.HTP_HUD_WeaponButtonColumn);
+
+                    break;
+                case 4: // Health and Gold
+                    GamePage.HTP_HUD_WeaponButtonColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_Screen4_HealthGoldInfo.Visibility = visibility;
+
+                    // Set the properties of the column
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen4_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
 
                     break;
             }
         }
+
+        // Sets the properties of a HUD column when the screen number is changed
+        // This method hides or shows the red box border and highlights or greys out the HUD column
+        private void SetHUDColumnProperties(Visibility visibility, Border RedBoxBorder, Grid HUDColumn)
+        {
+            // Check if the screen is being shown
+            if (visibility == Visibility.Visible)
+            {
+                // Add a border thickness of 3 to the red box
+                RedBoxBorder.BorderThickness = new Thickness(3);
+
+                // Highlight the column by setting its opacty
+                HUDColumn.Opacity = HTP_Focused_Opacity;
+            }
+            else // The screen is being hidden
+            {
+                // Remove the border thickness from the red box
+                RedBoxBorder.BorderThickness = new Thickness(0);
+
+                // Grey out the column
+                HUDColumn.Opacity = HTP_Unfocused_Opacity;
+            }
+        }
+
 
     }
 }
