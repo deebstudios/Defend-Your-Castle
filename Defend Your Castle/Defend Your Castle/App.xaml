@@ -603,6 +603,7 @@
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
                 <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="IsTabStop" Value="False"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -1387,6 +1388,7 @@
                 <Setter Property="IsHoldingEnabled" Value="False"/>
                 <Setter Property="IsRightTapEnabled" Value="False"/>
                 <Setter Property="IsDoubleTapEnabled" Value="False"/>
+                <Setter Property="IsTabStop" Value="False"/>
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
                 <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
