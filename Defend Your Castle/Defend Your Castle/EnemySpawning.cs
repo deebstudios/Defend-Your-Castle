@@ -13,9 +13,10 @@ namespace Defend_Your_Castle
         private const int MinSpeedIncrease = 12;
         private const int MaxSpeedIncrease = 8;
 
-        //The starting level and number of levels the max number of enemies that can spawn increases
+        //The starting level, number of levels the max number of enemies that can spawn increases, and the max number of enemies that can spawn at once
         private const int StartMoreSpawn = 4;
-        private const int MaxNumIncrease = 7;
+        private const int MaxNumIncrease = 6;
+        public const int MaxNumSpawn = 4;
 
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
         private const int FirstInvLevel = 15;
@@ -85,9 +86,9 @@ namespace Defend_Your_Castle
             // The minimum spawn time decreases by 48 milliseconds each level
             int MinSpawnTime = (2750 - (48 * (level.GetLevelNum - 1)));
 
-            // Set the maximum spawn time to be 1.5x the minimum spawn time
+            // Set the maximum spawn time to be 1.2x the minimum spawn time
             // Add 1 to include the maximum spawn time
-            int MaxSpawnTime = (int)(MinSpawnTime * 1.5f) + 1;
+            int MaxSpawnTime = (int)(MinSpawnTime * 1.2f) + 1;
 
             // Randomly generate the next spawn time for the enemy
             SpawnTime = RandGenerator.Next(MinSpawnTime, MaxSpawnTime);
@@ -96,14 +97,13 @@ namespace Defend_Your_Castle
             NextSpawnTime = Game1.ActiveTime + SpawnTime;
         }
 
-        public void AddEnemy(int amount)
+        //Increases the index of the EnemySpawnChances list to include more enemies
+        public void AddNewSpawnEnemy(int numnewenemies)
         {
-            int newval = ListIndex + amount;
+            //Make sure we don't go out of bounds when adding. When loading in data, we'd pass a value greater than 1 here
+            ListIndex += numnewenemies;
 
-            if (newval <= EnemySpawnChances.Count)
-            {
-                ListIndex = newval;
-            }
+            if (ListIndex > EnemySpawnChances.Count) ListIndex = EnemySpawnChances.Count;
         }
 
         public void CheckAddSpawnEnemy()
@@ -115,7 +115,7 @@ namespace Defend_Your_Castle
                 case 13:
                 case 18:
                     // Add a new enemy to the enemy spawn list
-                    AddEnemy(1);
+                    AddNewSpawnEnemy(1);
                     break;
                 default:
                     break;
@@ -212,8 +212,10 @@ namespace Defend_Your_Castle
             int minspeedinc = level.GetLevelNum / MinSpeedIncrease;
             int maxspeedinc = level.GetLevelNum / MaxSpeedIncrease;
 
+            float randdecimal = (float)Math.Round(RandGenerator.NextDouble(), 2);
+
             // Choose a random value between the minimum speed increase and the maximum speed increase, both inclusive
-            int speedincrease = RandGenerator.Next(minspeedinc, maxspeedinc + 1);
+            float speedincrease = randdecimal + RandGenerator.Next(minspeedinc, maxspeedinc + 1);
 
             //Get a random costume (recolor) for the enemy to be
             int costume = RandGenerator.Next(0, 3);
@@ -277,7 +279,9 @@ namespace Defend_Your_Castle
                 if (level.GetLevelNum >= StartMoreSpawn)
                 {
                     //Add more enemies
-                    int addenem = (level.GetLevelNum - StartMoreSpawn) / MaxNumIncrease;
+                    int addenem = ((level.GetLevelNum - StartMoreSpawn) / MaxNumIncrease) + 1;
+                    if (addenem > MaxNumSpawn) addenem = MaxNumSpawn;
+
                     numenemies += RandGenerator.Next(0, addenem + 1);
                 }
 

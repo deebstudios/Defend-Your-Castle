@@ -126,7 +126,7 @@ namespace Defend_Your_Castle
             {
                 //+1 for reaching the value
                 int newenemies = ((LevelNum - EnemySpawning.StartNewEnem) / EnemySpawning.NextNewEnem) + 1;
-                EnemySpawn.AddEnemy(newenemies);
+                EnemySpawn.AddNewSpawnEnemy(newenemies);
             }
 
             // Set the level end time
@@ -142,7 +142,7 @@ namespace Defend_Your_Castle
         private float LevelDuration
         {
             // NOTE: This calculation will need to be changed
-            get { return (20000 + ((LevelNum - 1) * 900)); }
+            get { return (20000 + ((LevelNum - 1) * 1100)); }
         }
 
         //Creates the night fade based on how long the level lasts
@@ -400,7 +400,7 @@ namespace Defend_Your_Castle
             {
                 //+1 for reaching the value
                 int newenemies = ((LevelNum - EnemySpawning.StartNewEnem) / EnemySpawning.NextNewEnem) + 1;
-                EnemySpawn.AddEnemy(newenemies);
+                EnemySpawn.AddNewSpawnEnemy(newenemies);
             }
 
             // Loop until we reach the level the player should be at

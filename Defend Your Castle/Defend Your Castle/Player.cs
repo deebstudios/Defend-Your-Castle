@@ -22,7 +22,7 @@ namespace Defend_Your_Castle
 
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
         private const int HUDTopBounds = 125;
-        private const int HUDBottomBounds = 375;
+        //private const int HUDBottomBounds = 375;
 
         //The start and end of the castle entrance, respectively
         //They must be added to the player's Y position to get the true positions
@@ -321,7 +321,7 @@ namespace Defend_Your_Castle
                 //Make sure the attack is below the HUD boundary
                 Rectangle touchrect = Input.GestureRect(gesture);
 
-                if (touchrect.Y > HUDTopBounds && touchrect.Y < HUDBottomBounds)
+                if (touchrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
                     CurrentWeapon.Attack();
@@ -357,7 +357,7 @@ namespace Defend_Your_Castle
                 //Make sure the attack is below the HUD boundary
                 Rectangle clickrect = Input.MouseRect(mouseState);
 
-                if (clickrect.Y > HUDTopBounds && clickrect.Y < HUDBottomBounds)
+                if (clickrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
                     CurrentWeapon.Attack();

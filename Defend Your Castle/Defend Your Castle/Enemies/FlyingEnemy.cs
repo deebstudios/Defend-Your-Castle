@@ -17,14 +17,14 @@ namespace Defend_Your_Castle
         //The height the enemy flies
         private float FlyingHeight;
 
-        public FlyingEnemy(Level level, float Y, float flyingheight, int speedadd, int costume)
+        public FlyingEnemy(Level level, float Y, float flyingheight, float speedadd, int costume)
         {
             ObjectSheet = LoadAssets.FlyingGoblinSheet[costume];
             InvincibleSheet = LoadAssets.FlyingGoblinInvincibleSheet;
 
             Gold = 150;
 
-            MoveSpeed = new Vector2(2 + speedadd, 0);
+            MoveSpeed = new Vector2(2f + speedadd, 0);
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
 
