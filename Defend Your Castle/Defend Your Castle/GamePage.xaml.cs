@@ -13,7 +13,7 @@ namespace Defend_Your_Castle
     /// </summary>
     public sealed partial class GamePage : SwapChainBackgroundPanel
     {
-        readonly Game1 _game;
+        private Game1 _game;
 
         public double HUD_InnerHPBarWidth;
         public double Shop_InnerHPBarWidth;

@@ -71,6 +71,8 @@ namespace Defend_Your_Castle
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
 
                     break;
+                default:
+                    break;
             }
         }
 
@@ -233,6 +235,8 @@ namespace Defend_Your_Castle
                     // Set the properties of the column
                     SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen4_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
 
+                    break;
+                default:
                     break;
             }
         }
