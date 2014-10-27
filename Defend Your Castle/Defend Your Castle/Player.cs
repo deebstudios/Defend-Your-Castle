@@ -21,7 +21,8 @@ namespace Defend_Your_Castle
         private GamePage gamePage;
 
         //The Y boundary for attacking; anything above this boundary will be the HUD, and enemies don't appear where the HUD is
-        private const int HUDYBounds = 75;
+        private const int HUDTopBounds = 125;
+        //private const int HUDBottomBounds = 375;
 
         //The start and end of the castle entrance, respectively
         //They must be added to the player's Y position to get the true positions
@@ -78,7 +79,7 @@ namespace Defend_Your_Castle
             PercentDamage = 1f;
 
             // Set the player's base health and maximum health
-            Health = MaxHealth = 1500;
+            Health = MaxHealth = 1000;
 
             // Start the player out with some gold
             Gold = 100;
@@ -312,15 +313,33 @@ namespace Defend_Your_Castle
             InvincibilityAvailable = false;
         }
 
-        public void Attack(Level level, GestureSample? gesture)
+        //public void Attack(Level level, GestureSample? gesture)
+        //{
+        //    // Check to make sure the player can attack
+        //    if (CanAttack == true)
+        //    {
+        //        //Make sure the attack is below the HUD boundary
+        //        Rectangle touchrect = Input.GestureRect(gesture);
+
+        //        if (touchrect.Y > HUDTopBounds && touchrect.Y < HUDBottomBounds)
+        //        {
+        //            // Play the weapon's attack sound
+        //            CurrentWeapon.Attack();
+
+        //            level.EnemyHit(touchrect);
+        //        }
+        //    }
+        //}
+
+        public void Attack(Level level, TouchLocation? touchLoc)
         {
             // Check to make sure the player can attack
             if (CanAttack == true)
             {
                 //Make sure the attack is below the HUD boundary
-                Rectangle touchrect = Input.GestureRect(gesture);
+                Rectangle touchrect = Input.GetTouchRect(touchLoc); //Input.GestureRect(gesture);
 
-                if (touchrect.Y > HUDYBounds)
+                if (touchrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
                     CurrentWeapon.Attack();
@@ -356,7 +375,7 @@ namespace Defend_Your_Castle
                 //Make sure the attack is below the HUD boundary
                 Rectangle clickrect = Input.MouseRect(mouseState);
 
-                if (clickrect.Y > HUDYBounds)
+                if (clickrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
                     CurrentWeapon.Attack();
@@ -375,15 +394,17 @@ namespace Defend_Your_Castle
         public override void Update(Level level)
         {
             // Get the last touch gesture (if any)
-            GestureSample? gesture = Input.GetTouchGesture();
+            TouchLocation? touchLoc = Input.GetTouchLocation();
+            //GestureSample? gesture = Input.GetTouchGesture();
 
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
             }
-            else if (Input.IsScreenTapped(gesture))
+            else if (Input.IsScreenTapped(touchLoc) == true)// Input.IsScreenTapped(gesture))
             {
-                Attack(level, gesture);
+                Attack(level, touchLoc);
+                //Attack(level, gesture);
             }
 
             //If the player is invincible, update the color effect

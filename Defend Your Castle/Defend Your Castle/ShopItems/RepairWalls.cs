@@ -16,7 +16,9 @@ namespace Defend_Your_Castle
         {
             Name = "Repair Walls";
 
-            HealAmount = 1000;
+            HealAmount = 500;
+
+            price = 250;
 
             Description = "Repair your fort's walls.\n+" + HealAmount + " Health";
 

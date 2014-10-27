@@ -69,12 +69,6 @@ namespace Defend_Your_Castle
 
             // Show the mouse on the game screen
             IsMouseVisible = true;
-
-            // Store the global touch state
-            Input.TouchState = TouchPanel.GetState(Window);
-
-            // Enable the tap gesture
-            TouchPanel.EnabledGestures = GestureType.Tap;
         }
 
         static Game1()
@@ -107,6 +101,9 @@ namespace Defend_Your_Castle
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            
+            // Enable the tap gesture
+            TouchPanel.EnabledGestures = GestureType.Tap;
 
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
@@ -261,7 +258,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.Shop:
                     GamePage.ShowShop();
-                    SoundManager.PlaySong(LoadAssets.ShopMusic, true, false);
+                    SoundManager.PlaySong(LoadAssets.ShopMusic);
 
                     break;
                 case GameState.HowToPlay:
@@ -389,9 +386,6 @@ namespace Defend_Your_Castle
                     
                     break;
             }
-
-            // Update the global touch state
-            Input.TouchState = TouchPanel.GetState(Window);
 
             #if DEBUG
                 //Debug commands

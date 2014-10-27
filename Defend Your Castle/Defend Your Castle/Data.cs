@@ -144,7 +144,7 @@ namespace Defend_Your_Castle
                         // Deserialize the GameData object
                         gameData = (GameData)serializer.ReadObject(reader);
                     }
-                    catch // The data could not be loaded
+                    catch (SerializationException e)// The data could not be loaded
                     {
                         // Set the GameData object to null
                         gameData = null;

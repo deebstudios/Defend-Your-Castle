@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
 
             MaxLevel = 3;
 
-            price = 0;//20000;
+            price = 20000;
 
             Description = "A loyal helper that defends your fort from enemies.";
 
