@@ -35,6 +35,12 @@ namespace Defend_Your_Castle
         {
             // Use invincibility on the player
             ShopPlayer.UseInvincibility();
+            
+            // Decrease the current level of the invincibility by 1
+            CurLevel -= 1;
+
+            // Make sure the current level doesn't go below 0
+            if (CurLevel < 0) CurLevel = 0;
         }
 
 
