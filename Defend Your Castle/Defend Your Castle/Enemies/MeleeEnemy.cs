@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //An enemy that goes up to the castle and attacks
     public sealed class MeleeEnemy : Enemy
     {
-        public MeleeEnemy(Level level, float Y, float speedadd, int costume)
+        public MeleeEnemy(Level level, float xdiff, float Y, float speedadd, int costume)
         {
             ObjectSheet = LoadAssets.GoblinSheet[costume];
             InvincibleSheet = LoadAssets.GoblinInvincibleSheet;
@@ -18,7 +18,7 @@ namespace Defend_Your_Castle
 
             MoveSpeed = new Vector2(1f + speedadd, 0);
 
-            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(xdiff - Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 

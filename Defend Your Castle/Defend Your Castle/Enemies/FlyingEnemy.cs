@@ -17,7 +17,7 @@ namespace Defend_Your_Castle
         //The height the enemy flies
         private float FlyingHeight;
 
-        public FlyingEnemy(Level level, float Y, float flyingheight, float speedadd, int costume)
+        public FlyingEnemy(Level level, float xdiff, float Y, float flyingheight, float speedadd, int costume)
         {
             ObjectSheet = LoadAssets.FlyingGoblinSheet[costume];
             InvincibleSheet = LoadAssets.FlyingGoblinInvincibleSheet;
@@ -29,7 +29,7 @@ namespace Defend_Your_Castle
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
 
             FlyingHeight = flyingheight;
-            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(xdiff - Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             WeaponWeakness = (int)Player.WeaponTypes.Spear;
 

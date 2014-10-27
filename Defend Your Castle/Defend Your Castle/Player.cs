@@ -275,16 +275,22 @@ namespace Defend_Your_Castle
             Heal(healthIncrease);
         }
 
-        //Fortify's the castle by decreasing all damage dealt by a certain percentage (ONE TIME UPGRADE)
-        public void FortifyCastle()
+        //Fortify the player's castle
+        public void StrengthenCastle(int numtimes)
         {
-            Fortified = true;
+            //0 is passed in when loading if the player didn't upgrade at all
+            if (numtimes > 0)
+            {
+                float amount = FortifyCastle.DamageReduction * numtimes;
 
-            //Change the castle graphic
-            ObjectSheet = LoadAssets.PlayerCastleFortified;
+                //Change the castle graphic
+                ObjectSheet = LoadAssets.PlayerCastleFortified;
 
-            //Reduce all damage by 10%
-            PercentDamage = .9f;
+                PercentDamage -= amount;
+                PercentDamage = (float)Math.Round(PercentDamage, 2);
+
+                if (PercentDamage < FortifyCastle.MaxDamageReduction) PercentDamage = FortifyCastle.MaxDamageReduction;
+            }
         }
 
         public void UpgradeCastle(int healthIncrease)

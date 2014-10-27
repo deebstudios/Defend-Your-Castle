@@ -8,7 +8,7 @@ namespace Defend_Your_Castle
 {
     public sealed class ArmoredSpearEnemy : SpearEnemy
     {
-        public ArmoredSpearEnemy(Level level, float Y, float speedadd, int costume) : base(level, Y, speedadd, costume)
+        public ArmoredSpearEnemy(Level level, float xdiff, float Y, float speedadd, int costume) : base(level, xdiff, Y, speedadd, costume)
         {
             ObjectSheet = LoadAssets.RangedArmoredGoblin[costume];
             InvincibleSheet = LoadAssets.RangedArmoredGoblinInvincible;

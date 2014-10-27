@@ -201,7 +201,7 @@ namespace Defend_Your_Castle
                     if (visibility == Visibility.Visible)
                     {
                         // Create a new MeleeEnemy
-                        MeleeEnemy goblin = new MeleeEnemy(Game.level, Game1.ScreenHalf.Y, 0, 1);
+                        MeleeEnemy goblin = new MeleeEnemy(Game.level, 0, Game1.ScreenHalf.Y, 0, 1);
 
                         // Move the goblin in plain view
                         goblin.Move(new Vector2(150, 50));
