@@ -313,13 +313,31 @@ namespace Defend_Your_Castle
             InvincibilityAvailable = false;
         }
 
-        public void Attack(Level level, GestureSample? gesture)
+        //public void Attack(Level level, GestureSample? gesture)
+        //{
+        //    // Check to make sure the player can attack
+        //    if (CanAttack == true)
+        //    {
+        //        //Make sure the attack is below the HUD boundary
+        //        Rectangle touchrect = Input.GestureRect(gesture);
+
+        //        if (touchrect.Y > HUDTopBounds && touchrect.Y < HUDBottomBounds)
+        //        {
+        //            // Play the weapon's attack sound
+        //            CurrentWeapon.Attack();
+
+        //            level.EnemyHit(touchrect);
+        //        }
+        //    }
+        //}
+
+        public void Attack(Level level, TouchLocation? touchLoc)
         {
             // Check to make sure the player can attack
             if (CanAttack == true)
             {
                 //Make sure the attack is below the HUD boundary
-                Rectangle touchrect = Input.GestureRect(gesture);
+                Rectangle touchrect = Input.GetTouchRect(touchLoc); //Input.GestureRect(gesture);
 
                 if (touchrect.Y > HUDTopBounds)
                 {
@@ -376,15 +394,17 @@ namespace Defend_Your_Castle
         public override void Update(Level level)
         {
             // Get the last touch gesture (if any)
-            GestureSample? gesture = Input.GetTouchGesture();
+            TouchLocation? touchLoc = Input.GetTouchLocation();
+            //GestureSample? gesture = Input.GetTouchGesture();
 
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
             }
-            else if (Input.IsScreenTapped(gesture))
+            else if (Input.IsScreenTapped(touchLoc) == true)// Input.IsScreenTapped(gesture))
             {
-                Attack(level, gesture);
+                Attack(level, touchLoc);
+                //Attack(level, gesture);
             }
 
             //If the player is invincible, update the color effect
