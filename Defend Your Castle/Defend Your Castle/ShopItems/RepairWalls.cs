@@ -22,6 +22,9 @@ namespace Defend_Your_Castle
 
             Description = "Repair your fort's walls.\n+" + HealAmount + " Health";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big RepairWallsIcon.png";
         }

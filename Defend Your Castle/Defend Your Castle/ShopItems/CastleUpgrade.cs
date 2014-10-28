@@ -23,6 +23,9 @@ namespace Defend_Your_Castle
 
             Description = "Increase the durability of your fort's walls. +" + HealthIncrease + " Max Health";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big FortifyWallsIcon.png";
         }

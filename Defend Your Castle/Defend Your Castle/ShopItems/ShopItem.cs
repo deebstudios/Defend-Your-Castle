@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Defend_Your_Castle
 {
     // Base class used to represent an item in the shop
     //When an item can no longer be bought, grey it out
-    public class ShopItem
+    public class ShopItem : INotifyPropertyChanged
     {
         //A number denoting that there is no limit to how many times the player can buy a particular item
         public static int InfinitePurchases = -1;
@@ -61,20 +62,20 @@ namespace Defend_Your_Castle
             get { return price + " Gold"; }
         }
 
+        // The string representation of the current level of the ShopItem
         // Format: CurLevel / MaxLevel
+        private String levelString;
+
+        // Format: CurLevel / MaxLevel
+        // This is both a getter and a setter property so the OnPropertyChanged interface can be implemented
         public String LevelString
         {
             get
+            { return levelString; }
+            set
             {
-                // Get the string representation of the current level 
-                String levelString = CurLevel.ToString();
-
-                // Get the string representation of the max level
-                // Use "∞" if the max level equals InfinitePurchases
-                levelString += " / " + ((MaxLevel > InfinitePurchases) ? MaxLevel.ToString() : "∞");
-
-                // Return the level string
-                return levelString;
+                levelString = value;
+                OnPropertyChanged("LevelString");
             }
         }
 
@@ -103,7 +104,8 @@ namespace Defend_Your_Castle
         // Performs the action of the shop item
         public virtual void UseItem()
         {
-            CurLevel++;
+            // Increment the current level by 1
+            SetCurrentLevel(CurLevel + 1);
         }
 
         // Performs the action of the shop item when used on the HUD (used by consumables only)
@@ -114,7 +116,45 @@ namespace Defend_Your_Castle
 
         public void SetCurrentLevel(int level)
         {
+            // Set the new level
             CurLevel = level;
+
+            // Make sure the current level doesn't go below 0
+            if (CurLevel < 0) CurLevel = 0;
+
+            // Set the displayed level
+            SetDisplayedLevel();
+        }
+
+        public void SetDisplayedLevel()
+        {
+            // Get the string representation of the current level 
+            String ItemLevelString = CurLevel.ToString();
+
+            // Get the string representation of the max level
+            // Use "∞" if the max level equals InfinitePurchases
+            ItemLevelString += " / " + ((MaxLevel > InfinitePurchases) ? MaxLevel.ToString() : "∞");
+
+            // Set the level string
+            LevelString = ItemLevelString;
+        }
+
+        // Declare the PropertyChanged event
+        // PropertyChanged implementation courtesy of MSDN: http://msdn.microsoft.com/en-us/library/ms743695(v=vs.110).aspx
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Create the OnPropertyChanged method to raise the event 
+        protected void OnPropertyChanged(String name)
+        {
+            // Set the EventHandler to the PropertyChanged event
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            // Make sure the event exists
+            if (handler != null)
+            {
+                // It does, so invoke the PropertyChanged event
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
 
 

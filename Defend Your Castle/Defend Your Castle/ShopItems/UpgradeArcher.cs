@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
 
             Description = "Increase the power and range of your Archers.";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big UpgradeArcherIcon.png";
         }

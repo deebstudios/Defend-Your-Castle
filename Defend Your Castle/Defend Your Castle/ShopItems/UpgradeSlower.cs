@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
 
             Description = "Increase the slow power and slow duration of your Slowers.";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/SlowerUpgradeIcon.png";
         }

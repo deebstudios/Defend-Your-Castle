@@ -286,7 +286,8 @@
                                 </Button>
                                 
                                 <!-- Levels -->
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}" Text="{Binding Path=LevelString}" />
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
+                                           Text="{Binding Path=LevelString, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             
                             <!-- Shop Item Name, Price, + Description -->
@@ -341,6 +342,7 @@
         <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
             <Setter Property="Grid.RowSpan" Value="4"/>
             <Setter Property="Background" Value="Gold"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
 
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
