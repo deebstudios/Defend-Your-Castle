@@ -13,7 +13,7 @@ namespace Defend_Your_Castle
             // Set the properties of the item
             Name = "Upgrade Archer";
 
-            MaxLevel = 3;
+            MaxLevel = 2;
 
             price = 10000;
 

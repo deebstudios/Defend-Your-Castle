@@ -15,8 +15,8 @@ namespace Defend_Your_Castle
     {
         //The amount the Archer's stats increase by each level
         private const int ChanceIncrease = 1;
-        private const int RangeIncrease = 50;
-        private const float SpeedIncrease = 200f;
+        private const int RangeIncrease = 75;
+        private const float SpeedIncrease = 250f;
 
         //The range of the archer and its chance of hitting a nearby enemy; these can be increased with level
         private int AttackRange;
