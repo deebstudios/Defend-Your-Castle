@@ -248,6 +248,9 @@ namespace Defend_Your_Castle
 
             // State that the player has saved data
             Game1.HasSavedData = true;
+
+            // Enable the "Continue Game" button
+            TitleScreen_ContinueGame.IsEnabled = true;
         }
 
 

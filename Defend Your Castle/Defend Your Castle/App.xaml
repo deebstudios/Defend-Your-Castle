@@ -998,9 +998,12 @@
             <!-- GridViewItem Style
                  Default GridViewItem style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709915.aspx -->
             <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
-                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                <!-- BELOW: Changed FontFamily from "{ThemeResource ContentControlThemeFontFamily}"
+                            Changed FontSize from "{ThemeResource ControlContentThemeFontSize}" -->
+                <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
+                <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
                 <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="TabNavigation" Value="Once"/>
                 <Setter Property="IsHoldingEnabled" Value="False"/>
                 <Setter Property="IsTabStop" Value="False"/>
@@ -1242,9 +1245,9 @@
                                         </VisualState>
                                         
                                         <VisualState x:Name="MultipleDraggingSecondary">
-                                            <Storyboard>
+                                            <!--<Storyboard>
                                                 <FadeOutThemeAnimation TargetName="ContentContainer" />
-                                            </Storyboard>
+                                            </Storyboard>-->
                                         </VisualState>
                                         
                                         <!--<VisualStateGroup.Transitions>
@@ -1331,7 +1334,7 @@
                                              approximate the size of the item using placeholder text. -->
                                                     <TextBlock x:Name="PlaceholderTextBlock" Visibility="Collapsed" Text="Xg"
                                                                Foreground="{x:Null}" Margin="{TemplateBinding Padding}"
-                                                               IsHitTestVisible="False" AutomationProperties.AccessibilityView="Raw"/>
+                                                               IsHitTestVisible="False" AutomationProperties.AccessibilityView="Raw" FontFamily="Global User Interface"/>
                                                     
                                                     <Rectangle x:Name="PlaceholderRect" Visibility="Collapsed"
                                                                Fill="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"/>
