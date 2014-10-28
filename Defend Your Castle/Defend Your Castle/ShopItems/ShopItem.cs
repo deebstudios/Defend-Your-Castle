@@ -61,6 +61,23 @@ namespace Defend_Your_Castle
             get { return price + " Gold"; }
         }
 
+        // Format: CurLevel / MaxLevel
+        public String LevelString
+        {
+            get
+            {
+                // Get the string representation of the current level 
+                String levelString = CurLevel.ToString();
+
+                // Get the string representation of the max level
+                // Use "∞" if the max level equals InfinitePurchases
+                levelString += " / " + ((MaxLevel > InfinitePurchases) ? MaxLevel.ToString() : "∞");
+
+                // Return the level string
+                return levelString;
+            }
+        }
+
         public int GetCurrentLevel
         {
             get { return CurLevel; }
