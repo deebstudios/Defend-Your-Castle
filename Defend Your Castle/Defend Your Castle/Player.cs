@@ -275,16 +275,22 @@ namespace Defend_Your_Castle
             Heal(healthIncrease);
         }
 
-        //Fortify's the castle by decreasing all damage dealt by a certain percentage (ONE TIME UPGRADE)
-        public void FortifyCastle()
+        //Fortify the player's castle
+        public void StrengthenCastle(int numtimes)
         {
-            Fortified = true;
+            //0 is passed in when loading if the player didn't upgrade at all
+            if (numtimes > 0)
+            {
+                float amount = FortifyCastle.DamageReduction * numtimes;
 
-            //Change the castle graphic
-            ObjectSheet = LoadAssets.PlayerCastleFortified;
+                //Change the castle graphic
+                ObjectSheet = LoadAssets.PlayerCastleFortified;
 
-            //Reduce all damage by 10%
-            PercentDamage = .9f;
+                PercentDamage -= amount;
+                PercentDamage = (float)Math.Round(PercentDamage, 2);
+
+                if (PercentDamage < FortifyCastle.MaxDamageReduction) PercentDamage = FortifyCastle.MaxDamageReduction;
+            }
         }
 
         public void UpgradeCastle(int healthIncrease)
@@ -334,7 +340,7 @@ namespace Defend_Your_Castle
         public void Attack(Level level, TouchLocation? touchLoc)
         {
             // Check to make sure the player can attack
-            if (CanAttack == true)
+            if (CanAttack == true && level.DidEnemiesSpawn == true)
             {
                 //Make sure the attack is below the HUD boundary
                 Rectangle touchrect = Input.GetTouchRect(touchLoc); //Input.GestureRect(gesture);
@@ -370,7 +376,7 @@ namespace Defend_Your_Castle
         public void Attack(Level level)
         {
             // Check to make sure the player can attack
-            if (CanAttack)
+            if (CanAttack == true && level.DidEnemiesSpawn == true)
             {
                 //Make sure the attack is below the HUD boundary
                 Rectangle clickrect = Input.MouseRect(mouseState);

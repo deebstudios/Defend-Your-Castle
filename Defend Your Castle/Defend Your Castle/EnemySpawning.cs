@@ -10,17 +10,19 @@ namespace Defend_Your_Castle
     {
         //The number of levels required for the min and max speed enemies increase their base speed by to go up by 1
         //Ex. If MinSpeedIncrease = 5, every 5 levels the minimum amount enemies increase their base speed by goes up by 1
-        private const int MinSpeedIncrease = 12;
-        private const int MaxSpeedIncrease = 8;
+        private const int MinSpeedIncrease = 20;
+        private const int MaxSpeedIncrease = 9;
+        private const int MaxSpeedBonus = 6;
 
         //The starting level, number of levels the max number of enemies that can spawn increases, and the max number of enemies that can spawn at once
         private const int StartMoreSpawn = 4;
-        private const int MaxNumIncrease = 6;
-        public const int MaxNumSpawn = 4;
+        private const int MaxNumIncrease = 8;
+        public const int MaxNumSpawn = 3;
 
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
         private const int FirstInvLevel = 15;
         private const float MaxInvDuration = 1900f;
+        private const float InvDecrease = 300f;
 
         //The chance for an enemy to be invincible
         private const int InvChance = 10;
@@ -63,7 +65,7 @@ namespace Defend_Your_Castle
         }
 
         // Determines if any enemies can start spawning for the level
-        private bool CanStartSpawning
+        public bool CanStartSpawning
         {
             get { return (Game1.ActiveTime >= PrevSpawnDelay); }
         }
@@ -200,10 +202,13 @@ namespace Defend_Your_Castle
             return (RandGenerator.Next(0, ListIndex));
         }
 
-        private Enemy FindEnemyToSpawn(int RandNum)
+        private Enemy FindEnemyToSpawn(int RandNum, int index)
         {
             // Get the Enemy number to spawn
             int EnemyIndex = FindEnemyNumToSpawn(RandNum);
+
+            //If more than one enemy spawns at a time, move it to the left to avoid overlap. The amount depends on the index
+            float XMove = -(index * 17);
 
             // Get the Y position at which the enemy will spawn
             float Y = (RandGenerator.Next(Player.GateStart, Player.GateEnd)) + level.GetPlayer.GetPosition.Y;
@@ -211,6 +216,10 @@ namespace Defend_Your_Castle
             //Increase the speed the enemies move at based on level
             int minspeedinc = level.GetLevelNum / MinSpeedIncrease;
             int maxspeedinc = level.GetLevelNum / MaxSpeedIncrease;
+
+            //Cap the speeds
+            if (minspeedinc > MaxSpeedBonus) minspeedinc = MaxSpeedBonus;
+            if (maxspeedinc > MaxSpeedBonus) maxspeedinc = MaxSpeedBonus;
 
             float randdecimal = (float)Math.Round(RandGenerator.NextDouble(), 2);
 
@@ -225,21 +234,21 @@ namespace Defend_Your_Castle
             switch (EnemyIndex)
             {
                 case 1: // Spear Enemy
-                    enem = new SpearEnemy(level, Y, speedincrease, costume);
+                    enem = new SpearEnemy(level, XMove, Y, speedincrease, costume);
                     break;
                 case 2: //Armored enemy
-                    enem = new ArmoredEnemy(level, Y, speedincrease, costume);
+                    enem = new ArmoredEnemy(level, XMove, Y, speedincrease, costume);
                     break;
                 case 3: //Armored Spear enemy
-                    enem = new ArmoredSpearEnemy(level, Y, speedincrease, costume);
+                    enem = new ArmoredSpearEnemy(level, XMove, Y, speedincrease, costume);
                     break;
                 case 4: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
-                    enem = new FlyingEnemy(level, Y, flyheight, speedincrease, costume);
+                    enem = new FlyingEnemy(level, XMove, Y, flyheight, speedincrease, costume);
                     break;
                 case 0: // Melee Enemy
                 default:
-                    enem = new MeleeEnemy(level, Y, speedincrease, costume);
+                    enem = new MeleeEnemy(level, XMove, Y, speedincrease, costume);
                     break;
             }
 
@@ -251,16 +260,18 @@ namespace Defend_Your_Castle
 
                 if (invchance == 0)
                 {
+                    //Scale invincibility length with bonus speed. At 0 bonus speed, it's MaxInvDuration
+                    float invduration = MaxInvDuration - (speedincrease * InvDecrease);
 
-                    /*We want the invincibility value to be at around 200f on the last level due to how fast enemies move
-                      It should decrease a little every few levels*/
-
-                    //Decrease by 100 ms every level
-                    int leveldiff = (level.GetLevelNum - FirstInvLevel) * 50;
-                    float invduration = MaxInvDuration - leveldiff;
-
-                    //If the enemy is ranged, subtract 100 ms from the duration since they don't have to travel as far
-                    if (EnemyIndex == 0 || EnemyIndex == 4) invduration -= 100f;
+                    ///*We want the invincibility value to be at around 200f on the last level due to how fast enemies move
+                    //  It should decrease a little every few levels*/
+                    //
+                    ////Decrease by 100 ms every level
+                    //int leveldiff = (level.GetLevelNum - FirstInvLevel) * 50;
+                    //float invduration = MaxInvDuration - leveldiff;
+                    //
+                    ////If the enemy is ranged, subtract 100 ms from the duration since they don't have to travel as far
+                    //if (EnemyIndex == 0 || EnemyIndex == 4) invduration -= 100f;
 
                     enem.SetInvincible(invduration);
                 }
@@ -288,7 +299,7 @@ namespace Defend_Your_Castle
                 for (int i = 0; i < numenemies; i++)
                 {
                     // Find an enemy to spawn
-                    Enemy EnemyToSpawn = FindEnemyToSpawn(RandGenerator.Next(0, GetSpawnChancesSum()));
+                    Enemy EnemyToSpawn = FindEnemyToSpawn(RandGenerator.Next(0, GetSpawnChancesSum()), i);
 
                     // Add the enemy that should be spawned
                     level.AddEnemy(EnemyToSpawn);

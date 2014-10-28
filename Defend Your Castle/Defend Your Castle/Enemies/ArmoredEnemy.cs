@@ -10,7 +10,7 @@ namespace Defend_Your_Castle
     //An armored enemy
     public sealed class ArmoredEnemy : Enemy
     {
-        public ArmoredEnemy(Level level, float Y, float speedadd, int costume)
+        public ArmoredEnemy(Level level, float xdiff, float Y, float speedadd, int costume)
         {
             MoveSpeed = new Vector2(1f + speedadd, 0);
 
@@ -23,7 +23,7 @@ namespace Defend_Your_Castle
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(0, 0, 17, 35), 225), new AnimFrame(new Rectangle(21, 0, 17, 35), 225), new AnimFrame(new Rectangle(40, 0, 19, 35), 225, new Vector2(2, 0)));
 
-            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(xdiff - Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             SetProperties(level);
         }

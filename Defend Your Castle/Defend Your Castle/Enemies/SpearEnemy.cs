@@ -13,9 +13,9 @@ namespace Defend_Your_Castle
         //The amount of damage the projectile deals
         protected int ProjectileDamage;
 
-        public SpearEnemy(Level level, float Y, float speedadd, int costume)
+        public SpearEnemy(Level level, float xdiff, float Y, float speedadd, int costume)
         {
-            MoveSpeed = new Vector2(1f + speedadd, 0);
+            MoveSpeed = new Vector2(.5f + speedadd, 0);
             Range = 150;
 
             ProjectileDamage = 25;
@@ -26,7 +26,7 @@ namespace Defend_Your_Castle
 
             WeaponWeakness = (int)Player.WeaponTypes.Sword;
 
-            Position = new Vector2(-Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
+            Position = new Vector2(xdiff - Animation.CurrentAnimFrame.FrameSize.X, Y - Animation.CurrentAnimFrame.FrameSize.Y);
 
             SetProperties(level);
         }

@@ -173,7 +173,7 @@ namespace Defend_Your_Castle
             SlowTime = (Game1.ActiveTime + slowDur);
 
             //Slow down the current animation
-            float slowamount = .15f + (.5f * slowerlevel);
+            float slowamount = (Slower.AnimationSlow * (slowerlevel + 1));
             CurAction.GetAnim.ChangeAnimSpeed(slowamount);
         }
 

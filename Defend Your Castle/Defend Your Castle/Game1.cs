@@ -312,8 +312,8 @@ namespace Defend_Your_Castle
 
             // Add all consumables to the HUD
             shop.AddConsumablesToHUD();
-            if (shop.GetStrengthenWallsLevel >= 1)
-                level.GetPlayer.FortifyCastle();
+            
+            level.GetPlayer.StrengthenCastle(shop.GetStrengthenWallsLevel);
 
             // Select the Sword
             SelectSwordWeapon();
