@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
 
         public SpearEnemy(Level level, float xdiff, float Y, float speedadd, int costume)
         {
-            MoveSpeed = new Vector2(1f + speedadd, 0);
+            MoveSpeed = new Vector2(.5f + speedadd, 0);
             Range = 150;
 
             ProjectileDamage = 25;

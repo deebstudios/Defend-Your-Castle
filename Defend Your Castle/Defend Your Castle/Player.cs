@@ -340,7 +340,7 @@ namespace Defend_Your_Castle
         public void Attack(Level level, TouchLocation? touchLoc)
         {
             // Check to make sure the player can attack
-            if (CanAttack == true)
+            if (CanAttack == true && level.DidEnemiesSpawn == true)
             {
                 //Make sure the attack is below the HUD boundary
                 Rectangle touchrect = Input.GetTouchRect(touchLoc); //Input.GestureRect(gesture);
@@ -376,7 +376,7 @@ namespace Defend_Your_Castle
         public void Attack(Level level)
         {
             // Check to make sure the player can attack
-            if (CanAttack)
+            if (CanAttack == true && level.DidEnemiesSpawn == true)
             {
                 //Make sure the attack is below the HUD boundary
                 Rectangle clickrect = Input.MouseRect(mouseState);

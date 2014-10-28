@@ -12,6 +12,7 @@ namespace Defend_Your_Castle
         //Ex. If MinSpeedIncrease = 5, every 5 levels the minimum amount enemies increase their base speed by goes up by 1
         private const int MinSpeedIncrease = 20;
         private const int MaxSpeedIncrease = 9;
+        private const int MaxSpeedBonus = 6;
 
         //The starting level, number of levels the max number of enemies that can spawn increases, and the max number of enemies that can spawn at once
         private const int StartMoreSpawn = 4;
@@ -21,6 +22,7 @@ namespace Defend_Your_Castle
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
         private const int FirstInvLevel = 15;
         private const float MaxInvDuration = 1900f;
+        private const float InvDecrease = 300f;
 
         //The chance for an enemy to be invincible
         private const int InvChance = 10;
@@ -63,7 +65,7 @@ namespace Defend_Your_Castle
         }
 
         // Determines if any enemies can start spawning for the level
-        private bool CanStartSpawning
+        public bool CanStartSpawning
         {
             get { return (Game1.ActiveTime >= PrevSpawnDelay); }
         }
@@ -215,6 +217,10 @@ namespace Defend_Your_Castle
             int minspeedinc = level.GetLevelNum / MinSpeedIncrease;
             int maxspeedinc = level.GetLevelNum / MaxSpeedIncrease;
 
+            //Cap the speeds
+            if (minspeedinc > MaxSpeedBonus) minspeedinc = MaxSpeedBonus;
+            if (maxspeedinc > MaxSpeedBonus) maxspeedinc = MaxSpeedBonus;
+
             float randdecimal = (float)Math.Round(RandGenerator.NextDouble(), 2);
 
             // Choose a random value between the minimum speed increase and the maximum speed increase, both inclusive
@@ -254,16 +260,18 @@ namespace Defend_Your_Castle
 
                 if (invchance == 0)
                 {
+                    //Scale invincibility length with bonus speed. At 0 bonus speed, it's MaxInvDuration
+                    float invduration = MaxInvDuration - (speedincrease * InvDecrease);
 
-                    /*We want the invincibility value to be at around 200f on the last level due to how fast enemies move
-                      It should decrease a little every few levels*/
-
-                    //Decrease by 100 ms every level
-                    int leveldiff = (level.GetLevelNum - FirstInvLevel) * 50;
-                    float invduration = MaxInvDuration - leveldiff;
-
-                    //If the enemy is ranged, subtract 100 ms from the duration since they don't have to travel as far
-                    if (EnemyIndex == 0 || EnemyIndex == 4) invduration -= 100f;
+                    ///*We want the invincibility value to be at around 200f on the last level due to how fast enemies move
+                    //  It should decrease a little every few levels*/
+                    //
+                    ////Decrease by 100 ms every level
+                    //int leveldiff = (level.GetLevelNum - FirstInvLevel) * 50;
+                    //float invduration = MaxInvDuration - leveldiff;
+                    //
+                    ////If the enemy is ranged, subtract 100 ms from the duration since they don't have to travel as far
+                    //if (EnemyIndex == 0 || EnemyIndex == 4) invduration -= 100f;
 
                     enem.SetInvincible(invduration);
                 }

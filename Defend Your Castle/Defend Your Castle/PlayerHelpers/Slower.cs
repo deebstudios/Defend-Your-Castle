@@ -21,6 +21,8 @@ namespace Defend_Your_Castle
         private Vector2 SlowAmountIncrease;
         private const float SlowDurIncrease = 250f;
 
+        public const float AnimationSlow = .10f;
+
         // The Slower's chance of slowing a nearby enemy
         private int SlowChance;
 
@@ -51,7 +53,7 @@ namespace Defend_Your_Castle
             SlowDur = 3000;
 
             // Set the slow amount increase
-            SlowAmountIncrease = new Vector2(0.2f, 0);
+            SlowAmountIncrease = new Vector2(0.5f, 0);
             
             AttackTime = 1000;
             PrevAttack = 0f;

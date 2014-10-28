@@ -17,6 +17,14 @@ namespace Defend_Your_Castle
         //The damage the projectile does
         protected int Damage;
 
+        //Amount of gold the projectile gives
+        protected int Gold;
+
+        protected bool FakeDead;
+
+        //The fade for the gold drop
+        protected FadeOnce GoldDrop;
+
         //Velocity of the projectile
         protected Vector2 Velocity;
         protected Vector2 CurVelocity;
@@ -31,6 +39,10 @@ namespace Defend_Your_Castle
             Velocity = Vector2.Zero;
 
             Damage = 1;
+
+            Gold = 15;
+            FakeDead = false;
+            GoldDrop = null;
 
             Launched = false;
 
@@ -67,35 +79,72 @@ namespace Defend_Your_Castle
             Launched = true;
         }
 
+        public override bool IsDying
+        {
+            get { return (FakeDead == true); }
+        }
+
+        //Gives gold to the player
+        public override void GrantGold(Level level, bool killedbyplayer)
+        {
+            level.GetPlayer.ReceiveGold(Gold);
+        }
+
+        public override void Die(Level level)
+        {
+            FakeDead = true;
+            GoldDrop = new FadeOnce(new Color(255, 255, 255, 255), -5, 0, 255, 0f);
+        }
+
         public override void Update(Level level)
         {
-            if (Launched == true)
+            if (FakeDead == false)
             {
-                Move(CurVelocity);
-                if (UsesGravity == true)
+                if (Launched == true)
                 {
-                    CurVelocity.Y += LevelObject.Gravity;
-                    
-                    //Rotate the projectile
-                    CheckRotation();
-                }
+                    Move(CurVelocity);
+                    if (UsesGravity == true)
+                    {
+                        CurVelocity.Y += LevelObject.Gravity;
 
-                base.Update(level);
+                        //Rotate the projectile
+                        CheckRotation();
+                    }
 
-                //If the projectile hitbox touches the player, make the player take damage and remove the projectile from the level
-                if (hitbox.GetRect.Right >= StopX)
-                {
-                    level.GetPlayer.TakeDamage(Damage, level);
-                    Die(level);
+                    //If the projectile hitbox touches the player, make the player take damage and remove the projectile from the level
+                    if (hitbox.GetRect.Right >= StopX)
+                    {
+                        level.GetPlayer.TakeDamage(Damage, level);
+                        base.Die(level);
+                    }
                 }
             }
+            else
+            {
+                GoldDrop.Update();
+                if (GoldDrop.DoneFading == true)
+                    base.Die(level);
+            }
+
+            base.Update(level);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Launched == true)
             {
-                Sprite.Draw(spriteBatch, ObjectSheet, Position, DirectionFacing, Color.White, Rotation, GetDrawDepth);
+                Sprite.Draw(spriteBatch, ObjectSheet, Position, DirectionFacing, GoldDrop != null ? GoldDrop.GetFadeColor : Color.White, Rotation, GetDrawDepth);
+
+                //Draw gold dropping animation
+                if (FakeDead == true)
+                {
+                    //Center the text and gold icon above the enemy you killed
+                    Vector2 center = new Vector2(Position.X + (int)(Sprite.FrameSize.X / 2), GetTruePosition.Y - 10);
+                    Vector2 textsize = LoadAssets.DYFFont.MeasureString(Gold.ToString()) / 2;
+
+                    spriteBatch.DrawString(LoadAssets.DYFFont, Gold.ToString(), new Vector2(center.X, center.Y - 10), GoldDrop.GetFadeColor, 0f, textsize, 1f, SpriteEffects.None, .999f);
+                    spriteBatch.Draw(LoadAssets.GoldCoinEffect, center, null, GoldDrop.GetFadeColor, 0f, new Vector2(LoadAssets.GoldCoinEffect.Width / 2, LoadAssets.GoldCoinEffect.Height / 2), 1f, SpriteEffects.None, 1f);
+                }
 
                 base.Draw(spriteBatch);
             }

@@ -101,6 +101,11 @@ namespace Defend_Your_Castle
             get { return (GoldEarned + BonusGold); }
         }
 
+        public bool DidEnemiesSpawn
+        {
+            get { return EnemySpawn.CanStartSpawning; }
+        }
+
         public Level(Player play, Game1 game)
         {
             player = play;
@@ -142,7 +147,7 @@ namespace Defend_Your_Castle
         private float LevelDuration
         {
             // NOTE: This calculation will need to be changed
-            get { return (20000 + ((LevelNum - 1) * 1000)); }
+            get { return (20000 + ((LevelNum - 1) * 900)); }
         }
 
         //Creates the night fade based on how long the level lasts
@@ -324,27 +329,27 @@ namespace Defend_Your_Castle
                 }
             }
 
-              //Find highest Y
-              float highestY = 0;
-              int index = -1;
-              
-              for (int i = 0; i < enemies.Count; i++)
-              {
-                  if (enemies[i].GetPosition.Y > highestY)
-                  {
-                      highestY = enemies[i].GetPosition.Y;
-                      index = i;
-                  }
-              }
-              
-              if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
-              {
-                  enemies[index].Die(this);
-                  enemies[index].GrantGold(this, true);
+            //Find highest Y
+            float highestY = 0;
+            int index = -1;
+            
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].GetPosition.Y > highestY)
+                {
+                    highestY = enemies[i].GetPosition.Y;
+                    index = i;
+                }
+            }
+            
+            if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
+            {
+                enemies[index].Die(this);
+                enemies[index].GrantGold(this, true);
 
-                  // Increment the player's kill count by 1
-                  NumPlayerKills += 1;
-              }
+                // Increment the player's kill count by 1
+                NumPlayerKills += 1;
+            }
         }
 
         public void Update()

@@ -24,7 +24,7 @@ namespace Defend_Your_Castle
 
             Gold = 150;
 
-            MoveSpeed = new Vector2(2f + speedadd, 0);
+            MoveSpeed = new Vector2(1.5f + speedadd, 0);
 
             Animation = new Animation(true, new AnimFrame(new Rectangle(3, 3, 31, 29), 300), new AnimFrame(new Rectangle(39, 3, 31, 29), 300), new AnimFrame(new Rectangle(75, 3, 31, 29), 300));
 
