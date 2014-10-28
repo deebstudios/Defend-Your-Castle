@@ -24,6 +24,9 @@ namespace Defend_Your_Castle
 
             Description = "Strengthen your fort's walls to better defend against enemy attacks! +3% reduced damage from all attacks";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/FortifyCastleIcon.png";
         }

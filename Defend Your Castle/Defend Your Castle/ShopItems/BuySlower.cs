@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
 
             Description = "A loyal helper that slows enemy movement and attack speeds.";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/SlowerIcon.png";
         }

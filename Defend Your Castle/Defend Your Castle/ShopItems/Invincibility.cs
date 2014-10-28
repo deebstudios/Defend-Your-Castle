@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
 
             Description = "Shields your fort with an impervious energy for 5 seconds.";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big InvincibilityIcon.png";
         }
@@ -37,10 +40,7 @@ namespace Defend_Your_Castle
             ShopPlayer.UseInvincibility();
             
             // Decrease the current level of the invincibility by 1
-            CurLevel -= 1;
-
-            // Make sure the current level doesn't go below 0
-            if (CurLevel < 0) CurLevel = 0;
+            SetCurrentLevel(CurLevel - 1);
         }
 
 
