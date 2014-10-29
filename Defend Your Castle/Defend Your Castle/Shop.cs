@@ -53,12 +53,12 @@ namespace Defend_Your_Castle
 
         public int GetArcherLevel
         {
-            get { return ShopPrepareRepairs[3].GetCurrentLevel; }
+            get { return ShopPrepareRepairs[2].GetCurrentLevel; }
         }
 
         public int GetSlowerLevel
         {
-            get { return ShopPrepareRepairs[4].GetCurrentLevel; }
+            get { return ShopPrepareRepairs[3].GetCurrentLevel; }
         }
 
         public int GetStrengthenWallsLevel

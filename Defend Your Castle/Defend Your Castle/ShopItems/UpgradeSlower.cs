@@ -13,11 +13,14 @@ namespace Defend_Your_Castle
             // Set the properties of the item
             Name = "Upgrade Slower";
 
-            MaxLevel = 3;
+            MaxLevel = 2;
 
             price = 7500;
 
             Description = "Increase the slow power and slow duration of your Slowers.";
+
+            // Set the displayed level
+            SetDisplayedLevel();
 
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/SlowerUpgradeIcon.png";

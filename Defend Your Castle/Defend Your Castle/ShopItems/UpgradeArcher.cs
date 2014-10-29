@@ -13,11 +13,14 @@ namespace Defend_Your_Castle
             // Set the properties of the item
             Name = "Upgrade Archer";
 
-            MaxLevel = 3;
+            MaxLevel = 2;
 
             price = 10000;
 
             Description = "Increase the power and range of your Archers.";
+
+            // Set the displayed level
+            SetDisplayedLevel();
 
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big UpgradeArcherIcon.png";

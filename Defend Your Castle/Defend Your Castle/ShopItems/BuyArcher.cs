@@ -19,6 +19,9 @@ namespace Defend_Your_Castle
 
             Description = "A loyal helper that defends your fort from enemies.";
 
+            // Set the displayed level
+            SetDisplayedLevel();
+
             // Get the path to the image of the item
             ImagePath = "Content/Graphics/ShopIcons/Big ArcherIcon.png";
         }

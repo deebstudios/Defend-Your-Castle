@@ -272,12 +272,8 @@
     <Content Include="Content\L Character.png" />
     <Content Include="Content\M Character.png" />
     <Content Include="Content\Graphics\ScalableBox.png" />
-    <Content Include="Content\Music\Home Base Groove.wma">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Music\Itty Bitty 8 Bit.wma">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\Music\Home Base Groove.xnb" />
+    <Content Include="Content\Music\Itty Bitty 8 Bit.xnb" />
     <Content Include="Content\N Character.png" />
     <Content Include="Content\O Character.png" />
     <Content Include="Content\P Character.png" />
@@ -304,12 +300,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Music\Home Base Groove.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Music\Itty Bitty 8 Bit.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />

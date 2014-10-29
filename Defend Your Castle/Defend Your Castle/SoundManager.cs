@@ -22,17 +22,23 @@ namespace Defend_Your_Castle
         public static float SoundVolume;
         public static float MusicVolume;
 
+        //The current song that is being played
+        public static SoundEffectInstance CurSong;
+        public static SoundEffect CurSongPlaying;
+
         static SoundManager()
         {
             //Initialize them to the middle value of .5f
             SoundVolume = MusicVolume = MediaPlayer.Volume = .5f;
+
+            CurSong = null;
         }
 
         // Sets the sound volume
         public static void SetSoundVolume(float volume)
         {
             SoundVolume = volume;
-            
+
             // Save the volume settings
             SaveVolumeSettings();
         }
@@ -41,7 +47,8 @@ namespace Defend_Your_Castle
         public static void SetMusicVolume(float volume)
         {
             MusicVolume = MediaPlayer.Volume = volume;
-            
+            if (CurSong != null) CurSong.Volume = MusicVolume;
+
             // Save the volume settings
             SaveVolumeSettings();
         }
@@ -56,19 +63,29 @@ namespace Defend_Your_Castle
         }
 
         //Plays a song, stopping the previous song first - you can choose to not loop the song if you wish, but the default will be set to loop
-        public static void PlaySong(Song song, bool loop = true)
+        public static void PlaySong(SoundEffect song, bool loop = true)
         {
-            if (song != null)
+            if (song != null && song != CurSongPlaying)
             {
                 StopSong();
-                MediaPlayer.Play(song);
-                MediaPlayer.IsRepeating = loop;
+                //MediaPlayer.Play(song);
+                CurSongPlaying = song;
+                CurSong = CurSongPlaying.CreateInstance();
+                CurSong.Volume = MusicVolume;
+                CurSong.IsLooped = loop;
+                CurSong.Play();
+                //MediaPlayer.IsRepeating = loop;
             }
         }
 
         public static void StopSong()
         {
-            MediaPlayer.Stop();
+            if (CurSong != null)
+            {
+                CurSong.Stop();
+                CurSong = null;
+                CurSongPlaying = null;
+            }
         }
 
         public static void SaveVolumeSettings()

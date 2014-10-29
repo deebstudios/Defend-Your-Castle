@@ -18,7 +18,7 @@ namespace Defend_Your_Castle
             MoveSpeed = new Vector2(.5f + speedadd, 0);
             Range = 150;
 
-            ProjectileDamage = 25;
+            ProjectileDamage = 50;
 
             ObjectSheet = LoadAssets.SpearGoblinSheet[costume];
             InvincibleSheet = LoadAssets.SpearGoblinInvincibleSheet;

@@ -49,7 +49,7 @@ namespace Defend_Your_Castle
                 AttackAnim.SetAnimSpeed(Animation.GetSpeed);
 
                 //Attack now
-                CurAction = new MeleeAttack(this, AttackAnim, 75, AttackAnim.MaxFrame);
+                CurAction = new MeleeAttack(this, AttackAnim, 100, AttackAnim.MaxFrame);
             }
         }
     }

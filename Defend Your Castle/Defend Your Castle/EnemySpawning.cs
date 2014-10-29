@@ -13,15 +13,16 @@ namespace Defend_Your_Castle
         private const int MinSpeedIncrease = 20;
         private const int MaxSpeedIncrease = 9;
         private const int MaxSpeedBonus = 6;
+        private const float MaxFloatSpeedBonus = .5f;
 
         //The starting level, number of levels the max number of enemies that can spawn increases, and the max number of enemies that can spawn at once
         private const int StartMoreSpawn = 4;
-        private const int MaxNumIncrease = 8;
+        private const int MaxNumIncrease = 15;//8;
         public const int MaxNumSpawn = 3;
 
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
         private const int FirstInvLevel = 15;
-        private const float MaxInvDuration = 1900f;
+        private const float MaxInvDuration = 1800f;
         private const float InvDecrease = 300f;
 
         //The chance for an enemy to be invincible
@@ -222,6 +223,7 @@ namespace Defend_Your_Castle
             if (maxspeedinc > MaxSpeedBonus) maxspeedinc = MaxSpeedBonus;
 
             float randdecimal = (float)Math.Round(RandGenerator.NextDouble(), 2);
+            if (randdecimal > MaxFloatSpeedBonus) randdecimal = MaxFloatSpeedBonus;
 
             // Choose a random value between the minimum speed increase and the maximum speed increase, both inclusive
             float speedincrease = randdecimal + RandGenerator.Next(minspeedinc, maxspeedinc + 1);

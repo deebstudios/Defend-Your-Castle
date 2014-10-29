@@ -59,8 +59,8 @@ namespace Defend_Your_Castle
         public static SpriteFont DYFFont;
 
         //Music
-        public static Song TitleScreenMusic;
-        public static Song ShopMusic;
+        public static SoundEffect TitleScreenMusic;
+        public static SoundEffect ShopMusic;
 
         //Sounds
         public static SoundEffect WeaponSwing;
@@ -138,8 +138,8 @@ namespace Defend_Your_Castle
 
         private static void LoadMusic(ContentManager Content)
         {
-            TitleScreenMusic = Content.Load<Song>(MusicDir + "Home Base Groove");
-            ShopMusic = Content.Load<Song>(MusicDir + "Itty Bitty 8 Bit");
+            TitleScreenMusic = Content.Load<SoundEffect>(MusicDir + "Home Base Groove");
+            ShopMusic = Content.Load<SoundEffect>(MusicDir + "Itty Bitty 8 Bit");
         }
 
 
