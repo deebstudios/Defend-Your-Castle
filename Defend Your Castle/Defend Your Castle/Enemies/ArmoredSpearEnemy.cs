@@ -18,7 +18,7 @@ namespace Defend_Your_Castle
             WeaponWeakness = (int)Player.WeaponTypes.Warhammer;
             Range = 120;
 
-            ProjectileDamage = 50;
+            ProjectileDamage = 75;
         }
     }
 }

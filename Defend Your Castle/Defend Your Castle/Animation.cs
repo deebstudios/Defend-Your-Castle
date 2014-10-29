@@ -42,7 +42,7 @@ namespace Defend_Your_Castle
             FullAnimDuration = 0;
 
             CurFrame = 0;
-            CurReverse = false;
+            CurReverse = ShouldReverse = false;
 
             PlayRate = 1f;
 
