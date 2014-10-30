@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Defend_Your_Castle.App">
       <m2:VisualElements DisplayName="Defend Your Castle" Description="Defend your fort from the Goblin Tribe! Defeat Goblins with your weapons, purchase mercenaries and upgrades, and make your fort impenetrable until night falls upon the land!" BackgroundColor="#464646" ForegroundText="light" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png">
-        <m2:DefaultTile>
+        <m2:DefaultTile Square70x70Logo="Assets\StoreLogos\DefendYourFortLogo 70x70.png" Wide310x150Logo="Assets\StoreLogos\DefendYourFortLogo 310x150.png" Square310x310Logo="Assets\StoreLogos\DefendYourFortLogo 310x310.png">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
           </m2:ShowNameOnTiles>
