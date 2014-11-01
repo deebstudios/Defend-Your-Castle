@@ -192,6 +192,45 @@
     <Content Include="Assets\Logo.scale-140.png" />
     <Content Include="Assets\Logo.scale-180.png" />
     <Content Include="Assets\Logo.scale-80.png" />
+    <Content Include="Assets\NewStoreLogos\Splash Screen\DefendYourFortLogo 1116x540.png" />
+    <Content Include="Assets\NewStoreLogos\Splash Screen\DefendYourFortLogo 620x300.png" />
+    <Content Include="Assets\NewStoreLogos\Splash Screen\DefendYourFortLogo 868x420.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 120x120.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 150x150.scale-100.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 150x150.scale-140.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 150x150.scale-180.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 150x150.scale-80.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 210x210.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 270x270.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 16x16.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 24x24.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 256x256.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 30x30.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 32x32.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 42x42.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 48x48.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\30x30\DefendYourFortLogo 54x54.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 248x120.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 310x150.scale-100.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 310x150.scale-140.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 310x150.scale-180.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 310x150.scale-80.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 434x210.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 558x270.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x310\DefendYourFortLogo 248x248.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x310\DefendYourFortLogo 310x310.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x310\DefendYourFortLogo 434x434.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\310x310\DefendYourFortLogo 558x558.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 126x126.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 56x56.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 70x70.scale-100.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 70x70.scale-140.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 70x70.scale-180.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 70x70.scale-80.png" />
+    <Content Include="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 98x98.png" />
+    <Content Include="Assets\NewStoreLogos\Store Logo\DefendYourFortLogo 50x50.png" />
+    <Content Include="Assets\NewStoreLogos\Store Logo\DefendYourFortLogo 70x70.png" />
+    <Content Include="Assets\NewStoreLogos\Store Logo\DefendYourFortLogo 90x90.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-140.png" />
     <Content Include="Assets\SmallLogo.scale-180.png" />
@@ -203,6 +242,9 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-140.png" />
     <Content Include="Assets\SplashScreen.scale-180.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-140.png" />
+    <Content Include="Assets\StoreLogo.scale-180.png" />
     <Content Include="Assets\StoreLogos\CastleIcon50x50.png" />
     <Content Include="Assets\StoreLogos\DefendYourFortLogo 1116x540.png" />
     <Content Include="Assets\StoreLogos\DefendYourFortLogo 120x120.png" />
@@ -359,10 +401,12 @@
     <Content Include="Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Music\Game Over %28spazzo-1493__game-over%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Content\A Character.png" />
     <Content Include="Content\Graphics\Alpha Sword.png" />
     <Content Include="Content\Graphics\Alpha Warhammer.png" />

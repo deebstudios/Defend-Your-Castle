@@ -61,6 +61,7 @@ namespace Defend_Your_Castle
         //Music
         public static SoundEffect TitleScreenMusic;
         public static SoundEffect ShopMusic;
+        public static SoundEffect GameOver;
 
         //Sounds
         public static SoundEffect WeaponSwing;
@@ -140,6 +141,7 @@ namespace Defend_Your_Castle
         {
             TitleScreenMusic = Content.Load<SoundEffect>(MusicDir + "Home Base Groove");
             ShopMusic = Content.Load<SoundEffect>(MusicDir + "Itty Bitty 8 Bit");
+            GameOver = Content.Load<SoundEffect>(MusicDir + "Game Over (spazzo-1493__game-over)");
         }
 
 

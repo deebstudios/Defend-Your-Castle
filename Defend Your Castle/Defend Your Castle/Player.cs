@@ -266,6 +266,9 @@ namespace Defend_Your_Castle
 
             // Change the game mode to Screen
             level.Game.ChangeGameState(GameState.Screen);
+
+            //Play the game over song
+            SoundManager.PlaySong(LoadAssets.GameOver, false);
         }
 
         public void IncreaseMaxHealth(int healthIncrease)
