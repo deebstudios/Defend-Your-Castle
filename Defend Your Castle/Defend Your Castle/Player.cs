@@ -420,12 +420,12 @@ namespace Defend_Your_Castle
             }
             else if (Input.IsKeyDown(keyboardState, Keys.W) == true)
             {
-                SwitchWeapon(1);
+                SwitchWeapon(2);
                 gamePage.HUD_WeaponWarhammer.IsChecked = true;
             }
             else if (Input.IsKeyDown(keyboardState, Keys.E) == true)
             {
-                SwitchWeapon(2);
+                SwitchWeapon(1);
                 gamePage.HUD_WeaponSpear.IsChecked = true;
             }
 
