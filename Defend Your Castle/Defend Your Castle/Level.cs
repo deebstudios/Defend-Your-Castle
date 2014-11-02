@@ -101,6 +101,12 @@ namespace Defend_Your_Castle
             get { return (GoldEarned + BonusGold); }
         }
 
+        // Returns the Level's EnemySpawn object
+        public EnemySpawning GetEnemySpawn
+        {
+            get { return EnemySpawn; }
+        }
+
         public bool DidEnemiesSpawn
         {
             get { return EnemySpawn.CanStartSpawning; }
