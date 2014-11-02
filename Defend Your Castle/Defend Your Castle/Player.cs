@@ -60,6 +60,9 @@ namespace Defend_Your_Castle
         // Stores the mouse state
         private MouseState mouseState;
 
+        //The keyboard state
+        private KeyboardState keyboardState;
+
         public Player(GamePage gamepage)
         {
             // Get the reference to GamePage.xaml
@@ -103,6 +106,9 @@ namespace Defend_Your_Castle
 
             // Initialize the mouse state
             mouseState = new MouseState();
+
+            //Initialize keyboard state
+            keyboardState = new KeyboardState(Keys.Q, Keys.W, Keys.E);
         }
 
         public GamePage GetGamePage
@@ -406,6 +412,24 @@ namespace Defend_Your_Castle
             TouchLocation? touchLoc = Input.GetTouchLocation();
             //GestureSample? gesture = Input.GetTouchGesture();
 
+            //Check for switching weapons via keyboard input
+            if (Input.IsKeyDown(keyboardState, Keys.Q) == true)
+            {
+                SwitchWeapon(0);
+                gamePage.HUD_WeaponSword.IsChecked = true;
+            }
+            else if (Input.IsKeyDown(keyboardState, Keys.W) == true)
+            {
+                SwitchWeapon(1);
+                gamePage.HUD_WeaponWarhammer.IsChecked = true;
+            }
+            else if (Input.IsKeyDown(keyboardState, Keys.E) == true)
+            {
+                SwitchWeapon(2);
+                gamePage.HUD_WeaponSpear.IsChecked = true;
+            }
+
+            //Check for hurting enemies
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
@@ -419,12 +443,11 @@ namespace Defend_Your_Castle
             //If the player is invincible, update the color effect
             if (IsInvincible == true) InvincibilityFade.Update();
 
-            //TEMPORARY, test granting invincibility
-            if (Input.IsRightMouseButtonDown(mouseState) == true)
-                UseInvincibility();
-
             // Get the mouse state
             mouseState = Mouse.GetState();
+
+            //Update the keyboard state
+            keyboardState = Keyboard.GetState();
 
             base.Update(level);
         }
