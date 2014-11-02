@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
   <Identity Name="a2ccaf43-330c-488a-93c7-a3acde7023b7" Publisher="CN=hydrakiller4000" Version="1.1.0.0" />
   <Properties>
-    <DisplayName>Defend Your Castle</DisplayName>
+    <DisplayName>Defend Your Fort</DisplayName>
     <PublisherDisplayName>hydrakiller4000</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Defend_Your_Castle.App">
-      <m2:VisualElements DisplayName="Defend Your Castle" Description="Defend your fort from the Goblin Tribe! Defeat Goblins with your weapons, purchase mercenaries and upgrades, and make your fort impenetrable until night falls upon the land!" BackgroundColor="#464646" ForegroundText="light" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png">
-        <m2:DefaultTile>
+      <m2:VisualElements DisplayName="Defend Your Castle" Description="Defend your fort from the Goblin Tribe! Defeat Goblins with your weapons, purchase mercenaries and upgrades, and keep your fort safe until night falls upon the land!" BackgroundColor="#464646" ForegroundText="light" Square150x150Logo="Assets\NewStoreLogos\Start Screen\150x150\DefendYourFortLogo 150x150.png" Square30x30Logo="Assets\SmallLogo.png">
+        <m2:DefaultTile Square70x70Logo="Assets\NewStoreLogos\Start Screen\70x70\DefendYourFortLogo 70x70.png" Wide310x150Logo="Assets\NewStoreLogos\Start Screen\310x150\DefendYourFortLogo 310x150.png" Square310x310Logo="Assets\StoreLogos\DefendYourFortLogo 310x310.png">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
           </m2:ShowNameOnTiles>

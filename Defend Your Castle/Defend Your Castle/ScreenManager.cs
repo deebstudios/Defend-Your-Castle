@@ -144,6 +144,9 @@ namespace Defend_Your_Castle
         {
             // Switch to the Title Screen
             ChangeScreen(Screens.TitleScreen);
+
+            //Play the title screen music
+            SoundManager.PlaySong(LoadAssets.TitleScreenMusic);
         }
 
         // How To Play Screen

@@ -291,6 +291,15 @@ namespace Defend_Your_Castle
 
             // Set the player to in-game
             ChangeGameState(GameState.InGame);
+
+            // Reset the level's spawn delay timer
+            level.GetEnemySpawn.ResetSpawnDelayTimer();
+
+            // Set the level start message's text to the level number
+            GamePage.LevelStart_Message.Text = "Level " + level.GetLevelNum;
+
+            // Show the level animation
+            GamePage.LevelStart_Anim.Begin();
         }
 
         public void PauseGame()
