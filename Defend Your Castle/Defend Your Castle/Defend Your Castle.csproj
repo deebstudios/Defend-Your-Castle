@@ -171,7 +171,7 @@
     <Compile Include="ShopItems\BuyArcher.cs" />
     <Compile Include="ShopItems\BuySlower.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
-    <Compile Include="ShopItems\FortifyCastle.cs" />
+    <Compile Include="ShopItems\StrengthenWalls.cs" />
     <Compile Include="ShopItems\Invincibility.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />
     <Compile Include="ShopItems\RepairWallsx10.cs" />

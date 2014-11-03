@@ -37,7 +37,7 @@ namespace Defend_Your_Castle
             // Initialize the three ShopItems lists. Change these lists to modify the items in the shop
             
             // Upgrades
-            ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer, this), new FortifyCastle(shopPlayer, this),
+            ShopUpgrades = new List<ShopItem>() { new CastleUpgrade(shopPlayer, this), new StrengthenWalls(shopPlayer, this),
                                                   new RepairWalls(shopPlayer, this), new RepairWallsx10(shopPlayer, this) };
 
             // Prepare/Repair
@@ -68,8 +68,19 @@ namespace Defend_Your_Castle
 
         public void AssignShopItems()
         {
-            gamePage.Shop_UpgradesList.ItemsSource = ShopUpgrades;
-            gamePage.Shop_PrepareRepairList.ItemsSource = ShopPrepareRepairs;
+            // Fort
+            gamePage.Shop_UpgradesList1.ItemsSource = new List<ShopItem> { ShopUpgrades[0] };
+            gamePage.Shop_UpgradesList2.ItemsSource = new List<ShopItem> { ShopUpgrades[1] };
+            gamePage.Shop_UpgradesList3.ItemsSource = new List<ShopItem> { ShopUpgrades[2] };
+            gamePage.Shop_UpgradesList4.ItemsSource = new List<ShopItem> { ShopUpgrades[3] };
+
+            // Helpers
+            gamePage.Shop_PrepareRepairList1.ItemsSource = new List<ShopItem> { ShopPrepareRepairs[0] };
+            gamePage.Shop_PrepareRepairList2.ItemsSource = new List<ShopItem> { ShopPrepareRepairs[1] };
+            gamePage.Shop_PrepareRepairList3.ItemsSource = new List<ShopItem> { ShopPrepareRepairs[2] };
+            gamePage.Shop_PrepareRepairList4.ItemsSource = new List<ShopItem> { ShopPrepareRepairs[3] };
+
+            // Items
             gamePage.Shop_ItemsList.ItemsSource = ShopItems;
         }
 
