@@ -113,13 +113,18 @@
         </Style>
 
         <!-- Level Start Styles -->
+        <Style x:Key="LevelStart_GridStyle" TargetType="Grid">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+        
         <Style x:Key="LevelStart_BorderStyle" TargetType="Border">
+            <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="Blue"/>
             <Setter Property="BorderThickness" Value="0,1,0,1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0,10,0,10"/>
-            <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
 
         <Style x:Key="LevelStart_MessageStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
@@ -356,10 +361,13 @@
             <Setter Property="Margin" Value="10,0,0,10"/>
         </Style>
 
-        <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
+        <Style x:Key="Shop_SaveGameGridAnimStyle" BasedOn="{StaticResource LevelStart_GridStyle}" TargetType="Grid">
             <Setter Property="Grid.RowSpan" Value="4"/>
-            <Setter Property="Background" Value="Gold"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
+        
+        <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
+            <Setter Property="Background" Value="Gold"/>
         </Style>
 
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
@@ -548,8 +556,8 @@
             </Grid.Resources>
 
             <!-- Background Image -->
-            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
-                   Source="Content/Graphics/Game Over Sprite.png" />
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="150"
+                   Source="Content/Graphics/Game Over Sprite.png" Opacity="1.0" />
             
             <!-- Game Over Message -->
             <Viewbox>
@@ -847,6 +855,8 @@
                                 <Run>For example, killing a grounded, unarmored</Run>
                                 <LineBreak />
                                 <Run>Goblin with the Warhammer will yield less gold.</Run>
+                                <LineBreak /><LineBreak />
+                                <Run>Use gold to buy upgrades and helpers in the shop.</Run>
                             </TextBlock>
                         </Viewbox>
                     </Border>
@@ -983,24 +993,34 @@
             </Grid>
         </Grid>
 
-        <!-- Level Start Border -->
-        <Border Name="LevelStart_Border" Style="{StaticResource LevelStart_BorderStyle}">
-            <!-- Level Start Text -->
-            <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
+        <!-- Level Start Grid -->
+        <Grid Name="LevelStart_Grid" Style="{StaticResource LevelStart_GridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.20*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Border.Resources>
+            <!-- Level Start Border -->
+            <Border Style="{StaticResource LevelStart_BorderStyle}">
+                <!-- Level Start Text -->
+                <Viewbox>
+                    <TextBlock Name="LevelStart_Message" Style="{StaticResource LevelStart_MessageStyle}" x:FieldModifier="public" />
+                </Viewbox>
+            </Border>
+
+            <Grid.Resources>
                 <!-- Level Start Animation -->
                 <Storyboard x:Name="LevelStart_Anim" x:FieldModifier="public">
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Visibility">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LevelStart_Grid" Storyboard.TargetProperty="Visibility">
                         <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                     </ObjectAnimationUsingKeyFrames>
 
-                    <DoubleAnimation Storyboard.TargetName="LevelStart_Border" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0"
-                                 Duration="0:0:2"/>
+                    <DoubleAnimation Storyboard.TargetName="LevelStart_Grid" Storyboard.TargetProperty="Opacity"
+                                         From="1.0" To="0.0" Duration="0:0:2"/>
                 </Storyboard>
-            </Border.Resources>
-        </Border>
-
+            </Grid.Resources>
+        </Grid>
     </Grid>
 
     <!-- Pause Menu -->
@@ -1323,24 +1343,35 @@
                 </Grid>
             </Grid>
         </Grid>
-        
-        <!-- Game Saved Border -->
-        <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
-            <!-- Game Saved Text -->
-            <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
 
-            <Border.Resources>
+        <!-- Game Saved Grid -->
+        <Grid Name="Shop_SaveGameAnimGrid" Style="{StaticResource Shop_SaveGameGridAnimStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.20*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Game Saved Border -->
+            <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
+                <!-- Game Saved Text -->
+                <Viewbox>
+                    <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
+                </Viewbox>
+            </Border>
+
+            <Grid.Resources>
                 <!-- Save Game Animation -->
                 <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Visibility">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimGrid" Storyboard.TargetProperty="Visibility">
                         <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                     </ObjectAnimationUsingKeyFrames>
 
-                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimBorder" Storyboard.TargetProperty="Opacity"
+                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimGrid" Storyboard.TargetProperty="Opacity"
                                      From="1.0" To="0.0" Duration="0:0:1"/>
                 </Storyboard>
-            </Border.Resources>
-        </Border>
+            </Grid.Resources>
+        </Grid>
     </Grid>
 
     <!-- Full Screen Notice - Notifies the player that the game must be in full screen -->
