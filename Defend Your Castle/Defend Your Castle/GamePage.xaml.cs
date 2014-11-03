@@ -218,7 +218,7 @@ namespace Defend_Your_Castle
         {
             // Get the Button that was clicked
             Button TheButton = (Button)sender;
-
+            
             // Get the ShopItem associated with the Button
             ShopItem shopItem = (ShopItem)TheButton.DataContext;
             

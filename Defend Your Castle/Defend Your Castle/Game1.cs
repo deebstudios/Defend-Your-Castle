@@ -300,6 +300,9 @@ namespace Defend_Your_Castle
 
             // Show the level animation
             GamePage.LevelStart_Anim.Begin();
+
+            //Play the level music
+            SoundManager.PlaySong(LoadAssets.LevelMusic);
         }
 
         public void PauseGame()

@@ -54,53 +54,6 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Purchase Item %28d-w__coins-01%29.wav">
-      <Name>Purchase Item %28d-w__coins-01%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Weapon Swing %28qubodup__sharp-swosh-18_01%29 %28Original%29.wav">
-      <Name>Weapon Swing %28qubodup__sharp-swosh-18_01%29 %28Original%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Goblin Death %28sihil__ogre1%29 %28Original%29.wav">
-      <Name>Goblin Death %28sihil__ogre1%29 %28Original%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Goblin Death %28sihil__ogre1%29.wav">
-      <Name>Goblin Death %28sihil__ogre1%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Level Complete %28Bart Kelsey - orchestra%29.wav">
-      <Name>Level Complete %28Bart Kelsey - orchestra%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Weapon Swing %28qubodup__sharp-swosh-18_01%29.wav">
-      <Name>Weapon Swing %28qubodup__sharp-swosh-18_01%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Game Over %28spazzo-1493__game-over%29.wav">
-      <Name>Game Over %28spazzo-1493__game-over%29</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 

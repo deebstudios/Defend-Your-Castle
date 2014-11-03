@@ -171,7 +171,7 @@
     <Compile Include="ShopItems\BuyArcher.cs" />
     <Compile Include="ShopItems\BuySlower.cs" />
     <Compile Include="ShopItems\CastleUpgrade.cs" />
-    <Compile Include="ShopItems\FortifyCastle.cs" />
+    <Compile Include="ShopItems\StrengthenWalls.cs" />
     <Compile Include="ShopItems\Invincibility.cs" />
     <Compile Include="ShopItems\RepairWalls.cs" />
     <Compile Include="ShopItems\RepairWallsx10.cs" />
@@ -405,6 +405,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Music\Funk Game Loop.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Music\Music to Delight %28Edited &amp; Looped%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Music\Rollin at 5.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />

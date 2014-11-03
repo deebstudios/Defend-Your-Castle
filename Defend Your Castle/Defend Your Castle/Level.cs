@@ -203,6 +203,9 @@ namespace Defend_Your_Castle
 
             // Set the game state to InGame
             Game.ChangeGameState(GameState.InGame);
+
+            //Play music
+            SoundManager.PlaySong(LoadAssets.LevelMusic);
         }
         
         // Resets the information that is tracked during the level

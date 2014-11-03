@@ -17,7 +17,7 @@ namespace Defend_Your_Castle
 
             price = 1000;
 
-            Description = "Shields your fort with an impervious energy for 5 seconds.";
+            Description = "Shields your fort with an\nimpervious energy for 5 seconds.\nYou can have only one at a time.";
 
             // Set the displayed level
             SetDisplayedLevel();

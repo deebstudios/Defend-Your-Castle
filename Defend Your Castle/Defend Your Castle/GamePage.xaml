@@ -203,9 +203,9 @@
         </Style>
 
         <Style x:Key="Shop_NextLevelStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,50,20"/>
+            <Setter Property="Margin" Value="0,5,10,7"/>
         </Style>
 
         <Style x:Key="Shop_ShopSectionStyle" TargetType="Border">
@@ -214,8 +214,9 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <!--<Setter Property="Width" Value="80"/>
-            <Setter Property="Height" Value="80"/>-->
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="5"/>
@@ -227,7 +228,7 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_LevelsStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="17"/>
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -238,25 +239,31 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="TextLineBounds" Value="Tight"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
         
         <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Grid.Row" Value="2"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
             <Setter Property="TextTrimming" Value="None"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
-            <Setter Property="Grid.Row" Value="1"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -273,7 +280,12 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- Shop Item Image + Levels -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!-- Shop Item Image + Level -->
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -281,27 +293,32 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- Shop Item Image -->
-                                <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click">
+                                <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click" FontFamily="Global User Interface">
                                     <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
                                 </Button>
-                                
-                                <!-- Levels -->
+
+                                <!-- Shop Item Level -->
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
                                            Text="{Binding Path=LevelString, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             
-                            <!-- Shop Item Name, Price, + Description -->
-                            <Grid Grid.Column="1" Margin="5,0,5,0">
+                            <!-- Shop Item Name + Price -->
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}" />
+                                <!-- Name -->
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}"
+                                           Margin="0,2,0,0" />
+                                
+                                <!-- Price -->
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}" />
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
                             </Grid>
+                            
+                            <!-- Shop Item Description -->
+                            <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
                         </Grid>
                     </DataTemplate>
                 </Setter.Value>
@@ -336,7 +353,7 @@
             <Setter Property="FontSize" Value="48"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="20,0,0,20"/>
+            <Setter Property="Margin" Value="10,0,0,10"/>
         </Style>
 
         <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
@@ -347,7 +364,7 @@
 
         <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="0,0,20,20"/>
+            <Setter Property="Margin" Value="0,0,10,10"/>
         </Style>
 
         <!-- "Not Enough Gold" Flyout -->
@@ -700,8 +717,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Screen #3 - Weapon Red Box -->
-                    <Border Name="HTP_HUD_Screen3_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
-                            BorderThickness="0">
+                    <Border Name="HTP_HUD_Screen3_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public">
                         <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
@@ -764,7 +780,7 @@
 
                     <!-- Screen #4 - Health, Gold, and Consumables Red Box -->
                     <Border Name="HTP_HUD_Screen4_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
-                            BorderThickness="0">
+                            BorderBrush="Transparent">
                         <!-- Grid for Health, Gold, and Consumable Items -->
                         <Grid>
                             <Grid.RowDefinitions>
@@ -1146,7 +1162,7 @@
                 </StackPanel>
             </Viewbox>
         </Border>
-
+        
         <!-- Row 3 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="2">
             <Grid>
@@ -1158,29 +1174,89 @@
                 <!-- Left Side -->
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.20*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <!-- Fort -->
-                    <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Fort"/>
+                    <Viewbox>
+                        <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Fort"/>
+                    </Viewbox>
 
                     <!-- Fort Items -->
-                    <GridView Name="Shop_UpgradesList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public" />
+                    <Viewbox Grid.Row="1">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Top-Left -->
+                            <GridView Name="Shop_UpgradesList1" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      x:FieldModifier="public" />
+                            
+                            <!-- Top-Right -->
+                            <GridView Name="Shop_UpgradesList2" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Column="1" x:FieldModifier="public" />
+
+                            <!-- Bottom-Left -->
+                            <GridView Name="Shop_UpgradesList3" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Row="1" x:FieldModifier="public" />
+
+                            <!-- Bottom-Right -->
+                            <GridView Name="Shop_UpgradesList4" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Row="1" Grid.Column="1" x:FieldModifier="public" />
+                        </Grid>
+                    </Viewbox>
                 </Grid>
 
                 <!-- Right Side -->
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.20*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <!-- Helpers -->
-                    <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Helpers"/>
+                    <Viewbox>
+                        <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Helpers"/>
+                    </Viewbox>
 
                     <!-- Helpers Items -->
-                    <GridView Name="Shop_PrepareRepairList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public" />
+                    <Viewbox Grid.Row="1">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Top-Left -->
+                            <GridView Name="Shop_PrepareRepairList1" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      x:FieldModifier="public" />
+
+                            <!-- Top-Right -->
+                            <GridView Name="Shop_PrepareRepairList2" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Column="1" x:FieldModifier="public" />
+
+                            <!-- Bottom-Left -->
+                            <GridView Name="Shop_PrepareRepairList3" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Row="1" x:FieldModifier="public" />
+
+                            <!-- Bottom-Right -->
+                            <GridView Name="Shop_PrepareRepairList4" Style="{StaticResource Shop_ShopItemsListStyle}"
+                                      Grid.Row="1" Grid.Column="1" x:FieldModifier="public" />                            
+                        </Grid>
+                    </Viewbox>
                 </Grid>
             </Grid>
         </Border>
@@ -1188,31 +1264,63 @@
         <!-- Bottom Row -->
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.20*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
+            
             <!-- Items Text -->
-            <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
+            <Viewbox>
+                <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
+            </Viewbox>
 
-            <!-- Items -->
-            <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public" />
+            <!-- Items, Save Button, Next Level Text, + Done Button-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.30*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Items -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.50*"/>
+                    </Grid.RowDefinitions>
 
-            <!-- Save Button, Next Level Text, + Done Button -->
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Viewbox>
+                        <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public"
+                                  Margin="0,30,0,0" />
+                    </Viewbox>
+                </Grid>
 
-                <!-- Save Button -->
-                <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
+                <!-- Save Button, Next Level Text, + Done Button -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <TextBlock Name="Shop_NextLevel" Style="{StaticResource Shop_NextLevelStyle}" x:FieldModifier="public" Text="Next Level: 2" />
-                    <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
-                </StackPanel>
+                    <!-- Save Button -->
+                    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
+                    </Viewbox>
+
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Viewbox VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <TextBlock Name="Shop_NextLevel" Style="{StaticResource Shop_NextLevelStyle}" x:FieldModifier="public"
+                                       Text="Next Level: 2" />
+                        </Viewbox>
+
+                        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1">
+                            <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
+                        </Viewbox>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
         
