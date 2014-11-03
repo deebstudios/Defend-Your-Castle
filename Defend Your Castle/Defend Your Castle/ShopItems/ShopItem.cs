@@ -128,15 +128,9 @@ namespace Defend_Your_Castle
 
         public void SetDisplayedLevel()
         {
-            // Get the string representation of the current level 
-            String ItemLevelString = CurLevel.ToString();
-
-            // Get the string representation of the max level
-            // Use "∞" if the max level equals InfinitePurchases
-            ItemLevelString += " / " + ((MaxLevel > InfinitePurchases) ? MaxLevel.ToString() : "∞");
-
-            // Set the level string
-            LevelString = ItemLevelString;
+            // Set the level string to "CurLevel / MaxLevel"
+            // If the item can be purchased an infinite number of times, set the level string to an empty String
+            LevelString = ((MaxLevel <= InfinitePurchases) ? String.Empty : CurLevel.ToString() + " / " + MaxLevel.ToString());
         }
 
         // Declare the PropertyChanged event

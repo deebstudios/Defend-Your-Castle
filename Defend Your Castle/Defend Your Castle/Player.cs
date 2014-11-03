@@ -290,7 +290,7 @@ namespace Defend_Your_Castle
             //0 is passed in when loading if the player didn't upgrade at all
             if (numtimes > 0)
             {
-                float amount = FortifyCastle.DamageReduction * numtimes;
+                float amount = StrengthenWalls.DamageReduction * numtimes;
 
                 //Change the castle graphic
                 ObjectSheet = LoadAssets.PlayerCastleFortified;
@@ -298,7 +298,7 @@ namespace Defend_Your_Castle
                 PercentDamage -= amount;
                 PercentDamage = (float)Math.Round(PercentDamage, 2);
 
-                if (PercentDamage < FortifyCastle.MaxDamageReduction) PercentDamage = FortifyCastle.MaxDamageReduction;
+                if (PercentDamage < StrengthenWalls.MaxDamageReduction) PercentDamage = StrengthenWalls.MaxDamageReduction;
             }
         }
 

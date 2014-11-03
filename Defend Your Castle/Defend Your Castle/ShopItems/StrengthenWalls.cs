@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework;
 namespace Defend_Your_Castle
 {
     //A ShopItem that makes the player's castle stronger and take less damage from attacks
-    public sealed class FortifyCastle : ShopItem
+    public sealed class StrengthenWalls : ShopItem
     {
         public const float DamageReduction = .03f;
         public const float MaxDamageReduction = .85f;
 
-        public FortifyCastle(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
+        public StrengthenWalls(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
             Name = "Strengthen Walls";
@@ -22,7 +22,7 @@ namespace Defend_Your_Castle
 
             price = 5000;
 
-            Description = "Strengthen your fort's walls to better defend against enemy attacks! +3% reduced damage from all attacks";
+            Description = "Strengthen your fort's walls to\nbetter defend against enemy attacks!\n+3% reduced damage";
 
             // Set the displayed level
             SetDisplayedLevel();

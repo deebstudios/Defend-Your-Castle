@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media;
 using Microsoft.Xna.Framework;
 
 namespace Defend_Your_Castle
@@ -251,16 +253,16 @@ namespace Defend_Your_Castle
             // Check if the screen is being shown
             if (visibility == Visibility.Visible)
             {
-                // Add a border thickness of 3 to the red box
-                RedBoxBorder.BorderThickness = new Thickness(3);
+                // Set the red box's border color to Red
+                RedBoxBorder.BorderBrush = new SolidColorBrush(Colors.Red);
 
                 // Highlight the column by setting its opacty
                 HUDColumn.Opacity = HTP_Focused_Opacity;
             }
             else // The screen is being hidden
             {
-                // Remove the border thickness from the red box
-                RedBoxBorder.BorderThickness = new Thickness(0);
+                // Set the red box's border color to Transparent
+                RedBoxBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
                 // Grey out the column
                 HUDColumn.Opacity = HTP_Unfocused_Opacity;
