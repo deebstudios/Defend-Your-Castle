@@ -25,7 +25,7 @@ namespace Defend_Your_Castle
         public int HTP_ScreenNum = 1;
 
         // Stores the max screen number for the How To Play Screen
-        public int HTP_MaxScreenNum = 10;
+        public int HTP_MaxScreenNum = 6;
 
         // Stores the opacity of focused UI elements on the How To Play Screen
         public double HTP_Focused_Opacity = 1.0;
@@ -186,6 +186,9 @@ namespace Defend_Your_Castle
             // Change the game state to Screen
             Game.ChangeGameState(GameState.Screen);
 
+            // Reset the How To Play screen
+            ResetHowToPlayScreen();
+
             // Change the screen to the Title Screen
             ChangeScreen(Screens.TitleScreen);
         }
@@ -209,7 +212,7 @@ namespace Defend_Your_Castle
                         MeleeEnemy goblin = new MeleeEnemy(Game.level, 0, Game1.ScreenHalf.Y, 0, 1);
 
                         // Move the goblin in plain view
-                        goblin.Move(new Vector2(150, 50));
+                        goblin.Move(new Vector2(150, 75));
 
                         // Add the goblin to the level
                         Game.level.AddEnemy(goblin);
@@ -231,14 +234,28 @@ namespace Defend_Your_Castle
                     SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen3_RedBox, GamePage.HTP_HUD_WeaponButtonColumn);
 
                     break;
-                case 4: // Health and Gold
+                case 4: // Weapon Shortcuts
+                    GamePage.HTP_HUD_WeaponButtonColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_Screen4_WeaponShortcutInfo.Visibility = visibility;
+                    GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
+
+                    // Set the properties of the column
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen3_RedBox, GamePage.HTP_HUD_WeaponButtonColumn);
+
+                    break;
+                case 5: // Health and Gold
                     GamePage.HTP_HUD_WeaponButtonColumn.Visibility = visibility;
                     GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
                     GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
-                    GamePage.HTP_HUD_Screen4_HealthGoldInfo.Visibility = visibility;
+                    GamePage.HTP_HUD_Screen5_HealthGoldInfo.Visibility = visibility;
 
                     // Set the properties of the column
-                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen4_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen5_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
+
+                    break;
+                case 6: // Ready to start
+                    GamePage.HTP_HUD_Screen6_ReadyToPlay.Visibility = visibility;
 
                     break;
                 default:
@@ -267,6 +284,29 @@ namespace Defend_Your_Castle
                 // Grey out the column
                 HUDColumn.Opacity = HTP_Unfocused_Opacity;
             }
+        }
+
+        // Resets the How To Play tutorial to the first screen
+        private void ResetHowToPlayScreen()
+        {
+            // Loop as long as the How To Play screen is past the first screen
+            while (HTP_ScreenNum > 1)
+            {
+                // Hide the current screen
+                ChangeHowToPlayScreen(Visibility.Collapsed);
+
+                // Move to the previous screen
+                HTP_ScreenNum -= 1;
+            }
+
+            // Show the first screen
+            ChangeHowToPlayScreen(Visibility.Visible);
+
+            // Hide the left arrow button
+            GamePage.HTP_LeftArrowButton.Visibility = Visibility.Collapsed;
+
+            // Show the right arrow button
+            GamePage.HTP_RightArrowButton.Visibility = Visibility.Visible;
         }
 
 

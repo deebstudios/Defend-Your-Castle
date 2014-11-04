@@ -588,6 +588,12 @@
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
                 
+                <Style x:Key="HTP_LastScreenBorderStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
+                    <Setter Property="Grid.Row" Value="1"/>
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+                
                 <Style x:Key="HTP_RedBoxStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="Red"/>
@@ -600,8 +606,13 @@
                     <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
                     <Setter Property="Padding" Value="6,2,6,2"/>
                 </Style>
-                
-                <Style x:Key="HTP_SecondScreen_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+
+                <Style x:Key="HTP_ExitButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
+                    <Setter Property="BorderThickness" Value="1,1,0,0"/>
+                    <Setter Property="Padding" Value="12,8,12,8"/>
+                </Style>
+
+                <Style x:Key="HTP_Screen_3_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
                     <Setter Property="FontSize" Value="36"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="10,0,10,0"/>
@@ -631,8 +642,7 @@
                 
                 <!-- Exit button -->
                 <Viewbox Grid.Column="2" VerticalAlignment="Bottom">
-                    <Button Name="HTP_ExitButton" Style="{StaticResource HUDButtonStyle}" BorderThickness="1,1,0,0"
-                            Content="Exit" x:FieldModifier="public" />
+                    <Button Name="HTP_ExitButton" Style="{StaticResource HTP_ExitButtonStyle}" Content="Exit" x:FieldModifier="public" />
                 </Viewbox>
             </Grid>
             
@@ -724,7 +734,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Screen #3 - Weapon Red Box -->
+                    <!-- Screen #3 + #4 - Weapon Red Box -->
                     <Border Name="HTP_HUD_Screen3_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public">
                         <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
@@ -759,22 +769,45 @@
 
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                     <Image Source="Content/Graphics/Big Sword.png" Width="32" />
-                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <TextBlock Style="{StaticResource HTP_Screen_3_TextBlockStyle}" />
                                     <Image Source="Content/Graphics/Goblin.png" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Content/Graphics/Big Warhammer.png" Width="32" />
-                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <TextBlock Style="{StaticResource HTP_Screen_3_TextBlockStyle}" />
                                     <Image Source="Content/Graphics/Armored Goblin.png" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Content/Graphics/Big Spear.png" Width="32" />
-                                    <TextBlock Style="{StaticResource HTP_SecondScreen_TextBlockStyle}" />
+                                    <TextBlock Style="{StaticResource HTP_Screen_3_TextBlockStyle}" />
                                     <Image Source="Content/Graphics/Flying Goblin.png" />
                                 </StackPanel>
                             </StackPanel>
+                        </Border>
+                    </Viewbox>
+
+                    <!-- Screen #4 - Weapon Shortcuts -->
+                    <Viewbox Name="HTP_HUD_Screen4_WeaponShortcutInfo" Grid.Row="1" x:FieldModifier="public" Visibility="Collapsed">
+                        <Border Style="{StaticResource HTP_BorderStyle}" Margin="0,20,20,0">
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
+                                <Run>You can also switch weapons using</Run>
+                                <LineBreak />
+                                <Run>shortcuts. On a keyboard, use the Q, W,</Run>
+                                <LineBreak />
+                                <Run>and E keys to switch to the Sword,</Run>
+                                <LineBreak />
+                                <Run>Warhammer, and Spear, respectively. On</Run>
+                                <LineBreak />
+                                <Run>a touch screen, swipe to the left or</Run>
+                                <LineBreak />
+                                <Run>right anywhere on the screen to switch</Run>
+                                <LineBreak />
+                                <Run>between the three weapons.</Run>
+                                <LineBreak /><LineBreak />
+                                <Run>These shortcuts only work while in-game.</Run>
+                            </TextBlock>
                         </Border>
                     </Viewbox>
                 </Grid>
@@ -786,8 +819,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Screen #4 - Health, Gold, and Consumables Red Box -->
-                    <Border Name="HTP_HUD_Screen4_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
+                    <!-- Screen #5 - Health, Gold, and Consumables Red Box -->
+                    <Border Name="HTP_HUD_Screen5_RedBox" Style="{StaticResource HTP_RedBoxStyle}" x:FieldModifier="public"
                             BorderBrush="Transparent">
                         <!-- Grid for Health, Gold, and Consumable Items -->
                         <Grid>
@@ -822,8 +855,8 @@
                     </Border>
                 </Grid>
 
-                <!-- Screen #4 - Health, Gold, and Consumables Information -->
-                <Grid Name="HTP_HUD_Screen4_HealthGoldInfo" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Collapsed">
+                <!-- Screen #5 - Health, Gold, and Consumables Information -->
+                <Grid Name="HTP_HUD_Screen5_HealthGoldInfo" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.20*"/>
                         <RowDefinition Height="*"/>
@@ -838,25 +871,50 @@
                     <Border Style="{StaticResource HTP_BorderStyle}" Grid.Row="1" Grid.Column="1">
                         <Viewbox>
                             <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
-                                <Run>The red bar is your health. This decreases</Run>
+                                <Run>The red bar is your health. This decreases when</Run>
                                 <LineBreak />
-                                <Run>when you take damage from Goblins. When your</Run>
+                                <Run>you take damage from Goblins. When your health</Run>
                                 <LineBreak />
-                                <Run>health gets down to 0, you lose.</Run>
+                                <Run>gets down to 0, you lose.</Run>
                                 <LineBreak /><LineBreak />
                                 <Run>The number under your health bar is your gold.</Run>
                                 <LineBreak />
                                 <Run>You gain gold by killing Goblins. You are</Run>
                                 <LineBreak />
-                                <Run>awarded less gold if you kill a Goblin with</Run>
+                                <Run>awarded less gold if you kill a Goblin with a</Run>
                                 <LineBreak />
-                                <Run>a sub-optimal weapon for that Goblin type.</Run>
+                                <Run>sub-optimal weapon for that Goblin type. For</Run>
                                 <LineBreak />
-                                <Run>For example, killing a grounded, unarmored</Run>
+                                <Run>example, killing a grounded, unarmored Goblin</Run>
                                 <LineBreak />
-                                <Run>Goblin with the Warhammer will yield less gold.</Run>
+                                <Run>with the Warhammer will yield less gold.</Run>
                                 <LineBreak /><LineBreak />
                                 <Run>Use gold to buy upgrades and helpers in the shop.</Run>
+                            </TextBlock>
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
+                <!-- Screen #6 - Ready To Play -->
+                <Grid Name="HTP_HUD_Screen6_ReadyToPlay" Grid.ColumnSpan="4" x:FieldModifier="public" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.50*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.50*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.50*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource HTP_LastScreenBorderStyle}">
+                        <Viewbox>
+                            <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
+                                <Run>That's about it! You're now ready to defend</Run>
+                                <LineBreak />
+                                <Run>your fort from the Goblin tribe!</Run>
                             </TextBlock>
                         </Viewbox>
                     </Border>
@@ -873,10 +931,6 @@
                         <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
                     </Viewbox>
                 </Grid>
-            </Grid>
-            
-            <Grid Name="HowToPlayScreen_Shop">
-                
             </Grid>
         </Grid>
     </Grid>
