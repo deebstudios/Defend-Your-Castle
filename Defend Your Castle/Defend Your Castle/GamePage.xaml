@@ -446,6 +446,8 @@
                     <Button Name="TitleScreen_Options" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Options"
                             x:FieldModifier="public" Margin="0,0,0,20" />
                     <Button Name="TitleScreen_HowToPlay" Style="{StaticResource TitleScreen_ButtonStyle}" Content="How to Play"
+                            x:FieldModifier="public" Margin="0,0,0,20" />
+                    <Button Name="TitleScreen_Credits" Style="{StaticResource TitleScreen_ButtonStyle}" Content="Credits"
                             x:FieldModifier="public" />
                 </StackPanel>
             </Viewbox>
@@ -933,6 +935,111 @@
                 </Grid>
             </Grid>
         </Grid>
+
+        <!-- Credits Screen -->
+        <Grid Name="CreditsScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Options Styles -->
+            <Grid.Resources>
+                <Style x:Key="CreditsScreen_TitleStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+
+                <Style x:Key="CreditsScreen_BorderStyle" TargetType="Border">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0,0,0,30"/>
+                </Style>
+                
+                <Style x:Key="CreditsScreen_CreditsStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="36"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+                
+                <Style x:Key="CreditsScreen_BackButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+                    <Setter Property="FontSize" Value="32"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Content" Value="Back"/>
+                    <Setter Property="Margin" Value="0,60,0,0"/>
+                </Style>
+            </Grid.Resources>
+
+            <!-- Screen Title -->
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock Style="{StaticResource CreditsScreen_TitleStyle}" Text="Credits" />
+            </Viewbox>
+
+            <!-- Credits + Back Button -->
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Credits + Back Button Grid -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Credits + Back Button Viewbox -->
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                        <StackPanel Style="{StaticResource StackPanelMenuStyle}">
+                            <Border Style="{StaticResource CreditsScreen_BorderStyle}">
+                                <!-- Credits -->
+                                <TextBlock Style="{StaticResource CreditsScreen_CreditsStyle}">
+                                    <Run FontWeight="Bold" FontStyle="Italic">Design, Programming, Art, UI</Run>
+                                    <LineBreak />
+                                    <Run>Thomas Deeb</Run>
+                                    <LineBreak />
+                                    <Run>Alexander Deeb</Run>
+                                
+                                    <LineBreak /><LineBreak />
+                                    <Run FontWeight="Bold" FontStyle="Italic">Sounds</Run>
+                                    <LineBreak />
+                                    <Run>sihil, D W, qubodup, spazzo_1493</Run>
+                                    <LineBreak />
+                                    <Run>(freesound.org)</Run>
+                                    <LineBreak />
+                                    <Run>Bart Kelsey (opengameart.org)</Run>
+                               
+                                    <LineBreak /><LineBreak />
+                                    <Run FontWeight="Bold" FontStyle="Italic">Music</Run>
+                                    <LineBreak />
+                                    <Run>Kevin MacLeod (incompetech.com)</Run>
+                                    <LineBreak />
+                                    <Run FontSize="20">"Itty Bitty 8 Bit," "Home Base Groove,"</Run>
+                                    <LineBreak />
+                                    <Run FontSize="20">"Funk Game Loop," "Rollin at 5"</Run>
+                                    <LineBreak />
+                                    <Run FontSize="20">Licensed under Creative Commons: By Attribution 3.0</Run>
+                                    <LineBreak />
+                                    <Run FontSize="20">http://creativecommons.org/licenses/by/3.0/</Run>
+                                    
+                                    <LineBreak /><LineBreak />
+                                    <Run FontWeight="Bold" FontStyle="Italic">Special Thanks</Run>
+                                    <LineBreak />
+                                    <Run>Ben Borchard</Run>
+                                    <LineBreak />
+                                    <Run>Daniel Eggimann</Run>
+                                </TextBlock>
+                            </Border>
+
+                            <!-- Back Button -->
+                            <Button Name="CreditsScreen_Back" Style="{StaticResource CreditsScreen_BackButtonStyle}"
+                                    x:FieldModifier="public" />
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 
     <!-- Game HUD -->
@@ -1376,7 +1483,17 @@
 
                     <!-- Save Button -->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame" />
+                        <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame">
+                            <Button.Resources>
+                                <!-- Enable Save Game Button Animation -->
+                                <Storyboard x:Name="Shop_EnableSaveGameAnim" x:FieldModifier="public">
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGame" Storyboard.TargetProperty="IsEnabled"
+                                                                   BeginTime="0:0:1">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="True"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </Button.Resources>
+                        </Button>
                     </Viewbox>
 
                     <Grid Grid.Column="1">
