@@ -558,7 +558,7 @@
             </Grid.Resources>
 
             <!-- Background Image -->
-            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="150"
+            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
                    Source="Content/Graphics/Game Over Sprite.png" Opacity="1.0" />
             
             <!-- Game Over Message -->
