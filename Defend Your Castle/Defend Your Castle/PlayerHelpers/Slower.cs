@@ -49,11 +49,11 @@ namespace Defend_Your_Castle
 
             SlowChance = 4;
 
-            SlowAmount = new Vector2(0.5f, 0);
+            SlowAmount = new Vector2(0.4f, 0);
             SlowDur = 3000;
 
             // Set the slow amount increase
-            SlowAmountIncrease = new Vector2(0.5f, 0);
+            SlowAmountIncrease = new Vector2(0.4f, 0);
             
             AttackTime = 1000;
             PrevAttack = 0f;
