@@ -16,7 +16,7 @@ namespace Defend_Your_Castle
         {
             Name = "Repair Walls";
 
-            HealAmount = 500;
+            HealAmount = 400;
 
             price = 250;
 
