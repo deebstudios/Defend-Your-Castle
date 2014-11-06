@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
     public sealed class ScreenManager
     {
         // An enum for each screen in the game
-        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen, HowToPlayScreen };
+        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen, HowToPlayScreen, CreditsScreen };
 
         // References to Game1.cs and GamePage.cs
         public Game1 Game;
@@ -25,7 +25,7 @@ namespace Defend_Your_Castle
         public int HTP_ScreenNum = 1;
 
         // Stores the max screen number for the How To Play Screen
-        public int HTP_MaxScreenNum = 10;
+        public int HTP_MaxScreenNum = 6;
 
         // Stores the opacity of focused UI elements on the How To Play Screen
         public double HTP_Focused_Opacity = 1.0;
@@ -50,6 +50,10 @@ namespace Defend_Your_Castle
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
                     GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
                     GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+
+                    // Play the Title Screen music
+                    SoundManager.PlaySong(LoadAssets.TitleScreenMusic);
 
                     break;
                 case Screens.OptionsScreen:
@@ -57,6 +61,7 @@ namespace Defend_Your_Castle
                     GamePage.TitleScreen.Visibility = Visibility.Collapsed;
                     GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
                     GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
 
                     break;
                 case Screens.GameOverScreen:
@@ -64,6 +69,7 @@ namespace Defend_Your_Castle
                     GamePage.TitleScreen.Visibility = Visibility.Collapsed;
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
                     GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
 
                     break;
                 case Screens.HowToPlayScreen:
@@ -71,6 +77,18 @@ namespace Defend_Your_Castle
                     GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
                     GamePage.TitleScreen.Visibility = Visibility.Collapsed;
                     GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
+                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+
+                    break;
+                case Screens.CreditsScreen:
+                    GamePage.CreditsScreen.Visibility = Visibility.Visible;
+                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
+                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
+                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
+                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+                    
+                    // Play the Victory music
+                    SoundManager.PlaySong(LoadAssets.Victory);
 
                     break;
                 default:
@@ -87,6 +105,7 @@ namespace Defend_Your_Castle
             GamePage.TitleScreen_ContinueGame.Click += ContinueGame;
             GamePage.TitleScreen_Options.Click += TitleScreen_Options_Click;
             GamePage.TitleScreen_HowToPlay.Click += TitleScreen_HowToPlay_Click;
+            GamePage.TitleScreen_Credits.Click += TitleScreen_Credits_Click;
 
             // Options Screen
             GamePage.OptionsScreen_Back.Click += OptionsScreen_Back_Click;
@@ -98,6 +117,9 @@ namespace Defend_Your_Castle
             GamePage.HTP_LeftArrowButton.Click += HowToPlayScreen_ChangeScreens;
             GamePage.HTP_RightArrowButton.Click += HowToPlayScreen_ChangeScreens;
             GamePage.HTP_ExitButton.Click += HowToPlayScreen_Exit;
+
+            // Credits Screen
+            GamePage.CreditsScreen_Back.Click += CreditsScreen_Back_Click;
         }
 
         // Title Screen
@@ -130,6 +152,12 @@ namespace Defend_Your_Castle
 
             // Change the game state to How To Play
             Game.ChangeGameState(GameState.HowToPlay);
+        }
+
+        private void TitleScreen_Credits_Click(object sender, RoutedEventArgs e)
+        {
+            // Switch to the Credits Screen
+            ChangeScreen(Screens.CreditsScreen);
         }
 
         // Options Screen
@@ -186,6 +214,9 @@ namespace Defend_Your_Castle
             // Change the game state to Screen
             Game.ChangeGameState(GameState.Screen);
 
+            // Reset the How To Play screen
+            ResetHowToPlayScreen();
+
             // Change the screen to the Title Screen
             ChangeScreen(Screens.TitleScreen);
         }
@@ -209,7 +240,7 @@ namespace Defend_Your_Castle
                         MeleeEnemy goblin = new MeleeEnemy(Game.level, 0, Game1.ScreenHalf.Y, 0, 1);
 
                         // Move the goblin in plain view
-                        goblin.Move(new Vector2(150, 50));
+                        goblin.Move(new Vector2(150, 75));
 
                         // Add the goblin to the level
                         Game.level.AddEnemy(goblin);
@@ -231,14 +262,28 @@ namespace Defend_Your_Castle
                     SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen3_RedBox, GamePage.HTP_HUD_WeaponButtonColumn);
 
                     break;
-                case 4: // Health and Gold
+                case 4: // Weapon Shortcuts
+                    GamePage.HTP_HUD_WeaponButtonColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_Screen4_WeaponShortcutInfo.Visibility = visibility;
+                    GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
+                    GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
+
+                    // Set the properties of the column
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen3_RedBox, GamePage.HTP_HUD_WeaponButtonColumn);
+
+                    break;
+                case 5: // Health and Gold
                     GamePage.HTP_HUD_WeaponButtonColumn.Visibility = visibility;
                     GamePage.HTP_HUD_HealthGoldColumn.Visibility = visibility;
                     GamePage.HTP_HUD_PauseColumn.Visibility = visibility;
-                    GamePage.HTP_HUD_Screen4_HealthGoldInfo.Visibility = visibility;
+                    GamePage.HTP_HUD_Screen5_HealthGoldInfo.Visibility = visibility;
 
                     // Set the properties of the column
-                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen4_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
+                    SetHUDColumnProperties(visibility, GamePage.HTP_HUD_Screen5_RedBox, GamePage.HTP_HUD_HealthGoldColumn);
+
+                    break;
+                case 6: // Ready to start
+                    GamePage.HTP_HUD_Screen6_ReadyToPlay.Visibility = visibility;
 
                     break;
                 default:
@@ -267,6 +312,37 @@ namespace Defend_Your_Castle
                 // Grey out the column
                 HUDColumn.Opacity = HTP_Unfocused_Opacity;
             }
+        }
+
+        // Resets the How To Play tutorial to the first screen
+        private void ResetHowToPlayScreen()
+        {
+            // Loop as long as the How To Play screen is past the first screen
+            while (HTP_ScreenNum > 1)
+            {
+                // Hide the current screen
+                ChangeHowToPlayScreen(Visibility.Collapsed);
+
+                // Move to the previous screen
+                HTP_ScreenNum -= 1;
+            }
+
+            // Show the first screen
+            ChangeHowToPlayScreen(Visibility.Visible);
+
+            // Hide the left arrow button
+            GamePage.HTP_LeftArrowButton.Visibility = Visibility.Collapsed;
+
+            // Show the right arrow button
+            GamePage.HTP_RightArrowButton.Visibility = Visibility.Visible;
+        }
+
+        // Credits Screen
+
+        private void CreditsScreen_Back_Click(object sender, RoutedEventArgs e)
+        {
+            // Switch to the Title Screen
+            ChangeScreen(Screens.TitleScreen);
         }
 
 

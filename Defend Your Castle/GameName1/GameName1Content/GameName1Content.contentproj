@@ -35,6 +35,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'PSM' ">
     <MonoGamePlatform>PSM</MonoGamePlatform>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter" />

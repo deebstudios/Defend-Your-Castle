@@ -141,13 +141,11 @@ namespace Defend_Your_Castle
 
         private static void LoadMusic(ContentManager Content)
         {
-            TitleScreenMusic = Content.Load<SoundEffect>(MusicDir + "Home Base Groove");
+            TitleScreenMusic = Content.Load<SoundEffect>(MusicDir + "Home Base Groove (Edited)");
             ShopMusic = Content.Load<SoundEffect>(MusicDir + "Itty Bitty 8 Bit");
-            LevelMusic = Content.Load<SoundEffect>(MusicDir + "Rollin at 5");//"Music to Delight (Edited & Looped)");
+            LevelMusic = Content.Load<SoundEffect>(MusicDir + "Rollin at 5 (Edited)");
             GameOver = Content.Load<SoundEffect>(MusicDir + "Game Over (spazzo-1493__game-over)");
-            Victory = Content.Load<SoundEffect>(MusicDir + "Funk Game Loop");
+            Victory = Content.Load<SoundEffect>(MusicDir + "Funk Game Loop (Edited)");
         }
-
-
     }
 }

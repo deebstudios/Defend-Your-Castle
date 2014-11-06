@@ -70,9 +70,6 @@ namespace Defend_Your_Castle
             // Return null if no touches can be found
             if (touchCollection.Count < 1) return null;
 
-            // Return null if the touch is not pressed
-            if (touchCollection[0].State != TouchLocationState.Pressed) return null;
-
             // Return the first TouchLocation object
             return (touchCollection[0]);
         }
@@ -86,9 +83,43 @@ namespace Defend_Your_Castle
         //    return (TouchPanel.ReadGesture());
         //}
 
+        public static bool IsScreenSwiped(TouchLocation? touchLoc)
+        {
+            // Return false if the touch location is null
+            if (touchLoc == null) return false;
+
+            // Convert the specified location to a non-nullable TouchLocation to access its properties
+            TouchLocation fullTouchLoc = (TouchLocation)touchLoc;
+            
+            // Return false if the touch is not in the released state
+            if (fullTouchLoc.State != TouchLocationState.Released) return false;
+
+            // Stores the previous touch location of the gesture
+            TouchLocation prevLoc;
+
+            // Try to get the previous location
+            // Return false if the previous location could not be found or the previous location's state is not Moved
+            if (fullTouchLoc.TryGetPreviousLocation(out prevLoc) == false || prevLoc.State != TouchLocationState.Moved)
+                return false;
+
+            // Get the difference between the two positions
+            Vector2 delta = (fullTouchLoc.Position - prevLoc.Position);
+
+            float DragTolerance = 20;
+
+            return (Math.Abs(GetX((int)delta.X)) >= DragTolerance);
+        }
+
         public static bool IsScreenTapped(TouchLocation? touchLoc)
         {
-            return (touchLoc != null);
+            // Return false if the touch location is null
+            if (touchLoc == null) return false;
+
+            // Convert the specified location to a non-nullable TouchLocation to access its properties
+            TouchLocation fullTouchLoc = (TouchLocation)touchLoc;
+
+            // Return true if the touch is pressed
+            return (fullTouchLoc.State == TouchLocationState.Pressed);
         }
 
         //public static bool IsScreenTapped(GestureSample? gesture)

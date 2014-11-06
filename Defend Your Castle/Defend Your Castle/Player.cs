@@ -409,7 +409,7 @@ namespace Defend_Your_Castle
         public override void Update(Level level)
         {
             // Get the last touch gesture (if any)
-            TouchLocation? touchLoc = Input.GetTouchLocation();
+            //TouchLocation? touchLoc = Input.GetTouchLocation();
             //GestureSample? gesture = Input.GetTouchGesture();
 
             //Check for switching weapons via keyboard input
@@ -434,10 +434,21 @@ namespace Defend_Your_Castle
             {
                 Attack(level);
             }
-            else if (Input.IsScreenTapped(touchLoc) == true)// Input.IsScreenTapped(gesture))
+
+            // Get the collection of TouchLocation objects
+            TouchCollection touchCollection = TouchPanel.GetState();
+
+            for (int i = 0; i < touchCollection.Count; i++)
             {
-                Attack(level, touchLoc);
-                //Attack(level, gesture);
+                if (Input.IsScreenSwiped(touchCollection[i]) == true)
+                {
+                    Debug.OutputValue("Was swiped!");
+                }
+                else if (Input.IsScreenTapped(touchCollection[i]) == true)// Input.IsScreenTapped(gesture))
+                {
+                    Attack(level, touchCollection[i]);
+                    //Attack(level, gesture);
+                }
             }
 
             //If the player is invincible, update the color effect
