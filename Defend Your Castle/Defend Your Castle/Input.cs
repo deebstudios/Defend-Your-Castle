@@ -12,6 +12,21 @@ namespace Defend_Your_Castle
     // Class that handles key input
     public static class Input
     {
+        //The minimum amount required to move your finger after holding it down to be considered a swipe input
+        public const float DragTolerance = 30f;
+
+        public static Vector2 PrevTouchLoc;
+
+        static Input()
+        {
+            ResetPrevLoc();
+        }
+
+        private static void ResetPrevLoc()
+        {
+            PrevTouchLoc = -Vector2.One;
+        }
+
         public static bool IsKeyDown(KeyboardState KeyboardState, Keys Key)
         {
             // Return true if the specified key is pressed and held; otherwise, return false
@@ -68,7 +83,16 @@ namespace Defend_Your_Castle
             TouchCollection touchCollection = TouchPanel.GetState();
 
             // Return null if no touches can be found
-            if (touchCollection.Count < 1) return null;
+            if (touchCollection.Count < 1)
+            {
+                ResetPrevLoc();
+                return null;
+            }
+
+            if (PrevTouchLoc == -Vector2.One)
+            {
+                PrevTouchLoc = touchCollection[0].Position;
+            }
 
             // Return the first TouchLocation object
             return (touchCollection[0]);
@@ -83,31 +107,31 @@ namespace Defend_Your_Castle
         //    return (TouchPanel.ReadGesture());
         //}
 
-        public static bool IsScreenSwiped(TouchLocation? touchLoc)
+        public static float IsScreenSwiped(TouchLocation? touchLoc)
         {
             // Return false if the touch location is null
-            if (touchLoc == null) return false;
+            if (touchLoc == null) return 0f;
 
             // Convert the specified location to a non-nullable TouchLocation to access its properties
             TouchLocation fullTouchLoc = (TouchLocation)touchLoc;
             
             // Return false if the touch is not in the released state
-            if (fullTouchLoc.State != TouchLocationState.Released) return false;
+            if (fullTouchLoc.State != TouchLocationState.Released) return 0f;
 
             // Stores the previous touch location of the gesture
-            TouchLocation prevLoc;
+            //TouchLocation prevLoc;
 
             // Try to get the previous location
             // Return false if the previous location could not be found or the previous location's state is not Moved
-            if (fullTouchLoc.TryGetPreviousLocation(out prevLoc) == false || prevLoc.State != TouchLocationState.Moved)
-                return false;
+            //if (fullTouchLoc.TryGetPreviousLocation(out prevLoc) == false || prevLoc.State != TouchLocationState.Moved)
+            //    return false;
 
             // Get the difference between the two positions
-            Vector2 delta = (fullTouchLoc.Position - prevLoc.Position);
+            Vector2 delta = (fullTouchLoc.Position - PrevTouchLoc);
 
-            float DragTolerance = 20;
+            ResetPrevLoc();
 
-            return (Math.Abs(GetX((int)delta.X)) >= DragTolerance);
+            return delta.X;//(Math.Abs(GetX((int)delta.X)) >= DragTolerance);
         }
 
         public static bool IsScreenTapped(TouchLocation? touchLoc)
