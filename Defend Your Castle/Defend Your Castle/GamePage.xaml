@@ -558,8 +558,10 @@
             </Grid.Resources>
 
             <!-- Background Image -->
-            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
-                   Source="Content/Graphics/Game Over Sprite.png" Opacity="1.0" />
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2">
+                <Image Style="{StaticResource ScreenBackgroundImageStyle}" Margin="30"
+                       Source="Content/Graphics/Game Over Sprite.png" Opacity="1.0" />
+            </Viewbox>
             
             <!-- Game Over Message -->
             <Viewbox>

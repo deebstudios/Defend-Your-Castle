@@ -406,13 +406,8 @@ namespace Defend_Your_Castle
             level.NumHelperKills += 1;
         }
 
-        public override void Update(Level level)
+        private void CheckSwitchWeaponKB()
         {
-            // Get the last touch gesture (if any)
-            //TouchLocation? touchLoc = Input.GetTouchLocation();
-            //GestureSample? gesture = Input.GetTouchGesture();
-
-            //Check for switching weapons via keyboard input
             if (Input.IsKeyDown(keyboardState, Keys.Q) == true)
             {
                 SwitchWeapon(0);
@@ -428,27 +423,31 @@ namespace Defend_Your_Castle
                 SwitchWeapon(1);
                 gamePage.HUD_WeaponSpear.IsChecked = true;
             }
+        }
 
-            //Check for hurting enemies
+        public override void Update(Level level)
+        {
+            // Get the last touch gesture (if any)
+            TouchLocation? touchLoc = Input.GetTouchLocation();
+            //GestureSample? gesture = Input.GetTouchGesture();
+
+            //Check for switching weapons via keyboard input
+            CheckSwitchWeaponKB();
+
+            //Check for hurting enemies with a mouse
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
             }
-
-            // Get the collection of TouchLocation objects
-            TouchCollection touchCollection = TouchPanel.GetState();
-
-            for (int i = 0; i < touchCollection.Count; i++)
+            //Check for switching weapons by swiping left or right on the screen
+            else if (Input.IsScreenSwiped(touchLoc) == true)
             {
-                if (Input.IsScreenSwiped(touchCollection[i]) == true)
-                {
-                    Debug.OutputValue("Was swiped!");
-                }
-                else if (Input.IsScreenTapped(touchCollection[i]) == true)// Input.IsScreenTapped(gesture))
-                {
-                    Attack(level, touchCollection[i]);
-                    //Attack(level, gesture);
-                }
+                Debug.OutputValue("Was swiped!");
+            }
+            //Check for hurting enemies with a touch screen
+            else if (Input.IsScreenTapped(touchLoc) == true)
+            {
+                Attack(level, touchLoc);
             }
 
             //If the player is invincible, update the color effect
