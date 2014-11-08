@@ -1086,12 +1086,12 @@
                             <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                         </RadioButton>
 
-                        <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2"
+                        <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
                                      Margin="30,0,30,0" x:FieldModifier="public" Click="ChangeWeaponButton">
                             <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                         </RadioButton>
 
-                        <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
+                        <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2"
                                      x:FieldModifier="public" Click="ChangeWeaponButton">
                             <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
                         </RadioButton>

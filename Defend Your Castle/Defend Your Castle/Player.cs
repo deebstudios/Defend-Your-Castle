@@ -88,7 +88,7 @@ namespace Defend_Your_Castle
             Gold = 100;
 
             // Select the Sword weapon by default
-            Weapons = new Weapon[] { new Sword(), new Spear(), new Warhammer() };
+            Weapons = new Weapon[] { new Sword(), new Warhammer(), new Spear() };
 
             CurWeapon = (int)WeaponTypes.Sword;
 
@@ -328,24 +328,6 @@ namespace Defend_Your_Castle
             InvincibilityAvailable = false;
         }
 
-        //public void Attack(Level level, GestureSample? gesture)
-        //{
-        //    // Check to make sure the player can attack
-        //    if (CanAttack == true)
-        //    {
-        //        //Make sure the attack is below the HUD boundary
-        //        Rectangle touchrect = Input.GestureRect(gesture);
-
-        //        if (touchrect.Y > HUDTopBounds && touchrect.Y < HUDBottomBounds)
-        //        {
-        //            // Play the weapon's attack sound
-        //            CurrentWeapon.Attack();
-
-        //            level.EnemyHit(touchrect);
-        //        }
-        //    }
-        //}
-
         public void Attack(Level level, TouchLocation? touchLoc)
         {
             // Check to make sure the player can attack
@@ -406,21 +388,24 @@ namespace Defend_Your_Castle
             level.NumHelperKills += 1;
         }
 
-        private void CheckSwitchWeaponKB(int? switchval)
+        private void CheckSwitchWeapon(int WeaponNum = -1)
         {
-            if (switchval == 0 || Input.IsKeyDown(keyboardState, Keys.Q) == true)
+            // Check if the Sword should be selected
+            if (WeaponNum == 0 || Input.IsKeyDown(keyboardState, Keys.Q) == true)
             {
                 SwitchWeapon(0);
                 gamePage.HUD_WeaponSword.IsChecked = true;
             }
-            else if (switchval == 1 || Input.IsKeyDown(keyboardState, Keys.W) == true)
-            {
-                SwitchWeapon(2);
-                gamePage.HUD_WeaponWarhammer.IsChecked = true;
-            }
-            else if (switchval == 2 || Input.IsKeyDown(keyboardState, Keys.E) == true)
+            // Check if the Warhammer should be selected
+            else if (WeaponNum == 1 || Input.IsKeyDown(keyboardState, Keys.W) == true)
             {
                 SwitchWeapon(1);
+                gamePage.HUD_WeaponWarhammer.IsChecked = true;
+            }
+            // Check if the Spear should be selected
+            else if (WeaponNum == 2 || Input.IsKeyDown(keyboardState, Keys.E) == true)
+            {
+                SwitchWeapon(2);
                 gamePage.HUD_WeaponSpear.IsChecked = true;
             }
         }
@@ -429,55 +414,42 @@ namespace Defend_Your_Castle
         {
             // Get the last touch gesture (if any)
             TouchLocation? touchLoc = Input.GetTouchLocation();
-            //GestureSample? gesture = Input.GetTouchGesture();
 
             //Check for switching weapons via keyboard input
-            CheckSwitchWeaponKB(null);
+            CheckSwitchWeapon();
 
             //Check for hurting enemies with a mouse
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
             }
+            // Check if the player touched the screen
             else if (touchLoc != null)
             {
-                float delta = Input.IsScreenSwiped(touchLoc);
+                // Get the delta of a potential swipe gesture
+                float delta = Input.GetSwipeDelta(touchLoc);
 
-                if (Math.Abs(delta) >= Input.DragTolerance)
+                // Check if the screen was swiped
+                if (Input.IsScreenSwiped(delta) == true)
                 {
-                    Debug.OutputValue("Was swiped!");
+                    // Get the new weapon that should be selected
+                    int NewWeaponNum = ((delta < 0) ? (CurWeapon - 1) : (CurWeapon + 1));
 
-                    int newweapon = 0;
-                    if (delta < 0)
-                    {
-                        if (CurWeapon == 0) newweapon = 2;
-                        else if (CurWeapon == 2) newweapon = 0;
-                        else newweapon = 1;
-                    }
-                    else
-                    {
-                        if (CurWeapon == 0) newweapon = 1;
-                        else if (CurWeapon == 2) newweapon = 2;
-                        else newweapon = 0;
-                    }
+                    // Switch to the Spear if the player swiped left at the Sword
+                    if (NewWeaponNum < 0)
+                        NewWeaponNum = (Weapons.Length - 1);
+                    else // Switch to the Sword if the player swiped right at the Spear
+                        NewWeaponNum %= Weapons.Length;
 
-                    CheckSwitchWeaponKB(newweapon);
+                    // Switch the weapon
+                    CheckSwitchWeapon(NewWeaponNum);
                 }
+                // Check if the screen was tapped
                 else if (Input.IsScreenTapped(touchLoc) == true)
                 {
                     Attack(level, touchLoc);
                 }
             }
-            //Check for switching weapons by swiping left or right on the screen
-            //else if (Input.IsScreenSwiped(touchLoc) == true)
-            //{
-            //    Debug.OutputValue("Was swiped!");
-            //}
-            ////Check for hurting enemies with a touch screen
-            //else if (Input.IsScreenTapped(touchLoc) == true)
-            //{
-            //    Attack(level, touchLoc);
-            //}
 
             //If the player is invincible, update the color effect
             if (IsInvincible == true) InvincibilityFade.Update();
