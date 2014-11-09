@@ -88,7 +88,7 @@ namespace Defend_Your_Castle
             Gold = 100;
 
             // Select the Sword weapon by default
-            Weapons = new Weapon[] { new Sword(), new Spear(), new Warhammer() };
+            Weapons = new Weapon[] { new Sword(), new Warhammer(), new Spear() };
 
             CurWeapon = (int)WeaponTypes.Sword;
 
@@ -267,11 +267,8 @@ namespace Defend_Your_Castle
             // Call the base Die method
             base.Die(level);
 
-            // Show the Game Over screen
-            level.Game.screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
-
-            // Change the game mode to Screen
-            level.Game.ChangeGameState(GameState.Screen);
+            // Change the game state to GameOver
+            level.Game.ChangeGameState(GameState.GameOver);
 
             //Play the game over song
             SoundManager.PlaySong(LoadAssets.GameOver, false);
@@ -327,24 +324,6 @@ namespace Defend_Your_Castle
             base.UseInvincibility();
             InvincibilityAvailable = false;
         }
-
-        //public void Attack(Level level, GestureSample? gesture)
-        //{
-        //    // Check to make sure the player can attack
-        //    if (CanAttack == true)
-        //    {
-        //        //Make sure the attack is below the HUD boundary
-        //        Rectangle touchrect = Input.GestureRect(gesture);
-
-        //        if (touchrect.Y > HUDTopBounds && touchrect.Y < HUDBottomBounds)
-        //        {
-        //            // Play the weapon's attack sound
-        //            CurrentWeapon.Attack();
-
-        //            level.EnemyHit(touchrect);
-        //        }
-        //    }
-        //}
 
         public void Attack(Level level, TouchLocation? touchLoc)
         {
@@ -406,48 +385,66 @@ namespace Defend_Your_Castle
             level.NumHelperKills += 1;
         }
 
-        public override void Update(Level level)
+        private void CheckSwitchWeapon(int WeaponNum = -1)
         {
-            // Get the last touch gesture (if any)
-            //TouchLocation? touchLoc = Input.GetTouchLocation();
-            //GestureSample? gesture = Input.GetTouchGesture();
-
-            //Check for switching weapons via keyboard input
-            if (Input.IsKeyDown(keyboardState, Keys.Q) == true)
+            // Check if the Sword should be selected
+            if (WeaponNum == 0 || Input.IsKeyDown(keyboardState, Keys.Q) == true)
             {
                 SwitchWeapon(0);
                 gamePage.HUD_WeaponSword.IsChecked = true;
             }
-            else if (Input.IsKeyDown(keyboardState, Keys.W) == true)
-            {
-                SwitchWeapon(2);
-                gamePage.HUD_WeaponWarhammer.IsChecked = true;
-            }
-            else if (Input.IsKeyDown(keyboardState, Keys.E) == true)
+            // Check if the Warhammer should be selected
+            else if (WeaponNum == 1 || Input.IsKeyDown(keyboardState, Keys.W) == true)
             {
                 SwitchWeapon(1);
+                gamePage.HUD_WeaponWarhammer.IsChecked = true;
+            }
+            // Check if the Spear should be selected
+            else if (WeaponNum == 2 || Input.IsKeyDown(keyboardState, Keys.E) == true)
+            {
+                SwitchWeapon(2);
                 gamePage.HUD_WeaponSpear.IsChecked = true;
             }
+        }
 
-            //Check for hurting enemies
+        public override void Update(Level level)
+        {
+            // Get the last touch gesture (if any)
+            TouchLocation? touchLoc = Input.GetTouchLocation();
+
+            //Check for switching weapons via keyboard input
+            CheckSwitchWeapon();
+
+            //Check for hurting enemies with a mouse
             if (Input.IsLeftMouseButtonDown(mouseState))
             {
                 Attack(level);
             }
-
-            // Get the collection of TouchLocation objects
-            TouchCollection touchCollection = TouchPanel.GetState();
-
-            for (int i = 0; i < touchCollection.Count; i++)
+            // Check if the player touched the screen
+            else if (touchLoc != null)
             {
-                if (Input.IsScreenSwiped(touchCollection[i]) == true)
+                // Get the delta of a potential swipe gesture
+                float delta = Input.GetSwipeDelta(touchLoc);
+
+                // Check if the screen was swiped
+                if (Input.IsScreenSwiped(delta) == true)
                 {
-                    Debug.OutputValue("Was swiped!");
+                    // Get the new weapon that should be selected
+                    int NewWeaponNum = ((delta < 0) ? (CurWeapon - 1) : (CurWeapon + 1));
+
+                    // Switch to the Spear if the player swiped left at the Sword
+                    if (NewWeaponNum < 0)
+                        NewWeaponNum = (Weapons.Length - 1);
+                    else // Switch to the Sword if the player swiped right at the Spear
+                        NewWeaponNum %= Weapons.Length;
+
+                    // Switch the weapon
+                    CheckSwitchWeapon(NewWeaponNum);
                 }
-                else if (Input.IsScreenTapped(touchCollection[i]) == true)// Input.IsScreenTapped(gesture))
+                // Check if the screen was tapped
+                else if (Input.IsScreenTapped(touchLoc) == true)
                 {
-                    Attack(level, touchCollection[i]);
-                    //Attack(level, gesture);
+                    Attack(level, touchLoc);
                 }
             }
 

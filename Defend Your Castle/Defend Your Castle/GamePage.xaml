@@ -556,17 +556,13 @@
                     <Setter Property="Margin" Value="10"/>
                 </Style>
             </Grid.Resources>
-
-            <!-- Background Image -->
-            <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="150"
-                   Source="Content/Graphics/Game Over Sprite.png" Opacity="1.0" />
             
             <!-- Game Over Message -->
             <Viewbox>
                 <TextBlock Style="{StaticResource GameOverScreen_TextBlockStyle}" Text="You were defeated" />
             </Viewbox>
 
-            <!-- Grid for the Continue Button -->
+            <!-- Grid for the Main Menu Button -->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -574,8 +570,8 @@
                 </Grid.RowDefinitions>
 
                 <Viewbox Grid.Row="1">
-                    <!-- Continue Button -->
-                    <Button Name="GameOverScreen_Continue" Style="{StaticResource ButtonStyle}" Content="Alright, fine"
+                    <!-- Main Menu Button -->
+                    <Button Name="GameOverScreen_MainMenu" Style="{StaticResource ButtonStyle}" Content="Back to Main Menu"
                             Margin="20" x:FieldModifier="public" />
                 </Viewbox>
             </Grid>
@@ -936,6 +932,67 @@
             </Grid>
         </Grid>
 
+        <!-- Victory Screen -->
+        <Grid Name="VictoryScreen" x:FieldModifier="public" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Victory Styles -->
+            <Grid.Resources>
+                <Style x:Key="VictoryScreen_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="28"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="25"/>
+                </Style>
+            </Grid.Resources>
+
+            <!-- Victory Image -->
+            <Viewbox Grid.Row="1">
+                <Image Source="Content/Graphics/Victory Text.png" />
+            </Viewbox>
+
+            <!-- Victory Message -->
+            <Viewbox Grid.Row="2">
+                <TextBlock Style="{StaticResource VictoryScreen_TextBlockStyle}" Margin="25,60,25,0" FontSize="32"
+                           Text="You have successfully defended your fort from the Goblin tribe!" />
+            </Viewbox>
+
+            <!-- Grid for the Thank You Message + Credits Button -->
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.465*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Thank You Message Grid -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="1">
+                        <!-- Thank You Message -->
+                        <TextBlock Style="{StaticResource VictoryScreen_TextBlockStyle}" Text="Thanks for playing!"
+                                   FontWeight="Bold" />
+                    </Viewbox>
+                </Grid>
+                
+                <Viewbox Grid.Row="2">
+                    <!-- Credits Button -->
+                    <Button Name="VictoryScreen_Credits" Style="{StaticResource ButtonStyle}" Content="Credits"
+                            Margin="20" x:FieldModifier="public" />
+                </Viewbox>
+            </Grid>
+        </Grid>
+
         <!-- Credits Screen -->
         <Grid Name="CreditsScreen" x:FieldModifier="public" Visibility="Collapsed">
             <Grid.RowDefinitions>
@@ -1084,12 +1141,12 @@
                             <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                         </RadioButton>
 
-                        <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2"
+                        <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
                                      Margin="30,0,30,0" x:FieldModifier="public" Click="ChangeWeaponButton">
                             <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                         </RadioButton>
 
-                        <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
+                        <RadioButton Name="HUD_WeaponSpear" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="2"
                                      x:FieldModifier="public" Click="ChangeWeaponButton">
                             <Image Source="Content/Graphics/Big Spear.png" Width="32" Height="32"/>
                         </RadioButton>

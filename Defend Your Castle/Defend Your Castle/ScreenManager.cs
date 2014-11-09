@@ -15,7 +15,8 @@ namespace Defend_Your_Castle
     public sealed class ScreenManager
     {
         // An enum for each screen in the game
-        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen, HowToPlayScreen, CreditsScreen };
+        public enum Screens : byte { TitleScreen, OptionsScreen, GameOverScreen, HowToPlayScreen, VictoryScreen,
+                                     CreditsScreen };
 
         // References to Game1.cs and GamePage.cs
         public Game1 Game;
@@ -40,52 +41,62 @@ namespace Defend_Your_Castle
             GamePage = gamePage;
         }
 
+        // Hides all of the screens
+        private void HideAllScreens()
+        {
+            GamePage.TitleScreen.Visibility = Visibility.Collapsed;
+            GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
+            GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
+            GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
+            GamePage.VictoryScreen.Visibility = Visibility.Collapsed;
+            GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+        }
+
         // Changes from one screen to another
         public void ChangeScreen(Screens screen)
         {
             switch (screen)
             {
                 case Screens.TitleScreen:
-                    GamePage.TitleScreen.Visibility = Visibility.Visible;
-                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
-                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
-                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
-                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+                    HideAllScreens();
 
+                    GamePage.TitleScreen.Visibility = Visibility.Visible;
+                    
                     // Play the Title Screen music
                     SoundManager.PlaySong(LoadAssets.TitleScreenMusic);
 
                     break;
                 case Screens.OptionsScreen:
-                    GamePage.OptionsScreen.Visibility = Visibility.Visible;
-                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
-                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
-                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
-                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+                    HideAllScreens();
 
+                    GamePage.OptionsScreen.Visibility = Visibility.Visible;
+                    
                     break;
                 case Screens.GameOverScreen:
-                    GamePage.GameOverScreen.Visibility = Visibility.Visible;
-                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
-                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
-                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
-                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+                    HideAllScreens();
 
+                    GamePage.GameOverScreen.Visibility = Visibility.Visible;
+                    
                     break;
                 case Screens.HowToPlayScreen:
+                    HideAllScreens();
+
                     GamePage.HowToPlayScreen.Visibility = Visibility.Visible;
-                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
-                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
-                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
-                    GamePage.CreditsScreen.Visibility = Visibility.Collapsed;
+                    
+                    break;
+                case Screens.VictoryScreen:
+                    HideAllScreens();
+
+                    GamePage.VictoryScreen.Visibility = Visibility.Visible;
+
+                    // Play the Victory music
+                    SoundManager.PlaySong(LoadAssets.Victory);
 
                     break;
                 case Screens.CreditsScreen:
+                    HideAllScreens();
+
                     GamePage.CreditsScreen.Visibility = Visibility.Visible;
-                    GamePage.TitleScreen.Visibility = Visibility.Collapsed;
-                    GamePage.OptionsScreen.Visibility = Visibility.Collapsed;
-                    GamePage.GameOverScreen.Visibility = Visibility.Collapsed;
-                    GamePage.HowToPlayScreen.Visibility = Visibility.Collapsed;
                     
                     // Play the Victory music
                     SoundManager.PlaySong(LoadAssets.Victory);
@@ -111,12 +122,15 @@ namespace Defend_Your_Castle
             GamePage.OptionsScreen_Back.Click += OptionsScreen_Back_Click;
 
             // GameOver Screen
-            GamePage.GameOverScreen_Continue.Click += GameOverScreen_Continue;
+            GamePage.GameOverScreen_MainMenu.Click += GameOverScreen_MainMenu;
 
             // How To Play Screen
             GamePage.HTP_LeftArrowButton.Click += HowToPlayScreen_ChangeScreens;
             GamePage.HTP_RightArrowButton.Click += HowToPlayScreen_ChangeScreens;
             GamePage.HTP_ExitButton.Click += HowToPlayScreen_Exit;
+
+            // Victory Screen
+            GamePage.VictoryScreen_Credits.Click += VictoryScreen_Credits_Click;
 
             // Credits Screen
             GamePage.CreditsScreen_Back.Click += CreditsScreen_Back_Click;
@@ -170,8 +184,11 @@ namespace Defend_Your_Castle
 
         // Game Over Screen
 
-        private void GameOverScreen_Continue(object sender, RoutedEventArgs e)
+        private void GameOverScreen_MainMenu(object sender, RoutedEventArgs e)
         {
+            // Change the game state to screen
+            Game.ChangeGameState(GameState.Screen);
+
             // Switch to the Title Screen
             ChangeScreen(Screens.TitleScreen);
 
@@ -335,6 +352,17 @@ namespace Defend_Your_Castle
 
             // Show the right arrow button
             GamePage.HTP_RightArrowButton.Visibility = Visibility.Visible;
+        }
+
+        // Victory Screen
+
+        private void VictoryScreen_Credits_Click(object sender, RoutedEventArgs e)
+        {
+            // Change the game state to screen
+            Game.ChangeGameState(GameState.Screen);
+
+            // Switch to the Credits Screen
+            ChangeScreen(Screens.CreditsScreen);
         }
 
         // Credits Screen

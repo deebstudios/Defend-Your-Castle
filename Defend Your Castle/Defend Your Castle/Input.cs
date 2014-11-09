@@ -12,6 +12,22 @@ namespace Defend_Your_Castle
     // Class that handles key input
     public static class Input
     {
+        // The minimum amount required to move your finger after holding it down to be considered a swipe input
+        private const float DragTolerance = 30f;
+
+        // Stores the previous touch location. Used for swiping
+        private static Vector2 PrevTouchLoc;
+
+        static Input()
+        {
+            ResetPrevTouchLoc();
+        }
+
+        private static void ResetPrevTouchLoc()
+        {
+            PrevTouchLoc = -Vector2.One;
+        }
+
         public static bool IsKeyDown(KeyboardState KeyboardState, Keys Key)
         {
             // Return true if the specified key is pressed and held; otherwise, return false
@@ -67,47 +83,55 @@ namespace Defend_Your_Castle
             // Get the collection of TouchLocation objects
             TouchCollection touchCollection = TouchPanel.GetState();
 
-            // Return null if no touches can be found
-            if (touchCollection.Count < 1) return null;
+            // Check if no touches can be found
+            if (touchCollection.Count < 1)
+            {
+                // Reset the previous touch location
+                ResetPrevTouchLoc();
+
+                // Return null
+                return null;
+            }
+
+            // Check if a previous touch location doesn't exist
+            if (PrevTouchLoc == -Vector2.One)
+            {
+                // Set the previous touch location to the first touch location
+                PrevTouchLoc = touchCollection[0].Position;
+            }
 
             // Return the first TouchLocation object
             return (touchCollection[0]);
         }
 
-        //public static GestureSample? GetTouchGesture()
-        //{
-        //    // Check if a gesture is NOT available, and return null if so
-        //    if (TouchPanel.IsGestureAvailable == false) return null;
+        public static bool IsScreenSwiped(float delta)
+        {
+            // Translate the raw delta value to in-game coordinates. Also, get the positive value of the delta
+            delta = Math.Abs(GetX((int)delta));
 
-        //    // Return the last gesture
-        //    return (TouchPanel.ReadGesture());
-        //}
+            // Return whether or not a swipe was performed
+            return (delta >= DragTolerance);
+        }
 
-        public static bool IsScreenSwiped(TouchLocation? touchLoc)
+        public static float GetSwipeDelta(TouchLocation? touchLoc)
         {
             // Return false if the touch location is null
-            if (touchLoc == null) return false;
+            if (touchLoc == null) return 0f;
 
             // Convert the specified location to a non-nullable TouchLocation to access its properties
             TouchLocation fullTouchLoc = (TouchLocation)touchLoc;
             
             // Return false if the touch is not in the released state
-            if (fullTouchLoc.State != TouchLocationState.Released) return false;
-
-            // Stores the previous touch location of the gesture
-            TouchLocation prevLoc;
-
-            // Try to get the previous location
-            // Return false if the previous location could not be found or the previous location's state is not Moved
-            if (fullTouchLoc.TryGetPreviousLocation(out prevLoc) == false || prevLoc.State != TouchLocationState.Moved)
-                return false;
+            if (fullTouchLoc.State != TouchLocationState.Released) return 0f;
 
             // Get the difference between the two positions
-            Vector2 delta = (fullTouchLoc.Position - prevLoc.Position);
+            Vector2 delta = (fullTouchLoc.Position - PrevTouchLoc);
+            
+            // Reset the previous touch location
+            ResetPrevTouchLoc();
 
-            float DragTolerance = 20;
-
-            return (Math.Abs(GetX((int)delta.X)) >= DragTolerance);
+            // Return the X difference between the current and previous touch points
+            return delta.X;
         }
 
         public static bool IsScreenTapped(TouchLocation? touchLoc)
@@ -121,43 +145,6 @@ namespace Defend_Your_Castle
             // Return true if the touch is pressed
             return (fullTouchLoc.State == TouchLocationState.Pressed);
         }
-
-        //public static bool IsScreenTapped(GestureSample? gesture)
-        //{
-        //    // Check if the specified gesture is invalid, and return false if so
-        //    if (gesture == null) return false;
-
-        //    // Convert the specified gesture to a non-nullable type GestureSample to access its properties
-        //    GestureSample fullGesture = (GestureSample)gesture;
-
-        //    // Return whether or not the gesture was a tap
-        //    return (fullGesture.GestureType == GestureType.Tap);
-        //}
-
-        //public static bool IsTapInRect(Rectangle Rect, GestureSample? gesture)
-        //{
-        //    // Convert the specified gesture to a non-nullable type GestureSample to access its properties
-        //    GestureSample fullGesture = (GestureSample)gesture;
-
-        //    // Create a rectangle for the tap on the screen
-        //    Rectangle TapRect = new Rectangle((int)fullGesture.Position.X, (int)fullGesture.Position.Y, 1, 1);
-
-        //    // Return true if the tap is within the Rectangle's bounds; otherwise, return false
-        //    return TapRect.Intersects(Rect);
-        //}
-
-        //public static Rectangle GestureRect(GestureSample? gesture)
-        //{
-        //    // Convert the specified gesture to a non-nullable type GestureSample to access its properties
-        //    GestureSample fullGesture = (GestureSample)gesture;
-
-        //    // Create a rectangle for the tap on the screen
-        //    // The GetX and GetY methods are needed here since the touch coordinates are based on the screen resolution
-        //    Rectangle TapRect = new Rectangle(GetX((int)fullGesture.Position.X), GetY((int)fullGesture.Position.Y), 1, 1);
-
-        //    // Return the rectangle that represents the tapped region
-        //    return TapRect;
-        //}
 
         public static Rectangle GetTouchRect(TouchLocation? touchLoc)
         {

@@ -18,6 +18,14 @@ namespace Defend_Your_Castle
         private const string SoundDir = "Sounds/";
         private const string MusicDir = "Music/";
 
+        // Screen graphics
+
+        // Game Over sprite
+        public static Texture2D GameOverSprite;
+
+        // Victory Screen
+        public static Texture2D VictoryScreen;
+
         //Level graphics
         public static Texture2D LevelBG;
         public static Texture2D DaySun;
@@ -90,6 +98,14 @@ namespace Defend_Your_Castle
 
         private static void LoadGraphics(ContentManager Content)
         {
+            // Screen Graphics
+
+            // Game Over sprite
+            GameOverSprite = LoadGraphic(Content, "Game Over Sprite");
+
+            // Victory Screen
+            VictoryScreen = LoadGraphic(Content, "Victory Screen");
+
             //Level graphics
             LevelBG = LoadGraphic(Content, "Level Background");
             DaySun = LoadGraphic(Content, "Sun");

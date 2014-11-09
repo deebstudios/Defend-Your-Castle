@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Defend_Your_Castle
 {
     // Global enum to represent the game state
-    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop, HowToPlay }
+    public enum GameState : byte { Screen, InGame, Paused, LevelEnd, Shop, HowToPlay, GameOver, Victory }
 
     public class Game1 : Game
     {
@@ -266,6 +266,16 @@ namespace Defend_Your_Castle
                     screenManager.ChangeScreen(ScreenManager.Screens.HowToPlayScreen);
 
                     break;
+                case GameState.GameOver:
+                    ShowGrid_Screen();
+                    screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
+                    
+                    break;
+                case GameState.Victory:
+                    ShowGrid_Screen();
+                    screenManager.ChangeScreen(ScreenManager.Screens.VictoryScreen);
+
+                    break;
             }
         }
 
@@ -325,6 +335,7 @@ namespace Defend_Your_Castle
             // Add all consumables to the HUD
             shop.AddConsumablesToHUD();
             
+            // Apply the damage reduction to the player's castle if he/she purchased any Strengthen Walls
             level.GetPlayer.StrengthenCastle(shop.GetStrengthenWallsLevel);
 
             // Select the Sword
@@ -395,6 +406,8 @@ namespace Defend_Your_Castle
                 case GameState.LevelEnd:
                 case GameState.Shop:
                 case GameState.HowToPlay:
+                case GameState.GameOver:
+                case GameState.Victory:
                     
                     break;
             }
@@ -439,6 +452,22 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.HowToPlay:
                     level.Draw(spriteBatch);
+
+                    break;
+                case GameState.GameOver:
+                    // Get the X and Y positions at which the Game Over sprite would be centered on the screen
+                    float x = (ScreenHalf.X - (LoadAssets.GameOverSprite.Width / 2));
+                    float y = (ScreenHalf.Y - (LoadAssets.GameOverSprite.Height / 2));
+
+                    spriteBatch.Draw(LoadAssets.GameOverSprite, new Vector2(x, y), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
+                    break;
+                case GameState.Victory:
+                    // Get the X and Y positions at which the Victory screen would be centered on the screen
+                    x = (ScreenHalf.X - (LoadAssets.VictoryScreen.Width / 2));
+                    y = (ScreenHalf.Y - (LoadAssets.VictoryScreen.Height / 2));
+
+                    spriteBatch.Draw(LoadAssets.VictoryScreen, new Vector2(x, y), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
                     break;
             }
