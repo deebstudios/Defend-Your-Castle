@@ -1242,26 +1242,43 @@
 
     <!-- Pause Menu -->
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
-        <StackPanel>
-            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Viewbox for the menu -->
+            <Viewbox Grid.Row="1">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
-                        <Slider Name="PauseMenu_MusicVolume" Style="{StaticResource SliderStyle}" />
-                    </StackPanel>
+                    <!-- Volume Controls -->
+                    <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+                        <StackPanel>
+                            <!-- Music Volume -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
+                                <Slider Name="PauseMenu_MusicVolume" Style="{StaticResource SliderStyle}" />
+                            </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
-                        <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
-                    </StackPanel>
+                            <!-- Sound Volume -->
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
+                                <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Resume Button -->
+                    <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume"
+                            Margin="0,0,0,20" Click="PauseMenu_Resume_Click" />
+
+                    <!-- Quit Button -->
+                    <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit"
+                            Click="PauseMenu_Quit_Click" />
                 </StackPanel>
-            </Border>
-
-            <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume" Margin="0,0,0,20"
-                    Click="PauseMenu_Resume_Click" />
-
-            <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit" Click="PauseMenu_Quit_Click" />
-        </StackPanel>
+            </Viewbox>
+        </Grid>
     </Border>
 
     <!-- Level End Screen -->
