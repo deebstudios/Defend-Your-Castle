@@ -364,6 +364,8 @@
     <Content Include="Content\Graphics\Sword.png" />
     <Content Include="Content\Graphics\TestAnim.png" />
     <Content Include="Content\Graphics\Title Screen Background.png" />
+    <Content Include="Content\Graphics\Victory Screen.png" />
+    <Content Include="Content\Graphics\Victory Text.png" />
     <Content Include="Content\H Character.png" />
     <Content Include="Content\I Character.png" />
     <Content Include="Content\J Character.png" />

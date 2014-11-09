@@ -267,11 +267,8 @@ namespace Defend_Your_Castle
             // Call the base Die method
             base.Die(level);
 
-            // Show the Game Over screen
-            level.Game.screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
-
-            // Change the game mode to Screen
-            level.Game.ChangeGameState(GameState.Screen);
+            // Change the game state to GameOver
+            level.Game.ChangeGameState(GameState.GameOver);
 
             //Play the game over song
             SoundManager.PlaySong(LoadAssets.GameOver, false);
