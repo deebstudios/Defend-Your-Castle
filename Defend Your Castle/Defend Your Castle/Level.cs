@@ -132,7 +132,7 @@ namespace Defend_Your_Castle
             // Initialize the EnemySpawning class
             EnemySpawn = new EnemySpawning(this);
 
-            //TEMPORARY
+            //This is here just in case the level somehow gets set to something other than 1
             if (LevelNum >= EnemySpawning.StartNewEnem)
             {
                 //+1 for reaching the value
@@ -200,6 +200,7 @@ namespace Defend_Your_Castle
             // Update the player's HP and Gold on the UI
             player.UpdateHealth();
             player.UpdateGoldAmount();
+            player.TouchHit = false;
 
             // Set the game state to InGame
             Game.ChangeGameState(GameState.InGame);
@@ -320,10 +321,18 @@ namespace Defend_Your_Castle
             }
         }
 
-        //Make the player hit an enemy if it attacked
-        //NOTE: We need to change this so if more than one enemy is selected at a Y position, the one with the highest Y position is chosen
-        public void EnemyHit(Rectangle rect)
+        //Decrement the number of attacks if the player swiped and didn't hit an enemy
+        public void DecrementNumAttacks()
         {
+            NumAttacks -= 1;
+        }
+
+        //Make the player hit an enemy if it attacked
+        public bool EnemyHit(Rectangle rect)
+        {
+            //Check if we actually hit an enemy
+            bool hitenem = false;
+
             // Increment the player's number of attacks by 1
             NumAttacks += 1;
 
@@ -335,6 +344,7 @@ namespace Defend_Your_Castle
                 if (Enemies[i].CanGetHit(rect) == true)
                 {
                     enemies.Add(Enemies[i]);
+                    hitenem = true;
                 }
             }
 
@@ -359,6 +369,8 @@ namespace Defend_Your_Castle
                 // Increment the player's kill count by 1
                 NumPlayerKills += 1;
             }
+
+            return hitenem;
         }
 
         public void Update()

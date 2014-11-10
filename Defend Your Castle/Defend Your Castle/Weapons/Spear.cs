@@ -14,7 +14,6 @@ namespace Defend_Your_Castle
             // Set the attack speed
             AttackSpeed = 50;
 
-            //TEMPORARY
             MakeAvailable();
         }
 

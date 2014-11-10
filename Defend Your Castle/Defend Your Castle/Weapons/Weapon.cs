@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Defend_Your_Castle
@@ -16,6 +17,9 @@ namespace Defend_Your_Castle
 
         //Is the weapon available for use yet?
         private bool Available;
+
+        //The graphic for this weapon
+        //public Texture2D Graphic;
 
         // The sound to play when the player uses the weapon
         public SoundEffect Sound;
