@@ -418,6 +418,12 @@
     <Content Include="Content\Music\Home Base Groove %28Edited%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sounds\Ineffective Weapon %28dj-chronos__metal-9%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\Switch Weapon %28spookymodem__item-received%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Defend Your Castle_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

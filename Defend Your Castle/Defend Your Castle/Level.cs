@@ -360,15 +360,32 @@ namespace Defend_Your_Castle
                     index = i;
                 }
             }
-            
-            if (index >= 0 && player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
-            {
-                enemies[index].Die(this);
-                enemies[index].GrantGold(this, true);
 
-                // Increment the player's kill count by 1
-                NumPlayerKills += 1;
+            //Detect if we made an ineffective hit
+            bool ineffectivehit = false;
+
+            //Check if there is an enemy to hit
+            if (index >= 0)
+            {
+                //Check if our weapon can hurt the enemy
+                if (player.CurrentWeapon.CanHit(enemies[index].GetWeaponWeakness) == true)
+                {
+                    enemies[index].Die(this);
+                    enemies[index].GrantGold(this, true);
+
+                    // Increment the player's kill count by 1
+                    NumPlayerKills += 1;
+                }
+                //Otherwise play a sound indicating it can't
+                else
+                {
+                    SoundManager.PlaySound(LoadAssets.IneffectiveSwing);
+                    ineffectivehit = true;
+                }
             }
+
+            //Play the normal weapon swing sound if we havent made an ineffective hit
+            if (ineffectivehit == false) SoundManager.PlaySound(LoadAssets.WeaponSwing);
 
             return hitenem;
         }

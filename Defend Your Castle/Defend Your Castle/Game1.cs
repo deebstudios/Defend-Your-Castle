@@ -368,7 +368,7 @@ namespace Defend_Your_Castle
         private void SelectSwordWeapon()
         {
             // Set the player's selected weapon to the sword
-            level.GetPlayer.SwitchWeapon(0);
+            level.GetPlayer.SwitchWeapon(0, false);
 
             // Select the Sword on the UI
             GamePage.HUD_WeaponSword.IsChecked = true;

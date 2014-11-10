@@ -159,12 +159,18 @@ namespace Defend_Your_Castle
         }
 
         //Switch the Player's weapon
-        public void SwitchWeapon(int newweapon)
+        public void SwitchWeapon(int newweapon, bool playsound = true)
         {
             if (newweapon >= 0 && newweapon < Weapons.Length)
             {
                 if (Weapons[newweapon].CanUse == true)
+                {
+                    //Play the switch weapon sound
+                    if (playsound == true && CurWeapon != newweapon)
+                        SoundManager.PlaySound(LoadAssets.SwitchWeapon);
+
                     CurWeapon = newweapon;
+                }
             }
         }
 
@@ -339,7 +345,7 @@ namespace Defend_Your_Castle
                 if (touchrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
-                    CurrentWeapon.Attack();
+                    //CurrentWeapon.Attack();
 
                     TouchHit = level.EnemyHit(touchrect);
                 }
@@ -375,7 +381,7 @@ namespace Defend_Your_Castle
                 if (clickrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
-                    CurrentWeapon.Attack();
+                    //CurrentWeapon.Attack();
 
                     level.EnemyHit(clickrect);
                 }

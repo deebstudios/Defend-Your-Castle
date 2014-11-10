@@ -75,6 +75,8 @@ namespace Defend_Your_Castle
 
         //Sounds
         public static SoundEffect WeaponSwing;
+        public static SoundEffect IneffectiveSwing;
+        public static SoundEffect SwitchWeapon;
         public static SoundEffect PurchaseItem;
         public static SoundEffect GoblinDeath;
         public static SoundEffect LevelComplete;
@@ -152,6 +154,8 @@ namespace Defend_Your_Castle
             GoblinDeath = Content.Load<SoundEffect>(SoundDir + "Goblin Death (sihil__ogre1)");
             PurchaseItem = Content.Load<SoundEffect>(SoundDir + "Purchase Item (d-w__coins-01)");
             WeaponSwing = Content.Load<SoundEffect>(SoundDir + "Weapon Swing (qubodup__sharp-swosh-18_01)");
+            IneffectiveSwing = Content.Load<SoundEffect>(SoundDir + "Ineffective Weapon (dj-chronos__metal-9)");
+            SwitchWeapon = Content.Load<SoundEffect>(SoundDir + "Switch Weapon (spookymodem__item-received)");
             LevelComplete = Content.Load<SoundEffect>(SoundDir + "Level Complete (Bart Kelsey - orchestra)");
         }
 
