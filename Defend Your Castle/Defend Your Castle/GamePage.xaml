@@ -169,13 +169,13 @@
         </Style>
 
         <Style x:Key="LevelEnd_LevelCompleteTextStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="56"/>
+            <Setter Property="FontSize" Value="48"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         </Style>
 
         <Style x:Key="LevelEnd_StatsTextStyle" BasedOn="{StaticResource LevelEnd_LevelCompleteTextStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="44"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="Margin" Value="0,20,0,0"/>
             <Setter Property="Opacity" Value="0"/>
@@ -183,7 +183,6 @@
 
         <Style x:Key="LevelEnd_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
             <Setter Property="FontSize" Value="48"/>
-            <Setter Property="Grid.Row" Value="2"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
@@ -1061,9 +1060,9 @@
                                     <LineBreak /><LineBreak />
                                     <Run FontWeight="Bold" FontStyle="Italic">Sounds</Run>
                                     <LineBreak />
-                                    <Run>sihil, D W, qubodup, spazzo_1493</Run>
+                                    <Run>Dan Oberbauer, spazzo_1493, qubodup,</Run>
                                     <LineBreak />
-                                    <Run>(freesound.org)</Run>
+                                    <Run>D W, sihil, spookymodem (freesound.org)</Run>
                                     <LineBreak />
                                     <Run>Bart Kelsey (opengameart.org)</Run>
                                
@@ -1243,69 +1242,93 @@
 
     <!-- Pause Menu -->
     <Border Name="PauseMenu" Style="{StaticResource PauseMenuStyle}" x:FieldModifier="public" Visibility="Collapsed">
-        <StackPanel>
-            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Viewbox for the menu -->
+            <Viewbox Grid.Row="1">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
-                        <Slider Name="PauseMenu_MusicVolume" Style="{StaticResource SliderStyle}" />
-                    </StackPanel>
+                    <!-- Volume Controls -->
+                    <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
+                        <StackPanel>
+                            <!-- Music Volume -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
+                                <Slider Name="PauseMenu_MusicVolume" Style="{StaticResource SliderStyle}" />
+                            </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                        <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
-                        <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
-                    </StackPanel>
+                            <!-- Sound Volume -->
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
+                                <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Resume Button -->
+                    <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume"
+                            Margin="0,0,0,20" Click="PauseMenu_Resume_Click" />
+
+                    <!-- Quit Button -->
+                    <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit"
+                            Click="PauseMenu_Quit_Click" />
                 </StackPanel>
-            </Border>
-
-            <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume" Margin="0,0,0,20"
-                    Click="PauseMenu_Resume_Click" />
-
-            <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit" Click="PauseMenu_Quit_Click" />
-        </StackPanel>
+            </Viewbox>
+        </Grid>
     </Border>
 
     <!-- Level End Screen -->
     <Grid Name="LevelEnd" x:FieldModifier="public" Visibility="Collapsed">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.14*"/>
         </Grid.RowDefinitions>
 
         <!-- Level End Background -->
         <Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />
 
         <!-- Level Complete Text -->
-        <TextBlock Name="LevelEnd_LevelCompleteText" Style="{StaticResource LevelEnd_LevelCompleteTextStyle}" x:FieldModifier="public" />
+        <Viewbox>
+            <TextBlock Name="LevelEnd_LevelCompleteText" Style="{StaticResource LevelEnd_LevelCompleteTextStyle}"
+                       x:FieldModifier="public" />
+        </Viewbox>
 
         <!-- Level Statistics -->
-        <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!-- Kills -->
-            <TextBlock Name="LevelEnd_Kills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+        <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="60">
+                <!-- Kills -->
+                <TextBlock Name="LevelEnd_Kills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Helper Kills -->
-            <TextBlock Name="LevelEnd_HelperKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+                <!-- Helper Kills -->
+                <TextBlock Name="LevelEnd_HelperKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Total Kills -->
-            <TextBlock Name="LevelEnd_TotalKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+                <!-- Total Kills -->
+                <TextBlock Name="LevelEnd_TotalKills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Accuracy Rate -->
-            <TextBlock Name="LevelEnd_AccuracyRate" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+                <!-- Accuracy Rate -->
+                <TextBlock Name="LevelEnd_AccuracyRate" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Bonus Gold -->
-            <TextBlock Name="LevelEnd_BonusGold" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public"/>
+                <!-- Bonus Gold -->
+                <TextBlock Name="LevelEnd_BonusGold" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Gold Earned -->
-            <TextBlock Name="LevelEnd_GoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
+                <!-- Gold Earned -->
+                <TextBlock Name="LevelEnd_GoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
-            <!-- Total Gold Earned -->
-            <TextBlock Name="LevelEnd_TotalGoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" FontWeight="Bold"
+                <!-- Total Gold Earned -->
+                <TextBlock Name="LevelEnd_TotalGoldEarned" Style="{StaticResource LevelEnd_StatsTextStyle}" FontWeight="Bold"
                        x:FieldModifier="public" />
-        </StackPanel>
+            </StackPanel>
+        </Viewbox>
 
         <!-- Next Button -->
-        <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="LevelEnd_Next_Click" />
+        <Viewbox Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Name="LevelEnd_Next" Style="{StaticResource LevelEnd_ButtonStyle}" Content="Next" Click="LevelEnd_Next_Click" />
+        </Viewbox>
 
         <!-- Level End Animation -->
         <Grid.Resources>

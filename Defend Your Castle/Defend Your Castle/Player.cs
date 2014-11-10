@@ -48,6 +48,9 @@ namespace Defend_Your_Castle
         // The max level of the player's castle
         //private const int MaxCastleLevel = 3;
 
+        //Checks if the player hit an enemy when touching
+        public bool TouchHit;
+
         // The amount of gold the player has
         public int Gold;
 
@@ -78,7 +81,7 @@ namespace Defend_Your_Castle
             InvincibilityAvailable = false;
             InvincibilityFade = new Fade(Color.White, 10, 0, 255, Fade.InfiniteLoops, 0f);
 
-            Fortified = false;
+            Fortified = TouchHit = false;
             PercentDamage = 1f;
 
             // Set the player's base health and maximum health
@@ -156,12 +159,18 @@ namespace Defend_Your_Castle
         }
 
         //Switch the Player's weapon
-        public void SwitchWeapon(int newweapon)
+        public void SwitchWeapon(int newweapon, bool playsound = true)
         {
             if (newweapon >= 0 && newweapon < Weapons.Length)
             {
                 if (Weapons[newweapon].CanUse == true)
+                {
+                    //Play the switch weapon sound
+                    if (playsound == true && CurWeapon != newweapon)
+                        SoundManager.PlaySound(LoadAssets.SwitchWeapon);
+
                     CurWeapon = newweapon;
+                }
             }
         }
 
@@ -336,9 +345,9 @@ namespace Defend_Your_Castle
                 if (touchrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
-                    CurrentWeapon.Attack();
+                    //CurrentWeapon.Attack();
 
-                    level.EnemyHit(touchrect);
+                    TouchHit = level.EnemyHit(touchrect);
                 }
             }
         }
@@ -372,7 +381,7 @@ namespace Defend_Your_Castle
                 if (clickrect.Y > HUDTopBounds)
                 {
                     // Play the weapon's attack sound
-                    CurrentWeapon.Attack();
+                    //CurrentWeapon.Attack();
 
                     level.EnemyHit(clickrect);
                 }
@@ -440,6 +449,9 @@ namespace Defend_Your_Castle
 
                     // Switch the weapon
                     CheckSwitchWeapon(NewWeaponNum);
+
+                    //If we didn't hit an enemy when swiping, don't penalize the player by decrementing the number of attempted attacks
+                    if (TouchHit == false) level.DecrementNumAttacks();
                 }
                 // Check if the screen was tapped
                 else if (Input.IsScreenTapped(touchLoc) == true)
@@ -472,6 +484,9 @@ namespace Defend_Your_Castle
             }
 
             Animation.Draw(spriteBatch, ObjectSheet, Position, Direction.Right, Color.White, 0f, depth);
+
+            //Draw weapon as cursor
+            //spriteBatch.Draw(CurrentWeapon.Graphic, new Vector2(Input.GetX(Mouse.GetState().X - 5), Input.GetY(Mouse.GetState().Y - 5)), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 1f);
 
             base.Draw(spriteBatch);
         }

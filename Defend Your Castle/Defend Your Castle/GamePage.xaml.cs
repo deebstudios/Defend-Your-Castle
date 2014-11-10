@@ -183,8 +183,17 @@ namespace Defend_Your_Castle
         // Occurs when the "Next" button is clicked on the Level End screen
         private void LevelEnd_Next_Click(object sender, RoutedEventArgs e)
         {
-            // Change the game state to Shop
-            _game.ChangeGameState(GameState.Shop);
+            // Check if the player did not beat the game
+            if (_game.level.GetLevelNum < Level.MaxLevel)
+            {
+                // Change the game state to Shop
+                _game.ChangeGameState(GameState.Shop);
+            }
+            else // The player beat the game!
+            {
+                // Show the Victory screen
+                _game.ChangeGameState(GameState.Victory);
+            }
         }
 
         // Shop
