@@ -20,7 +20,7 @@ namespace Defend_Your_Castle
 
             price = 250;
 
-            Description = "+" + HealAmount + " Health.\n";
+            Description = "+" + HealAmount + " Health\n";
             // "Repair your fort's walls.\n+" + HealAmount + " Health";
 
             // Set the displayed level

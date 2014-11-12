@@ -17,7 +17,7 @@ namespace Defend_Your_Castle
             
             price = 10000;
 
-            Description = "Slows enemy movement and attack speeds.";
+            Description = "Slows enemy movement and attack speeds";
             //"A loyal helper that slows\nenemy movement and attack speeds.\n";
 
             // Set the displayed level
