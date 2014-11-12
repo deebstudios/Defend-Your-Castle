@@ -21,7 +21,8 @@ namespace Defend_Your_Castle
 
             price = 750;
 
-            Description = "Increase the durability\nof your fort's walls.\n+" + HealthIncrease + " Max Health";
+            Description = "+" + HealthIncrease + " Max Health.";
+            // "Increase the durability\nof your fort's walls.\n+" + HealthIncrease + " Max Health";
 
             // Set the displayed level
             SetDisplayedLevel();

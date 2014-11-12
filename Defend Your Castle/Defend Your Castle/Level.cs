@@ -25,6 +25,9 @@ namespace Defend_Your_Castle
         private const float SunX = 45f;
         private const float SunY = 25f;
 
+        // Multiplier for the amount of bonus gold the player will receive
+        private const float BonusGoldMultiplier = 15f;
+
         //The game's max level
         public const int MaxLevel = 50;
 
@@ -89,10 +92,10 @@ namespace Defend_Your_Castle
         }
 
         // Calculates the amount of bonus gold the player has earned at the end of the level
-        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * 10]
+        // Formula: [(# Player Kills * (Accuracy Rate / 100)) * BonusGoldMultiplier]
         private int BonusGold
         {
-            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * 10)); }
+            get { return ((int)((NumPlayerKills * (PlayerAccuracyRate / 100d)) * BonusGoldMultiplier)); }
         }
 
         // Returns the total amount of gold the player has earned in the level
@@ -255,6 +258,9 @@ namespace Defend_Your_Castle
 
             // Give the player the bonus gold
             player.ReceiveGold(BonusGold);
+
+            // Save the game
+            Game.GamePage.SaveGame();
 
             // Set the game state to LevelEnd
             Game.ChangeGameState(GameState.LevelEnd);

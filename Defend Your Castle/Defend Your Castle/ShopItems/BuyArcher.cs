@@ -17,7 +17,8 @@ namespace Defend_Your_Castle
 
             price = 15000;
 
-            Description = "A loyal helper that defends\nyour fort from enemies.\n";
+            Description = "Attacks incoming enemies.";
+            //"A loyal helper that defends\nyour fort from enemies.\n";
 
             // Set the displayed level
             SetDisplayedLevel();

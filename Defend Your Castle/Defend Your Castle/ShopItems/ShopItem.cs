@@ -59,7 +59,7 @@ namespace Defend_Your_Castle
 
         public String PriceString
         {
-            get { return price + " Gold"; }
+            get { return price.ToString(); }
         }
 
         // The string representation of the current level of the ShopItem

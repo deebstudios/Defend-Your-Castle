@@ -247,10 +247,9 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Grid.Row" Value="1"/>
-            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="Margin" Value="5,1,0,0"/>
             <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
         
@@ -263,11 +262,24 @@
             <Setter Property="TextTrimming" Value="None"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
+        
+        <Style x:Key="Shop_ShopItemsList_PriceImageStyle" TargetType="Image">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Source" Value="Content/Graphics/ShopIcons/Big ShopIcon.png"/>
+        </Style>
 
         <Style x:Key="Shop_ShopItemsListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
+            <Setter Property="Width" Value="300"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Margin" Value="10"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -318,7 +330,10 @@
                                            Margin="0,2,0,0" />
                                 
                                 <!-- Price -->
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}" />
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
+                                    <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}" />
+                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}" />
+                                </StackPanel>
                             </Grid>
                             
                             <!-- Shop Item Description -->
@@ -1534,7 +1549,7 @@
                 <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
             </Viewbox>
 
-            <!-- Items, Save Button, Next Level Text, + Done Button-->
+            <!-- Items, Game Saved Text, Next Level Text, + Done Button-->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -1545,35 +1560,34 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.50*"/>
+                        <RowDefinition Height="0.57*"/>
                     </Grid.RowDefinitions>
 
                     <Viewbox>
-                        <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" x:FieldModifier="public"
-                                  Margin="0,30,0,0" />
+                        <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" Width="350"
+                                  x:FieldModifier="public" Margin="0,30,0,0" />
                     </Viewbox>
                 </Grid>
 
-                <!-- Save Button, Next Level Text, + Done Button -->
+                <!-- Game Saved Text, Next Level Text, + Done Button -->
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Save Button -->
+                    <!-- Game Saved Text -->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <Button Name="Shop_SaveGame" Style="{StaticResource Shop_SaveGameStyle}" Content="Save" Click="SaveGame">
-                            <Button.Resources>
-                                <!-- Enable Save Game Button Animation -->
-                                <Storyboard x:Name="Shop_EnableSaveGameAnim" x:FieldModifier="public">
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGame" Storyboard.TargetProperty="IsEnabled"
-                                                                   BeginTime="0:0:1">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="True"/>
-                                    </ObjectAnimationUsingKeyFrames>
+                        <TextBlock Name="Shop_GameSavedMessage" Style="{StaticResource Shop_NextLevelStyle}" 
+                                   Text="Game Saved!" Opacity="0" Margin="10,5,0,7" Foreground="Blue">
+                            <TextBlock.Resources>
+                                <!-- Show Game Saved Text Animation -->
+                                <Storyboard x:Name="Shop_ShowGameSavedAnim" x:FieldModifier="public" AutoReverse="True">
+                                    <DoubleAnimation Storyboard.TargetName="Shop_GameSavedMessage" Storyboard.TargetProperty="Opacity"
+                                                     From="0" To="1" Duration="0:0:1"/>
                                 </Storyboard>
-                            </Button.Resources>
-                        </Button>
+                            </TextBlock.Resources>
+                        </TextBlock>
                     </Viewbox>
 
                     <Grid Grid.Column="1">
@@ -1593,35 +1607,6 @@
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-
-        <!-- Game Saved Grid -->
-        <Grid Name="Shop_SaveGameAnimGrid" Style="{StaticResource Shop_SaveGameGridAnimStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="0.20*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!-- Game Saved Border -->
-            <Border Name="Shop_SaveGameAnimBorder" Style="{StaticResource Shop_SaveGameAnimStyle}">
-                <!-- Game Saved Text -->
-                <Viewbox>
-                    <TextBlock Style="{StaticResource LevelStart_MessageStyle}" Text="Game Saved!" />
-                </Viewbox>
-            </Border>
-
-            <Grid.Resources>
-                <!-- Save Game Animation -->
-                <Storyboard x:Name="Shop_SaveGameAnim" x:FieldModifier="public">
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Shop_SaveGameAnimGrid" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                    </ObjectAnimationUsingKeyFrames>
-
-                    <DoubleAnimation Storyboard.TargetName="Shop_SaveGameAnimGrid" Storyboard.TargetProperty="Opacity"
-                                     From="1.0" To="0.0" Duration="0:0:1"/>
-                </Storyboard>
-            </Grid.Resources>
         </Grid>
     </Grid>
 

@@ -17,7 +17,8 @@ namespace Defend_Your_Castle
 
             price = 7500;
 
-            Description = "Increase the slow power and slow\nduration of your Slowers.";
+            Description = "Enhances Slower powers.";
+            //"Increase the slow power and slow\nduration of your Slowers.";
 
             // Set the displayed level
             SetDisplayedLevel();

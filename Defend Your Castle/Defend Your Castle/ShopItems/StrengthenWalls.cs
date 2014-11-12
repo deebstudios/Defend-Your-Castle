@@ -22,7 +22,8 @@ namespace Defend_Your_Castle
 
             price = 5000;
 
-            Description = "Strengthen your fort's walls to\nbetter defend against enemy attacks!\n+3% reduced damage";
+            Description = "+3% reduced damage.\n";
+            //"Strengthen your fort's walls to\nbetter defend against enemy attacks!\n+3% reduced damage";
 
             // Set the displayed level
             SetDisplayedLevel();

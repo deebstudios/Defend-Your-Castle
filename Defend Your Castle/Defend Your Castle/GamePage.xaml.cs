@@ -188,6 +188,9 @@ namespace Defend_Your_Castle
             {
                 // Change the game state to Shop
                 _game.ChangeGameState(GameState.Shop);
+
+                // Show the "Game Saved!" text
+                Shop_ShowGameSavedAnim.Begin();
             }
             else // The player beat the game!
             {
@@ -247,19 +250,10 @@ namespace Defend_Your_Castle
             LevelStart_Anim.Begin();
         }
 
-        private void SaveGame(object sender, RoutedEventArgs e)
+        public void SaveGame()
         {
-            // Disable the Save button
-            Shop_SaveGame.IsEnabled = false;
-
             // Save the game
             Data.SaveGameData(_game.shop, _game.level);
-
-            // Show the animation that the game was saved
-            Shop_SaveGameAnim.Begin();
-
-            // Start the animation to re-enable the Save button after one second
-            Shop_EnableSaveGameAnim.Begin();
 
             // State that the player has saved data
             Game1.HasSavedData = true;

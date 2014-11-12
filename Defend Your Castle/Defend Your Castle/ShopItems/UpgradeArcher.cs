@@ -17,7 +17,8 @@ namespace Defend_Your_Castle
 
             price = 10000;
 
-            Description = "Increase the power and range\nof your Archers.";
+            Description = "Enhances Archer range and power.";
+            //"Increase the power and range\nof your Archers.";
 
             // Set the displayed level
             SetDisplayedLevel();

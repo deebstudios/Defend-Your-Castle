@@ -257,6 +257,7 @@ namespace Defend_Your_Castle
 
                     break;
                 case GameState.Shop:
+                    GamePage.Shop_ShowGameSavedAnim.Stop();
                     GamePage.ShowShop();
                     SoundManager.PlaySong(LoadAssets.ShopMusic);
 
@@ -323,11 +324,11 @@ namespace Defend_Your_Castle
 
         public async Task<bool> ContinueGame()
         {
-            // Set the player to shop
-            ChangeGameState(GameState.Shop);
-
             // Load the player's saved game data
             await LoadData();
+
+            // Set the game state to shop
+            ChangeGameState(GameState.Shop);
 
             // Remove all consumables from the HUD
             shop.RemoveConsumablesFromHUD();
@@ -340,9 +341,6 @@ namespace Defend_Your_Castle
 
             // Select the Sword
             SelectSwordWeapon();
-
-            // Show the shop
-            GamePage.ShowShop();
 
             // Return true
             return true;
