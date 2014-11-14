@@ -10,14 +10,14 @@ namespace Defend_Your_Castle
     {
         //The number of levels required for the min and max speed enemies increase their base speed by to go up by 1
         //Ex. If MinSpeedIncrease = 5, every 5 levels the minimum amount enemies increase their base speed by goes up by 1
-        private const int MinSpeedIncrease = 20;
-        private const int MaxSpeedIncrease = 9;
+        private const int MinSpeedIncrease = 15;//20;
+        private const int MaxSpeedIncrease = 6;//6;//9;
         private const int MaxSpeedBonus = 6;
-        private const float MaxFloatSpeedBonus = .5f;
+        private const float MaxFloatSpeedBonus = .8f;
 
         //The starting level, number of levels the max number of enemies that can spawn increases, and the max number of enemies that can spawn at once
         private const int StartMoreSpawn = 4;
-        private const int MaxNumIncrease = 15;//8;
+        private const int MaxNumIncrease = 12;//15
         public const int MaxNumSpawn = 3;
 
         //The first level enemies are able to spawn with invincibility and the maximum invincibility duration
@@ -86,8 +86,11 @@ namespace Defend_Your_Castle
         private void RefreshSpawnTime()
         {
             // Set the minimum spawn time to depend on the level the player is on
-            // The minimum spawn time decreases by 48 milliseconds each level
-            int MinSpawnTime = (2750 - (48 * (level.GetLevelNum - 1)));
+            // The minimum spawn time decreases by a little each level
+            int MinSpawnTime = (2750 - (/*48*/60 * (level.GetLevelNum - 1)));
+
+            //Here as a precaution; we don't want enemies to spawn too quickly
+            if (MinSpawnTime < 300) MinSpawnTime = 300;
 
             // Set the maximum spawn time to be 1.2x the minimum spawn time
             // Add 1 to include the maximum spawn time
@@ -114,8 +117,8 @@ namespace Defend_Your_Castle
             switch (level.GetLevelNum)
             {
                 case 3:
-                case 8:
-                case 13:
+                case 7://8:
+                case 12://13:
                 case 18:
                     // Add a new enemy to the enemy spawn list
                     AddNewSpawnEnemy(1);
@@ -241,10 +244,10 @@ namespace Defend_Your_Castle
                 case 2: //Armored enemy
                     enem = new ArmoredEnemy(level, XMove, Y, speedincrease, costume);
                     break;
-                case 3: //Armored Spear enemy
+                case 4: //3: //Armored Spear enemy
                     enem = new ArmoredSpearEnemy(level, XMove, Y, speedincrease, costume);
                     break;
-                case 4: //Flying enemy
+                case 3: //4: //Flying enemy
                     int flyheight = RandGenerator.Next(FlyingEnemy.MinFlyingHeight, FlyingEnemy.MaxFlyingHeight + 1);
                     enem = new FlyingEnemy(level, XMove, Y, flyheight, speedincrease, costume);
                     break;
