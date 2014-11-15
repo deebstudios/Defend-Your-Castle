@@ -29,7 +29,7 @@ namespace Defend_Your_Castle
         private const float BonusGoldMultiplier = 15f;
 
         //The game's max level
-        public const int MaxLevel = 50;
+        public const int MaxLevel = 40;
 
         // Stores the level number of the level
         private int LevelNum;
@@ -259,8 +259,9 @@ namespace Defend_Your_Castle
             // Give the player the bonus gold
             player.ReceiveGold(BonusGold);
 
-            // Save the game
-            Game.GamePage.SaveGame();
+            // Save the game if the player did not just complete the last level
+            if (LevelNum < MaxLevel)
+                Game.GamePage.SaveGame();
 
             // Set the game state to LevelEnd
             Game.ChangeGameState(GameState.LevelEnd);

@@ -155,14 +155,18 @@ namespace Defend_Your_Castle
 
         private void HUD_ConsumablesListItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            // Get the shop item that was tapped
-            ShopItem item = (ShopItem)((Image)sender).DataContext;
+            // Make sure the game is NOT paused
+            if (_game.GameState == GameState.InGame)
+            {
+                // Get the shop item that was tapped
+                ShopItem item = (ShopItem)((Image)sender).DataContext;
 
-            // Use the item while in game
-            item.UseItemInGame();
+                // Use the item while in game
+                item.UseItemInGame();
 
-            // Remove the item from the HUD
-            HUD_ConsumablesList.Items.Remove(item);
+                // Remove the item from the HUD
+                HUD_ConsumablesList.Items.Remove(item);
+            }
         }
 
         // Pause Menu

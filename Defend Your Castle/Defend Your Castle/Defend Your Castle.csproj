@@ -299,6 +299,7 @@
     <Content Include="Content\Graphics\Armored Goblin.png" />
     <Content Include="Content\Graphics\CastleIcon50x50.png" />
     <Content Include="Content\Graphics\Game Over Sprite.png" />
+    <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big ShopIcon.png" />
     <Content Include="Content\Graphics\Big Spear.png" />
@@ -323,7 +324,6 @@
     <Content Include="Content\Graphics\Gold Coin.png" />
     <Content Include="Content\Graphics\HUD - Final Mockup.png" />
     <Content Include="Content\Graphics\Level Background.png" />
-    <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\OptionsScreenBackground.png" />
     <Content Include="Content\Graphics\PlayerCastle.png" />
     <Content Include="Content\Graphics\PlayerCastleFortified.png" />

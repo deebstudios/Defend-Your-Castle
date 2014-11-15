@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Defend_Your_Castle
 {
-    public sealed class CastleUpgrade : ShopItem
+    public sealed class ReinforceFort : ShopItem
     {
         // The amount of health to upgrade the castle
         private int HealthIncrease;
 
-        public CastleUpgrade(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
+        public ReinforceFort(Player shopPlayer, Shop shop) : base(shopPlayer, shop)
         {
             // Set the properties of the item
             Name = "Reinforce Fort";
             
             // Set the health increase
-            HealthIncrease = 250;
+            HealthIncrease = 200;
 
             BasePrice = price = 750;
 

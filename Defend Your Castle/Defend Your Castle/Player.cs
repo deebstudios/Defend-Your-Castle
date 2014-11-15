@@ -415,9 +415,6 @@ namespace Defend_Your_Castle
 
         public override void Update(Level level)
         {
-            // Get the last touch gesture (if any)
-            TouchLocation? touchLoc = Input.GetTouchLocation();
-
             //Check for switching weapons via keyboard input
             CheckSwitchWeapon();
 
@@ -427,33 +424,40 @@ namespace Defend_Your_Castle
                 Attack(level);
             }
             // Check if the player touched the screen
-            else if (touchLoc != null)
+            else
             {
-                // Get the delta of a potential swipe gesture
-                float delta = Input.GetSwipeDelta(touchLoc);
+                // Get the last touch gesture (if any)
+                TouchLocation? touchLoc = Input.GetTouchLocation();
 
-                // Check if the screen was swiped
-                if (Input.IsScreenSwiped(delta) == true)
+                // Make sure a touch gesture exists
+                if (touchLoc != null)
                 {
-                    // Get the new weapon that should be selected
-                    int NewWeaponNum = ((delta < 0) ? (CurWeapon - 1) : (CurWeapon + 1));
+                    // Get the delta of a potential swipe gesture
+                    float delta = Input.GetSwipeDelta(touchLoc);
 
-                    // Switch to the Spear if the player swiped left at the Sword
-                    if (NewWeaponNum < 0)
-                        NewWeaponNum = (Weapons.Length - 1);
-                    else // Switch to the Sword if the player swiped right at the Spear
-                        NewWeaponNum %= Weapons.Length;
+                    // Check if the screen was swiped
+                    if (Input.IsScreenSwiped(delta) == true)
+                    {
+                        // Get the new weapon that should be selected
+                        int NewWeaponNum = ((delta < 0) ? (CurWeapon - 1) : (CurWeapon + 1));
 
-                    // Switch the weapon
-                    CheckSwitchWeapon(NewWeaponNum);
+                        // Switch to the Spear if the player swiped left at the Sword
+                        if (NewWeaponNum < 0)
+                            NewWeaponNum = (Weapons.Length - 1);
+                        else // Switch to the Sword if the player swiped right at the Spear
+                            NewWeaponNum %= Weapons.Length;
 
-                    //If we didn't hit an enemy when swiping, don't penalize the player by decrementing the number of attempted attacks
-                    if (TouchHit == false) level.DecrementNumAttacks();
-                }
-                // Check if the screen was tapped
-                else if (Input.IsScreenTapped(touchLoc) == true)
-                {
-                    Attack(level, touchLoc);
+                        // Switch the weapon
+                        CheckSwitchWeapon(NewWeaponNum);
+
+                        //If we didn't hit an enemy when swiping, don't penalize the player by decrementing the number of attempted attacks
+                        if (TouchHit == false) level.DecrementNumAttacks();
+                    }
+                    // Check if the screen was tapped
+                    else if (Input.IsScreenTapped(touchLoc) == true)
+                    {
+                        Attack(level, touchLoc);
+                    }
                 }
             }
 
