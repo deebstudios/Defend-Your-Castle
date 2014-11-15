@@ -20,7 +20,8 @@ namespace Defend_Your_Castle
 
             MaxLevel = 5;
 
-            price = 5000;
+            BasePrice = price = 4000;
+            PriceIncrease = 1000;
 
             Description = "+3% reduced damage\n";
             //"Strengthen your fort's walls to\nbetter defend against enemy attacks!\n+3% reduced damage";

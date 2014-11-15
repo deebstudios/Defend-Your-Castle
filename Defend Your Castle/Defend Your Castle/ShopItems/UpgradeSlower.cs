@@ -15,7 +15,8 @@ namespace Defend_Your_Castle
 
             MaxLevel = 2;
 
-            price = 7500;
+            BasePrice = price = 7500;
+            PriceIncrease = 3000;
 
             Description = "Enhances Slower powers";
             //"Increase the slow power and slow\nduration of your Slowers.";

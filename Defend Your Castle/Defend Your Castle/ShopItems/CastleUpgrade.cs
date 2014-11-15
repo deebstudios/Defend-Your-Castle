@@ -19,7 +19,7 @@ namespace Defend_Your_Castle
             // Set the health increase
             HealthIncrease = 250;
 
-            price = 750;
+            BasePrice = price = 750;
 
             Description = "+" + HealthIncrease + " Max Health";
             // "Increase the durability\nof your fort's walls.\n+" + HealthIncrease + " Max Health";

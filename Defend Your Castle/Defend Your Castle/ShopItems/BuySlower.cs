@@ -14,8 +14,8 @@ namespace Defend_Your_Castle
             Name = "Slower";
 
             MaxLevel = 3;
-            
-            price = 10000;
+
+            BasePrice = price = 9000;
 
             Description = "Slows enemy movement and attack speeds";
             //"A loyal helper that slows\nenemy movement and attack speeds.\n";

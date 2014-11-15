@@ -26,8 +26,14 @@ namespace Defend_Your_Castle
         // A brief description of the item
         protected String description;
 
+        // The base price of the item
+        protected int BasePrice;
+
         // The price of the item
         protected int price;
+
+        // The amount to increase the cost of the item after each level
+        protected int PriceIncrease;
 
         //The level and max level of the shop item (how many times it can be upgraded)
         protected int MaxLevel;
@@ -55,11 +61,17 @@ namespace Defend_Your_Castle
         public int Price
         {
             get { return price; }
+            set
+            {
+                price = value;
+                OnPropertyChanged("PriceString");
+            }
         }
 
         public String PriceString
         {
-            get { return price.ToString(); }
+            // Display "Maxed Out" if the player has fully upgraded the ShopItem; otherwise, display the price
+            get { return ((CurLevel < MaxLevel || MaxLevel == InfinitePurchases) ? price.ToString() : "Maxed Out"); }
         }
 
         // The string representation of the current level of the ShopItem
@@ -82,6 +94,11 @@ namespace Defend_Your_Castle
         public int GetCurrentLevel
         {
             get { return CurLevel; }
+        }
+
+        public int GetMaxLevel
+        {
+            get { return MaxLevel; }
         }
 
         public ShopItem(Player shopPlayer, Shop shop)
@@ -121,6 +138,9 @@ namespace Defend_Your_Castle
 
             // Make sure the current level doesn't go below 0
             if (CurLevel < 0) CurLevel = 0;
+
+            // Set the new price of the item
+            Price = BasePrice + (CurLevel * PriceIncrease);
 
             // Set the displayed level
             SetDisplayedLevel();

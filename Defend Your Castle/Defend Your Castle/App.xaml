@@ -1398,6 +1398,9 @@
                 <Setter Property="Opacity" Value="0.30"/>
             </Style>
 
+            <!-- XAML Converters -->
+
+            <local:PriceToVisibilityConverter x:Key="PriceStringToVisibility"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

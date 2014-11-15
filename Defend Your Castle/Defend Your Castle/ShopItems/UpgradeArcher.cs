@@ -15,7 +15,8 @@ namespace Defend_Your_Castle
 
             MaxLevel = 2;
 
-            price = 10000;
+            BasePrice = price = 10000;
+            PriceIncrease = 6000;
 
             Description = "Enhances Archer range and power";
             //"Increase the power and range\nof your Archers.";

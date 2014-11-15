@@ -183,6 +183,7 @@
     <Compile Include="Weapons\Sword.cs" />
     <Compile Include="Weapons\Warhammer.cs" />
     <Compile Include="Weapons\Weapon.cs" />
+    <Compile Include="XamlConverters.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

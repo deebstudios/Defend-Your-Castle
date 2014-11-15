@@ -212,6 +212,12 @@
             <Setter Property="Margin" Value="0,5,10,7"/>
         </Style>
 
+        <Style x:Key="Shop_GameSavedStyle" BasedOn="{StaticResource Shop_NextLevelStyle}" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Margin" Value="10,5,0,7"/>
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+
         <Style x:Key="Shop_ShopSectionStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
@@ -249,7 +255,7 @@
         <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Margin" Value="5,1,0,0"/>
+            <Setter Property="Margin" Value="0,1,0,0"/>
             <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
         
@@ -267,6 +273,7 @@
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Source" Value="Content/Graphics/ShopIcons/Big ShopIcon.png"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
@@ -331,8 +338,10 @@
                                 
                                 <!-- Price -->
                                 <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
-                                    <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}" />
-                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}" Text="{Binding Path=PriceString}" />
+                                    <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}"
+                                           Visibility="{Binding Path=PriceString, Converter={StaticResource PriceStringToVisibility}}" />
+                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}"
+                                               Text="{Binding Path=PriceString, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </Grid>
                             
@@ -1578,13 +1587,12 @@
 
                     <!-- Game Saved Text -->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <TextBlock Name="Shop_GameSavedMessage" Style="{StaticResource Shop_NextLevelStyle}" 
-                                   Text="Game Saved!" Opacity="0" Margin="10,5,0,7" Foreground="Blue">
+                        <TextBlock Name="Shop_GameSavedMessage" Style="{StaticResource Shop_GameSavedStyle}" Text="Game Saved!">
                             <TextBlock.Resources>
                                 <!-- Show Game Saved Text Animation -->
-                                <Storyboard x:Name="Shop_ShowGameSavedAnim" x:FieldModifier="public" AutoReverse="True">
-                                    <DoubleAnimation Storyboard.TargetName="Shop_GameSavedMessage" Storyboard.TargetProperty="Opacity"
-                                                     From="0" To="1" Duration="0:0:1"/>
+                                <Storyboard x:Name="Shop_ShowGameSavedAnim" x:FieldModifier="public">
+                                    <DoubleAnimation Storyboard.TargetName="Shop_GameSavedMessage"
+                                                     Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:2"/>
                                 </Storyboard>
                             </TextBlock.Resources>
                         </TextBlock>

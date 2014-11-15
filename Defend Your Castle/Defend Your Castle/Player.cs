@@ -87,9 +87,6 @@ namespace Defend_Your_Castle
             // Set the player's base health and maximum health
             Health = MaxHealth = 1000;
 
-            // Start the player out with some gold
-            Gold = 100;
-
             // Select the Sword weapon by default
             Weapons = new Weapon[] { new Sword(), new Warhammer(), new Spear() };
 

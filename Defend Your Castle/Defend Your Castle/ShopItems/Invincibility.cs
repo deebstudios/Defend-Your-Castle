@@ -15,7 +15,7 @@ namespace Defend_Your_Castle
             // Set the max number of uses to 1
             MaxLevel = 1;
 
-            price = 1000;
+            BasePrice = price = 1000;
 
             Description = "5 seconds of invulnerability. One allowed at a time";
             // "Shields your fort with an\nimpervious energy for 5 seconds.\nYou can have only one at a time.";

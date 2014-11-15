@@ -101,7 +101,8 @@ namespace Defend_Your_Castle
                 // Update the Shop UI with the new gold amount
                 ShopPlayer.UpdateGoldAmountInShop();
             }
-            else if (ShopPlayer.Gold < item.Price) // The player doesn't have enough gold for the item
+            // The player doesn't have enough gold for the item, and the item isn't maxed out
+            else if ((ShopPlayer.Gold < item.Price) && (item.GetMaxLevel == ShopItem.InfinitePurchases || item.GetCurrentLevel < item.GetMaxLevel))
             {
                 // Notify the player of this
                 gamePage.Shop_NotEnoughGoldFlyout.ShowAt(TheButton);
