@@ -1568,13 +1568,14 @@
                 <!-- Items -->
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="0.205*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.57*"/>
+                        <RowDefinition Height="0.7735*"/>
                     </Grid.RowDefinitions>
 
-                    <Viewbox>
+                    <Viewbox Grid.Row="1">
                         <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" Width="350"
-                                  x:FieldModifier="public" Margin="0,30,0,0" />
+                                  x:FieldModifier="public" Margin="0" />
                     </Viewbox>
                 </Grid>
 
