@@ -30,6 +30,7 @@ namespace Defend_Your_Castle
         public static Texture2D LevelBG;
         public static Texture2D DaySun;
         public static Texture2D NightMoon;
+        public static Texture2D BGCloud;
 
         public static Texture2D Sword;
         public static Texture2D Spear;
@@ -112,6 +113,7 @@ namespace Defend_Your_Castle
             LevelBG = LoadGraphic(Content, "Level Background");
             DaySun = LoadGraphic(Content, "Sun");
             NightMoon = LoadGraphic(Content, "Moon");
+            BGCloud = LoadGraphic(Content, "Cloud");
 
             Sword = Content.Load<Texture2D>(GraphicsDir + "Alpha Sword");
             Spear = Content.Load<Texture2D>(GraphicsDir + "Spear");

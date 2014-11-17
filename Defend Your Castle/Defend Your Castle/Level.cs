@@ -436,6 +436,9 @@ namespace Defend_Your_Castle
             spriteBatch.Draw(LoadAssets.DaySun, new Vector2(Game1.ScreenHalf.X + SunX, SunY + NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
             spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + (SunX + 2), MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
+            //Draw the clouds
+            spriteBatch.Draw(LoadAssets.BGCloud, new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
+
             DrawEnemies(spriteBatch);
 
             //Draw the player

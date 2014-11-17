@@ -298,6 +298,7 @@
     <Content Include="Content\Graphics\Armored Goblin Sheet.png" />
     <Content Include="Content\Graphics\Armored Goblin.png" />
     <Content Include="Content\Graphics\CastleIcon50x50.png" />
+    <Content Include="Content\Graphics\Cloud.png" />
     <Content Include="Content\Graphics\Game Over Sprite.png" />
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
