@@ -17,7 +17,7 @@ namespace Defend_Your_Castle
         //The constant that helps determine the rate that the fade changes and the fade that changes day to night
         //The NightFactor determines if a day starts out in day or vice versa
         private const float FadeRate = 185f;
-        private const float CelestialDepth = .01f;
+        public const float CelestialDepth = .01f;
         private Fade NightFade;
         private int NightFactor;
 
@@ -59,6 +59,12 @@ namespace Defend_Your_Castle
 
         // Stores the number of enemies the player's helpers have killed
         public int NumHelperKills;
+
+        //Gets the night fade
+        public Fade GetNightFade
+        {
+            get { return NightFade; }
+        }
 
         //The starting Y position of the moon
         private float MoonY
@@ -437,7 +443,7 @@ namespace Defend_Your_Castle
             spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + (SunX + 2), MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
             //Draw the clouds
-            spriteBatch.Draw(LoadAssets.BGCloud, new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
+            spriteBatch.Draw(LoadAssets.BGClouds[2], new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
 
             DrawEnemies(spriteBatch);
 

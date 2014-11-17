@@ -134,6 +134,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CloudGenerator.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Enemies\ArmoredEnemy.cs" />
@@ -299,6 +300,8 @@
     <Content Include="Content\Graphics\Armored Goblin.png" />
     <Content Include="Content\Graphics\CastleIcon50x50.png" />
     <Content Include="Content\Graphics\Cloud.png" />
+    <Content Include="Content\Graphics\Cloud2.png" />
+    <Content Include="Content\Graphics\Cloud3.png" />
     <Content Include="Content\Graphics\Game Over Sprite.png" />
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />

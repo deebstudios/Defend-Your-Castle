@@ -303,7 +303,7 @@ namespace Defend_Your_Castle
             if (rotation != 0f)
             {
                 float pi90 = (float)MathHelper.PiOver2;
-                float pi180 = (float)Math.PI;
+                //float pi180 = (float)Math.PI;
                 float pi270 = (float)Math.PI + MathHelper.PiOver2;
 
                 //Adjust the position based on how these rotation values affect how the sprite draws
