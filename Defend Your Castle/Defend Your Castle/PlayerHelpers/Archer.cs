@@ -16,7 +16,7 @@ namespace Defend_Your_Castle
         //The amount the Archer's stats increase by each level
         private const int ChanceIncrease = 1;
         private const int RangeIncrease = 75;
-        private const float SpeedIncrease = 250f;
+        private const float SpeedIncrease = 200f;//250f;
 
         //The range of the archer and its chance of hitting a nearby enemy; these can be increased with level
         private int AttackRange;
@@ -37,10 +37,10 @@ namespace Defend_Your_Castle
             Animation = new Animation(new AnimFrame(new Rectangle(0, 0, 22, 35), 0f));
             AttackingAnim = new Animation(new AnimFrame(new Rectangle(23, 0, 24, 35), 200f, new Vector2(2, 0)), new AnimFrame(new Rectangle(48, 0, 26, 35), 500f, new Vector2(4, 0)));
 
-            AttackRange = 50;
-            AttackChance = 6;
+            AttackRange = 75;//50;
+            AttackChance = 5;//6;
 
-            AttackTime = 1000;
+            AttackTime = 900;//1000;
             PrevAttack = 0f;
 
             HelperIndex = index;
