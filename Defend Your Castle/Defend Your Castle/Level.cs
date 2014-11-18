@@ -47,6 +47,9 @@ namespace Defend_Your_Castle
         // Instance of the EnemySpawning class - used to spawn enemies
         private EnemySpawning EnemySpawn;
 
+        //The cloud generator for the level
+        private CloudGenerator cloudGenerator;
+
         // Stores the amount of Gold the player has when the level starts
         // Used to calculate the amount of Gold the player earned in the level
         private int StartingGold;
@@ -141,6 +144,9 @@ namespace Defend_Your_Castle
             // Initialize the EnemySpawning class
             EnemySpawn = new EnemySpawning(this);
 
+            //Create cloud generator
+            cloudGenerator = new CloudGenerator();
+
             //This is here just in case the level somehow gets set to something other than 1
             if (LevelNum >= EnemySpawning.StartNewEnem)
             {
@@ -199,6 +205,9 @@ namespace Defend_Your_Castle
             
             // Check if a new enemy can be added to the spawn list, and add the enemy if so
             EnemySpawn.CheckAddSpawnEnemy();
+
+            //Refresh the cloud generator
+            cloudGenerator.Refresh();
 
             // Set the level end time
             LevelEndTime = Game1.ActiveTime + LevelDuration;
@@ -417,6 +426,9 @@ namespace Defend_Your_Castle
             // Update the enemy spawn
             EnemySpawn.Update();
 
+            //Update the cloud generator
+            cloudGenerator.Update(this);
+
             // Check if the level can be ended
             CheckEndLevel();
         }
@@ -443,7 +455,8 @@ namespace Defend_Your_Castle
             spriteBatch.Draw(LoadAssets.NightMoon, new Vector2(Game1.ScreenHalf.X + (SunX + 2), MoonY - NightFade.GetCurFade), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth);
 
             //Draw the clouds
-            spriteBatch.Draw(LoadAssets.BGClouds[2], new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
+            cloudGenerator.Draw(spriteBatch, this);
+            //spriteBatch.Draw(LoadAssets.BGClouds[2], new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
 
             DrawEnemies(spriteBatch);
 

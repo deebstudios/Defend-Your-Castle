@@ -302,6 +302,8 @@
     <Content Include="Content\Graphics\Cloud.png" />
     <Content Include="Content\Graphics\Cloud2.png" />
     <Content Include="Content\Graphics\Cloud3.png" />
+    <Content Include="Content\Graphics\CloudLongerSmaller.png" />
+    <Content Include="Content\Graphics\CloudSmaller.png" />
     <Content Include="Content\Graphics\Game Over Sprite.png" />
     <Content Include="Content\Graphics\Moon.png" />
     <Content Include="Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
