@@ -160,6 +160,9 @@ namespace Defend_Your_Castle
         {
             // Create a new level
             Game.level = new Level(new Player(GamePage), Game);
+            
+            // Clear any clouds from the generator
+            Game.level.GetCloudGenerator.Clear();
 
             // Create a new shop
             Game.shop = new Shop(GamePage, Game.level.GetPlayer);

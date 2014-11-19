@@ -124,6 +124,12 @@ namespace Defend_Your_Castle
             get { return EnemySpawn.CanStartSpawning; }
         }
 
+        // Returns the Level's CloudGenerator object
+        public CloudGenerator GetCloudGenerator
+        {
+            get { return cloudGenerator; }
+        }
+
         public Level(Player play, Game1 game)
         {
             player = play;

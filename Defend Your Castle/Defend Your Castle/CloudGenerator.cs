@@ -78,7 +78,7 @@ namespace Defend_Your_Castle
         }
 
         //Clears the cloud generator
-        private void Clear()
+        public void Clear()
         {
             Clouds.Clear();
         }
