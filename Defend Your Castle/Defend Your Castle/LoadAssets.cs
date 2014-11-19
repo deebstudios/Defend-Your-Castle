@@ -68,11 +68,11 @@ namespace Defend_Your_Castle
         public static SpriteFont DYFFont;
 
         //Music
-        public static SoundEffect TitleScreenMusic;
-        public static SoundEffect ShopMusic;
-        public static SoundEffect LevelMusic;
-        public static SoundEffect GameOver;
-        public static SoundEffect Victory;
+        public static Song TitleScreenMusic;
+        public static Song ShopMusic;
+        public static Song LevelMusic;
+        public static Song GameOver;
+        public static Song Victory;
 
         //Sounds
         public static SoundEffect WeaponSwing;
@@ -163,11 +163,11 @@ namespace Defend_Your_Castle
 
         private static void LoadMusic(ContentManager Content)
         {
-            TitleScreenMusic = Content.Load<SoundEffect>(MusicDir + "Home Base Groove (Edited)");
-            ShopMusic = Content.Load<SoundEffect>(MusicDir + "Itty Bitty 8 Bit");
-            LevelMusic = Content.Load<SoundEffect>(MusicDir + "Rollin at 5 (Edited)");
-            GameOver = Content.Load<SoundEffect>(MusicDir + "Game Over (spazzo-1493__game-over)");
-            Victory = Content.Load<SoundEffect>(MusicDir + "Funk Game Loop (Edited)");
+            TitleScreenMusic = Content.Load<Song>(MusicDir + "Home Base Groove (Edited)");
+            ShopMusic = Content.Load<Song>(MusicDir + "Itty Bitty 8 Bit");
+            LevelMusic = Content.Load<Song>(MusicDir + "Rollin at 5 (Edited)");
+            GameOver = Content.Load<Song>(MusicDir + "Game Over (spazzo-1493__game-over)");
+            Victory = Content.Load<Song>(MusicDir + "Funk Game Loop (Edited)");
         }
     }
 }

@@ -288,7 +288,6 @@
     <Content Include="Assets\StoreLogos\DefendYourFortLogo 70x70.scale-80.png" />
     <Content Include="Assets\StoreLogos\DefendYourFortLogo 868x420.png" />
     <Content Include="Assets\StoreLogos\DefendYourFortLogo 98x98.png" />
-    <Content Include="Content\G Character.png" />
     <Content Include="Content\Graphics\Archer.png" />
     <Content Include="Content\Graphics\ArcherLvl2.png" />
     <Content Include="Content\Graphics\ArcherLvl3.png" />
@@ -373,28 +372,13 @@
     <Content Include="Content\Graphics\Title Screen Background.png" />
     <Content Include="Content\Graphics\Victory Screen.png" />
     <Content Include="Content\Graphics\Victory Text.png" />
-    <Content Include="Content\H Character.png" />
-    <Content Include="Content\I Character.png" />
-    <Content Include="Content\J Character.png" />
-    <Content Include="Content\K Character.png" />
-    <Content Include="Content\L Character.png" />
-    <Content Include="Content\M Character.png" />
     <Content Include="Content\Graphics\ScalableBox.png" />
-    <Content Include="Content\Music\Home Base Groove.xnb" />
+    <Content Include="Content\Music\Funk Game Loop %28Edited%29.wma" />
+    <Content Include="Content\Music\Game Over %28spazzo-1493__game-over%29.wma" />
+    <Content Include="Content\Music\Home Base Groove %28Edited%29.wma" />
+    <Content Include="Content\Music\Itty Bitty 8 Bit.wma" />
     <Content Include="Content\Music\Itty Bitty 8 Bit.xnb" />
-    <Content Include="Content\N Character.png" />
-    <Content Include="Content\O Character.png" />
-    <Content Include="Content\P Character.png" />
-    <Content Include="Content\Q Character.png" />
-    <Content Include="Content\R Character.png" />
-    <Content Include="Content\S Character.png" />
-    <Content Include="Content\T Character.png" />
-    <Content Include="Content\U Character.png" />
-    <Content Include="Content\V Character.png" />
-    <Content Include="Content\W Character.png" />
-    <Content Include="Content\X Character.png" />
-    <Content Include="Content\Y Character.png" />
-    <Content Include="Content\Z Character.png" />
+    <Content Include="Content\Music\Rollin at 5 %28Edited%29.wma" />
     <Content Include="Content\Fonts\DYFFont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -411,9 +395,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Music\Game Over %28spazzo-1493__game-over%29.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Music\Funk Game Loop.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Music\Rollin at 5 %28Edited%29.xnb">
@@ -433,14 +414,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\A Character.png" />
     <Content Include="Content\Graphics\Alpha Sword.png" />
     <Content Include="Content\Graphics\Alpha Warhammer.png" />
-    <Content Include="Content\B Character.png" />
-    <Content Include="Content\C Character.png" />
-    <Content Include="Content\D Character.png" />
-    <Content Include="Content\E Character.png" />
-    <Content Include="Content\F Character.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -63,7 +63,7 @@ namespace Defend_Your_Castle
             //graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
 
             Content.RootDirectory = "Content";
-
+            
             // Get the resolution scale factor
             ResolutionScaleFactor = new Vector2((ScreenSize.X / Window.ClientBounds.Width), (ScreenSize.Y / Window.ClientBounds.Height));
 
@@ -377,7 +377,7 @@ namespace Defend_Your_Castle
             //Update active time if the game is not paused
             if (GameState == GameState.InGame)
                 activeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            
+
             // Check which game state the player is in
             switch (GameState)
             {

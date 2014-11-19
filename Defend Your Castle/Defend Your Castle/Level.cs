@@ -406,8 +406,8 @@ namespace Defend_Your_Castle
                 }
             }
 
-            //Play the normal weapon swing sound if we havent made an ineffective hit
-            if (ineffectivehit == false) SoundManager.PlaySound(LoadAssets.WeaponSwing);
+            //Play the normal weapon swing sound if we havent made an ineffective hit or there are fewer than 25 enemies
+            if (ineffectivehit == false && Enemies.Count < 20) SoundManager.PlaySound(LoadAssets.WeaponSwing);
 
             return hitenem;
         }
