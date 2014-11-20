@@ -1,0 +1,4 @@
+MainPackage=C:\Users\hydrakiller4000\Documents\Other Projects\Games\Defend Your Castle\Defend Your Castle\Defend Your Castle\bin\Windows8\Release\Defend Your Castle_1.0.0.0_Bundle\Defend Your Castle_1.0.0.0_AnyCPU.appx
+SymbolPackage=C:\Users\hydrakiller4000\Documents\Other Projects\Games\Defend Your Castle\Defend Your Castle\Defend Your Castle\AppPackages\Defend Your Castle_1.0.0.0_Test\Defend Your Castle_1.0.0.0_AnyCPU.appxsym
+ResourcePack=C:\Users\hydrakiller4000\Documents\Other Projects\Games\Defend Your Castle\Defend Your Castle\Defend Your Castle\bin\Windows8\Release\Defend Your Castle_1.0.0.0_Bundle\Defend Your Castle_1.0.0.0_scale-140.appx
+ResourcePack=C:\Users\hydrakiller4000\Documents\Other Projects\Games\Defend Your Castle\Defend Your Castle\Defend Your Castle\bin\Windows8\Release\Defend Your Castle_1.0.0.0_Bundle\Defend Your Castle_1.0.0.0_scale-180.appx

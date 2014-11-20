@@ -12,10 +12,13 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Defend Your Castle_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Defend Your Castle_StoreKey.pfx</PackageCertificateKeyFile>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <TargetFrameworkVersion />
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>71062CAF9C8853296A996361E9F77D97084088D6</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -412,6 +415,9 @@
     <Content Include="Content\Sounds\Switch Weapon %28spookymodem__item-received%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Defend Your Castle_StoreKey.pfx" />
+    <None Include="Defend Your Castle_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Graphics\Alpha Sword.png" />

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="a2ccaf43-330c-488a-93c7-a3acde7023b7" Publisher="CN=hydrakiller4000" Version="1.0.0.0" />
+  <Identity Name="1522DeebStudios.DefendYourFort" Publisher="CN=67F628C4-A696-4195-9432-46B20F54849F" Version="1.0.0.0" />
   <Properties>
     <DisplayName>Defend Your Fort</DisplayName>
     <PublisherDisplayName>Deeb Studios</PublisherDisplayName>
