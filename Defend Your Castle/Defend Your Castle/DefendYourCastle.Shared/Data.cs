@@ -114,8 +114,30 @@ namespace Defend_Your_Castle
         // Loads the game's data. Returns an object array containing the Shop and Level, in that order
         public static async Task<object[]> LoadGameData(GamePage page, Game1 game)
         {
-            // Try to get the player file from its stored location
-            IStorageItem storageItem = await AppVersionData.LocalFolder.TryGetItemAsync("game.sav");
+            #if WINDOWS_APP
+                // Try to get the player file from its stored location
+                IStorageItem storageItem = await AppVersionData.LocalFolder.TryGetItemAsync("game.sav");
+            #else
+                // Create a new storage item
+                IStorageItem storageItem = null;
+
+                // Get a list of all of the files in the stored location
+                IReadOnlyList<StorageFile> files = await AppVersionData.LocalFolder.GetFilesAsync();
+
+                // Loop through all of the files in the folder
+                for (int i = 0; i < files.Count; i++)
+                {
+                    // Check if the file has the same name as the file we're looking for
+                    if (files[i].Name == "game.sav")
+                    {
+                        // Set the storage item equal to the file since we found it
+                        storageItem = files[i];
+
+                        // Exit the loop
+                        break;
+                    }
+                }
+            #endif
             
             // Check if the file was found
             if (storageItem == null)

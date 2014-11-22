@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
-using SharpDX;
-using SharpDX.XAudio2;
-using SharpDX.Windows;
 using Windows.Storage;
 
 namespace Defend_Your_Castle

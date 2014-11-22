@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Defend_Your_Castle
+namespace DefendYourCastle
 {
     public sealed class FortifyWalls : ShopItem
     {

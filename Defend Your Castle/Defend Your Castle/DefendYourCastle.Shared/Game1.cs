@@ -19,7 +19,7 @@ namespace Defend_Your_Castle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         // Reference to GamePage.xaml
         public GamePage GamePage;
 
@@ -63,12 +63,14 @@ namespace Defend_Your_Castle
             //graphics.PreferredBackBufferHeight = (int)ScreenSize.Y;
 
             Content.RootDirectory = "Content";
-            
+
             // Get the resolution scale factor
             ResolutionScaleFactor = new Vector2((ScreenSize.X / Window.ClientBounds.Width), (ScreenSize.Y / Window.ClientBounds.Height));
 
-            // Show the mouse on the game screen
-            IsMouseVisible = true;
+            #if WINDOWS_APP
+                // Show the mouse on the game screen
+                IsMouseVisible = true;
+            #endif
         }
 
         static Game1()
@@ -101,13 +103,13 @@ namespace Defend_Your_Castle
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            
+
             // Enable the tap gesture
             TouchPanel.EnabledGestures = GestureType.Tap;
 
             // Set the game state to indicate the player is viewing a screen
             GameState = GameState.Screen;
-            
+
             // Load the volume settings
             SoundManager.LoadVolumeSettings();
 
@@ -128,7 +130,7 @@ namespace Defend_Your_Castle
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            
+
             // Stop all songs
             SoundManager.StopSong();
 
@@ -270,7 +272,7 @@ namespace Defend_Your_Castle
                 case GameState.GameOver:
                     ShowGrid_Screen();
                     screenManager.ChangeScreen(ScreenManager.Screens.GameOverScreen);
-                    
+
                     break;
                 case GameState.Victory:
                     ShowGrid_Screen();
@@ -329,7 +331,7 @@ namespace Defend_Your_Castle
 
             // Add all consumables to the HUD
             shop.AddConsumablesToHUD();
-            
+
             // Apply the damage reduction to the player's castle if he/she purchased any Strengthen Walls
             level.GetPlayer.StrengthenCastle(shop.GetStrengthenWallsLevel);
 
@@ -381,7 +383,7 @@ namespace Defend_Your_Castle
                     break;
                 case GameState.InGame: // Update the in-game objects
                     level.Update();
-                    
+
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
                         ChangeGameState(GameState.Paused);
@@ -400,10 +402,10 @@ namespace Defend_Your_Castle
                 case GameState.HowToPlay:
                 case GameState.GameOver:
                 case GameState.Victory:
-                    
+
                     break;
             }
-
+            
             #if DEBUG
                 //Debug commands
                 Debug.Update();
@@ -415,7 +417,7 @@ namespace Defend_Your_Castle
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             Matrix scaleMatrix = Matrix.CreateScale(new Vector3(graphics.PreferredBackBufferWidth / ScreenSize.X, graphics.PreferredBackBufferHeight / ScreenSize.Y, 1f));
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, scaleMatrix);
@@ -473,7 +475,7 @@ namespace Defend_Your_Castle
         {
             // Readjust the resolution scale factor based on the new screen resolution/size
             ResolutionScaleFactor = new Vector2((ScreenSize.X / Window.ClientBounds.Width), (ScreenSize.Y / Window.ClientBounds.Height));
-
+            
             // Check if the user is NOT in full screen mode
             if (ApplicationView.GetForCurrentView().IsFullScreen == false)
             {
@@ -489,7 +491,6 @@ namespace Defend_Your_Castle
                 ChangeFullScreenNoticeState(Visibility.Collapsed);
             }
         }
-
 
     }
 }

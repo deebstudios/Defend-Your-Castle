@@ -36,7 +36,7 @@ namespace Defend_Your_Castle
             if (gamePage == null)
             {
                 // Create a main GamePage
-                gamePage = new GamePage(args);
+                gamePage = new GamePage(args.Arguments);
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -63,7 +63,7 @@ namespace Defend_Your_Castle
             var deferral = e.SuspendingOperation.GetDeferral();
 
             // TODO: Save application state and stop any background activity
-			
+
             deferral.Complete();
         }
     }

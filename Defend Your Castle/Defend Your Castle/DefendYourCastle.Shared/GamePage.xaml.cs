@@ -9,7 +9,7 @@ using Windows.ApplicationModel.Activation;
 namespace Defend_Your_Castle
 {
     /// <summary>
-    /// The root page used to display the game.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class GamePage : SwapChainBackgroundPanel
     {
@@ -18,12 +18,12 @@ namespace Defend_Your_Castle
         public double HUD_InnerHPBarWidth;
         public double Shop_InnerHPBarWidth;
 
-        public GamePage(LaunchActivatedEventArgs args)
+        public GamePage(string launchArguments)
         {
             this.InitializeComponent();
 
             // Create the game.
-            _game = XamlGame<Game1>.Create(args, Window.Current.CoreWindow, this);
+            _game = XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, this);
 
             // Set the GamePage of Game1 to the current class
             _game.GamePage = this;
@@ -107,7 +107,7 @@ namespace Defend_Your_Castle
             {
                 // Set the sound volume
                 SoundManager.SetSoundVolume(thevol);
-                
+
                 // Remove the ValueChanged events from the Sliders on the Options and Pause Menus
                 // This is done so that the the ValueChanged event will not proc again for the slider that was updated
                 OptionsScreen_SoundVolume.ValueChanged -= Slider_Volume_ValueChanged;
@@ -209,11 +209,11 @@ namespace Defend_Your_Castle
         {
             // Hide the level end screen
             LevelEnd.Visibility = Visibility.Collapsed;
-            
+
             // Update the player's Health and Gold in the Shop
             _game.level.GetPlayer.UpdateHealthInShop();
             _game.level.GetPlayer.UpdateGoldAmountInShop();
-            
+
             // Show the next level in the shop
             Shop_NextLevel.Text = "Next Level: " + (_game.level.GetLevelNum + 1);
 
@@ -234,10 +234,10 @@ namespace Defend_Your_Castle
         {
             // Get the Button that was clicked
             Button TheButton = (Button)sender;
-            
+
             // Get the ShopItem associated with the Button
             ShopItem shopItem = (ShopItem)TheButton.DataContext;
-            
+
             // Buy the item if possible
             _game.shop.BuyItem(shopItem, TheButton);
         }
@@ -265,7 +265,5 @@ namespace Defend_Your_Castle
             // Enable the "Continue Game" button
             TitleScreen_ContinueGame.IsEnabled = true;
         }
-
-
     }
 }

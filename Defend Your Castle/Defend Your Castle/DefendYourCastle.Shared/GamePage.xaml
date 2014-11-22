@@ -73,7 +73,7 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
-        
+
         <Style x:Key="HUD_ConsumablesListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -117,7 +117,7 @@
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
-        
+
         <Style x:Key="LevelStart_BorderStyle" TargetType="Border">
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Background" Value="White"/>
@@ -243,7 +243,7 @@
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopItemsList_NameStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -258,7 +258,7 @@
             <Setter Property="Margin" Value="0,1,0,0"/>
             <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
@@ -268,7 +268,7 @@
             <Setter Property="TextTrimming" Value="None"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
-        
+
         <Style x:Key="Shop_ShopItemsList_PriceImageStyle" TargetType="Image">
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
@@ -302,12 +302,12 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            
+
                             <!-- Shop Item Image + Level -->
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -324,7 +324,7 @@
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
                                            Text="{Binding Path=LevelString, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
-                            
+
                             <!-- Shop Item Name + Price -->
                             <Grid Grid.Column="1" Margin="5,0,0,0">
                                 <Grid.RowDefinitions>
@@ -335,7 +335,7 @@
                                 <!-- Name -->
                                 <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}"
                                            Margin="0,2,0,0" />
-                                
+
                                 <!-- Price -->
                                 <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
                                     <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}"
@@ -344,7 +344,7 @@
                                                Text="{Binding Path=PriceString, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </Grid>
-                            
+
                             <!-- Shop Item Description -->
                             <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
                         </Grid>
@@ -388,7 +388,7 @@
             <Setter Property="Grid.RowSpan" Value="4"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
-        
+
         <Style x:Key="Shop_SaveGameAnimStyle" BasedOn="{StaticResource LevelStart_BorderStyle}" TargetType="Border">
             <Setter Property="Background" Value="Gold"/>
         </Style>
@@ -405,7 +405,7 @@
                     <Setter Property="Padding" Value="0"/>
                 </Style>
             </Flyout.FlyoutPresenterStyle>
-            
+
             <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" BorderThickness="0" Margin="0" Padding="10">
                 <Viewbox>
                     <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
@@ -437,7 +437,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="0.6*"/>
             </Grid.RowDefinitions>
-            
+
             <!-- Title Screen Styles -->
             <Grid.Resources>
                 <Style x:Key="TitleScreen_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
@@ -455,7 +455,7 @@
             <!-- Background Image -->
             <Image Style="{StaticResource ScreenBackgroundImageStyle}" Grid.RowSpan="2" Margin="30"
                    Source="Content/Graphics/Title Screen Background.png" />
-            
+
             <!-- Defend Your Fort Logo -->
             <Image Style="{StaticResource TitleScreen_LogoStyle}" />
 
@@ -579,7 +579,7 @@
                     <Setter Property="Margin" Value="10"/>
                 </Style>
             </Grid.Resources>
-            
+
             <!-- Game Over Message -->
             <Viewbox>
                 <TextBlock Style="{StaticResource GameOverScreen_TextBlockStyle}" Text="You were defeated" />
@@ -608,13 +608,13 @@
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
-                
+
                 <Style x:Key="HTP_LastScreenBorderStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
                     <Setter Property="Grid.Row" Value="1"/>
                     <Setter Property="Grid.Column" Value="1"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                 </Style>
-                
+
                 <Style x:Key="HTP_RedBoxStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="Red"/>
@@ -622,7 +622,7 @@
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="Margin" Value="0"/>
                 </Style>
-                
+
                 <Style x:Key="HTP_ArrowButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
                     <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
                     <Setter Property="Padding" Value="6,2,6,2"/>
@@ -648,7 +648,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="0.08*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Left arrow button -->
                 <Viewbox>
                     <Button Name="HTP_LeftArrowButton" Style="{StaticResource HTP_ArrowButtonStyle}" BorderThickness="0,1,1,1"
@@ -660,13 +660,13 @@
                     <Button Name="HTP_RightArrowButton" Style="{StaticResource HTP_ArrowButtonStyle}" BorderThickness="1,1,0,1"
                             Content="&#xE27E;" x:FieldModifier="public" />
                 </Viewbox>
-                
+
                 <!-- Exit button -->
                 <Viewbox Grid.Column="2" VerticalAlignment="Bottom">
                     <Button Name="HTP_ExitButton" Style="{StaticResource HTP_ExitButtonStyle}" Content="Exit" x:FieldModifier="public" />
                 </Viewbox>
             </Grid>
-            
+
             <!-- HUD Grid -->
             <Grid Name="HowToPlayScreen_HUD" Margin="20" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
@@ -703,7 +703,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.50*"/>
                         <RowDefinition Height="*"/>
@@ -1007,7 +1007,7 @@
                                    FontWeight="Bold" />
                     </Viewbox>
                 </Grid>
-                
+
                 <Viewbox Grid.Row="2">
                     <!-- Credits Button -->
                     <Button Name="VictoryScreen_Credits" Style="{StaticResource ButtonStyle}" Content="Credits"
@@ -1035,12 +1035,12 @@
                     <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="Margin" Value="0,0,0,30"/>
                 </Style>
-                
+
                 <Style x:Key="CreditsScreen_CreditsStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
                     <Setter Property="FontSize" Value="36"/>
                     <Setter Property="TextAlignment" Value="Center"/>
                 </Style>
-                
+
                 <Style x:Key="CreditsScreen_BackButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
                     <Setter Property="FontSize" Value="32"/>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -1060,7 +1060,7 @@
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!-- Credits + Back Button Grid -->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -1447,7 +1447,7 @@
                 </StackPanel>
             </Viewbox>
         </Border>
-        
+
         <!-- Row 3 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="2">
             <Grid>
@@ -1475,7 +1475,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -1484,7 +1484,7 @@
                             <!-- Top-Left -->
                             <GridView Name="Shop_UpgradesList1" Style="{StaticResource Shop_ShopItemsListStyle}"
                                       x:FieldModifier="public" />
-                            
+
                             <!-- Top-Right -->
                             <GridView Name="Shop_UpgradesList2" Style="{StaticResource Shop_ShopItemsListStyle}"
                                       Grid.Column="1" x:FieldModifier="public" />
@@ -1539,7 +1539,7 @@
 
                             <!-- Bottom-Right -->
                             <GridView Name="Shop_PrepareRepairList4" Style="{StaticResource Shop_ShopItemsListStyle}"
-                                      Grid.Row="1" Grid.Column="1" x:FieldModifier="public" />                            
+                                      Grid.Row="1" Grid.Column="1" x:FieldModifier="public" />
                         </Grid>
                     </Viewbox>
                 </Grid>
@@ -1552,7 +1552,7 @@
                 <RowDefinition Height="0.20*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <!-- Items Text -->
             <Viewbox>
                 <TextBlock Style="{StaticResource Shop_ShopSubtitleStyle}" Text="Items"/>
@@ -1564,7 +1564,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.30*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!-- Items -->
                 <Grid>
                     <Grid.RowDefinitions>
