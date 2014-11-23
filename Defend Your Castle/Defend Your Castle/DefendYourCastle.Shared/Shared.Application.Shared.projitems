@@ -74,21 +74,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ArcherSheet.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Spear.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Sword.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Warhammer.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CastleIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CastleIcon50x50.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CastleIconBigger.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Cloud.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Cloud2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\cursor.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\DefendYourFortLogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Goblin.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Gold Coin.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\HUD - Final Mockup.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Level Background.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -120,7 +113,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Spear Goblin Sheet Invincible.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Spear Goblin Sheet.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Sword.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\TestAnim.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Title Screen Background.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Text.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Music\Funk Game Loop %28Edited%29.wma" />
@@ -168,9 +160,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Cloud3.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CloudLongerSmaller.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

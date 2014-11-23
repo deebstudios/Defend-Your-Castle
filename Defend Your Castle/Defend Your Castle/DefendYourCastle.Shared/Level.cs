@@ -462,7 +462,6 @@ namespace Defend_Your_Castle
 
             //Draw the clouds
             cloudGenerator.Draw(spriteBatch, this);
-            //spriteBatch.Draw(LoadAssets.BGClouds[2], new Vector2(120, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, CelestialDepth + .00001f);
 
             DrawEnemies(spriteBatch);
 
