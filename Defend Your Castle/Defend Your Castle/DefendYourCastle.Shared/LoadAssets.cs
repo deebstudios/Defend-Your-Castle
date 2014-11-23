@@ -56,13 +56,13 @@ namespace Defend_Your_Castle
         public static Texture2D RangedArmoredGoblinInvincible;
 
         //Shop graphics
-        public static Texture2D GoldCoin;
-        public static Texture2D FortifyWalls;
-        public static Texture2D Invincibility;
-        public static Texture2D RepairWalls;
-        public static Texture2D RepairWallsx10;
-        public static Texture2D BuyArcher;
-        public static Texture2D UpgradeArcher;
+        //public static Texture2D GoldCoin;
+        //public static Texture2D FortifyWalls;
+        //public static Texture2D Invincibility;
+        //public static Texture2D RepairWalls;
+        //public static Texture2D RepairWallsx10;
+        //public static Texture2D BuyArcher;
+        //public static Texture2D UpgradeArcher;
 
         //Fonts
         public static SpriteFont DYFFont;
@@ -139,13 +139,13 @@ namespace Defend_Your_Castle
             RangedArmoredGoblinInvincible = LoadGraphic(Content, "RangedArmoredGoblinInvincible");
 
             //Shop graphics
-            GoldCoin = LoadGraphic(Content, "Gold Coin");
-            FortifyWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/FortifyWallsIcon");
-            Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
-            RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
-            RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
-            BuyArcher = LoadGraphic(Content, "ShopIcons/ArcherIcon");
-            UpgradeArcher = LoadGraphic(Content, "ShopIcons/UpgradeArcherIcon");
+            //GoldCoin = LoadGraphic(Content, "Gold Coin");
+            //FortifyWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/FortifyWallsIcon");
+            //Invincibility = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/InvincibilityIcon2");
+            //RepairWalls = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsIcon");
+            //RepairWallsx10 = Content.Load<Texture2D>(GraphicsDir + "ShopIcons/RepairWallsx10Icon");
+            //BuyArcher = LoadGraphic(Content, "ShopIcons/ArcherIcon");
+            //UpgradeArcher = LoadGraphic(Content, "ShopIcons/UpgradeArcherIcon");
 
             //Debug graphics
             ScalableBox = Content.Load<Texture2D>(GraphicsDir + "ScalableBox");
