@@ -33,9 +33,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Fade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FadeOnce.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
-      <DependentUpon>GamePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Hitbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hurtbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
@@ -66,12 +63,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Warhammer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Weapon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XamlConverters.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin.png" />
