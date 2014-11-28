@@ -1,10 +1,11 @@
 ﻿using System;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using MonoGame.Framework;
-using Windows.ApplicationModel.Activation;
 
 namespace Defend_Your_Castle
 {
@@ -27,6 +28,9 @@ namespace Defend_Your_Castle
 
             // Set the GamePage of Game1 to the current class
             _game.GamePage = this;
+
+            // Hide the status bar
+            StatusBar.GetForCurrentView().HideAsync();
         }
 
         private async void SwapChainBackgroundPanel_Loaded(object sender, RoutedEventArgs e)

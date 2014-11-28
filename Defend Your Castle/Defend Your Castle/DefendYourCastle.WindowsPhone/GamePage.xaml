@@ -27,6 +27,7 @@
 
         <!-- Weapon Styles -->
         <Style x:Key="HUD_WeaponButtonStyle" BasedOn="{StaticResource RadioButtonStyle}" TargetType="RadioButton">
+            <Setter Property="MinWidth" Value="0"/>
             <Setter Property="Width" Value="80"/>
             <Setter Property="Height" Value="80"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -104,12 +105,14 @@
 
         <!-- Pause Button Styles -->
         <Style x:Key="HUD_PauseButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
             <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Padding" Value="8,4,8,4"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Padding" Value="12,4,12,4"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
         </Style>
 
         <!-- Level Start Styles -->
@@ -618,23 +621,23 @@
                 <Style x:Key="HTP_RedBoxStyle" BasedOn="{StaticResource HTP_BorderStyle}" TargetType="Border">
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="Red"/>
-                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="Margin" Value="0"/>
                 </Style>
 
                 <Style x:Key="HTP_ArrowButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
                     <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
-                    <Setter Property="Padding" Value="4,8,4,8"/>
+                    <Setter Property="Padding" Value="12,4,12,4"/>
                 </Style>
 
                 <Style x:Key="HTP_ExitButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
                     <Setter Property="BorderThickness" Value="1,1,0,0"/>
-                    <Setter Property="Padding" Value="16,8,16,8"/>
+                    <Setter Property="Padding" Value="16,20,16,20"/>
                 </Style>
 
                 <Style x:Key="HTP_Screen_3_TextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="64"/>
+                    <Setter Property="FontSize" Value="44"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="10,0,10,0"/>
                     <Setter Property="Text" Value="="/>
@@ -644,9 +647,9 @@
             <!-- Button Grid -->
             <Grid Name="HowToPlayScreen_ButtonGrid" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.075*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.075*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Left arrow button -->
@@ -668,7 +671,7 @@
             </Grid>
 
             <!-- HUD Grid -->
-            <Grid Name="HowToPlayScreen_HUD" Margin="20" x:FieldModifier="public">
+            <Grid Name="HowToPlayScreen_HUD" Margin="10" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -724,7 +727,7 @@
                                 <Run>fort and protect themselves from you.</Run>
                                 <LineBreak />
                                 <LineBreak />
-                                <Run>Kill a Goblin by tapping or clicking on it.</Run>
+                                <Run>Kill a Goblin by tapping on it.</Run>
                             </TextBlock>
                         </Viewbox>
                     </Border>
@@ -751,7 +754,7 @@
                 <Grid Name="HTP_HUD_WeaponButtonColumn" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"
                       x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.09*"/>
+                        <RowDefinition Height="0.13*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -760,10 +763,10 @@
                         <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" IsChecked="True">
-                                    <Image Source="Content/Graphics/Big Sword.png" Width="48" Height="48" />
+                                    <Image Source="Content/Graphics/Big Sword.png" Width="32" Height="32" />
                                 </RadioButton>
 
-                                <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="30,0,30,0">
+                                <RadioButton Style="{StaticResource HUD_WeaponButtonStyle}" Margin="40,0,40,0">
                                     <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                                 </RadioButton>
 
@@ -813,21 +816,13 @@
                     <Viewbox Name="HTP_HUD_Screen4_WeaponShortcutInfo" Grid.Row="1" x:FieldModifier="public" Visibility="Collapsed">
                         <Border Style="{StaticResource HTP_BorderStyle}" Margin="0,20,20,0">
                             <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="24">
-                                <Run>You can also switch weapons using</Run>
+                                <Run>You can also switch weapons by</Run>
                                 <LineBreak />
-                                <Run>shortcuts. On a keyboard, use the Q, W,</Run>
+                                <Run>swiping to the left or right anywhere</Run>
                                 <LineBreak />
-                                <Run>and E keys to switch to the Sword,</Run>
-                                <LineBreak />
-                                <Run>Warhammer, and Spear, respectively. On</Run>
-                                <LineBreak />
-                                <Run>a touch screen, swipe to the left or</Run>
-                                <LineBreak />
-                                <Run>right anywhere on the screen to switch</Run>
-                                <LineBreak />
-                                <Run>between the three weapons.</Run>
+                                <Run>on the screen.</Run>
                                 <LineBreak /><LineBreak />
-                                <Run>These shortcuts only work while in-game.</Run>
+                                <Run>This shortcut only works while in-game.</Run>
                             </TextBlock>
                         </Border>
                     </Viewbox>
@@ -836,7 +831,7 @@
                 <!-- HUD Third Column - Health, Gold, and Consumable Items -->
                 <Grid Name="HTP_HUD_HealthGoldColumn" Grid.Column="2" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.12*" />
+                        <RowDefinition Height="0.15*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -942,16 +937,18 @@
                 </Grid>
 
                 <!-- HUD Fourth Column - Pause Button -->
-                <Grid Name="HTP_HUD_PauseColumn" Grid.Column="3" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.0565*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <Border Style="{StaticResource HTP_RedBoxStyle}" Grid.Column="3" BorderBrush="Transparent">
+                    <Grid Name="HTP_HUD_PauseColumn" Opacity="0.30" x:FieldModifier="public" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.07*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    <Viewbox>
-                        <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
-                    </Viewbox>
-                </Grid>
+                        <Viewbox>
+                            <Button Style="{StaticResource HUD_PauseButtonStyle}" Content="&#xE292;" />
+                        </Viewbox>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
 
@@ -1064,9 +1061,9 @@
                 <!-- Credits + Back Button Grid -->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.03*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.03*"/>
                     </Grid.RowDefinitions>
 
                     <!-- Credits + Back Button Viewbox -->
@@ -1153,7 +1150,7 @@
             <!-- Second Column - Weapon Buttons -->
             <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.20*"/>
+                    <RowDefinition Height="0.13*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -1165,7 +1162,7 @@
                         </RadioButton>
 
                         <RadioButton Name="HUD_WeaponWarhammer" Style="{StaticResource HUD_WeaponButtonStyle}" Tag="1"
-                                     Margin="5,0,5,0" x:FieldModifier="public" Click="ChangeWeaponButton">
+                                     Margin="40,0,40,0" x:FieldModifier="public" Click="ChangeWeaponButton">
                             <Image Source="Content/Graphics/Big Warhammer.png" Width="32" Height="32"/>
                         </RadioButton>
 
@@ -1224,7 +1221,7 @@
             <!-- Fourth Column - Pause Button -->
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.0565*"/>
+                    <RowDefinition Height="0.07*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 

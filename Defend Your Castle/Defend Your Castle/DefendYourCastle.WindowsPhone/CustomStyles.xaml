@@ -18,6 +18,8 @@
     <!-- Button 
          Default Button style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709909.aspx -->
     <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
         <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
         <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
         <Setter Property="Background" Value="{StaticResource GameButtonBackgroundColor}"/>
@@ -94,9 +96,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!-- Custom Slider Thumb Width -->
-    <x:Double x:Key="SliderThumbWidth">40</x:Double>
     
     <!-- Slider
          Default Slider style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709929.aspx -->
@@ -345,7 +344,7 @@
                                             Changed Width from "{ThemeResource SliderTrackThemeHeight}" -->
                                 <Thumb x:Name="HorizontalThumb" Background="{ThemeResource SliderThumbBackgroundThemeBrush}"
                                                Style="{StaticResource SliderThumbStyle}" DataContext="{TemplateBinding Value}"
-                                               Width="{StaticResource SliderThumbWidth}" Height="{TemplateBinding Height}"
+                                               Width="{TemplateBinding Height}" Height="{TemplateBinding Height}"
                                                Grid.Row="1" Grid.Column="1" AutomationProperties.AccessibilityView="Raw"/>
 
                                 <Rectangle x:Name="HorizontalBorder" Stroke="{TemplateBinding BorderBrush}"
