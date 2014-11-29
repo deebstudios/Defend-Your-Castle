@@ -149,19 +149,21 @@
         <Style x:Key="PauseMenu_VolumeBorderStyle" TargetType="Border">
             <Setter Property="Background" Value="Orange"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
 
         <Style x:Key="PauseMenu_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="FontSize" Value="56"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
         <Style x:Key="PauseMenu_VolumeTextBlockStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="56"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="Margin" Value="0,0,30,0"/>
         </Style>
 
 
@@ -608,6 +610,7 @@
             <!-- HTP = How To Play -->
             <Grid.Resources>
                 <Style x:Key="HTP_BorderStyle" BasedOn="{StaticResource PauseMenu_VolumeBorderStyle}" TargetType="Border">
+                    <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
@@ -1266,7 +1269,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -1275,7 +1278,7 @@
                 <StackPanel>
                     <!-- Volume Controls -->
                     <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}">
-                        <StackPanel>
+                        <StackPanel Style="{StaticResource StackPanelMenuStyle}" Margin="40">
                             <!-- Music Volume -->
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Music Volume: " />
@@ -1283,7 +1286,7 @@
                             </StackPanel>
 
                             <!-- Sound Volume -->
-                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
                                 <TextBlock Style="{StaticResource PauseMenu_VolumeTextBlockStyle}" Text="Sound Volume: " />
                                 <Slider Name="PauseMenu_SoundVolume" Style="{StaticResource SliderStyle}" />
                             </StackPanel>
@@ -1292,7 +1295,7 @@
 
                     <!-- Resume Button -->
                     <Button Name="PauseMenu_Resume" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Resume"
-                            Margin="0,0,0,20" Click="PauseMenu_Resume_Click" />
+                            Margin="0,30,0,30" Click="PauseMenu_Resume_Click" />
 
                     <!-- Quit Button -->
                     <Button Name="PauseMenu_Quit" Style="{StaticResource PauseMenu_ButtonStyle}" Content="Quit"

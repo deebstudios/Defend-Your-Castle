@@ -103,8 +103,8 @@
         <Setter Property="FontFamily" Value="{StaticResource GameFont}"/>
         <Setter Property="FontSize" Value="{StaticResource GameFontSize}"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Width" Value="152"/>
-        <Setter Property="Height" Value="36"/>
+        <Setter Property="Width" Value="252"/>
+        <Setter Property="Height" Value="44"/>
         <Setter Property="Foreground" Value="{StaticResource GameFontColor}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="IsTabStop" Value="False"/>
