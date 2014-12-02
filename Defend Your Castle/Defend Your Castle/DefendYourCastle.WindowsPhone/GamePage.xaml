@@ -190,6 +190,7 @@
             <Setter Property="FontSize" Value="48"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Padding" Value="12"/>
             <Setter Property="Margin" Value="0,0,40,40"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="Opacity" Value="0"/>
@@ -211,6 +212,10 @@
             <Setter Property="FontSize" Value="56"/>
         </Style>
 
+        <Style x:Key="Shop_GoldAmountStyle" BasedOn="{StaticResource HUD_GoldAmountStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+        </Style>
+        
         <Style x:Key="Shop_NextLevelStyle" BasedOn="{StaticResource Shop_ShopTitleStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -243,14 +248,14 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_LevelsStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontSize" Value="21"/>
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_NameStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -258,14 +263,14 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_PriceStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Margin" Value="0,1,0,0"/>
             <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_DescriptionStyle" BasedOn="{StaticResource Shop_ShopItemsList_NameStyle}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Grid.ColumnSpan" Value="2"/>
@@ -285,7 +290,7 @@
             <Setter Property="Width" Value="300"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
                     <TransitionCollection>
@@ -356,7 +361,6 @@
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="FontFamily" Value="Global User Interface"/>
         </Style>
 
         <Style x:Key="Shop_CastleIconStyle" TargetType="Image">
@@ -382,13 +386,6 @@
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         </Style>
 
-        <Style x:Key="Shop_SaveGameStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <Setter Property="FontSize" Value="48"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="10,0,0,10"/>
-        </Style>
-
         <Style x:Key="Shop_SaveGameGridAnimStyle" BasedOn="{StaticResource LevelStart_GridStyle}" TargetType="Grid">
             <Setter Property="Grid.RowSpan" Value="4"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -398,24 +395,36 @@
             <Setter Property="Background" Value="Gold"/>
         </Style>
 
-        <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource Shop_SaveGameStyle}" TargetType="Button">
+        <Style x:Key="Shop_DoneStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="FontSize" Value="56"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="0,0,10,10"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
 
         <!-- "Not Enough Gold" Flyout -->
-        <Flyout x:Name="Shop_NotEnoughGoldFlyout" x:Key="Shop_NotEnoughGoldFlyout" x:FieldModifier="public" Placement="Bottom">
+        <Flyout x:Name="Shop_NotEnoughGoldFlyout" x:Key="Shop_NotEnoughGoldFlyout" x:FieldModifier="public">
             <Flyout.FlyoutPresenterStyle>
                 <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="Padding" Value="0"/>
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
                 </Style>
             </Flyout.FlyoutPresenterStyle>
 
-            <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" BorderThickness="0" Margin="0" Padding="10">
-                <Viewbox>
-                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.75*"/>
+                </Grid.RowDefinitions>
+                
+                <Viewbox VerticalAlignment="Top">
+                    <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" Margin="0">
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
+                    </Border>
                 </Viewbox>
-            </Border>
+            </Grid>    
         </Flyout>
 
         <!-- Full Screen Notice Styles -->
@@ -960,7 +969,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.05*"/>
                 <RowDefinition Height="0.15*"/>
-                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.20*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -977,7 +986,7 @@
 
             <!-- Victory Image -->
             <Viewbox Grid.Row="1">
-                <Image Source="Content/Graphics/Victory Text.png" />
+                <!--<Image Source="Content/Graphics/Victory Text.png" />-->
             </Viewbox>
 
             <!-- Victory Message -->
@@ -997,7 +1006,7 @@
                 <!-- Thank You Message Grid -->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.50*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -1011,7 +1020,7 @@
                 <Viewbox Grid.Row="2">
                     <!-- Credits Button -->
                     <Button Name="VictoryScreen_Credits" Style="{StaticResource ButtonStyle}" Content="Credits"
-                            Margin="20" x:FieldModifier="public" />
+                            Margin="0,0,0,40" x:FieldModifier="public" />
                 </Viewbox>
             </Grid>
         </Grid>
@@ -1310,11 +1319,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.14*"/>
+            <RowDefinition Height="0.17*"/>
         </Grid.RowDefinitions>
 
         <!-- Level End Background -->
-        <Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />
+        <!--<Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />-->
 
         <!-- Level Complete Text -->
         <Viewbox>
@@ -1324,7 +1333,7 @@
 
         <!-- Level Statistics -->
         <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Margin="60">
+            <StackPanel Margin="20">
                 <!-- Kills -->
                 <TextBlock Name="LevelEnd_Kills" Style="{StaticResource LevelEnd_StatsTextStyle}" x:FieldModifier="public" />
 
@@ -1406,7 +1415,7 @@
         </Grid.RowDefinitions>
 
         <!-- Shop Background -->
-        <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
+        <!--<Image Style="{StaticResource Shop_BackgroundImageStyle}" />-->
 
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
@@ -1442,7 +1451,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Name="Shop_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" Margin="5,0,0,0" />
-                        <TextBlock Name="Shop_GoldAmount" Style="{StaticResource HUD_GoldAmountStyle}" x:FieldModifier="public" />
+                        <TextBlock Name="Shop_GoldAmount" Style="{StaticResource Shop_GoldAmountStyle}" x:FieldModifier="public" />
                     </Grid>
                 </StackPanel>
             </Viewbox>
@@ -1470,7 +1479,7 @@
 
                     <!-- Fort Items -->
                     <Viewbox Grid.Row="1">
-                        <Grid Margin="5">
+                        <Grid Margin="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
@@ -1568,9 +1577,9 @@
                 <!-- Items -->
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.205*"/>
+                        <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.7735*"/>
+                        <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Row="1">
@@ -1599,17 +1608,20 @@
                         </TextBlock>
                     </Viewbox>
 
+                    <!-- Next Level Text + Done Button -->
                     <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
+                        <!-- Next Level Text -->
                         <Viewbox VerticalAlignment="Center" HorizontalAlignment="Right">
                             <TextBlock Name="Shop_NextLevel" Style="{StaticResource Shop_NextLevelStyle}" x:FieldModifier="public"
                                        Text="Next Level: 2" />
                         </Viewbox>
 
+                        <!-- Done Button -->
                         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1">
                             <Button Name="Shop_Done" Style="{StaticResource Shop_DoneStyle}" Content="Done" Click="StartNextLevel" />
                         </Viewbox>
