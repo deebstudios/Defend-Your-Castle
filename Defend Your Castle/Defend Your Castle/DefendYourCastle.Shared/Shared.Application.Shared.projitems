@@ -106,6 +106,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Sword.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Title Screen Background.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Text.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Text_WP.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Music\Funk Game Loop %28Edited%29.wma" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Music\Game Over %28spazzo-1493__game-over%29.wma" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Music\Home Base Groove %28Edited%29.wma" />

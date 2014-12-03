@@ -403,30 +403,6 @@
             <Setter Property="Margin" Value="0,0,20,20"/>
         </Style>
 
-        <!-- "Not Enough Gold" Flyout -->
-        <Flyout x:Name="Shop_NotEnoughGoldFlyout" x:Key="Shop_NotEnoughGoldFlyout" x:FieldModifier="public">
-            <Flyout.FlyoutPresenterStyle>
-                <Style TargetType="FlyoutPresenter">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
-                </Style>
-            </Flyout.FlyoutPresenterStyle>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="0.75*"/>
-                </Grid.RowDefinitions>
-                
-                <Viewbox VerticalAlignment="Top">
-                    <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" Margin="0">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
-                    </Border>
-                </Viewbox>
-            </Grid>    
-        </Flyout>
-
         <!-- Full Screen Notice Styles -->
         <Style x:Key="FullScreenNotice_ImageStyle" TargetType="Image">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -968,7 +944,7 @@
         <Grid Name="VictoryScreen" x:FieldModifier="public" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.05*"/>
-                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.18*"/>
                 <RowDefinition Height="0.20*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -986,7 +962,7 @@
 
             <!-- Victory Image -->
             <Viewbox Grid.Row="1">
-                <!--<Image Source="Content/Graphics/Victory Text.png" />-->
+                <Image Source="Content/Graphics/Victory Text_WP.png" />
             </Viewbox>
 
             <!-- Victory Message -->
@@ -1323,7 +1299,7 @@
         </Grid.RowDefinitions>
 
         <!-- Level End Background -->
-        <!--<Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />-->
+        <Image Style="{StaticResource LevelEnd_BackgroundImageStyle}" />
 
         <!-- Level Complete Text -->
         <Viewbox>
@@ -1415,7 +1391,7 @@
         </Grid.RowDefinitions>
 
         <!-- Shop Background -->
-        <!--<Image Style="{StaticResource Shop_BackgroundImageStyle}" />-->
+        <Image Style="{StaticResource Shop_BackgroundImageStyle}" />
 
         <!-- Top Row -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}">
@@ -1427,34 +1403,51 @@
 
         <!-- Row 2 -->
         <Border Style="{StaticResource Shop_ShopSectionStyle}" Grid.Row="1">
-            <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
-                <StackPanel Orientation="Horizontal">
-                    <!-- Castle Icon -->
-                    <Image Style="{StaticResource Shop_CastleIconStyle}" />
+            <Grid>
+                <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Castle Icon -->
+                        <Image Style="{StaticResource Shop_CastleIconStyle}" />
 
-                    <!-- Player Outer HP Bar -->
-                    <Border Name="Shop_OuterHPBar" Style="{StaticResource Shop_OuterHPBarStyle}">
-                        <Grid>
-                            <!-- Player Inner HP Bar -->
-                            <Border Name="Shop_InnerHPBar" Style="{StaticResource Shop_InnerHPBarStyle}" x:FieldModifier="public"/>
+                        <!-- Player Outer HP Bar -->
+                        <Border Name="Shop_OuterHPBar" Style="{StaticResource Shop_OuterHPBarStyle}">
+                            <Grid>
+                                <!-- Player Inner HP Bar -->
+                                <Border Name="Shop_InnerHPBar" Style="{StaticResource Shop_InnerHPBarStyle}" x:FieldModifier="public"/>
 
-                            <!-- Player HP Text -->
-                            <TextBlock Name="Shop_HPText" Style="{StaticResource Shop_HPTextStyle}" x:FieldModifier="public" />
+                                <!-- Player HP Text -->
+                                <TextBlock Name="Shop_HPText" Style="{StaticResource Shop_HPTextStyle}" x:FieldModifier="public" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Player Gold Amount -->
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Name="Shop_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" Margin="5,0,0,0" />
+                            <TextBlock Name="Shop_GoldAmount" Style="{StaticResource Shop_GoldAmountStyle}" x:FieldModifier="public" />
                         </Grid>
+                    </StackPanel>
+                </Viewbox>
+
+                <!-- "Not Enough Gold" Message -->
+                <Viewbox Name="Shop_NotEnoughGoldMessage" HorizontalAlignment="Center" Opacity="0">
+                    <Border Style="{StaticResource PauseMenu_VolumeBorderStyle}" BorderThickness="2,0,2,0" Margin="0">
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="Not enough gold!" />
                     </Border>
-
-                    <!-- Player Gold Amount -->
-                    <Grid HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Name="Shop_GoldImage" Style="{StaticResource HUD_GoldImageStyle}" Margin="5,0,0,0" />
-                        <TextBlock Name="Shop_GoldAmount" Style="{StaticResource Shop_GoldAmountStyle}" x:FieldModifier="public" />
-                    </Grid>
-                </StackPanel>
-            </Viewbox>
+                    
+                    <Viewbox.Resources>
+                        <!-- "Not Enough Gold" Animation -->
+                        <Storyboard x:Name="Shop_NotEnoughGoldAnimation" x:FieldModifier="public">
+                            <DoubleAnimation Storyboard.TargetName="Shop_NotEnoughGoldMessage"
+                                             Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:2" />
+                        </Storyboard>
+                    </Viewbox.Resources>
+                </Viewbox>
+            </Grid>
         </Border>
 
         <!-- Row 3 -->

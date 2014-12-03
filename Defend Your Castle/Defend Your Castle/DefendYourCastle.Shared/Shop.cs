@@ -105,7 +105,11 @@ namespace Defend_Your_Castle
             else if ((ShopPlayer.Gold < item.Price) && (item.GetMaxLevel == ShopItem.InfinitePurchases || item.GetCurrentLevel < item.GetMaxLevel))
             {
                 // Notify the player of this
-                gamePage.Shop_NotEnoughGoldFlyout.ShowAt(TheButton);
+                #if WINDOWS_APP
+                    gamePage.Shop_NotEnoughGoldFlyout.ShowAt(TheButton);
+                #else
+                    gamePage.Shop_NotEnoughGoldAnimation.Begin();
+                #endif
             }
         }
 
