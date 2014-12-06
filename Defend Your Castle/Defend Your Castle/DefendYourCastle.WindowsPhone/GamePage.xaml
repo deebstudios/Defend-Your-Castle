@@ -233,13 +233,15 @@
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
         </Style>
 
-        <Style x:Key="Shop_ShopItemsList_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <Setter Property="Width" Value="50"/>
-            <Setter Property="Height" Value="50"/>
+        <x:Double x:Key="Shop_ShopItemsList_Width">310</x:Double>
+        
+        <Style x:Key="Shop_ShopItemsList_ButtonStyle" BasedOn="{StaticResource Shop_ButtonStyle}" TargetType="Button">
+            <Setter Property="Width" Value="{StaticResource Shop_ShopItemsList_Width}"/>
+            <Setter Property="Background" Value="LightBlue"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Padding" Value="10"/>
         </Style>
 
         <Style x:Key="Shop_ShopItemsList_ImageStyle" TargetType="Image">
@@ -249,6 +251,7 @@
 
         <Style x:Key="Shop_ShopItemsList_LevelsStyle" BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontSize" Value="21"/>
+            <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -287,10 +290,10 @@
         </Style>
 
         <Style x:Key="Shop_ShopItemsListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
-            <Setter Property="Width" Value="300"/>
+            <Setter Property="Width" Value="{StaticResource Shop_ShopItemsList_Width}"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
                     <TransitionCollection>
@@ -307,57 +310,57 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Shop Item Image + Level -->
+                        <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click">
                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- Shop Item Image -->
-                                <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Click="ShopItem_Click" FontFamily="Global User Interface">
+                                <!-- Shop Item Image + Level -->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Shop Item Image -->
                                     <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
-                                </Button>
 
-                                <!-- Shop Item Level -->
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
+                                    <!-- Shop Item Level -->
+                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
                                            Text="{Binding Path=LevelString, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
+                                </Grid>
 
-                            <!-- Shop Item Name + Price -->
-                            <Grid Grid.Column="1" Margin="5,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                <!-- Shop Item Name + Price -->
+                                <Grid Grid.Column="1" Margin="5,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <!-- Name -->
-                                <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}"
+                                    <!-- Name -->
+                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}"
                                            Margin="0,2,0,0" />
 
-                                <!-- Price -->
-                                <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
-                                    <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}"
+                                    <!-- Price -->
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
+                                        <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}"
                                            Visibility="{Binding Path=PriceString, Converter={StaticResource PriceStringToVisibility}}" />
-                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}"
+                                        <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}"
                                                Text="{Binding Path=PriceString, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </Grid>
+                                    </StackPanel>
+                                </Grid>
 
-                            <!-- Shop Item Description -->
-                            <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
-                        </Grid>
+                                <!-- Shop Item Description -->
+                                <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
+                            </Grid>
+                        </Button>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -1572,12 +1575,68 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.55*"/>
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Row="1">
                         <GridView Name="Shop_ItemsList" Style="{StaticResource Shop_ShopItemsListStyle}" Width="350"
-                                  x:FieldModifier="public" Margin="0" />
+                                  x:FieldModifier="public" Margin="0">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource Shop_ShopItemsList_ButtonStyle}" Width="350" Click="ShopItem_Click">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Shop Item Image + Level -->
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!-- Shop Item Image -->
+                                                <Image Style="{StaticResource Shop_ShopItemsList_ImageStyle}" Source="{Binding Path=ImagePath}" />
+
+                                                <!-- Shop Item Level -->
+                                                <TextBlock Style="{StaticResource Shop_ShopItemsList_LevelsStyle}"
+                                                           Text="{Binding Path=LevelString, UpdateSourceTrigger=PropertyChanged}" />
+                                            </Grid>
+
+                                            <!-- Shop Item Name + Price -->
+                                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!-- Name -->
+                                                <TextBlock Style="{StaticResource Shop_ShopItemsList_NameStyle}" Text="{Binding Path=Name}"
+                                                           Margin="0,2,0,0" />
+
+                                                <!-- Price -->
+                                                <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" Margin="0,6,0,0">
+                                                    <Image Style="{StaticResource Shop_ShopItemsList_PriceImageStyle}"
+                                                           Visibility="{Binding Path=PriceString, Converter={StaticResource PriceStringToVisibility}}" />
+                                                    <TextBlock Style="{StaticResource Shop_ShopItemsList_PriceStyle}"
+                                                               Text="{Binding Path=PriceString, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </Grid>
+
+                                            <!-- Shop Item Description -->
+                                            <TextBlock Style="{StaticResource Shop_ShopItemsList_DescriptionStyle}" Text="{Binding Path=Description}" />
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
                     </Viewbox>
                 </Grid>
 

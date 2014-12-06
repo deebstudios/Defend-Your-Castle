@@ -96,6 +96,80 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Custom Button Style for Buttons in the Shop
+         The only difference between this style and ButtonStyle is the background color in the "PointerOver"
+         and "Pressed" visual states -->
+    <Style x:Key="Shop_ButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="CornflowerBlue" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="CornflowerBlue" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenter"
+                                                         Storyboard.TargetProperty="Opacity" To="0.50" Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused"/>
+                                <!--<Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                                 Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                                 Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>-->
+
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <!-- BELOW: Removed Margin="3" -->
+                        <Border x:Name="Border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              AutomationProperties.AccessibilityView="Raw" />
+                        </Border>
+
+                        <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square" StrokeDashArray="1,1" Opacity="0" StrokeDashOffset="1.5" />
+                        <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False"
+                                   Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1" Opacity="0" StrokeDashOffset="0.5" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
     <!-- Slider
          Default Slider style obtained from: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj709929.aspx -->

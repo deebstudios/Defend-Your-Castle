@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="8a8ba20c-d003-447d-af17-92a6919d589f" Publisher="CN=hydrakiller4000" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="8a8ba20c-d003-447d-af17-92a6919d589f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="1522DeebStudios.DefendYourFort" Publisher="CN=hydrakiller4000" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="e59941ec-1f68-4ba8-9df4-cc570b2e7443" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>DefendYourCastle</DisplayName>
-    <PublisherDisplayName>hydrakiller4000</PublisherDisplayName>
+    <DisplayName>Defend Your Fort</DisplayName>
+    <PublisherDisplayName>Deeb Studios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,9 +15,13 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="DefendYourCastle.App">
-      <m3:VisualElements DisplayName="DefendYourCastle" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="DefendYourCastle" ForegroundText="light" BackgroundColor="transparent">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Defend_Your_Castle.App">
+      <m3:VisualElements DisplayName="Defend Your Fort" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Prepare yourself: the Goblins are coming! In this fort defense game, fend off the Goblin tribe using your various weapons. Use the spoils of battle to hire helpers, improve your fort's defenses, and purchase other enhancements to resist the Goblin offense! Can you keep your fort safe until night falls upon the land?" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+          <m3:ShowNameOnTiles>
+            <m3:ShowOn Tile="square150x150Logo" />
+            <m3:ShowOn Tile="wide310x150Logo" />
+          </m3:ShowNameOnTiles>
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
         <m3:InitialRotationPreference>
