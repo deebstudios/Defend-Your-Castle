@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>cd6edbc3-3fed-48a8-b680-74563997e40f</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Defend_Your_Castle</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)CloudGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Debug.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\ArmoredEnemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\ArmoredSpearEnemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\EnemyAI\Action.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\EnemyAI\MeleeAttack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\EnemyAI\MoveForward.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\EnemyAI\ThrowSpear.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\FlyingEnemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\MeleeEnemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enemies\SpearEnemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EnemySpawning.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FadeOnce.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Hitbox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Hurtbox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Level.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LevelObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoadAssets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayerHelpers\Archer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayerHelpers\PlayerHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayerHelpers\Slower.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Projectiles\EnemySpear.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Projectiles\Projectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScreenManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shop.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\BuyArcher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\BuySlower.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\Invincibility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\ReinforceFort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\RepairWalls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\RepairWallsx10.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\ShopItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\StrengthenWalls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\UpgradeArcher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShopItems\UpgradeSlower.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SoundManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Spear.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Sword.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Warhammer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Weapon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XamlConverters.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Spear.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Sword.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Big Warhammer.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CastleIconBigger.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\DefendYourFortLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Goblin.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\HUD - Final Mockup.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Level Background.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\OptionsScreenBackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\OptionsScreenBackground_WP.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopBackground.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopBackground_WP.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\ArcherIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big ArcherIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big FortifyWallsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big InvincibilityIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big RepairWallsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big RepairWallsx10Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big ShopIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\Big UpgradeArcherIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\FortifyCastleIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\FortifyWallsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\InvincibilityIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\InvincibilityIcon2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\RepairWallsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\RepairWallsx10Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\ShopIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\SlowerIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\SlowerUpgradeIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ShopIcons\UpgradeArcherIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Spear Goblin Sheet Invincible.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Spear Goblin Sheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Sword.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Title Screen Background.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Text.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Text_WP.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Funk Game Loop %28Edited%29.wma" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Game Over %28spazzo-1493__game-over%29.wma" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Home Base Groove %28Edited%29.wma" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Itty Bitty 8 Bit.wma" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Rollin at 5 %28Edited%29.wma" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Fonts\DYFFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Funk Game Loop %28Edited%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Game Over %28spazzo-1493__game-over%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Home Base Groove %28Edited%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Itty Bitty 8 Bit.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Music\Rollin at 5 %28Edited%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Goblin Death %28sihil__ogre1%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Ineffective Weapon %28dj-chronos__metal-9%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Level Complete %28Bart Kelsey - orchestra%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Purchase Item %28d-w__coins-01%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Switch Weapon %28spookymodem__item-received%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Weapon Swing %28qubodup__sharp-swosh-18_01%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CloudLongerSmaller.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\CloudSmaller.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\PlayerCastle.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ScalableBox.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Alpha Sword.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Alpha Warhammer.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Archer.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ArcherLvl2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\ArcherLvl3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin Sheet 2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin Sheet 3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin Sheet Invincible.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Armored Goblin Sheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Enemy Spear (Complete).xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin Sheet 2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin Sheet 3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin Sheet Invincible.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Flying Goblin Sheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Game Over Sprite.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Goblin Sheet 2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Goblin Sheet 3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Goblin Sheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\GoblinInvincible Sheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Gold Coin Effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Moon.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\PlayerCastleFortified.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\PlayerCastleInvincible.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedArmoredGoblin 2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedArmoredGoblin 3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedArmoredGoblin.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedArmoredGoblinInvincible.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedGoblinSheet 2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedGoblinSheet 3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedGoblinSheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\RangedGoblinSheetInvincible.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\SlowerSheet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\SlowerSheet2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\SlowerSheet3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Spear.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Sun.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Graphics\Victory Screen.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
