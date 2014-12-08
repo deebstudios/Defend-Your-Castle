@@ -73,7 +73,13 @@ namespace Defend_Your_Castle
             int width = (int)Sprite.FrameSize.X;
             int height = (int)Sprite.FrameSize.Y;
             SetHitbox(width, height);
-            SetHurtbox(width, height, new Vector2(5, 5));
+
+            #if WINDOWS_APP
+                SetHurtbox(width, height, new Vector2(5, 5));
+            #else
+                SetHurtbox(width, height, new Vector2(10, 10));
+            #endif
+
             StopX = StopAtCastle(playerpos, Sprite.FrameSize + new Vector2(0, animsize.Y), 0);
 
             Launched = true;
