@@ -163,7 +163,7 @@ namespace Defend_Your_Castle
             if (_game.GameState == GameState.InGame)
             {
                 // Get the shop item that was tapped
-                ShopItem item = (ShopItem)((Image)sender).DataContext;
+                ShopItem item = (ShopItem)((Border)sender).DataContext;
 
                 // Use the item while in game
                 item.UseItemInGame();
@@ -269,5 +269,6 @@ namespace Defend_Your_Castle
             // Enable the "Continue Game" button
             TitleScreen_ContinueGame.IsEnabled = true;
         }
+
     }
 }

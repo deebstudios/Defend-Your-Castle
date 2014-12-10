@@ -255,7 +255,7 @@ namespace Defend_Your_Castle
                 Health -= CalculateDamage(damage);
 
                 //Don't show negative health
-                if (Health < 0)
+                if (Health <= 0)
                 {
                     Health = 0;
 
