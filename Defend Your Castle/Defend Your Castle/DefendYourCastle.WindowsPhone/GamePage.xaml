@@ -70,6 +70,13 @@
         </Style>
 
         <!-- Consumables Styles -->
+        <Style x:Key="HUD_ConsumablesList_BorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,0,10,0"/>
+        </Style>
+        
         <Style x:Key="HUD_ConsumablesList_ImageStyle" TargetType="Image">
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
@@ -78,7 +85,7 @@
         <Style x:Key="HUD_ConsumablesListStyle" BasedOn="{StaticResource GridViewStyle}" TargetType="GridView">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="8,0,8,8"/>
+            <Setter Property="Padding" Value="8,0,8,0"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
@@ -96,13 +103,15 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Image Style="{StaticResource HUD_ConsumablesList_ImageStyle}" Source="{Binding Path=ImagePath}"
-                               Tapped="HUD_ConsumablesListItem_Tapped" />
+                        <Border Style="{StaticResource HUD_ConsumablesList_BorderStyle}"
+                                Tapped="HUD_ConsumablesListItem_Tapped">
+                            <Image Style="{StaticResource HUD_ConsumablesList_ImageStyle}" Source="{Binding Path=ImagePath}" />
+                        </Border>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
         <!-- Pause Button Styles -->
         <Style x:Key="HUD_PauseButtonStyle" BasedOn="{StaticResource HUDButtonStyle}" TargetType="Button">
             <Setter Property="Height" Value="50"/>
