@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="1522DeebStudios.DefendYourFort" Publisher="CN=hydrakiller4000" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="e59941ec-1f68-4ba8-9df4-cc570b2e7443" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="1522DeebStudios.DefendYourFort" Publisher="CN=67F628C4-A696-4195-9432-46B20F54849F" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="bec20cf2-0ff0-4bf4-99cb-2d1df5e77e97" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Defend Your Fort</DisplayName>
     <PublisherDisplayName>Deeb Studios</PublisherDisplayName>
